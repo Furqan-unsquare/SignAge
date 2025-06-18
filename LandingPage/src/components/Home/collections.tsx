@@ -7,7 +7,7 @@ const collectionsData = [
     {
         id: 1,
         title: "Gaming",
-        image: "/assets/photo2.jpeg",
+        image: "/assets/neon.png",
         description: "LED Gaming Signs",
     },
     {
@@ -19,7 +19,7 @@ const collectionsData = [
     {
         id: 3,
         title: "Neon Wings",
-        image: "/assets/photo2.jpeg",
+        image: "/assets/image.png",
         description: "Decorative Wing Designs",
     },
     {
@@ -31,7 +31,7 @@ const collectionsData = [
     {
         id: 5,
         title: "Kids",
-        image: "/assets/photo2.jpeg",
+        image: "/assets/image.png",
         description: "Children's Room Decor",
     },
     {

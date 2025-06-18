@@ -1,123 +1,66 @@
-import { Zap, Mail, Phone, MapPin, Star } from 'lucide-react';
+import { Mail } from 'lucide-react';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  const footerLinks = {
-    'Services': [
-      'Neon Signs',
-      'Digital Displays',
-      'Business Signage',
-      'Restaurant Signs',
-      'Event Signage'
-    ],
-    'Company': [
-      'About Us',
-      'Portfolio',
-      'Testimonials',
-      'Careers',
-      'Contact'
-    ],
-    'Support': [
-      'Help Center',
-      'Installation Guide',
-      'Maintenance',
-      'Warranty',
-      'FAQ'
-    ]
-  };
-
   return (
-    <footer className="bg-gradient-to-br from-orange-100 to-yellow-100 border-t border-orange-200 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FDCA07] to-[#F26742]"></div>
-      
-      <div className="container mx-auto px-4 py-8 sm:py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-          {/* Company Info */}
-          <div className="lg:col-span-2 col-span-3">
-            <div className="flex items-center space-x-3 mb-4 sm:mb-6">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FDCA07] rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 sm:w-7 sm:h-7 text-[#EA3C1F] animate-pulse" />
-              </div>
-              <span className="text-2xl sm:text-3xl font-black text-[#FDCA07]">
-                SignCraft
-              </span>
-            </div>
-            
-            <p className="text-[#2f2f2f] mb-4 sm:mb-6 leading-relaxed max-w-md font-semibold text-sm sm:text-base">
-              Illuminating businesses across the nation with cutting-edge signage solutions that drive results and create lasting impressions.
-            </p>
+    <footer className="bg-gradient-to-r from-cyan-400 to-teal-500 relative overflow-hidden">
+      {/* Top red accent line */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-[rgb(253,202,7)]"></div>
 
-            {/* Contact Info */}
-            <div className="space-y-2 sm:space-y-3">
-              <div className="flex items-center space-x-3 text-[#2f2f2f] font-semibold text-sm sm:text-base">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#5e5e5e]" />
-                <span>(555) 123-SIGN</span>
-              </div>
-              <div className="flex items-center space-x-3 text-[#2f2f2f] font-semibold text-sm sm:text-base">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[#5e5e5e]" />
-                <span>hello@signcraft.com</span>
-              </div>
-              <div className="flex items-center space-x-3 text-[#2f2f2f] font-semibold text-sm sm:text-base">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#5e5e5e]" />
-                <span>123 Neon Street, City, State 12345</span>
-              </div>
+      <div className="container mx-auto px-4 py-8 relative z-10">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4 md:gap-2">
+
+          {/* Left Section - Contact Us */}
+          <div className="flex-1 max-w-sm text-center md:text-left">
+            <h2 className="text-4xl font-black text-yellow-400 uppercase tracking-wider mb-2">
+              CONTACT US
+            </h2>
+            <div className="flex flex-col md:flex-row gap-2 text-sm text-white font-semibold justify-center md:justify-start">
+              <a href="#" className="hover:text-yellow-300 transition-colors">
+                PRIVACY POLICY
+              </a>
+              <a href="#" className="hover:text-yellow-300 transition-colors">
+                TERMS OF SERVICE
+              </a>
             </div>
           </div>
 
-          {/* Links Columns */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-[#5e5e5e] font-black mb-3 sm:mb-4 text-base sm:text-lg">{category}</h3>
-              <ul className="space-y-1 sm:space-y-2">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a 
-                      href="#" 
-                      className="text-[#2f2f2f] hover:text-[#F26742] font-semibold transition-colors duration-300 relative group text-sm sm:text-base"
-                    >
-                      {link}
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F26742] transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-[#F26742] mt-8 sm:mt-12 pt-6 sm:pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-[#5e5e5e] text-center md:text-left font-semibold text-sm sm:text-base">
-              © {currentYear} SignCraft. All rights reserved. Illuminating your success.
-            </div>
-            
-            {/* Rating */}
-            <div className="flex items-center space-x-2 text-[#FDCA07]">
-              <div className="flex space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <span className="text-[#FDCA07] font-bold text-sm sm:text-base">4.9/5</span>
-              <span className="text-[#5e5e5e] font-semibold text-sm sm:text-base">from 500+ reviews</span>
+          {/* Center Section - Logo */}
+          <div className="flex-shrink-0 flex items-center justify-center">
+            <div className="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(253,202,7,0.8)] border-4 border-[rgb(253,202,7)]">
+              <img
+                src="/assets/logo5.png"
+                alt="Logo"
+                className="w-20 h-20 drop-shadow-[0_0_20px_rgba(253,202,7,0.8)]"
+              />
             </div>
           </div>
-        </div>
 
-        {/* Back to Top */}
-        <div className="text-center mt-6 sm:mt-8">
-          <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-[#FDCA07] hover:bg-gradient-to-r hover:from-[#EA3C1F] hover:to-[#F26742] text-[#5e5e5e] hover:text-[#FDCA07] font-bold rounded-full transition-all duration-300 hover:scale-105 group"
-          >
-            <Zap className="w-4 h-4 mr-2 group-hover:animate-pulse" />
-            Back to Top
-          </button>
+          {/* Right Section - Contact Info */}
+          <div className="flex-1 max-w-sm text-center md:text-right">
+            <div className="space-y-1">
+              <div className="flex items-center justify-center md:justify-end gap-2 text-white font-bold text-sm md:text-lg">
+                <span>@SIGNCRAFT_</span>
+                <div className="w-6 h-6 bg-white rounded flex items-center justify-center">
+                  <span className="text-cyan-500 text-sm">📷</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center md:justify-end gap-2 text-white font-bold text-sm md:text-lg">
+                <span>INFO@SIGNCRAFT.COM</span>
+                <div className="w-6 h-6 bg-white rounded flex items-center justify-center">
+                  <Mail className="w-4 h-4 text-cyan-500" />
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+
         </div>
       </div>
+
+      {/* Bottom accent */}
+      <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-b from-transparent to-black/10"></div>
     </footer>
   );
 };

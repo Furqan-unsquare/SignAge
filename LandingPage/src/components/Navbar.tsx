@@ -49,7 +49,7 @@ const Header = () => {
                     className="relative text-white text-lg font-anton hover:text-[#FDCA07] transition-colors duration-300"
                   >
                     {item.name}
-                    <motion.span 
+                    <motion.span
                       className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FDCA07]"
                       whileHover={{ width: '100%' }}
                       transition={{ duration: 0.3 }}
@@ -74,9 +74,10 @@ const Header = () => {
                 }
               }}
             >
-              <Zap className="w-6 h-6 text-[#FDCA07]" />
-              <span className="text-2xl font-bold text-white">SignCraft</span>
+              <img src="/assets/logo5.png" alt="Logo" className="w-[90px] h-auto drop-shadow-xl" />
             </motion.div>
+
+
 
             {/* Right Side Nav */}
             <div className="flex space-x-8 lg:space-x-12 pr-12">
@@ -100,7 +101,7 @@ const Header = () => {
                     className="relative text-white font-anton text-lg hover:text-[#FDCA07] transition-colors duration-300"
                   >
                     {item.name}
-                    <motion.span 
+                    <motion.span
                       className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FDCA07]"
                       whileHover={{ width: '100%' }}
                       transition={{ duration: 0.3 }}
@@ -137,10 +138,10 @@ const Header = () => {
                   <motion.div
                     key={item.name}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ 
-                      opacity: 1, 
+                    animate={{
+                      opacity: 1,
                       y: 0,
-                      transition: { 
+                      transition: {
                         delay: idx * 0.1,
                         type: 'spring',
                         stiffness: 200,
