@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const FontSchema = new mongoose.Schema({
-  size: { type: String, required: true }, 
+  name: { type: String, required: true },
   price: { type: Number, required: true }
 });
 
