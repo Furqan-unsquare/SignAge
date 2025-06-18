@@ -1,0 +1,38 @@
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
+const connectDB = require('./config/connection');
+const middleware = require('./middleware/auth');
+
+
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+
+// Connect to DB before starting server
+connectDB();
+console.log("db connected");
+
+app.use('/api/colors', middleware, require('./routes/price/color'));
+app.use('/api/sizes', middleware, require('./routes/price/size'));
+app.use('/api/types', middleware, require('./routes/price/type'));
+app.use('/api/fonts', middleware, require('./routes/price/font'));
+app.use('/api/enquiry', middleware, require('./routes/enquiry'));
+app.use('/api/orders', middleware, require('./routes/order'));
+app.use('/api/auth', require('./routes/auth'));
+// Sample route
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
+
+// Your routes go here...
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});

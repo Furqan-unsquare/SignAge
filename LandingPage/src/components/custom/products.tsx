@@ -1,0 +1,176 @@
+"use client"
+
+import { useState } from "react"
+import { Palette, Type, Building, Heart, Zap, Star } from 'lucide-react'
+
+interface CustomOption {
+  id: number
+  title: string
+  description: string
+  icon: React.ReactNode
+  image: string
+  features: string[]
+  popular?: boolean
+}
+
+const customOptions: CustomOption[] = [
+  {
+    id: 1,
+    title: "Text & Quotes",
+    description: "Custom text, quotes, names, or messages in your choice of fonts and colors",
+    icon: <Type className="w-6 h-6" />,
+    image: "/placeholder.svg?height=300&width=250",
+    features: ["50+ Font Styles", "Unlimited Colors", "Size Customization", "Symbol Integration"],
+  },
+  {
+    id: 2,
+    title: "Logo & Branding",
+    description: "Transform your business logo into stunning LED neon signage",
+    icon: <Building className="w-6 h-6" />,
+    image: "/placeholder.svg?height=300&width=250",
+    features: ["Vector Conversion", "Brand Colors", "Multiple Sizes", "Indoor/Outdoor"],
+    popular: true,
+  },
+  {
+    id: 3,
+    title: "Custom Shapes",
+    description: "Unique shapes, symbols, and artistic designs tailored to your vision",
+    icon: <Palette className="w-6 h-6" />,
+    image: "/placeholder.svg?height=300&width=250",
+    features: ["Any Shape Possible", "3D Effects", "Multi-Color", "Animation Options"],
+  },
+  {
+    id: 4,
+    title: "Personal Messages",
+    description: "Wedding signs, home decor, gifts, and personal celebration signage",
+    icon: <Heart className="w-6 h-6" />,
+    image: "/placeholder.svg?height=300&width=250",
+    features: ["Wedding Specials", "Home Decor", "Gift Options", "Personal Touch"],
+  },
+]
+
+const ProductsSection = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+
+  return (
+    <section className="bg-black py-24 px-4" id="customize">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-3 bg-gray-800 rounded-full px-6 py-3 mb-6">
+            <Palette className="w-5 h-5 text-[#fdca07]" />
+            <span className="text-white font-bold uppercase tracking-wide">Customization Options</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-wider mb-6">
+            What Would You Like To
+            <br />
+            <span className="text-[#fdca07]">Create Today?</span>
+          </h2>
+          
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+            Choose from our popular customization categories or tell us about your unique vision. 
+            Our design team will bring any concept to life with premium LED neon technology.
+          </p>
+        </div>
+
+        {/* Customization Options Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {customOptions.map((option) => (
+            <div
+              key={option.id}
+              className="group cursor-pointer relative"
+              onMouseEnter={() => setHoveredCard(option.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Popular Badge */}
+              {option.popular && (
+                <div className="absolute -top-3 -right-3 z-10 bg-[#fdca07] text-black font-black text-xs uppercase px-3 py-1 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 fill-current" />
+                  Popular
+                </div>
+              )}
+
+              <div className="relative bg-gray-900 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#fdca07] transition-all duration-300 h-full">
+                {/* Image Container */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={option.image || "/placeholder.svg"}
+                    alt={option.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                  {/* Icon */}
+                  <div className="absolute top-4 left-4 w-12 h-12 bg-[#fdca07] rounded-xl flex items-center justify-center text-black">
+                    {option.icon}
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-[#fdca07]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 space-y-4">
+                  <h3 className="text-xl font-black text-white uppercase tracking-wide">{option.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{option.description}</p>
+
+                  {/* Features */}
+                  <div className="space-y-2">
+                    {option.features.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2 text-xs text-gray-300">
+                        <div className="w-1.5 h-1.5 bg-[#fdca07] rounded-full"></div>
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <a href="/neonCustom">
+                  <button className="w-full bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#fdca07] hover:to-yellow-400 text-white hover:text-black font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform group-hover:scale-105 mt-6">
+                    CUSTOMIZE NOW
+                  </button>
+                  </a>
+                </div>
+
+                {/* Glow Effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_20px_#fdca07] pointer-events-none"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Process Steps */}
+        <div className="bg-gray-900 rounded-3xl p-8 md:p-12">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-wider mb-4">
+              How It <span className="text-[#fdca07]">Works</span>
+            </h3>
+            <p className="text-gray-400 text-lg">Simple 4-step process to get your custom neon sign</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { step: "01", title: "Share Your Idea", desc: "Tell us your concept, upload images, or describe your vision" },
+              { step: "02", title: "Free Design", desc: "Our designers create a mockup within 24 hours at no cost" },
+              { step: "03", title: "Approve & Order", desc: "Review, request changes, and place your order when satisfied" },
+              { step: "04", title: "Receive & Install", desc: "Get your custom sign delivered with installation guide" }
+            ].map((process, index) => (
+              <div key={index} className="text-center space-y-4">
+                <div className="w-16 h-16 bg-[#fdca07] rounded-full flex items-center justify-center text-black font-black text-xl mx-auto">
+                  {process.step}
+                </div>
+                <h4 className="text-white font-black uppercase tracking-wide">{process.title}</h4>
+                <p className="text-gray-400 text-sm leading-relaxed">{process.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default ProductsSection

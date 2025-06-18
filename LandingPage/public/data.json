@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "title": "The Future of Digital Signage in Retail Spaces",
+    "excerpt": "Exploring how digital signage is transforming the retail customer experience and what trends are emerging.",
+    "content": "<p>Digital signage has become an integral part of modern retail spaces...</p><h2>The Evolution of Retail Signage</h2><p>From static posters to interactive displays...</p>",
+    "category": "Retail",
+    "date": "May 15, 2023",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "author": "Sarah Johnson",
+    "tags": ["digital signage", "retail", "technology"],
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Sustainable Materials for Outdoor Signage",
+    "excerpt": "Discover eco-friendly materials that are revolutionizing the signage industry while reducing environmental impact.",
+    "content": "<p>As environmental concerns grow, the signage industry is adapting...</p>",
+    "category": "Sustainability",
+    "date": "April 28, 2023",
+    "readTime": "4 min read",
+    "image": "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80",
+    "author": "Michael Chen",
+    "tags": ["sustainability", "materials", "outdoor"]
+  },
+  {
+    "id": 3,
+    "title": "Augmented Reality in Signage: A New Frontier for Engagement",
+    "excerpt": "How augmented reality is enhancing signage to create immersive experiences for customers.",
+    "content": "<p>Augmented reality (AR) is transforming the signage industry by blending digital and physical worlds...</p><h2>Why AR Matters</h2><p>AR allows businesses to overlay digital content, such as product demos or interactive maps, onto physical signs...</p>",
+    "category": "Technology",
+    "date": "March 10, 2025",
+    "readTime": "6 min read",
+    "image": "https://images.unsplash.com/photo-1656337577506-16e4879c2d5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "author": "Emily Carter",
+    "tags": ["augmented reality", "signage", "interactive"],
+    "featured": false
+  },
+  {
+    "id": 4,
+    "title": "Personalized Signage: Connecting with Customers on a Deeper Level",
+    "excerpt": "Learn how personalized signage is helping brands create meaningful connections with their audiences.",
+    "content": "<p>Personalized signage is becoming a powerful tool for businesses to engage customers...</p><h2>The Power of Customization</h2><p>From displaying customer names to tailoring content based on location or behavior...</p>",
+    "category": "Marketing",
+    "date": "April 5, 2025",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "author": "David Lee",
+    "tags": ["personalization", "signage", "branding"],
+    "featured": true
+  },
+  {
+    "id": 5,
+    "title": "Eco-Friendly Signage: Solar-Powered Solutions for the Future",
+    "excerpt": "Solar-powered signage is leading the way in sustainable design, reducing energy costs and environmental impact.",
+    "content": "<p>Solar-powered signage is gaining traction as businesses seek greener alternatives...</p><h2>Benefits of Solar Power</h2><p>These signs harness solar energy to illuminate displays, offering a cost-effective and eco-friendly solution...</p>",
+    "category": "Sustainability",
+    "date": "May 20, 2025",
+    "readTime": "4 min read",
+    "image": "https://images.unsplash.com/photo-1508514177221-188b27467619?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "author": "Lisa Patel",
+    "tags": ["solar power", "sustainability", "signage"],
+    "featured": false
+  },
+  {
+    "id": 6,
+    "title": "Minimalist Signage Design: Less is More in 2025",
+    "excerpt": "Minimalist signage designs are captivating audiences with their clean and modern aesthetics.",
+    "content": "<p>Minimalist signage continues to dominate in 2025, focusing on simplicity and clarity...</p><h2>Why Minimalism Works</h2><p>Using clean typography, limited color palettes, and negative space, minimalist signs stand out in cluttered environments...</p>",
+    "category": "Design",
+    "date": "June 1, 2025",
+    "readTime": "3 min read",
+    "image": "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    "author": "James Rivera",
+    "tags": ["minimalism", "design", "signage"],
+    "featured": false
+  }
+]
