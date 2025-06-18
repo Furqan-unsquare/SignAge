@@ -1,5 +1,5 @@
 import { Phone, Zap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/UI/button';
 
 const ContactCTA = () => {
   return (
@@ -60,7 +60,7 @@ const ContactCTA = () => {
       </div>
 
       {/* Scrolling marquee text */}
-      <div className="absolute bottom-0 left-0 right-0 overflow-hidden py-3 bg-yellow-400/20 backdrop-blur-sm">
+      <div className="absolute bottom-0 left-0 right-0 overflow-hidden py-2 ">
         <div className="inline-block whitespace-nowrap animate-marquee">
           <span className="text-3xl font-black text-yellow-300 uppercase tracking-wider mx-8">
             ✦ FREE QUOTES ✦ 24/7 SUPPORT ✦ 5-YEAR WARRANTY ✦ INSTALLATION INCLUDED ✦

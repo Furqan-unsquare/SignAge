@@ -1,5 +1,5 @@
 import { Star, Zap, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/UI/button';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {

@@ -1,6 +1,6 @@
-import HeroSection from "../components/custom/hero"
-import ProductsSection from "../components/custom/products"
-import AboutSection from "../components/custom/about"
+import HeroSection from "../components/Custom/hero"
+import ProductsSection from "../components/Custom/products"
+import AboutSection from "../components/Custom/about"
 
 export default function HomePage() {
     return (

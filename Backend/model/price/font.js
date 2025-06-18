@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const FontSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  color: { type: mongoose.Schema.Types.ObjectId, ref: 'Color', required: true }
+  size: { type: String, required: true }, 
+  price: { type: Number, required: true }
 });
+
 
 module.exports = mongoose.model('Font', FontSchema);

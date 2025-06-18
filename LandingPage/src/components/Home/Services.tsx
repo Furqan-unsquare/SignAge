@@ -1,5 +1,5 @@
 import { Zap, Monitor, Building, Camera, Star, Palette } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/UI/card';
 import { useEffect } from 'react';
 
 const Services = () => {
