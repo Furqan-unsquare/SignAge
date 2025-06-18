@@ -46,15 +46,14 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex  w-full bg-gray-50">
+        <div className="min-h-screen flex w-screen  bg-gray-50 ">
             {/* Left side - Illustration */}
             <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-50 to-indigo-100 items-center justify-center p-12">
                 <div className="max-w-md">
                     <img 
                         src={adminIllustration} 
                         alt="Admin Illustration"
-                        className="w-full h-auto"
-                    />
+                        className="w-full h-auto"/>
                     <h2 className="mt-8 text-2xl font-bold text-gray-800">Welcome Back!</h2>
                     <p className="mt-2 text-gray-600">
                         Streamline your workflow with our powerful admin dashboard. Manage your content, users, and analytics all in one place.
@@ -103,7 +102,7 @@ const LoginPage = () => {
                                         type="email"
                                         autoComplete="email"
                                         required
-                                        className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="block w-full pl-10 pr-3 py-3 text-gray-600 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         placeholder="you@example.com"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
@@ -127,7 +126,7 @@ const LoginPage = () => {
                                         type={showPassword ? "text" : "password"}
                                         autoComplete="current-password"
                                         required
-                                        className="block w-full pl-10 pr-10 py-3 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="block w-full pl-10 pr-10 py-3 text-gray-600 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                         placeholder="••••••••"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
