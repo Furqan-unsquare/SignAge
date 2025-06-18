@@ -1,7 +1,6 @@
-"use client"
-
-import { useState } from "react"
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const collectionsData = [
     {
@@ -52,34 +51,80 @@ const collectionsData = [
         image: "/assets/photo2.jpeg",
         description: "Romantic Designs",
     },
-]
+];
 
 const Collections = () => {
-    const [startIndex, setStartIndex] = useState(0)
-    const itemsToShow = 5
+    const navigate = useNavigate(); // Changed from useHistory to useNavigate
+    const [startIndex, setStartIndex] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const containerRef = useRef(null);
+    const itemsToShow = 5;
 
-    // Get the visible items based on current start index
-    const getVisibleItems = () => {
-        const items = []
-        for (let i = 0; i < itemsToShow; i++) {
-            const index = (startIndex + i) % collectionsData.length
-            items.push(collectionsData[index])
-        }
-        return items
-    }
+    // Handle touch/mouse events for mobile scrolling
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - containerRef.current.offsetLeft);
+        setScrollLeft(containerRef.current.scrollLeft);
+    };
 
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - containerRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        containerRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    // Auto-scroll on mobile
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const handleScroll = () => {
+            const scrollPosition = container.scrollLeft;
+            const itemWidth = container.scrollWidth / collectionsData.length;
+            const newIndex = Math.round(scrollPosition / itemWidth);
+            setStartIndex(newIndex);
+        };
+
+        container.addEventListener('scroll', handleScroll);
+        return () => container.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Navigation functions for desktop
     const nextSlide = () => {
-        setStartIndex((prev) => (prev + 1) % collectionsData.length)
-    }
+        setStartIndex((prev) => (prev + 1) % collectionsData.length);
+    };
 
     const prevSlide = () => {
-        setStartIndex((prev) => (prev - 1 + collectionsData.length) % collectionsData.length)
-    }
+        setStartIndex((prev) => (prev - 1 + collectionsData.length) % collectionsData.length);
+    };
 
-    const visibleItems = getVisibleItems()
+    // Navigate to blogs
+    const navigateToBlogs = (collectionId) => {
+        navigate(`/blog`); // Changed from history.push to navigate
+    };
+
+    // Get visible items for desktop
+    const getVisibleItems = () => {
+        const items = [];
+        for (let i = 0; i < itemsToShow; i++) {
+            const index = (startIndex + i) % collectionsData.length;
+            items.push(collectionsData[index]);
+        }
+        return items;
+    };
+
+    const visibleItems = getVisibleItems();
 
     return (
-        <div className="relative min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-16 px-4">
+        <div className="relative min-h-full bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-16 px-4">
             {/* Header Section */}
             <div className="max-w-7xl mx-auto mb-12">
                 <div className="flex items-center justify-between">
@@ -90,8 +135,8 @@ const Collections = () => {
                         <div className="hidden md:block w-32 h-1 bg-[#fdca07] rounded-full"></div>
                     </div>
 
-                    {/* Navigation Arrows */}
-                    <div className="flex gap-3">
+                    {/* Navigation Arrows - Desktop Only */}
+                    <div className="hidden md:flex gap-3">
                         <button
                             onClick={prevSlide}
                             className="w-12 h-12 rounded-full border-2 border-white bg-transparent hover:bg-white hover:text-[#EA3C1F] text-white transition-all duration-300 flex items-center justify-center group"
@@ -108,34 +153,38 @@ const Collections = () => {
                 </div>
             </div>
 
-            {/* Collections Horizontal Scroll */}
+            {/* Collections Container */}
             <div className="max-w-7xl mx-auto">
-                <div className="overflow-hidden">
-                    <div className="flex gap-6 transition-transform duration-500 ease-in-out">
-                        {visibleItems.map((collection, index) => (
-                            <div
-                                key={`${collection.id}-${startIndex}-${index}`}
-                                className="group cursor-pointer transform transition-all duration-500 hover:scale-105 flex-shrink-0 w-full max-w-xs"
-                                style={{ minWidth: 'calc(20% - 1.2rem)' }}
-                            >
-                                {/* Collection Card */}
+                {/* Mobile Scroll Container */}
+                <div 
+                    ref={containerRef}
+                    className="md:hidden flex gap-6 overflow-x-auto scroll-snap-x-mandatory scrollbar-hide py-4"
+                    style={{ scrollSnapType: 'x mandatory' }}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onTouchStart={(e) => handleMouseDown(e.touches[0])}
+                    onTouchMove={(e) => handleMouseMove(e.touches[0])}
+                    onTouchEnd={handleMouseUp}
+                >
+                    {collectionsData.map((collection) => (
+                        <div
+                            key={collection.id}
+                            className="flex-shrink-0 w-4/5 scroll-snap-align-start"
+                            onClick={() => navigateToBlogs(collection.id)}
+                        >
+                            <div className="group cursor-pointer transform transition-all duration-500 hover:scale-105">
                                 <div className="relative bg-black rounded-2xl overflow-hidden border-4 border-transparent hover:border-[#fdca07] transition-all duration-300">
-                                    {/* Image Container */}
                                     <div className="relative h-80 overflow-hidden">
                                         <img
                                             src={collection.image || "/placeholder.svg"}
                                             alt={collection.title}
                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         />
-
-                                        {/* Overlay Gradient */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                                        {/* Hover Overlay */}
                                         <div className="absolute inset-0 bg-[#fdca07]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-
-                                    {/* Content */}
                                     <div className="absolute bottom-0 left-0 right-0 p-6">
                                         <div className="flex items-center justify-between">
                                             <div>
@@ -144,15 +193,51 @@ const Collections = () => {
                                                 </h3>
                                                 <p className="text-sm text-gray-300 font-medium">{collection.description}</p>
                                             </div>
-
-                                            {/* Arrow Indicator */}
                                             <div className="w-8 h-8 rounded-full bg-[#fdca07] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
                                                 <ArrowRight className="w-4 h-4 text-black font-bold" />
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_30px_#fdca07] pointer-events-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
-                                    {/* Glow Effect on Hover */}
+                {/* Desktop Collections */}
+                <div className="hidden md:block overflow-hidden">
+                    <div className="flex gap-6 transition-transform duration-500 ease-in-out">
+                        {visibleItems.map((collection) => (
+                            <div
+                                key={collection.id}
+                                className="group cursor-pointer transform transition-all duration-500 hover:scale-105 flex-shrink-0 w-full max-w-xs"
+                                style={{ minWidth: 'calc(20% - 1.2rem)' }}
+                                onClick={() => navigateToBlogs(collection.id)}
+                            >
+                                <div className="relative bg-black rounded-2xl overflow-hidden border-4 border-transparent hover:border-[#fdca07] transition-all duration-300">
+                                    <div className="relative h-80  overflow-hidden">
+                                        <img
+                                            src={collection.image || "/placeholder.svg"}
+                                            alt={collection.title}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-[#fdca07]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    </div>
+                                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-wide mb-1">
+                                                    {collection.title}
+                                                </h3>
+                                                <p className="text-sm text-gray-300 font-medium">{collection.description}</p>
+                                            </div>
+                                            <div className="w-8 h-8 rounded-full bg-[#fdca07] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                                                <ArrowRight className="w-4 h-4 text-black font-bold" />
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_30px_#fdca07] pointer-events-none"></div>
                                 </div>
                             </div>
@@ -161,36 +246,14 @@ const Collections = () => {
                 </div>
             </div>
 
-            {/* Bottom Indicators */}
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-                <div className="flex gap-2">
-                    {collectionsData.map((_, index) => (
-                        <div
-                            key={index}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index >= startIndex && index < startIndex + itemsToShow
-                                    ? "bg-[#fdca07] scale-125"
-                                    : "bg-white/50"
-                                }`}
-                        ></div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Current Item Counter */}
-            <div className="absolute top-32 right-8 bg-black/50 rounded-lg px-4 py-2">
+            {/* Current Item Counter - Desktop Only */}
+            <div className="hidden md:block absolute top-32 right-8 bg-black/50 rounded-lg px-4 py-2">
                 <span className="text-white font-bold">
                     {startIndex + 1}-{Math.min(startIndex + itemsToShow, collectionsData.length)} of {collectionsData.length}
                 </span>
             </div>
-
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5 pointer-events-none">
-                <div className="absolute top-20 left-10 text-6xl font-black text-white transform rotate-12">NEON</div>
-                <div className="absolute bottom-32 right-16 text-4xl font-black text-white transform -rotate-12">SIGNS</div>
-                <div className="absolute top-1/2 left-1/4 text-8xl font-black text-white transform rotate-45 opacity-30">★</div>
-            </div>
         </div>
-    )
-}
+    );
+};
 
-export default Collections
+export default Collections;

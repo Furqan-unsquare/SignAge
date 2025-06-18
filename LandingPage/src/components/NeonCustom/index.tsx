@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { PreviewPane } from "./Preview"
 import { ConfigurationPanel } from "./configPanel"
 import { HowToInstall } from "./install"
-import { WhatsInTheBox } from "./box"
+import { WhatsInTheBox } from "./WhatsInTheBox"
 import { Testimonials } from "./testimonials"
 import { FAQs } from "./FAQs"
 

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 
 const CTA = () => {
@@ -25,7 +27,7 @@ const CTA = () => {
 
 const ref = useRef(null);
 const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers only once
-
+const navigate = useNavigate();
 
   return (
     <section 
@@ -38,42 +40,42 @@ const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers o
           initial={{ opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative h-96 lg:h-[500px] flex items-center justify-center order-2 lg:order-1"
+          className="relative h-96 lg:h-[500px] hidden md:flex items-center justify-center order-2 lg:order-1"
         >
           {ctaImages.map((image, index) => (
            <motion.div
-  key={index}
-  initial={{ 
-    opacity: 0,
-    rotate: imagePositions[index].rotate,
-    x: imagePositions[index].x,
-    y: imagePositions[index].y + 20
-  }}
-  animate={isInView ? { 
-    opacity: 1,
-    rotate: imagePositions[index].rotate,
-    x: imagePositions[index].x,
-    y: imagePositions[index].y
-  } : {}}
-  transition={{ 
-    duration: 0.6,
-    delay: index * 0.15,
-    type: "spring",
-    damping: 10
-  }}
-  className="absolute w-32 h-40 md:w-40 md:h-52 rounded-xl overflow-hidden shadow-2xl cursor-pointer"
-  style={{
-    zIndex: index === 2 ? 30 : 30 - Math.abs(index - 2) * 5,
-  }}
->
-  <img
-    src={`${image}?w=400&h=500&fit=crop`}
-    alt={`Featured project ${index + 1}`}
-    className="w-full h-full object-cover"
-    loading="lazy"
-  />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-</motion.div>
+            key={index}
+            initial={{ 
+              opacity: 0,
+              rotate: imagePositions[index].rotate,
+              x: imagePositions[index].x,
+              y: imagePositions[index].y + 20
+            }}
+            animate={isInView ? { 
+              opacity: 1,
+              rotate: imagePositions[index].rotate,
+              x: imagePositions[index].x,
+              y: imagePositions[index].y
+            } : {}}
+            transition={{ 
+              duration: 0.6,
+              delay: index * 0.15,
+              type: "spring",
+              damping: 10
+            }}
+            className="absolute w-32 h-40 md:w-40 md:h-52 rounded-xl overflow-hidden shadow-2xl cursor-pointer"
+            style={{
+              zIndex: index === 2 ? 30 : 30 - Math.abs(index - 2) * 5,
+            }}
+          >
+            <img
+              src={`${image}?w=400&h=500&fit=crop`}
+              alt={`Featured project ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          </motion.div>
 
           ))}
         </motion.div>
@@ -103,8 +105,7 @@ const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers o
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.7 }}
-              className="text-xl text-white/90 max-w-lg leading-relaxed"
-            >
+              className="md:text-xl text-white/90 max-w-lg leading-relaxed">
               Let's collaborate to create something extraordinary. Our passionate team delivers results that make an impact.
             </motion.p>
           </div>
@@ -113,15 +114,15 @@ const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers o
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4"
-          >
+            className="flex flex-col sm:flex-row gap-4">
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative bg-gradient-to-r from-[#FDCA07] to-[#FFD700] text-[#EA3C1F] px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center">
-                Start Your Project
+              className="group relative bg-gradient-to-r from-[#FDCA07] to-[#FFD700] text-[#EA3C1F] px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 overflow-hidden">
+              <span
+              onClick={() => navigate("/custom")} 
+              className="relative z-10 flex items-center">
+                Create Your Sign
                 <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-200" />
               </span>
               <motion.span
@@ -136,7 +137,9 @@ const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers o
               whileTap={{ scale: 0.95 }}
               className="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:border-[#FDCA07] hover:text-[#FDCA07] transition-all duration-300 relative overflow-hidden"
             >
-              <span className="relative z-10">View Pricing</span>
+              <span
+              onClick={() => navigate("/contact-us")} 
+              className="relative z-10">Contact us</span>
               <motion.span
                 initial={{ x: -100, opacity: 0 }}
                 whileHover={{ x: 0, opacity: 0.1 }}

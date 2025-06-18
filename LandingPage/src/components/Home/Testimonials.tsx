@@ -49,8 +49,8 @@ const Testimonials = () => {
       {/* Main content container */}
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <div className="inline-block bg-[#fdca07] border-4 border-white px-8 py-4 rounded-2xl mb-8 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+        <div className="text-center md:mb-16">
+          <div className="inline-block md:bg-[#fdca07] text-left md:border-4 md:border-white px-3 md:px-8 py-4 rounded-2xl mb-8 transform hover:scale-105 transition-all duration-300 md:shadow-lg hover:shadow-xl">
             <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-wider drop-shadow-md">
               Real Customers, Real Reviews
             </h2>
@@ -117,9 +117,11 @@ const Testimonials = () => {
 
           {/* CTA Button */}
           <div className="mt-6">
+            <a href="/blog">
             <button className="bg-[#fdca07] hover:bg-[#f0c000] border-4 border-white text-black font-black text-lg px-10 py-5 rounded-full uppercase tracking-wider transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(253,202,7,0.6)]">
               View More Testimonials
             </button>
+            </a>
           </div>
         </div>
       </div>

@@ -28,6 +28,20 @@ const ProjectGallery = () => {
     }
   };
 
+  // Detect screen size and adjust initial visibleCount
+useEffect(() => {
+  const handleResize = () => {
+    const isMobile = window.innerWidth < 768;
+    setVisibleCount(isMobile ? 3 : 9);
+  };
+
+  handleResize(); // Call once on mount
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
+
   const item = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
     show: { 
@@ -84,7 +98,7 @@ const ProjectGallery = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
+    <section className="pb-16 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
@@ -110,10 +124,12 @@ const ProjectGallery = () => {
           {filters.map(filter => (
             <button
               key={filter.id}
-              onClick={() => {
-                setActiveFilter(filter.id);
-                setVisibleCount(9);
-              }}
+            onClick={() => {
+  setActiveFilter(filter.id);
+  const isMobile = window.innerWidth < 768;
+  setVisibleCount(isMobile ? 3 : 9);
+}}
+
               className={`px-5 py-2 rounded-full transition-colors ${
                 activeFilter === filter.id
                   ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
@@ -129,8 +145,7 @@ const ProjectGallery = () => {
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
-        >
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <AnimatePresence>
             {filteredProjects.slice(0, visibleCount).map(project => (
               <motion.div

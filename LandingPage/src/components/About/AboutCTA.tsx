@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const ContentHub = () => {
   const [activeTab, setActiveTab] = useState<"caseStudies" | "projects" | "insights">("caseStudies");
+  const navigate = useNavigate();
 
   // Sample data - replace with your actual content
   const content = {
@@ -82,7 +85,7 @@ const ContentHub = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-6 py-3 rounded-md text-lg font-medium transition-all ${activeTab === tab.id ? 'bg-[#FDCA07] text-[#EA3C1F]' : 'text-white hover:text-[#FDCA07]'}`}
+                className={`md:px-6 py-3 rounded-md text-lg font-medium transition-all ${activeTab === tab.id ? 'bg-[#FDCA07] text-[#EA3C1F]' : 'text-white hover:text-[#FDCA07]'}`}
               >
                 {tab.label}
               </button>
@@ -123,10 +126,14 @@ const ContentHub = () => {
               Let's discuss how we can help your business thrive with our local expertise and innovative solutions.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="px-8 py-4 bg-[#EA3C1F] text-white font-bold rounded-lg hover:bg-[#c53219] transition-colors">
-                Schedule a Consultation
+              <button
+              onClick={() => navigate("/custom")}
+              className="px-8 py-4 bg-[#EA3C1F] text-white font-bold rounded-lg hover:bg-[#c53219] transition-colors">
+                Start Designing 
               </button>
-              <button className="px-8 py-4 bg-white text-[#EA3C1F] font-bold rounded-lg hover:bg-gray-100 transition-colors">
+              <button
+              onClick={() => navigate("/blog")} 
+              className="px-8 py-4 bg-white text-[#EA3C1F] font-bold rounded-lg hover:bg-gray-100 transition-colors">
                 View All Case Studies
               </button>
             </div>

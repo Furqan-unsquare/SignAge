@@ -15,7 +15,6 @@ const Index = () => {
       <Collections />
       <CustomProducts />
       <Testimonials />
-
       <FAQ />
     </div>
   );

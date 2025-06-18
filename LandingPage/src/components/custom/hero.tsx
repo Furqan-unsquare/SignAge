@@ -43,7 +43,7 @@ const HeroSection = () => {
 
       
       {/* Animated Falling Sign - Positioned on Left Side */}
-      <div className="absolute top-96 left-8 md:left-16 lg:left-24 z-10">
+      <div className="absolute hidden md:block top-96 left-8 md:left-16 lg:left-24 z-10">
         <AnimatedNeonSign text="NEON STUDIO" />
       </div>
 
@@ -52,7 +52,7 @@ const HeroSection = () => {
         <GoodVibesNeon />
       </div>
 
-      <div className="max-w-7xl mx-auto text-center relative z-10 space-y-12 mt-24">
+      <div className="max-w-7xl mx-auto text-center relative z-10 space-y-12 md:mt-6">
         {/* Main Heading */}
         <div className="space-y-6">
           <div className="inline-flex items-center gap-3 bg-black/20 backdrop-blur-sm border-2 border-white/30 rounded-full px-6 py-3">
@@ -69,14 +69,14 @@ const HeroSection = () => {
             SIGNAGE
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-md md:text-xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
             Bring your vision to life with our premium LED neon signs. From concept to creation, design the perfect
             signage that represents your unique style and brand.
           </p>
         </div>
 
         {/* Mobile Good Vibes (only visible on mobile) */}
-        <div className="md:hidden rotate-12 mx-auto w-64">
+        <div className="md:hidden rotate-4 mx-auto w-64">
           <GoodVibesNeon />
         </div>
 
@@ -95,7 +95,7 @@ const HeroSection = () => {
         </div>
 
         {/* Feature Pills */}
-        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
           {[
             "Free Design Consultation",
             "Unlimited Revisions",
@@ -105,8 +105,7 @@ const HeroSection = () => {
           ].map((feature, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-medium hover:bg-[#fdca07] hover:text-black transition-all duration-300 cursor-pointer"
-            >
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-medium hover:bg-[#fdca07] hover:text-black transition-all duration-300 cursor-pointer">
               {feature}
             </div>
           ))}
@@ -114,21 +113,26 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button className="group relative bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-xl md:text-2xl uppercase tracking-wider px-10 py-5 rounded-2xl border-4 border-white transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#fdca07]">
+          <a href="#category">
+          <button className="group relative bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-xl md:text-2xl uppercase tracking-wider px-10 py-5 rounded-2xl  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#fdca07]">
             <div className="flex items-center gap-4">
               <Palette className="w-6 h-6" />
               <span>START DESIGNING</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
             </div>
           </button>
+          </a>
 
-          <button className="group bg-transparent border-4 border-white hover:bg-white text-white hover:text-[#EA3C1F] font-black text-xl uppercase tracking-wider px-10 py-5 rounded-2xl transition-all duration-300 hover:scale-105">
+          <a href="/work">
+          <button className="group bg-transparent  text-white hover:text-white/80 font-black text-xl uppercase tracking-wider px-10 py-5 rounded-2xl transition-all duration-300 hover:scale-105">
             <div className="flex items-center gap-3">
               <span>VIEW GALLERY</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </div>
           </button>
+        </a>
         </div>
+        
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto pt-12">

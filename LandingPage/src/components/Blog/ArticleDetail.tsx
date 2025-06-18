@@ -147,7 +147,7 @@ const socialPlatforms = ['whatsapp', 'instagram'];
       animate="visible"
       className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-12 px-4 sm:px-6 lg:px-8"
     >
-      <div className="max-w-4xl mx-auto mt-12">
+      <div className="max-w-4xl mx-auto mt-8 md:mt-12">
         
 
         <motion.div variants={itemVariants} className="mb-10">
@@ -238,25 +238,24 @@ const socialPlatforms = ['whatsapp', 'instagram'];
 
         {/* Floating share buttons */}
       < motion.div
-  variants={containerVariants}
-  initial="hidden"
-  animate="visible"
-  className="fixed bottom-8 left-8 z-20 flex flex-col space-y-3"
->
-  {socialPlatforms.map((social) => (
-    <motion.button
-      key={social}
-      variants={itemVariants}
-      whileHover={{ scale: 1.1, y: -3 }}
-      whileTap={{ scale: 0.9 }}
-      className="w-12 h-12 bg-[#FDCA07] rounded-full shadow-lg flex items-center justify-center text-[#EA3C1F] hover:bg-[#FFD700] transition-colors"
-      onClick={() => shareArticle(social)}>
-      {social === 'instagram' && <FaInstagram className="w-6 h-6 text-gray-700" />}
-      {social === 'whatsapp' && <FaWhatsapp className="w-6 h-6 text-gray-700" />}
-    </motion.button>
-  ))}
-</motion.div>
-
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="fixed bottom-8 right-4 md:left-8 z-20 flex flex-col space-y-3"
+      >
+        {socialPlatforms.map((social) => (
+          <motion.button
+            key={social}
+            variants={itemVariants}
+            whileHover={{ scale: 1.1, y: -3 }}
+            whileTap={{ scale: 0.9 }}
+            className="w-12 h-12 bg-[#FDCA07] rounded-full shadow-lg flex items-center justify-center text-[#EA3C1F] hover:bg-[#FFD700] transition-colors"
+            onClick={() => shareArticle(social)}>
+            {social === 'instagram' && <FaInstagram className="w-6 h-6 text-gray-700" />}
+            {social === 'whatsapp' && <FaWhatsapp className="w-6 h-6 text-gray-700" />}
+          </motion.button>
+        ))}
+      </motion.div>
       </div>
     </motion.div>
   );

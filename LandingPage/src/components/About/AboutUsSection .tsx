@@ -100,8 +100,7 @@ const AboutUsSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20  bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]  overflow-hidden"
-    >
+      className="relative pt-10 md:py-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] overflow-hidden">
       {/* Floating 3D Graphics */}
       {graphicElements.map((element) => (
         <div
@@ -184,13 +183,13 @@ const AboutUsSection: React.FC = () => {
         {/* Products Section */}
         <div>
           <div className="flex justify-between items-center mb-12">
-            <h3 className="text-3xl font-bold text-[#FDCA07]">
+            <h3 className="text-3xl  font-bold text-[#FDCA07]">
               Our Signature Products
             </h3>
             
             {/* Navigation Buttons - Top Right */}
             {!loading && !error && products.length > 0 && (
-              <div className="flex gap-2">
+              <div className="hidden md:flex gap-2">
                 <button
                   onClick={() => scrollCarousel("left")}
                   className="bg-[#FDCA07] text-[#EA3C1F] p-2 rounded-full shadow-lg hover:bg-[#FFD700] transition-colors"

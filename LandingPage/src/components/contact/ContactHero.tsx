@@ -35,11 +35,11 @@ const ContactHero = () => {
                 {/* Secondary animated phone with electric effect */}
                 <div className="absolute top-20 right-20 opacity-25">
                     <div className="animate-[electricRing_2s_ease-in-out_infinite_0.5s]">
-                        <div className="relative">
+                        <div className="relative hidden md:block">
                             <div className="absolute inset-0 animate-ping">
                                 <Phone className="w-32 h-32 text-yellow-300 blur-md transform rotate-12" />
                             </div>
-                            <Phone className="w-32 h-32 text-yellow-400 transform rotate-12 drop-shadow-xl relative z-10" />
+                            <Phone className=" w-32 h-32 text-yellow-400 transform rotate-12 drop-shadow-xl relative z-10" />
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ const ContactHero = () => {
                     </p>
 
                     {/* Quick Stats */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                    <div className="grid grid-cols-4 md:grid-cols-4 md:gap-6 mb-16">
                         {quickStats.map((stat, index) => (
                             <div key={stat.label} className="text-center group">
                                 <div className="w-12 h-12 mx-auto bg-yellow-400 border-2 border-white rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-yellow-300 transition-all duration-300 shadow-lg">

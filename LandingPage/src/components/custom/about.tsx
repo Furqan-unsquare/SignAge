@@ -48,11 +48,11 @@ const AboutSection = () => {
   ]
 
   return (
-    <section className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-24 px-4" id="about">
+    <section className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] pt-20 pb-4 px-4" id="about">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Left Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 px-2">
             <div>
               <div className="inline-flex items-center gap-3 bg-black/20 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
                 <Users className="w-5 h-5 text-[#fdca07]" />
@@ -91,13 +91,13 @@ const AboutSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-lg uppercase tracking-wider px-8 py-4 rounded-xl border-2 border-white transform transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3">
+              <button className="group bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-lg uppercase tracking-wider px-8 py-4 rounded-xl transform transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3">
                 <Zap className="w-5 h-5" />
                 <span>GET FREE QUOTE</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </button>
 
-              <button className="group bg-transparent border-2 border-white hover:bg-white text-white hover:text-[#EA3C1F] font-black text-lg uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3">
+              <button className="group bg-transparent text-white hover:text-white/80 font-black text-lg uppercase tracking-wider px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3">
                 <span>VIEW PORTFOLIO</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </button>
@@ -116,7 +116,7 @@ const AboutSection = () => {
               {/* Overlay Elements */}
               <div className="absolute top-6 left-6 bg-[#fdca07] text-black font-black text-sm uppercase px-4 py-2 rounded-lg">
                 <div className="flex items-center gap-2">
-                  <Star className="w-4 h-4 fill-current" />
+                  {/* <Star className="w-4 h-4 fill-current" /> */}
                   <span>Premium Quality</span>
                 </div>
               </div>

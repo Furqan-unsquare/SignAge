@@ -133,10 +133,12 @@ const Services = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-20">
+          <a href="/custom">
           <div className="inline-flex items-center px-10 py-5 bg-yellow-400 border-4 border-white rounded-full text-gray-900 font-black text-xl hover:scale-105 transition-all duration-300 cursor-pointer shadow-xl hover:shadow-yellow-400/50 group">
             LET'S CREATE SOMETHING AMAZING!
-            <Zap className="w-6 h-6 ml-3 text-gray-900 group-hover:animate-bounce" />
+            <Zap className="w-6 h-6 ml-3 hidden md:block text-gray-900 group-hover:animate-bounce" />
           </div>
+          </a>
         </div>
       </div>
 

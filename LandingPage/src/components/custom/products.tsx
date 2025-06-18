@@ -151,11 +151,11 @@ const ProductsSection = () => {
             <p className="text-gray-400 text-lg">Simple 4-step process to get your custom neon sign</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { step: "01", title: "Share Your Idea", desc: "Tell us your concept, upload images, or describe your vision" },
-              { step: "02", title: "Free Design", desc: "Our designers create a mockup within 24 hours at no cost" },
-              { step: "03", title: "Approve & Order", desc: "Review, request changes, and place your order when satisfied" },
+              { step: "02", title: "Free Design Tool", desc: "Our designers create a mockup within 24 hours at no cost" },
+              { step: "03", title: "Approve & Order", desc: "Review, request, and place your order when satisfied" },
               { step: "04", title: "Receive & Install", desc: "Get your custom sign delivered with installation guide" }
             ].map((process, index) => (
               <div key={index} className="text-center space-y-4">
@@ -163,7 +163,7 @@ const ProductsSection = () => {
                   {process.step}
                 </div>
                 <h4 className="text-white font-black uppercase tracking-wide">{process.title}</h4>
-                <p className="text-gray-400 text-sm leading-relaxed">{process.desc}</p>
+                {/* <p className="text-gray-400 text-sm leading-relaxed">{process.desc}</p> */}
               </div>
             ))}
           </div>

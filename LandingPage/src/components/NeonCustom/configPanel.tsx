@@ -59,7 +59,7 @@ export const ConfigurationPanel = ({
   return (
     <div className="overflow-y-auto max-h-full pr-2 space-y-6 scrollbar-hidden ">
       {/* Header with Total Price */}
-      <div className="flex justify-between sticky top-0 bg-black z-50 items-start">
+      <div className="flex justify-between sticky top-0 bg-black z-40 items-start">
         <div>
           <h1 className="text-3xl font-bold mb-2">Customise Neon Sign</h1>
           <div className="flex items-center gap-2 mb-2">

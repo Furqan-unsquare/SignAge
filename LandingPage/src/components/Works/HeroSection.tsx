@@ -57,7 +57,7 @@ const HeroSection: React.FC = () => {
       id="hero"
       className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] pt-16 px-4 sm:px-6 lg:px-8"
     >
-      <div className="max-w-full mx-auto w-full flex flex-col gap-28 pt-20 md:pt-40 items-center">
+      <div className="max-w-full mx-auto w-full flex flex-col gap-28 md:pt-40 items-center">
         {/* Stacked Images */}
         <motion.div
             initial={{ opacity: 0, y: 50 }}
