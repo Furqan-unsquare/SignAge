@@ -74,7 +74,16 @@ const Header = () => {
                 }
               }}
             >
-              <img src="/assets/logo5.png" alt="Logo" className="w-[90px] h-auto drop-shadow-xl" />
+              {/* Center Section - Logo */}
+              <div className="flex-shrink-0 flex items-center justify-center">
+                <div className="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(253,202,7,0.8)] border-4 border-[rgb(253,202,7)]">
+                  <img
+                    src="/assets/logo5.png"
+                    alt="Logo"
+                    className="w-20 h-20 drop-shadow-[0_0_20px_rgba(253,202,7,0.8)]"
+                  />
+                </div>
+              </div>
             </motion.div>
 
 
