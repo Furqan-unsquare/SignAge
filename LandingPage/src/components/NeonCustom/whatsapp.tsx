@@ -32,7 +32,7 @@ Total Price: ₹${totalPrice}
 
 Please confirm my order.`;
     
-    const phoneNumber = "919876543210"; // Replace with your WhatsApp number
+    const phoneNumber = "919372982499"; // Replace with your WhatsApp number
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
     window.open(url, "_blank");

@@ -91,7 +91,7 @@ const FAQ = () => {
           ))}
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Section
         <div className="text-center mt-20">
           <div className="bg-[#fdca07] border-4 border-white rounded-2xl p-8 md:p-12 max-w-3xl mx-auto shadow-[0_0_50px_rgba(253,202,7,0.3)] hover:shadow-[0_0_70px_rgba(253,202,7,0.5)] transition-all duration-300 hover:scale-105">
             <h3 className="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-wider drop-shadow-2xl">
@@ -104,7 +104,7 @@ const FAQ = () => {
               Contact Us Today
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

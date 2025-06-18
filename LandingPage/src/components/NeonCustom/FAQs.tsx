@@ -46,14 +46,14 @@ export const FAQs = () => {
               )}
             </div>
           ))}
-          <div className="text-center mt-8">
+          {/* <div className="text-center mt-8">
             <a 
               href="/faqs" 
               className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors"
             >
               View All FAQs
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
