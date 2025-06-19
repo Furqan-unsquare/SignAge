@@ -34,7 +34,7 @@ export interface AddOn {
 }
 
 export const NeonConfigurator = () => {
-    const [text, setText] = useState("ag")
+    const [text, setText] = useState("")
     const [selectedFont, setSelectedFont] = useState("Pacifico")
     const [selectedColor, setSelectedColor] = useState("#ffffff")
     const [selectedSize, setSelectedSize] = useState("Regular")

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../component/Sidebar';
-import { User, Mail, Trash, ChevronUp, ChevronDown, Search } from 'lucide-react';
+import { User, Mail, Trash, ChevronUp, ChevronDown, Search, Mailbox, MessageSquare } from 'lucide-react';
 import authHeader from '../utils/authHeader';
 
 const backendUrl = 'http://localhost:5000';
@@ -14,6 +14,7 @@ const EnquiryListPage = () => {
   const [sortOrder, setSortOrder] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [enquiriesPerPage] = useState(5);
+  const [expandedMessages, setExpandedMessages] = useState({});
 
   useEffect(() => {
     const fetchEnquiries = async () => {
@@ -34,6 +35,7 @@ const EnquiryListPage = () => {
       (entry) =>
         entry.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         entry.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        entry.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
         entry.message.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredEnquiries(filtered);
@@ -52,8 +54,8 @@ const EnquiryListPage = () => {
           : new Date(b[field]) - new Date(a[field]);
       }
       return order === 'asc'
-        ? a[field].localeCompare(b[field])
-        : b[field].localeCompare(a[field]);
+        ? a[field]?.localeCompare(b[field])
+        : b[field]?.localeCompare(a[field]);
     });
     setFilteredEnquiries(sorted);
   };
@@ -77,10 +79,31 @@ const EnquiryListPage = () => {
     }
   };
 
-  // Truncate email before @
-  const truncateEmail = (email) => {
-    const atIndex = email.indexOf('@');
-    return atIndex !== -1 ? email.substring(0, atIndex) + '@...' : email;
+  // Truncate text
+  const truncateText = (text, length = 20) => {
+    return text?.length > length ? text.substring(0, length) + '...' : text;
+  };
+
+  // Toggle message expansion
+  const toggleMessageExpansion = (id) => {
+    setExpandedMessages(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  // Handle email click
+  const handleEmail = (email, name) => {
+    const subject = `Re: Your enquiry with SignCraft`;
+    const body = `Dear ${name},\n\nThank you for reaching out to SignCraft regarding your signage needs. We've received your message and our team will get back to you shortly with more information.\n\nIn the meantime, feel free to browse our portfolio at [website link] to see examples of our work.\n\nBest regards,\nThe SignCraft Team`;
+    window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+  };
+
+  // Handle WhatsApp click
+  const handleWhatsApp = (phone) => {
+    const message = `Hi, thank you for contacting SignCraft. We've received your enquiry and will get back to you soon. Could you please let us know if you have any specific requirements or deadlines for your signage project?`;
+    const formattedPhone = phone.replace(/[^\d]/g, ''); // Remove non-numeric characters
+    window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`);
   };
 
   return (
@@ -138,9 +161,15 @@ const EnquiryListPage = () => {
                       )}
                     </div>
                   </th>
+                  
+                  <th className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                    Mobile No
+                  </th>
+
                   <th className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
                     Feedback
                   </th>
+
                   <th 
                     className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                     onClick={() => handleSort('createdAt')}
@@ -162,37 +191,75 @@ const EnquiryListPage = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {currentEnquiries.map((entry) => (
                   <tr key={entry._id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-900">
+                    <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-900 group relative">
                       <div className="flex items-center">
                         <User className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2" />
-                        <span>{entry.name}</span>
+                        <span className="truncate max-w-[120px]">
+                          {truncateText(entry.name)}
+                        </span>
                       </div>
+                      <span className="absolute left-0 bottom-full mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                        {entry.name}
+                      </span>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500 group relative">
                       <div className="flex items-center">
                         <Mail className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2" />
                         <span className="truncate max-w-[120px] sm:max-w-[180px]">
-                          {truncateEmail(entry.email)}
+                          {truncateText(entry.email)}
                         </span>
                       </div>
                       <span className="absolute left-0 bottom-full mb-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
                         {entry.email}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm sm:text-base text-gray-500 max-w-xs truncate">
-                      {entry.message}
+                    <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500">
+                      <div className="flex items-center">
+                        <span className="mr-2">{entry.phone}</span>
+                        {entry.phone && (
+                          <button
+                            onClick={() => handleWhatsApp(entry.phone)}
+                            className="text-green-600 hover:text-green-800 transition-colors"
+                            title="Message on WhatsApp"
+                          >
+                            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                    <td 
+                      className="px-4 py-3 text-sm sm:text-base text-gray-500 max-w-xs cursor-pointer"
+                      onClick={() => toggleMessageExpansion(entry._id)}
+                    >
+                      {expandedMessages[entry._id] ? (
+                        <div className="whitespace-pre-wrap">{entry.message}</div>
+                      ) : (
+                        <div className="truncate">{truncateText(entry.message, 30)}</div>
+                      )}
+                      {!expandedMessages[entry._id] && (
+                        <span className="text-xs text-gray-400">(click to expand)</span>
+                      )}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500">
                       {new Date(entry.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500">
-                      <button
-                        onClick={() => handleDelete(entry._id)}
-                        className="text-red-600 hover:text-red-800 transition-colors p-1"
-                        title="Delete"
-                      >
-                        <Trash className="h-4 w-4 sm:h-5 sm:w-5" />
-                      </button>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleEmail(entry.email, entry.name)}
+                          className="text-blue-600 hover:text-blue-800 transition-colors p-1"
+                          title="Reply via Email"
+                        >
+                          <Mailbox className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(entry._id)}
+                          className="text-red-600 hover:text-red-800 transition-colors p-1"
+                          title="Delete"
+                        >
+                          <Trash className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -211,8 +278,7 @@ const EnquiryListPage = () => {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium disabled:opacity-50 hover:bg-gray-50"
-              >
+                className="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium disabled:opacity-50 hover:bg-gray-50">
                 Previous
               </button>
               <button

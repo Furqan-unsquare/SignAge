@@ -6,24 +6,28 @@ const UserOrderSchema = new mongoose.Schema({
         required: true
     },
     color: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Color',
         required: true
     },
     size: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Size',
         required: true
     },
     type: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Type',
         required: true
     },
     font: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Font',
         required: true
+    },
+    addOns: {
+        type: [String], // 👈 NEW FIELD
+        default: []
     },
     totalPrice: {
         type: Number,

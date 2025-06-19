@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../component/Sidebar';
-import { Package, Truck, DollarSign, User, Clock, Activity, BarChart2 } from 'lucide-react';
+import { Package, Truck, User, Activity, BarChart2 } from 'lucide-react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line, Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -28,61 +29,75 @@ ChartJS.register(
 
 const DashboardPage = () => {
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [analytics, setAnalytics] = useState({
+  const [counts, setCounts] = useState({
     totalOrders: 0,
-    totalRevenue: 0,
-    activeUsers: 0,
-    conversionRate: 0,
+    totalEnquiries: 0,
+    totalProjects: 0,
   });
   const [recentOrders, setRecentOrders] = useState([]);
-  const [transactionData, setTransactionData] = useState([]);
-  const [performanceData, setPerformanceData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch all data in parallel
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        
-        if (token) {
-          const decoded = jwtDecode(token);
-          setName(decoded.name || '');
+        setError(null);
+
+        if (!token) {
+          console.warn('No token found in localStorage');
+          setError('Authentication token is missing. Please log in.');
+          setIsLoading(false);
+          return;
         }
 
-        const [analyticsRes, ordersRes, transactionsRes, performanceRes] = await Promise.all([
-          fetch('/api/analytics', { headers: { Authorization: `Bearer ${token}` } }),
-          fetch('/api/orders/recent', { headers: { Authorization: `Bearer ${token}` } }),
-          fetch('/api/transactions', { headers: { Authorization: `Bearer ${token}` } }),
-          fetch('/api/performance', { headers: { Authorization: `Bearer ${token}` } })
+        console.log('Fetching data with token:', token.substring(0, 10) + '...');
+        const [ordersRes, enquiriesRes, projectsRes] = await Promise.all([
+          fetch('http://localhost:5000/api/orders', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch('http://localhost:5000/api/enquiries', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch('http://localhost:5000/api/projects', {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
         ]);
 
-        const [
-          analyticsData,
-          ordersData,
-          transactionsData,
-          performanceData
-        ] = await Promise.all([
-          analyticsRes.json(),
+        if (!ordersRes.ok || !enquiriesRes.ok || !projectsRes.ok) {
+          throw new Error(`HTTP error! Status: ${ordersRes.status}, ${enquiriesRes.status}, ${projectsRes.status}`);
+        }
+
+        const [ordersData, enquiriesData, projectsData] = await Promise.all([
           ordersRes.json(),
-          transactionsRes.json(),
-          performanceRes.json()
+          enquiriesRes.json(),
+          projectsRes.json(),
         ]);
 
-        setAnalytics({
-          totalOrders: analyticsData.totalOrders || 0,
-          totalRevenue: analyticsData.totalRevenue || 0,
-          activeUsers: analyticsData.activeUsers || 0,
-          conversionRate: analyticsData.conversionRate || 0,
+        console.log('Raw Orders Data:', ordersData);
+        console.log('Raw Enquiries Data:', enquiriesData);
+        console.log('Raw Projects Data:', projectsData);
+
+        setCounts({
+          totalOrders: ordersData.length || 0,
+          totalEnquiries: enquiriesData.length || 0,
+          totalProjects: projectsData.length || 0,
         });
 
-        setRecentOrders(ordersData.slice(0, 5));
-        setTransactionData(transactionsData);
-        setPerformanceData(performanceData);
+        // Normalize recent orders data
+        const normalizedOrders = ordersData.map(order => ({
+          _id: order._id || order.id || 'N/A',
+          date: order.createdAt || order.date || new Date().toISOString(),
+          status: order.status || 'unknown',
+          amount: order.amount || order.totalPrice || 0,
+        }));
+        setRecentOrders(normalizedOrders.slice(0, 5));
 
       } catch (err) {
-        console.error('Error fetching data:', err);
+        console.error('Error fetching data:', err.message);
+        setError(`Failed to fetch data: ${err.message}. Check console for details.`);
       } finally {
         setIsLoading(false);
       }
@@ -91,32 +106,20 @@ const DashboardPage = () => {
     fetchData();
   }, [token]);
 
-  // Memoize chart data to prevent unnecessary re-renders
   const transactionChartData = useMemo(() => ({
-    labels: transactionData.map(t => new Date(t.date).toLocaleDateString()),
+    labels: recentOrders.map(o => new Date(o.date).toLocaleDateString()),
     datasets: [{
-      label: 'Transactions',
-      data: transactionData.map(t => t.amount),
+      label: 'Recent Orders',
+      data: recentOrders.map(o => o.amount),
       fill: false,
-      borderColor: '#059669', // Emerald-600
-      backgroundColor: 'rgba(5, 150, 105, 0.1)',
+      borderColor: '#10B981',
+      backgroundColor: 'rgba(16, 185, 129, 0.1)',
       tension: 0.4,
       pointRadius: 4,
       pointBackgroundColor: '#FFFFFF',
-      pointBorderColor: '#059669',
+      pointBorderColor: '#10B981',
     }]
-  }), [transactionData]);
-
-  const performanceChartData = useMemo(() => ({
-    labels: performanceData.map(p => p.month),
-    datasets: [{
-      label: 'Performance',
-      data: performanceData.map(p => p.value),
-      backgroundColor: 'rgba(5, 150, 105, 0.7)',
-      borderColor: 'rgba(5, 150, 105, 1)',
-      borderWidth: 1,
-    }]
-  }), [performanceData]);
+  }), [recentOrders]);
 
   const chartOptions = {
     responsive: true,
@@ -127,28 +130,21 @@ const DashboardPage = () => {
         backgroundColor: '#1F2937',
         titleColor: '#F9FAFB',
         bodyColor: '#F9FAFB',
-        borderColor: '#059669',
+        borderColor: '#10B981',
         borderWidth: 1,
       }
     },
     scales: {
-      x: { 
-        grid: { display: false },
-        ticks: { color: '#6B7280' } 
-      },
-      y: { 
-        grid: { color: '#E5E7EB' },
-        ticks: { color: '#6B7280' },
-        beginAtZero: true 
-      },
+      x: { grid: { display: false }, ticks: { color: '#6B7280' } },
+      y: { grid: { color: '#E5E7EB' }, ticks: { color: '#6B7280' }, beginAtZero: true },
     },
   };
 
   if (isLoading) {
     return (
-      <div className="min-h-screen w-screen flex bg-white">
+      <div className="min-h-screen w-screen flex bg-gray-50">
         <Sidebar />
-        <main className="flex-1 p-6 sm:p-8 bg-gray-50 flex items-center justify-center">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 flex items-center justify-center">
           <div className="animate-pulse flex flex-col items-center">
             <div className="h-12 w-12 bg-emerald-200 rounded-full mb-4"></div>
             <div className="h-4 bg-emerald-200 rounded w-32 mb-2"></div>
@@ -159,81 +155,73 @@ const DashboardPage = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen w-screen flex bg-gray-50">
+        <Sidebar />
+        <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 flex items-center justify-center">
+          <div className="text-center text-red-600">
+            <p>{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+            >
+              Retry
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen w-screen flex bg-white">
+    <div className="min-h-screen w-screen flex bg-gray-50">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 overflow-x-hidden">
+      <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-x-hidden">
         {/* Greeting */}
-        <h1 className="text-2xl sm:text-xl text-end md:text-start font-bold text-gray-800 mb-6">Hi, {name || 'User'}</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-right sm:text-left">Hi, {name || 'User'}</h1>
 
         {/* Analytics Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
             <div className="flex items-center">
-              <Package className="w-5 h-5 text-emerald-600 mr-2" />
+              <Package className="w-6 h-6 text-emerald-600 mr-3" />
               <div>
                 <p className="text-gray-600 text-sm">Total Orders</p>
-                <p className="text-xl font-semibold text-gray-800">{analytics.totalOrders}</p>
+                <p className="text-2xl font-semibold text-gray-800">{counts.totalOrders}</p>
               </div>
             </div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
             <div className="flex items-center">
-              <DollarSign className="w-5 h-5 text-emerald-600 mr-2" />
+              <User className="w-6 h-6 text-emerald-600 mr-3" />
               <div>
-                <p className="text-gray-600 text-sm">Total Revenue</p>
-                <p className="text-xl font-semibold text-gray-800">${analytics.totalRevenue.toFixed(2)}</p>
+                <p className="text-gray-600 text-sm">Total Enquiries</p>
+                <p className="text-2xl font-semibold text-gray-800">{counts.totalEnquiries}</p>
               </div>
             </div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
             <div className="flex items-center">
-              <User className="w-5 h-5 text-emerald-600 mr-2" />
+              <Activity className="w-6 h-6 text-emerald-600 mr-3" />
               <div>
-                <p className="text-gray-600 text-sm">Active Users</p>
-                <p className="text-xl font-semibold text-gray-800">{analytics.activeUsers}</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
-            <div className="flex items-center">
-              <Activity className="w-5 h-5 text-emerald-600 mr-2" />
-              <div>
-                <p className="text-gray-600 text-sm">Conversion Rate</p>
-                <p className="text-xl font-semibold text-gray-800">{analytics.conversionRate}%</p>
+                <p className="text-gray-600 text-sm">Total Projects</p>
+                <p className="text-2xl font-semibold text-gray-800">{counts.totalProjects}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Charts Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          {/* Transaction Graph */}
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
           <div className="bg-white p-4 rounded-lg shadow">
             <div className="flex items-center mb-4">
-              <BarChart2 className="w-5 h-5 text-emerald-600 mr-2" />
-              <h3 className="font-medium text-gray-800">Transaction History</h3>
+              <BarChart2 className="w-6 h-6 text-emerald-600 mr-3" />
+              <h3 className="text-lg font-medium text-gray-800">Recent Orders Trend</h3>
             </div>
             <div className="h-64">
               <Line data={transactionChartData} options={chartOptions} />
-            </div>
-          </div>
-
-          {/* Performance Graph */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <div className="flex items-center mb-4">
-              <Activity className="w-5 h-5 text-emerald-600 mr-2" />
-              <h3 className="font-medium text-gray-800">Monthly Performance</h3>
-            </div>
-            <div className="h-64">
-              <Bar data={performanceChartData} options={{
-                ...chartOptions,
-                plugins: {
-                  ...chartOptions.plugins,
-                  title: { display: false }
-                }
-              }} />
             </div>
           </div>
         </div>
@@ -241,8 +229,8 @@ const DashboardPage = () => {
         {/* Recent Orders */}
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="flex items-center mb-4">
-            <Truck className="w-5 h-5 text-emerald-600 mr-2" />
-            <h3 className="font-medium text-gray-800">Recent Orders</h3>
+            <Truck className="w-6 h-6 text-emerald-600 mr-3" />
+            <h3 className="text-lg font-medium text-gray-800">Recent Orders</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -255,28 +243,36 @@ const DashboardPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {recentOrders.map((order) => (
-                  <tr key={order._id} className="border-t hover:bg-gray-50 transition-colors">
-                    <td className="p-3 flex items-center">
-                      <Clock className="w-4 h-4 text-gray-500 mr-2" />
-                      <span className="truncate max-w-[120px] sm:max-w-none">{order._id}</span>
-                    </td>
-                    <td className="p-3">{new Date(order.date).toLocaleDateString()}</td>
-                    <td className="p-3">
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                        order.status === 'completed' 
-                          ? 'bg-emerald-100 text-emerald-800' 
-                          : order.status === 'processing' 
-                            ? 'bg-blue-100 text-blue-800' 
-                            : 'bg-gray-200 text-gray-800'
-                      }`}>
-                        <Truck className="w-3 h-3 mr-1" />
-                        {order.status}
-                      </span>
-                    </td>
-                    <td className="p-3">${order.amount.toFixed(2)}</td>
+                {recentOrders.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="p-3 text-center text-gray-500">No recent orders available.</td>
                   </tr>
-                ))}
+                ) : (
+                  recentOrders.map((order) => (
+                    <tr
+                      key={order._id}
+                      className="border-t hover:bg-gray-50 transition-colors cursor-pointer"
+                      onClick={() => navigate('/orders')}
+                    >
+                      <td className="p-3 flex items-center">
+                        <span className="truncate max-w-[120px] sm:max-w-none">{order._inputText}</span>
+                      </td>
+                      <td className="p-3">{new Date(order.date).toLocaleDateString()}</td>
+                      <td className="p-3">
+                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                          order.status === 'completed' 
+                            ? 'bg-emerald-100 text-emerald-800' 
+                            : order.status === 'processing' 
+                              ? 'bg-blue-100 text-blue-800' 
+                              : 'bg-gray-200 text-gray-800'
+                        }`}>
+                          {order.status}
+                        </span>
+                      </td>
+                      {/* <td className="p-3">${order.amount.toFixed(2)}</td> */}
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -286,4 +282,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;   
+export default DashboardPage;

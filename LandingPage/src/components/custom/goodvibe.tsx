@@ -27,7 +27,7 @@ const GoodVibesNeon = ({ className = "" }: GoodVibesNeonProps) => {
                     y: 0,
                     duration: 1.5,
                     ease: "back.out(1.7)",
-                    delay: 1,
+                    delay: 0.1,
                 })
             }
         }

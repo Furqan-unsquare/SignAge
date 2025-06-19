@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const UserOrder = require('../model/order'); // Make sure model path is correct
+const UserOrder = require('../model/order'); // Ensure path is correct
 
-// Create Order
+// ✅ Create Order
 router.post('/', async (req, res) => {
     try {
+        console.log("Incoming request body:", req.body);
+
         const {
             inputText,
             color,
             size,
             type,
             font,
+            addOns, // ✅ make sure it's included
             totalPrice,
             discount,
             isPaid
@@ -22,6 +25,7 @@ router.post('/', async (req, res) => {
             size,
             type,
             font,
+            addOns,
             totalPrice,
             discount,
             isPaid
@@ -30,27 +34,22 @@ router.post('/', async (req, res) => {
         await order.save();
         res.status(201).json(order);
     } catch (err) {
+        console.error("Error saving order:", err);
         res.status(400).json({ error: err.message });
     }
 });
 
-// Get All Orders
+// ✅ Get All Orders
 router.get('/', async (req, res) => {
     try {
-        const orders = await UserOrder.find()
-            .populate('color')
-            .populate('size')
-            .populate('type')
-            .populate('font')
-            .sort({ createdAt: -1 });
-
+        const orders = await UserOrder.find().sort({ createdAt: -1 });
         res.json(orders);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-// Update Order (edit any field including payment status)
+// ✅ Update Order
 router.put('/:id', async (req, res) => {
     try {
         const updatedOrder = await UserOrder.findByIdAndUpdate(
@@ -69,7 +68,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Delete Order
+// ✅ Delete Order
 router.delete('/:id', async (req, res) => {
     try {
         const deletedOrder = await UserOrder.findByIdAndDelete(req.params.id);

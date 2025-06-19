@@ -1,4 +1,3 @@
-// components/NeonConfigurator/WhatsAppButton.tsx
 "use client"
 import React from "react"
 
@@ -12,16 +11,16 @@ interface WhatsAppButtonProps {
 }
 
 export const WhatsAppButton = ({
-  text,
+  text, 
   selectedFont,
   selectedColor,
   selectedSize,
   selectedAddOns,
   totalPrice
 }: WhatsAppButtonProps) => {
-  const handleOrderClick = () => {
+  const handleOrderClick = async () => {
     const message = `Hello! I want to order a custom neon sign:
-    
+
 Text: ${text}
 Font: ${selectedFont}
 Color: ${selectedColor}
@@ -31,12 +30,41 @@ Add-ons: ${selectedAddOns.length ? selectedAddOns.join(", ") : "None"}
 Total Price: ₹${totalPrice}
 
 Please confirm my order.`;
-    
-    const phoneNumber = "919372982499"; // Replace with your WhatsApp number
+
+    // Send order data to backend
+    try {
+      const res = await fetch('http://localhost:5000/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputText: text,
+          font: selectedFont,
+          color: selectedColor,
+          size: selectedSize,
+          type: "Neon", // optional or dynamic
+          addOns: selectedAddOns,
+          totalPrice,
+          discount: 0, // update dynamically if needed
+          isPaid: false,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to create order");
+      }
+    } catch (err) {
+      console.error("Error sending order:", err);
+      alert("Something went wrong while placing the order.");
+      return;
+    }
+
+    // Redirect to WhatsApp
+    const phoneNumber = "917045992776";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
     window.open(url, "_blank");
-  }
+  };
 
   return (
     <button 

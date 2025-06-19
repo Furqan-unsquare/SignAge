@@ -76,7 +76,7 @@ const Header = () => {
             >
               {/* Center Section - Logo */}
               <div className="flex-shrink-0 flex items-center justify-center">
-                <div className="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(253,202,7,0.8)] border-4 border-[rgb(253,202,7)]">
+                <div className="w-24 h-24 bg-white rounded-full flex items-center mt-6 justify-center shadow-[0_0_30px_rgba(253,202,7,0.8)] border-4 border-[rgb(253,202,7)]">
                   <img
                     src="/assets/logo4.png"
                     alt="Logo"

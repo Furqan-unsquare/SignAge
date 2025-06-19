@@ -14,48 +14,11 @@ const CustomProducts = () => {
           
           {/* Left Side - Creative Dark Room Scene */}
           <div className="relative">
-            <div className="bg-black rounded-3xl p-8 min-h-[500px] relative overflow-hidden">
-              
-              {/* Room Interior */}
-              <div className="absolute inset-0">
-                {/* Floor */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                
-                {/* Wall */}
-                <div className="absolute top-0 left-0 right-0 h-2/3 bg-gradient-to-b from-gray-800 to-gray-900"></div>
-                
-                {/* Corner Shadow */}
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-black/50 to-transparent"></div>
-              </div>
+            <div className="bg-black rounded-3xl p- min-h-[500px] relative overflow-hidden">
+             
 
               {/* Neon Sign */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                <div className="relative">
-                  {/* Neon Glow Effect */}
-                  <div className="absolute inset-0 blur-md">
-                    <div className="text-6xl md:text-7xl font-black text-[#fdca07] opacity-80">
-                      CUSTOM
-                    </div>
-                  </div>
-                  
-                  {/* Main Neon Text */}
-                  <div className="relative text-6xl md:text-7xl font-black text-[#fdca07] text-center animate-pulse">
-                    CUSTOM
-                  </div>
-                  
-                  {/* Sub Neon Text */}
-                  <div className="relative mt-2">
-                    <div className="absolute inset-0 blur-sm">
-                      <div className="text-2xl md:text-3xl font-bold text-yellow-300 text-center opacity-70">
-                        PRODUCTS
-                      </div>
-                    </div>
-                    <div className="relative text-2xl md:text-3xl font-bold text-yellow-300 text-center">
-                      PRODUCTS
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <img src="https://i.pinimg.com/736x/26/cf/6b/26cf6b2063eea89b3fbda8a863ddb60a.jpg" alt="" />
 
               {/* Ambient Light Rays */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

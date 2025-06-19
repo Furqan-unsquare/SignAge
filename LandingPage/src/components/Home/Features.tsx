@@ -102,14 +102,8 @@ const NeonCraftSection = () => {
                             <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white z-10"></div>
                             
                             {/* Placeholder for image */}
-                            <div className="aspect-[4/3] bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                                <div className="text-center space-y-4">
-                                    <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto animate-pulse">
-                                        <Sparkles className="w-10 h-10 text-gray-800" />
-                                    </div>
-                                    <p className="text-yellow-300 font-bold text-lg">Your Amazing Craft Image Here</p>
-                                    <p className="text-yellow-400/60 text-sm">Replace with actual workshop photo</p>
-                                </div>
+                            <div className="aspect-[5/3] bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                                <img src="https://i.pinimg.com/736x/07/e2/ec/07e2ec074af3cc99c9168ace13d569e9.jpg" alt="" />
                             </div>
                         </div>
 

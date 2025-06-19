@@ -12,7 +12,7 @@ const collectionsData = [
     {
         id: 2,
         title: "Cafe & Restaurant",
-        image: "/assets/photo2.jpeg",
+        image: "https://i.pinimg.com/736x/0d/8d/f7/0d8df70441cdc91668537bd5fac7c88d.jpg",
         description: "Food & Beverage Signage",
     },
     {
@@ -24,7 +24,7 @@ const collectionsData = [
     {
         id: 4,
         title: "Under ₹4000",
-        image: "/assets/photo2.jpeg",
+        image: "https://i.pinimg.com/736x/ca/5b/4e/ca5b4efebe421c1e174c566defa4e0a9.jpg",
         description: "Budget-Friendly Options",
     },
     {
@@ -36,19 +36,19 @@ const collectionsData = [
     {
         id: 6,
         title: "Sports",
-        image: "/assets/photo2.jpeg",
+        image: "https://i.pinimg.com/736x/df/fd/96/dffd965eec2ab8add39d2ef248a3d073.jpg",
         description: "Sports Theme Signs",
     },
     {
         id: 7,
         title: "Music",
-        image: "/assets/photo2.jpeg",
+        image: "https://i.pinimg.com/736x/0d/8d/f7/0d8df70441cdc91668537bd5fac7c88d.jpg",
         description: "Musical Instruments",
     },
     {
         id: 8,
         title: "Love",
-        image: "/assets/photo2.jpeg",
+        image: "https://i.pinimg.com/736x/ca/5b/4e/ca5b4efebe421c1e174c566defa4e0a9.jpg",
         description: "Romantic Designs",
     },
 ];
