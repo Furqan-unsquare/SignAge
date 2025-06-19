@@ -1,32 +1,6 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
-import { Card, CardContent } from '@/components/UI/card';
 
 const ContactSection = () => {
-  const contactMethods = [
-    {
-      icon: Phone,
-      title: 'Phone',
-      value: '+1 (555) 123-SIGN',
-      description: 'Mon-Fri, 9AM-6PM EST',
-      color: 'from-yellow-400 to-yellow-300'
-    },
-    {
-      icon: Mail,
-      title: 'Email',
-      value: 'hello@electrifybrands.com',
-      description: 'We respond within 24 hours',
-      color: 'from-yellow-500 to-yellow-400'
-    },
-    {
-      icon: MapPin,
-      title: 'Studio',
-      value: '123 Neon Street, Design City',
-      description: 'Visit our showroom',
-      color: 'from-yellow-400 to-amber-400'
-    }
-  ];
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,9 +8,9 @@ const ContactSection = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -44,13 +18,13 @@ const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('/enquiries', {
+      const response = await fetch('http://localhost:5000/api/enquiries', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +54,7 @@ const ContactSection = () => {
   return (
     <div className="relative overflow-hidden">
       {/* Marquee Top - Smoother Animation */}
-      <div className="py-3 overflow-hidden ">
+      <div className="py-3 overflow-hidden">
         <div className="marquee whitespace-nowrap text-yellow-300 text-2xl md:text-4xl font-bold">
           {[...Array(3)].map((_, i) => (
             <React.Fragment key={i}>
@@ -99,7 +73,7 @@ const ContactSection = () => {
         <div className="relative h-96 lg:h-auto">
           <div className="absolute inset-0 rounded-t-xl lg:rounded-r-none lg:rounded-l-xl overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215256018003!2d-73.9878449241643!3d40.7484409713899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215256018003!2d-73.9878449241643!3d40.7484409713899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2us!4v1620000000000!5m2!1sen!2sus"
               width="100%"
               height="100%"
               style={{ border: 0 }}

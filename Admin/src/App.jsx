@@ -6,6 +6,7 @@ import PricingPage from './pages/Pricing';
 import OrderListPage from './pages/Order';
 
 import EnquiryListPage from './pages/Enquiry';
+import AdminGallery from './pages/AdminGallery';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/dashboard" element={<RequireAuth><DashboardPage /></RequireAuth>} />
         <Route path="/pricing" element={<RequireAuth><PricingPage /></RequireAuth>} />
         <Route path="/orders" element={<RequireAuth><OrderListPage /></RequireAuth>} />
+        <Route path="/galery" element={<RequireAuth><AdminGallery /></RequireAuth>} />
         <Route path="/enquiry" element={<RequireAuth><EnquiryListPage /></RequireAuth>} />
 
         {/* other routes */}

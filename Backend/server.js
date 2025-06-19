@@ -1,12 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const app = express();
 const connectDB = require('./config/connection');
 const middleware = require('./middleware/auth');
-
-
 
 // Middleware
 app.use(cors());
@@ -22,8 +21,14 @@ app.use('/api/sizes', middleware, require('./routes/price/size'));
 app.use('/api/types', middleware, require('./routes/price/type'));
 app.use('/api/fonts', middleware, require('./routes/price/font'));
 app.use('/api/enquiry', middleware, require('./routes/enquiry'));
+app.use('/api/enquiries', require('./routes/enquiryRoutes'));
+app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/orders', middleware, require('./routes/order'));
 app.use('/api/auth', require('./routes/auth'));
+
+// Serve static files from images directory
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 // Sample route
 app.get('/', (req, res) => {
     res.send('Backend is running!');

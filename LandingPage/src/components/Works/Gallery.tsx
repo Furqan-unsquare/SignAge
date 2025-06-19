@@ -1,20 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-type Project = {
-  id: number;
-  title: string;
-  image: string;
-  category: "exterior" | "interior" | "digital" | "vehicle";
-  featured?: boolean;
-};
 
 const ProjectGallery = () => {
   // State management
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [visibleCount, setVisibleCount] = useState<number>(9);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [projects, setProjects] = useState([]);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(9);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Animation variants
   const container = {
@@ -23,38 +15,36 @@ const ProjectGallery = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        when: "beforeChildren"
-      }
-    }
+        when: "beforeChildren",
+      },
+    },
   };
-
-  // Detect screen size and adjust initial visibleCount
-useEffect(() => {
-  const handleResize = () => {
-    const isMobile = window.innerWidth < 768;
-    setVisibleCount(isMobile ? 3 : 9);
-  };
-
-  handleResize(); // Call once on mount
-  window.addEventListener("resize", handleResize);
-
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
-
 
   const item = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
+    show: {
+      opacity: 1,
+      y: 0,
       scale: 1,
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 15
-      }
-    }
+        damping: 15,
+      },
+    },
   };
+
+  // Detect screen size and adjust initial visibleCount
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      setVisibleCount(isMobile ? 3 : 9);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Filter options
   const filters = [
@@ -66,12 +56,13 @@ useEffect(() => {
     { id: "featured", label: "Featured Work" },
   ];
 
-  // Fetch projects
+  // Fetch projects from API
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("/gallery.json");
-        const data = await response.json();
+        const response = await fetch('http://localhost:5000/api/projects');
+        if (!response.ok) throw new Error('Failed to fetch projects');
+        const { data } = await response.json();
         setProjects(data);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -82,17 +73,18 @@ useEffect(() => {
   }, []);
 
   // Filter projects
-  const filteredProjects = projects.filter(project => 
-    activeFilter === "all" || 
-    project.category === activeFilter || 
-    (activeFilter === "featured" && project.featured)
+  const filteredProjects = projects.filter(
+    (project) =>
+      activeFilter === "all" ||
+      project.category === activeFilter ||
+      (activeFilter === "featured" && project.featured)
   );
 
   // Load more projects
   const loadMore = () => {
     setIsLoading(true);
     setTimeout(() => {
-      setVisibleCount(prev => prev + 9);
+      setVisibleCount((prev) => prev + 9);
       setIsLoading(false);
     }, 500);
   };
@@ -101,7 +93,7 @@ useEffect(() => {
     <section className="pb-16 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -120,51 +112,53 @@ useEffect(() => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12">
-          {filters.map(filter => (
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
+          {filters.map((filter) => (
             <button
               key={filter.id}
-            onClick={() => {
-  setActiveFilter(filter.id);
-  const isMobile = window.innerWidth < 768;
-  setVisibleCount(isMobile ? 3 : 9);
-}}
-
+              onClick={() => {
+                setActiveFilter(filter.id);
+                const isMobile = window.innerWidth < 768;
+                setVisibleCount(isMobile ? 3 : 9);
+              }}
               className={`px-5 py-2 rounded-full transition-colors ${
                 activeFilter === filter.id
                   ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
                   : "bg-white/10 text-white hover:bg-white/20"
-              }`}>
+              }`}
+            >
               {filter.label}
             </button>
           ))}
         </motion.div>
 
-        {/* Gallery Grid */}
+        {/* Masonry Gallery */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          className="columns-1 sm:columns-2 lg:columns-3 gap-6 mb-12"
+        >
           <AnimatePresence>
-            {filteredProjects.slice(0, visibleCount).map(project => (
+            {filteredProjects.slice(0, visibleCount).map((project) => (
               <motion.div
-                key={project.id}
+                key={project._id}
                 variants={item}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.03,
-                  boxShadow: "0 10px 25px -5px rgba(253, 202, 7, 0.3)"
+                  boxShadow: "0 10px 25px -5px rgba(253, 202, 7, 0.3)",
                 }}
-                className={`rounded-xl overflow-hidden border ${
+                className={`rounded-xl overflow-hidden border break-inside-avoid mb-6 ${
                   project.featured ? "border-2 border-[#FDCA07]" : "border-white/10"
                 }`}
-                layout // Enables smooth layout transitions
+                layout
               >
-                <div className="relative aspect-[4/3] bg-gray-800 overflow-hidden">
+                <div className="relative bg-gray-800 overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-cover"
                     loading="lazy"
                   />
                   {project.featured && (

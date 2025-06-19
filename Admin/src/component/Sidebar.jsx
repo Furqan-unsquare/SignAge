@@ -37,6 +37,7 @@ const Sidebar = () => {
         { path: "/dashboard", name: "Dashboard", icon: <FiHome size={20} /> },
         { path: "/pricing", name: "Pricing", icon: <FiDollarSign size={20} /> },
         { path: "/orders", name: "Orders", icon: <FiShoppingCart size={20} /> },
+        { path: "/galery", name: "Galery", icon: <FiShoppingCart size={20} /> },
         { path: "/enquiry", name: "Enquiries", icon: <FiMessageSquare size={20} /> },
     ];
 
