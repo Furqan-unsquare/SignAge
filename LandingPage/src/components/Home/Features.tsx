@@ -18,10 +18,10 @@ const NeonCraftSection = () => {
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-16 items-center">
                     
                     {/* Content Side */}
-                    <div className="space-y-8">
+                    <div className="space-y-8 px-2 py-6">
                         {/* Neon-style title */}
                         <div className="relative">
                             <div className="absolute inset-0 blur-sm">
@@ -40,10 +40,10 @@ const NeonCraftSection = () => {
 
                         {/* Glowing description */}
                         <div className="space-y-4">
-                            <p className="text-xl text-yellow-100 leading-relaxed">
+                            <p className="md:text-xl text-yellow-100 leading-relaxed">
                                 From concept to creation, every neon sign is crafted with passion in our Mumbai studio.
                             </p>
-                            <p className="text-lg text-yellow-200/80">
+                            <p className="md:text-lg text-yellow-200/80">
                                 Our master craftsmen bend, shape, and electrify each piece to perfection - 
                                 <span className="text-yellow-300 font-bold"> bringing your vision to life with authentic neon glow</span>.
                             </p>

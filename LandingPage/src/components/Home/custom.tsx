@@ -3,7 +3,7 @@ import React from 'react';
 
 const CustomProducts = () => {
   return (
-    <div className="relative bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-20 px-4 md:px-8">
+    <div className="relative bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-10 md:py-20 px-4 md:px-8">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/20 to-transparent"></div>
@@ -74,9 +74,9 @@ const CustomProducts = () => {
           </div>
 
           {/* Right Side - Content */}
-          <div className="text-white space-y-6">
-            <div className="space-y-4">
-              <h2 className="text-5xl md:text-6xl font-black uppercase tracking-wider">
+          <div className="text-white px-4 space-y-6">
+            <div className="space-y-1">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-wider">
                 Talk to us to
               </h2>
               <h3 className="text-2xl md:text-6xl font-black uppercase tracking-wider text-[#fdca07]">
@@ -107,7 +107,7 @@ const CustomProducts = () => {
                 </div>
                 <div>
                   <h4 className="text-2xl font-bold text-[#fdca07] mb-2">We Take Extra Step</h4>
-                  <p className="text-lg text-gray-200">Get a mock up. See how exactly this looks and get a price quote</p>
+                  <p className="md:text-lg text-gray-200">Get a mock up. See how exactly this looks and get a price quote</p>
                 </div>
               </div>
 
@@ -120,7 +120,7 @@ const CustomProducts = () => {
                 </div>
                 <div>
                   <h4 className="text-2xl font-bold text-[#fdca07] mb-2">Design Finalize and Shipped!</h4>
-                  <p className="text-lg text-gray-200">Finalize design. You confirm. Production starts. Get your product</p>
+                  <p className="md:text-lg text-gray-200">Finalize design. You confirm. Production starts. Get your product</p>
                 </div>
               </div>
             </div>

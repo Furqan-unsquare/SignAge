@@ -242,7 +242,7 @@ const AboutUsSection: React.FC = () => {
                   
                   {/* Product Text Below Image */}
                   <div className="p-6">
-                    <h4 className="text-xl font-bold text-white">{product.title || "Untitled"}</h4>
+                    <h4 className="text-lg md:text-xl font-bold text-white">{product.title || "Untitled"}</h4>
                   </div>
                 </div>
               ))}

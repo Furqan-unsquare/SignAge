@@ -41,13 +41,13 @@ const FAQ = () => {
               <HelpCircle className="w-16 h-16 text-white" />
             </div>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black mb-6 uppercase tracking-wider">
+          <h2 className="text-3xl md:text-7xl font-black mb-6 uppercase tracking-wider">
             <span className="text-[#fdca07] drop-shadow-2xl">FREQUENTLY </span>
             <span className="text-white drop-shadow-2xl">ASKED</span>
             <br />
             <span className="text-white drop-shadow-2xl">QUESTIONS</span>
           </h2>
-          <p className="text-xl md:text-2xl text-yellow-100 max-w-3xl mx-auto font-bold uppercase tracking-wide drop-shadow-lg">
+          <p className="text-ms md:text-2xl text-yellow-100 max-w-3xl mx-auto font-bold uppercase tracking-wide drop-shadow-lg">
             Everything you need to know about premium signage solutions
           </p>
           <div className="mt-8 flex justify-center">
@@ -60,17 +60,17 @@ const FAQ = () => {
           {faqs.map((faq, index) => (
             <Card
               key={index}
-              className="bg-white/95 backdrop-blur-sm border-4 border-white hover:border-[#fdca07] transition-all duration-300 hover:shadow-[0_0_30px_rgba(253,202,7,0.3)] hover:scale-[1.02] rounded-2xl overflow-hidden"
+              className="bg-white/95 backdrop-blur-sm hover:border-[#fdca07] transition-all duration-300 hover:shadow-[0_0_30px_rgba(253,202,7,0.3)] hover:scale-[1.02] rounded-2xl overflow-hidden"
             >
               <CardContent className="p-0">
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full p-8 text-left flex items-center justify-between hover:bg-[#fdca07]/10 transition-all duration-300 group"
                 >
-                  <h3 className="text-xl md:text-2xl font-black text-[#EA3C1F] pr-4 uppercase tracking-wide group-hover:text-[#EB3C20] transition-colors duration-300">
+                  <h3 className="text-md md:text-2xl font-black text-[#EA3C1F] pr-4 uppercase tracking-wide group-hover:text-[#EB3C20] transition-colors duration-300">
                     {faq.question}
                   </h3>
-                  <div className="bg-[#EA3C1F] p-2 rounded-full group-hover:bg-[#fdca07] transition-all duration-300 flex-shrink-0">
+                  <div className="bg-[#EA3C1F] p-2 rounded-full transition-all duration-300 flex-shrink-0">
                     {openFAQ === index ? (
                       <ChevronUp className="w-6 h-6 text-white" />
                     ) : (
@@ -80,8 +80,8 @@ const FAQ = () => {
                 </button>
 
                 {openFAQ === index && (
-                  <div className="px-8 pb-8 border-t-4 border-[#fdca07]/20 bg-gradient-to-r from-[#fdca07]/5 to-transparent">
-                    <p className="text-[#EA3C1F] leading-relaxed pt-6 font-semibold text-lg">
+                  <div className="px-8 py-6 border-t-4 border-[#fdca07]/20 bg-gradient-to-r from-[#fdca07]/5 to-transparent">
+                    <p className="text-[#EA3C1F] leading-relaxed  font-semibold md:text-lg">
                       {faq.answer}
                     </p>
                   </div>

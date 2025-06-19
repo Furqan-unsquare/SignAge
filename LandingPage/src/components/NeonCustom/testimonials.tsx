@@ -27,13 +27,8 @@ export const Testimonials = () => {
     <div className="py-12 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center mb-10">
-          <h2 className="text-3xl font-bold">Customer Testimonials</h2>
-          <a 
-            href="/testimonials" 
-            className="text-purple-400 hover:text-purple-300 transition-colors"
-          >
-            View All →
-          </a>
+          <h2 className="text-3xl font-bold">Happy Customer</h2>
+          
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (

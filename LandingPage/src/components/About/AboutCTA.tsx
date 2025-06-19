@@ -69,7 +69,7 @@ const ContentHub = () => {
           <h2 className="text-4xl md:text-6xl font-bold text-[#FDCA07] mb-4">
             Success Stories & Insights
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="md:text-xl text-white/90 max-w-3xl mx-auto">
             Explore how we're helping local businesses thrive through innovation and community focus
           </p>
         </div>
@@ -85,7 +85,7 @@ const ContentHub = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`md:px-6 py-3 rounded-md text-lg font-medium transition-all ${activeTab === tab.id ? 'bg-[#FDCA07] text-[#EA3C1F]' : 'text-white hover:text-[#FDCA07]'}`}
+                className={`md:px-6 py-3 rounded-md md:text-lg font-medium transition-all ${activeTab === tab.id ? 'bg-[#FDCA07] text-[#EA3C1F]' : 'text-white hover:text-[#FDCA07]'}`}
               >
                 {tab.label}
               </button>
@@ -106,8 +106,8 @@ const ContentHub = () => {
               </div>
               
               <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white">{item.title}</h3>
-                  <p className="text-[#FDCA07]">{item.client || item.categories?.join(" • ") || `${item.stats?.length} Key Findings`}</p>
+                  <h3 className="text-lg md:text-2xl font-bold text-white">{item.title}</h3>
+                  <p className="md:text-xl text-[#FDCA07]">{item.client || item.categories?.join(" • ") || `${item.stats?.length} Key Findings`}</p>
               </div>
             </div>
           ))}
@@ -122,7 +122,7 @@ const ContentHub = () => {
             <h3 className="text-3xl md:text-4xl font-bold text-[#EA3C1F] mb-4">
               Ready to start your success story?
             </h3>
-            <p className="text-[#EA3C1F]/90 text-xl mb-8">
+            <p className="text-[#EA3C1F]/90 md:text-xl mb-8">
               Let's discuss how we can help your business thrive with our local expertise and innovative solutions.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
