@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../components/Sidebar';
 import { Eye, Trash, CheckCircle, XCircle, Edit, Calendar, ChevronUp, ChevronDown, RefreshCw } from 'lucide-react';
 import authHeader from '../utils/authHeader';
 
@@ -178,12 +178,12 @@ const OrderListPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-screen flex bg-white">
+    <div className="min-h-screen w-screen flex bg-gray-100">
       <Sidebar className="w-64" />
 
       <main className="flex-1 p-4 sm:p-6 md:p-8 bg-white overflow-x-hidden">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">User Orders</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Customer Orders</h2>
           <div className="flex items-center space-x-2">
             <input
               type="date"
@@ -220,7 +220,7 @@ const OrderListPage = () => {
           <div className="text-center text-gray-600">No orders found.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm sm:text-base bg-white rounded-lg shadow">
+            <table className="w-full text-sm sm:text-base bg-white rounded-xl shadow">
               <thead className="bg-gray-100 sticky top-0">
                 <tr>
                   <th className="p-3 text-left text-gray-600">Name</th>
@@ -419,7 +419,7 @@ const OrderListPage = () => {
                     className="w-full p-2 border border-gray-300 rounded-lg bg-white"
                   >
                     <option value="Pending">Pending</option>
-                    <option value="Paid">Paid</option>
+                    <option value="Paid" className='bg-red-400'>Paid</option>
                   </select>
                   {selectedOrder.isPaid && (
                     <p className="text-xs text-gray-500 mt-1">Paid status not reversible.</p>

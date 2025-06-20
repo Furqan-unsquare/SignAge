@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trash2, Plus, X } from 'lucide-react';
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../components/Sidebar';
 
 const AdminGallery = () => {
   const [projects, setProjects] = useState([]);

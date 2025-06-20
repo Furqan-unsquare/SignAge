@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../components/Sidebar';
 import { User, Mail, Trash, ChevronUp, ChevronDown, Search, MessageSquare, MailIcon } from 'lucide-react';
 import authHeader from '../utils/authHeader';
 

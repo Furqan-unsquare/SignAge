@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../component/Sidebar';
+import Sidebar from '../components/Sidebar';
 import { Package, Truck, User, Activity, BarChart2 } from 'lucide-react';
 import {
   Chart as ChartJS,
