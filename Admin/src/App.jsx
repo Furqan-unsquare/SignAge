@@ -7,6 +7,7 @@ import OrderListPage from './pages/Order';
 
 import EnquiryListPage from './pages/Enquiry';
 import AdminGallery from './pages/AdminGallery';
+import NotFoundPage from './component/NotFoundPage';
 
 
 
@@ -21,8 +22,9 @@ function App() {
         <Route path="/orders" element={<RequireAuth><OrderListPage /></RequireAuth>} />
         <Route path="/galery" element={<RequireAuth><AdminGallery /></RequireAuth>} />
         <Route path="/enquiry" element={<RequireAuth><EnquiryListPage /></RequireAuth>} />
-
-        {/* other routes */}
+        
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

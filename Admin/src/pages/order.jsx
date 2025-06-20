@@ -199,13 +199,13 @@ const OrderListPage = () => {
             />
             <button
               onClick={handleDateFilter}
-              className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center"
+              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center"
             >
               <Calendar className="w-5 h-5 mr-1" /> Filter
             </button>
             <button
               onClick={resetDateFilter}
-              className="p-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 flex items-center"
+              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center"
             >
               <RefreshCw className="w-5 h-5" />
             </button>

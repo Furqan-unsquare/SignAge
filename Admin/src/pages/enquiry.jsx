@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../component/Sidebar';
-import { User, Mail, Trash, ChevronUp, ChevronDown, Search, Mailbox, MessageSquare } from 'lucide-react';
+import { User, Mail, Trash, ChevronUp, ChevronDown, Search, MessageSquare, MailIcon } from 'lucide-react';
 import authHeader from '../utils/authHeader';
 
 const backendUrl = 'http://localhost:5000';
@@ -121,7 +121,7 @@ const EnquiryListPage = () => {
               placeholder="Search enquiries..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#059669] text-gray-800"
+              className="w-full p-2 pl-10 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#059669] text-gray-800"
             />
             <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
           </div>
@@ -133,13 +133,14 @@ const EnquiryListPage = () => {
         ) : (
           <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-white">
                 <tr>
                   <th 
                     className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                     onClick={() => handleSort('name')}
                   >
                     <div className="flex items-center">
+                      <User className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2" />
                       Name
                       {sortField === 'name' && (
                         sortOrder === 'asc' ? 
@@ -153,6 +154,7 @@ const EnquiryListPage = () => {
                     onClick={() => handleSort('email')}
                   >
                     <div className="flex items-center">
+                      <Mail className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2" />
                       Email
                       {sortField === 'email' && (
                         sortOrder === 'asc' ? 
@@ -167,7 +169,7 @@ const EnquiryListPage = () => {
                   </th>
 
                   <th className="px-4 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Feedback
+                    Feedback <br /><span className="text-xs text-gray-400">(click to expand)</span>
                   </th>
 
                   <th 
@@ -193,7 +195,6 @@ const EnquiryListPage = () => {
                   <tr key={entry._id} className="hover:bg-gray-50">
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-900 group relative">
                       <div className="flex items-center">
-                        <User className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2" />
                         <span className="truncate max-w-[120px]">
                           {truncateText(entry.name)}
                         </span>
@@ -204,7 +205,6 @@ const EnquiryListPage = () => {
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500 group relative">
                       <div className="flex items-center">
-                        <Mail className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 mr-2" />
                         <span className="truncate max-w-[120px] sm:max-w-[180px]">
                           {truncateText(entry.email)}
                         </span>
@@ -216,15 +216,6 @@ const EnquiryListPage = () => {
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500">
                       <div className="flex items-center">
                         <span className="mr-2">{entry.phone}</span>
-                        {entry.phone && (
-                          <button
-                            onClick={() => handleWhatsApp(entry.phone)}
-                            className="text-green-600 hover:text-green-800 transition-colors"
-                            title="Message on WhatsApp"
-                          >
-                            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
-                          </button>
-                        )}
                       </div>
                     </td>
                     <td 
@@ -235,9 +226,6 @@ const EnquiryListPage = () => {
                         <div className="whitespace-pre-wrap">{entry.message}</div>
                       ) : (
                         <div className="truncate">{truncateText(entry.message, 30)}</div>
-                      )}
-                      {!expandedMessages[entry._id] && (
-                        <span className="text-xs text-gray-400">(click to expand)</span>
                       )}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm sm:text-base text-gray-500">
@@ -250,8 +238,17 @@ const EnquiryListPage = () => {
                           className="text-blue-600 hover:text-blue-800 transition-colors p-1"
                           title="Reply via Email"
                         >
-                          <Mailbox className="h-4 w-4 sm:h-5 sm:w-5" />
+                          <MailIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </button>
+                        {entry.phone && (
+                          <button
+                            onClick={() => handleWhatsApp(entry.phone)}
+                            className="text-green-600 hover:text-green-800 transition-colors"
+                            title="Message on WhatsApp"
+                          >
+                            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
+                          </button>
+                        )}
                         <button
                           onClick={() => handleDelete(entry._id)}
                           className="text-red-600 hover:text-red-800 transition-colors p-1"

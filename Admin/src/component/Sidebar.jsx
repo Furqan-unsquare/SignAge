@@ -7,7 +7,8 @@ import {
   FiMessageSquare,
   FiLogOut,
   FiMenu,
-  FiX
+  FiX,
+  FiImage
 } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
@@ -37,7 +38,7 @@ const Sidebar = () => {
         { path: "/dashboard", name: "Dashboard", icon: <FiHome size={20} /> },
         { path: "/pricing", name: "Pricing", icon: <FiDollarSign size={20} /> },
         { path: "/orders", name: "Orders", icon: <FiShoppingCart size={20} /> },
-        { path: "/galery", name: "Galery", icon: <FiShoppingCart size={20} /> },
+        { path: "/galery", name: "Galery", icon: <FiImage size={20} /> },
         { path: "/enquiry", name: "Enquiries", icon: <FiMessageSquare size={20} /> },
     ];
 
@@ -66,7 +67,7 @@ const Sidebar = () => {
             <aside 
                 className={`
                     fixed md:sticky top-0 z-40 h-screen
-                    bg-gray-800 text-white
+                    bg-white border-r-1 border-gray-200 shadow-lg text-gray-700
                     transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
                     md:translate-x-0 transition-transform duration-300 ease-in-out
                     w-64 md:w-72 flex-shrink-0
@@ -81,7 +82,7 @@ const Sidebar = () => {
                             alt="Company Logo" 
                             className="h-10 w-auto" 
                         />
-                        <h2 className="text-2xl font-bold">Admin Panel</h2>
+                        <h2 className="text-2xl font-bold">Dashboard</h2>
                     </div>
 
                     {/* Navigation */}
@@ -93,7 +94,7 @@ const Sidebar = () => {
                                 className={({ isActive }) => `
                                     flex items-center space-x-3 px-4 py-3 rounded-lg
                                     transition-colors duration-200
-                                    ${isActive ? 'bg-gray-700 text-white font-medium' : 'hover:bg-gray-900'}
+                                    ${isActive ? 'bg-green-500 text-white font-medium' : 'hover:bg-green-300'}
                                 `}
                                 onClick={() => !isDesktop && setIsMobileMenuOpen(false)}
                             >
@@ -107,10 +108,9 @@ const Sidebar = () => {
                     <button
                         onClick={handleLogout}
                         className={`
-                            flex items-center justify-center space-x-2
-                            mt-auto py-3 px-4 rounded-lg
-                            bg-emerald-600 text-white font-medium
-                            hover:bg-emerald-700 transition-colors duration-200
+                            flex items-center justify-start space-x-2
+                            mt-auto py-3 px-4 rounded-lg font-medium
+                            hover:bg-gray hover:text-black transition-colors duration-200
                         `}>
                         <FiLogOut size={20} />
                         <span>Logout</span>
