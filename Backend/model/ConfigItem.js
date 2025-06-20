@@ -10,6 +10,7 @@ const fontSchema = new mongoose.Schema({
 // Color Schema
 const colorSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  value: { type: String, required: true },
   rate: { type: Number, required: true, min: 0 }
 }, { timestamps: true });
 

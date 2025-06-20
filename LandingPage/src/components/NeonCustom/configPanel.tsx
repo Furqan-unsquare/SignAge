@@ -2,7 +2,7 @@
 "use client"
 import React from "react"
 import { Star, Info, Copy } from "lucide-react"
-import { WhatsAppButton } from "./whatsapp"
+import { WhatsAppButton } from "./WhatsAppButton"
 
 interface ConfigurationPanelProps {
   text: string;

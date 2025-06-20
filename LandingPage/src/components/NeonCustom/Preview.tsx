@@ -29,7 +29,7 @@ export const PreviewPane = ({ text, selectedFont, selectedColor, fonts }: Previe
       color: "transparent",
       WebkitTextStroke: `1.5px ${selectedColor}`,
       textShadow: glowEffect,
-      fontWeight: 900,
+      fontWeight: 400,
       position: "absolute",
       top: "50%",
       left: "50%",

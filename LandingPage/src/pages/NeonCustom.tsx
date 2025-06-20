@@ -1,4 +1,4 @@
-import {NeonConfigurator} from "../components/NeonCustom/index"
+import {NeonConfigurator} from "../components/NeonCustom/Herosection"
 
 export default function HomePage() {
     return (

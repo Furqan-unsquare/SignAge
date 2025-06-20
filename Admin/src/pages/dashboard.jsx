@@ -88,10 +88,10 @@ const DashboardPage = () => {
 
         // Normalize recent orders data
         const normalizedOrders = ordersData.map(order => ({
-          _id: order._id || order.id || 'N/A',
-          date: order.createdAt || order.date || new Date().toISOString(),
-          status: order.status || 'unknown',
-          amount: order.amount || order.totalPrice || 0,
+          _id: order.inputText || 'N/A',
+          date: order.createdAt || new Date().toISOString(),
+          status: order.status || 'pending',
+          amount: order.totalPrice || 0,
         }));
         setRecentOrders(normalizedOrders.slice(0, 5));
 
@@ -250,17 +250,17 @@ const DashboardPage = () => {
                 ) : (
                   recentOrders.map((order) => (
                     <tr
-                      key={order._id}
-                      className="border-t hover:bg-gray-50 transition-colors cursor-pointer"
+                      key={order.inputText}
+                      className="border-t hover:bg-gray-50 text-gray-600 transition-colors cursor-pointer"
                       onClick={() => navigate('/orders')}
                     >
                       <td className="p-3 flex items-center">
-                        <span className="truncate max-w-[120px] sm:max-w-none">{order._inputText}</span>
+                        <span className="truncate max-w-[120px] sm:max-w-none">{order.id}</span>
                       </td>
                       <td className="p-3">{new Date(order.date).toLocaleDateString()}</td>
                       <td className="p-3">
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                          order.status === 'completed' 
+                          order.status === 'paid' 
                             ? 'bg-emerald-100 text-emerald-800' 
                             : order.status === 'processing' 
                               ? 'bg-blue-100 text-blue-800' 
@@ -269,7 +269,7 @@ const DashboardPage = () => {
                           {order.status}
                         </span>
                       </td>
-                      {/* <td className="p-3">${order.amount.toFixed(2)}</td> */}
+                      <td className="p-3">₹{order.amount.toFixed(2)}</td>
                     </tr>
                   ))
                 )}
