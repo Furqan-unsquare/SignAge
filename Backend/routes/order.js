@@ -13,11 +13,24 @@ router.post('/', async (req, res) => {
             size,
             type,
             font,
-            addOns, // ✅ make sure it's included
+            phoneNumber,
             totalPrice,
-            discount,
+            orderId,
             isPaid
         } = req.body;
+
+        // Validate required fields
+        if (!inputText || !color || !size || !type || !font || !phoneNumber || totalPrice == null) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        // Check if orderId is unique if provided
+        if (orderId) {
+            const existingOrder = await UserOrder.findOne({ orderId });
+            if (existingOrder) {
+                return res.status(400).json({ error: 'Order ID already exists' });
+            }
+        }
 
         const order = new UserOrder({
             inputText,
@@ -25,10 +38,10 @@ router.post('/', async (req, res) => {
             size,
             type,
             font,
-            addOns,
-            totalPrice,
-            discount,
-            isPaid
+            mobile: phoneNumber,
+            totalPrice: parseFloat(totalPrice),
+            orderId: orderId || undefined, // Allow MongoDB to generate _id if orderId is not provided
+            isPaid: !!isPaid
         });
 
         await order.save();
@@ -45,6 +58,7 @@ router.get('/', async (req, res) => {
         const orders = await UserOrder.find().sort({ createdAt: -1 });
         res.json(orders);
     } catch (err) {
+        console.error("Error fetching orders:", err);
         res.status(500).json({ error: err.message });
     }
 });
@@ -52,10 +66,22 @@ router.get('/', async (req, res) => {
 // ✅ Update Order
 router.put('/:id', async (req, res) => {
     try {
-        const updatedOrder = await UserOrder.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
+        const orderId = req.params.id; // Use id from URL
+        const updatedOrder = await UserOrder.findOneAndUpdate(
+            { orderId }, // Find by orderId field
+            {
+                $set: {
+                    inputText: req.body.inputText,
+                    color: req.body.color,
+                    size: req.body.size,
+                    type: req.body.type,
+                    font: req.body.font,
+                    mobile: req.body.mobile,
+                    totalPrice: parseFloat(req.body.totalPrice) || 0,
+                    isPaid: !!req.body.isPaid
+                }
+            },
+            { new: true, runValidators: true }
         );
 
         if (!updatedOrder) {
@@ -64,6 +90,7 @@ router.put('/:id', async (req, res) => {
 
         res.json(updatedOrder);
     } catch (err) {
+        console.error("Error updating order:", err);
         res.status(400).json({ error: err.message });
     }
 });
@@ -71,7 +98,8 @@ router.put('/:id', async (req, res) => {
 // ✅ Delete Order
 router.delete('/:id', async (req, res) => {
     try {
-        const deletedOrder = await UserOrder.findByIdAndDelete(req.params.id);
+        const orderId = req.params.id; // Use id from URL
+        const deletedOrder = await UserOrder.findOneAndDelete({ orderId });
 
         if (!deletedOrder) {
             return res.status(404).json({ message: 'Order not found' });
@@ -79,6 +107,7 @@ router.delete('/:id', async (req, res) => {
 
         res.json({ message: 'Order deleted successfully' });
     } catch (err) {
+        console.error("Error deleting order:", err);
         res.status(500).json({ error: err.message });
     }
 });

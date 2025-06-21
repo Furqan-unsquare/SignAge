@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const UserOrderSchema = new mongoose.Schema({
+    orderId: {
+        type: String,
+        required: true,
+        unique: true // optional, only if you want each ID to be unique
+    },
     inputText: {
         type: String,
         required: true
@@ -25,17 +30,13 @@ const UserOrderSchema = new mongoose.Schema({
         ref: 'Font',
         required: true
     },
-    addOns: {
-        type: [String], // 👈 NEW FIELD
-        default: []
-    },
     totalPrice: {
         type: Number,
         required: true
     },
-    discount: {
-        type: Number,
-        default: 0
+    mobile: {
+    type: String,
+    required: true
     },
     isPaid: {
         type: Boolean,

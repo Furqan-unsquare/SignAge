@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Font, Color, Size, AddOn, LetterCharge } = require('../model/ConfigItem');
+const { Font, Color, Size, LetterCharge } = require('../model/ConfigItem');
 
 const setupCrudRoutes = (model, path) => {
   router.get(`/${path}`, async (req, res) => {
@@ -34,6 +34,5 @@ setupCrudRoutes(LetterCharge, 'letter-charges');
 setupCrudRoutes(Font, 'fonts');
 setupCrudRoutes(Color, 'colors');
 setupCrudRoutes(Size, 'sizes');
-setupCrudRoutes(AddOn, 'addons');
 
 module.exports = router;

@@ -6,7 +6,6 @@ import LetterChargeManager from '../components/signage/LetterChargeManager';
 import FontManager from '../components/signage/FontManager';
 import ColorManager from '../components/signage/ColorManager';
 import SizeManager from '../components/signage/SizeManager';
-import AddOnManager from '../components/signage/AddOnManager';
 import { SignageProvider } from '../contexts/SignageContext';
 import Sidebar from '../components/Sidebar';
 
@@ -114,14 +113,6 @@ const ItemManagement = () => {
                     <section>
                       <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-slate-800">Size Management</h3>
                       <SizeManager />
-                    </section>
-
-                    <Separator />
-
-                    {/* Add-ons Management */}
-                    <section>
-                      <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-slate-800">Add-ons Management</h3>
-                      <AddOnManager />
                     </section>
                   </CardContent>
                 </Card>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { 
   FiHome, 
-  FiDollarSign, 
   FiShoppingCart, 
   FiMessageSquare,
   FiLogOut,
@@ -36,8 +35,8 @@ const Sidebar = () => {
 
     const menuItems = [
         { path: "/dashboard", name: "Dashboard", icon: <FiHome size={20} /> },
-        { path: "/pricing", name: "Pricing", icon: <FiDollarSign size={20} /> },
         { path: "/orders", name: "Orders", icon: <FiShoppingCart size={20} /> },
+        { path: "/pricing", name: "Management", icon: <FiMenu size={20} /> },
         { path: "/galery", name: "Galery", icon: <FiImage size={20} /> },
         { path: "/enquiry", name: "Enquiries", icon: <FiMessageSquare size={20} /> },
     ];

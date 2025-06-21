@@ -22,12 +22,6 @@ const sizeSchema = new mongoose.Schema({
   height: { type: Number }
 }, { timestamps: true });
 
-// AddOn Schema
-const addOnSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  rate: { type: Number, required: true, min: 0 }
-}, { timestamps: true });
-
 // Letter Charge Schema
 const letterChargeSchema = new mongoose.Schema({
   charge: { type: Number, required: true, min: 0 }
@@ -38,6 +32,5 @@ module.exports = {
   Font: mongoose.model('Font', fontSchema),
   Color: mongoose.model('Color', colorSchema),
   Size: mongoose.model('Size', sizeSchema),
-  AddOn: mongoose.model('AddOn', addOnSchema),
   LetterCharge: mongoose.model('LetterCharge', letterChargeSchema)
 };
