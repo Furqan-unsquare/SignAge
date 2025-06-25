@@ -92,9 +92,9 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4 md:px-0">
           {services.map((service, index) => (
-            <div key={service.title} className="relative group h-full">
+            <div key={service.title} className="relative group h-full ">
               {/* Ropes positioned at 1/4 and 3/4 width */}
               <div className="absolute -top-6 left-1/4 w-1 h-8 transform -translate-x-1/2 z-10">
                 <div className={`w-full h-full ${service.ropeColor} rounded-t-full`}></div>

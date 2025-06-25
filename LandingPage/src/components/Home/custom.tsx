@@ -14,11 +14,11 @@ const CustomProducts = () => {
           
           {/* Left Side - Creative Dark Room Scene */}
           <div className="relative">
-            <div className="bg-black rounded-3xl p- min-h-[500px] relative overflow-hidden">
+            <div className="bg-black rounded-3xl p- md:min-h-[500px] relative overflow-hidden">
              
 
               {/* Neon Sign */}
-            <img src="https://i.pinimg.com/736x/26/cf/6b/26cf6b2063eea89b3fbda8a863ddb60a.jpg" alt="" />
+            <img src="https://i.pinimg.com/736x/26/cf/6b/26cf6b2063eea89b3fbda8a863ddb60a.jpg" alt="" className='bgcover'/>
 
               {/* Ambient Light Rays */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

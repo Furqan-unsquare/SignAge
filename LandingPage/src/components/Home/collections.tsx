@@ -128,11 +128,11 @@ const Collections = () => {
             {/* Header Section */}
             <div className="max-w-7xl mx-auto md:mb-12">
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-wider">
+                    <div className="flex items-center md:gap-4">
+                        <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-wider">
                             Explore Our Collections
                         </h2>
-                        <div className=" w-32 h-1 bg-[#fdca07] rounded-full"></div>
+                        <div className="w-32 h-1 bg-[#fdca07] rounded-full"></div>
                     </div>
 
                     {/* Navigation Arrows - Desktop Only */}

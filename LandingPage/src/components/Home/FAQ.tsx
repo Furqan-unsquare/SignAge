@@ -47,7 +47,7 @@ const FAQ = () => {
             <br />
             <span className="text-white drop-shadow-2xl">QUESTIONS</span>
           </h2>
-          <p className="text-ms md:text-2xl text-yellow-100 max-w-3xl mx-auto font-bold uppercase tracking-wide drop-shadow-lg">
+          <p className="text-ms  md:text-2xl text-yellow-100 max-w-3xl mx-auto font-bold uppercase tracking-wide drop-shadow-lg">
             Everything you need to know about premium signage solutions
           </p>
           <div className="mt-8 flex justify-center">

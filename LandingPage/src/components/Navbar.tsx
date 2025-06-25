@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Zap } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { Menu, X, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(true);
 
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Work', href: '/work' },
-    { name: 'Custom', href: '/custom' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact-us' }
+    { name: "Home", href: "/" },
+    { name: "Work", href: "/work" },
+    { name: "Custom", href: "/custom" },
+    { name: "Blog", href: "/blog" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact-us" },
   ];
 
   useEffect(() => {
@@ -21,6 +21,19 @@ const Header = () => {
     }, 800);
     return () => clearTimeout(timer);
   }, []);
+
+  // Effect to control body scrolling
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    // Cleanup to ensure overflow is restored when component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -39,11 +52,12 @@ const Header = () => {
                     y: 0,
                     transition: {
                       delay: idx * 0.1,
-                      type: 'spring',
+                      type: "spring",
                       stiffness: 300,
-                      damping: 15
-                    }
-                  }}>
+                      damping: 15,
+                    },
+                  }}
+                >
                   <a
                     href={item.href}
                     className="relative text-white text-lg font-anton hover:text-[#FDCA07] transition-colors duration-300"
@@ -51,7 +65,7 @@ const Header = () => {
                     {item.name}
                     <motion.span
                       className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FDCA07]"
-                      whileHover={{ width: '100%' }}
+                      whileHover={{ width: "100%" }}
                       transition={{ duration: 0.3 }}
                     />
                   </a>
@@ -68,10 +82,10 @@ const Header = () => {
                 y: 0,
                 transition: {
                   delay: 0.3,
-                  type: 'spring',
+                  type: "spring",
                   stiffness: 300,
-                  damping: 15
-                }
+                  damping: 15,
+                },
               }}
             >
               {/* Center Section - Logo */}
@@ -80,13 +94,11 @@ const Header = () => {
                   <img
                     src="/assets/logo4.png"
                     alt="Logo"
-                    className="w-20 h-20 "
+                    className="w-20 h-20"
                   />
                 </div>
               </div>
             </motion.div>
-
-
 
             {/* Right Side Nav */}
             <div className="flex space-x-8 lg:space-x-12 pr-12">
@@ -99,10 +111,10 @@ const Header = () => {
                     y: 0,
                     transition: {
                       delay: (idx + 2) * 0.1,
-                      type: 'spring',
+                      type: "spring",
                       stiffness: 300,
-                      damping: 15
-                    }
+                      damping: 15,
+                    },
                   }}
                 >
                   <a
@@ -112,7 +124,7 @@ const Header = () => {
                     {item.name}
                     <motion.span
                       className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FDCA07]"
-                      whileHover={{ width: '100%' }}
+                      whileHover={{ width: "100%" }}
                       transition={{ duration: 0.3 }}
                     />
                   </a>
@@ -120,7 +132,6 @@ const Header = () => {
               ))}
             </div>
           </nav>
-
 
           {/* Mobile Toggle */}
           <motion.button
@@ -132,7 +143,7 @@ const Header = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu - Unchanged */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -140,7 +151,7 @@ const Header = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden fixed inset-0 top- bg-[#EA3C1F]/90 backdrop-blur-md"
+              className="md:hidden fixed inset-0 top-0 bg-[#EA3C1F]/90 backdrop-blur-md"
             >
               <nav className="h-full flex flex-col items-center justify-center space-y-8">
                 {navItems.map((item, idx) => (
@@ -152,10 +163,10 @@ const Header = () => {
                       y: 0,
                       transition: {
                         delay: idx * 0.1,
-                        type: 'spring',
+                        type: "spring",
                         stiffness: 200,
-                        damping: 15
-                      }
+                        damping: 15,
+                      },
                     }}
                   >
                     <a
