@@ -28,7 +28,7 @@ const ItemManagement = () => {
         <div className="flex-1 overflow-auto text-gray-800">
           <div className="container mx-auto px-4 py-8">
             {/* Header */}
-            <div className="mb-6 md:mb-8">
+            <div className="mb-6 md:mb-8 mt-6 md:mt-0">
               <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-2">
                 Signage Configuration Panel
               </h1>
@@ -48,7 +48,7 @@ const ItemManagement = () => {
                     value={type.id}
                     disabled={type.disabled}
                     className={`
-                      relative px-4 py-2 md:px-6 md:py-3 mx-1 rounded-lg font-medium transition-all duration-300 text-sm md:text-base
+                      relative px-4 py-2 md:px-6 md:py-3 mx-1  font-medium transition-all duration-300 text-sm md:text-base
                       ${!type.disabled 
                         ? 'data-[state=active]:bg-gradient-to-r data-[state=active]:text-black hover:bg-slate-50' 
                         : 'opacity-50 cursor-not-allowed'
@@ -74,7 +74,7 @@ const ItemManagement = () => {
 
               {/* Neon Signage Configuration */}
               <TabsContent value="neon" className="space-y-4 md:space-y-6">
-                <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm">
+                <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm ">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center gap-2 md:gap-3">
                       <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>

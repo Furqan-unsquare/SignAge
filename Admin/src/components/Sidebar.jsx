@@ -37,7 +37,7 @@ const Sidebar = () => {
         { path: "/dashboard", name: "Dashboard", icon: <FiHome size={20} /> },
         { path: "/orders", name: "Orders", icon: <FiShoppingCart size={20} /> },
         { path: "/pricing", name: "Management", icon: <FiMenu size={20} /> },
-        { path: "/galery", name: "Galery", icon: <FiImage size={20} /> },
+        { path: "/gallery", name: "Galery", icon: <FiImage size={20} /> },
         { path: "/enquiry", name: "Enquiries", icon: <FiMessageSquare size={20} /> },
     ];
 
@@ -47,9 +47,8 @@ const Sidebar = () => {
             {!isDesktop && (
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="fixed z-40 top-4 left-4 p-2 text-black"
-                    aria-label="Toggle menu"
-                >
+                    className="fixed z-40 top-2 left-2 p-2 text-black"
+                    aria-label="Toggle menu">
                     {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                 </button>
             )}

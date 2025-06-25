@@ -110,8 +110,8 @@ const EnquiryListPage = () => {
     <div className="min-h-screen w-screen flex bg-white">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">User Enquiries</h2>
+      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 ">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 mt-6 md:mt-0">User Enquiries</h2>
 
         {/* Search Bar */}
         <div className="mb-6">

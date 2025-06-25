@@ -20,7 +20,7 @@ function App() {
         <Route path="/dashboard" element={<RequireAuth><DashboardPage /></RequireAuth>} />
         <Route path="/pricing" element={<RequireAuth><ItemManagement /></RequireAuth>} />
         <Route path="/orders" element={<RequireAuth><OrderListPage /></RequireAuth>} />
-        <Route path="/galery" element={<RequireAuth><AdminGallery /></RequireAuth>} />
+        <Route path="/gallery" element={<RequireAuth><AdminGallery /></RequireAuth>} />
         <Route path="/enquiry" element={<RequireAuth><EnquiryListPage /></RequireAuth>} />
         
         {/* 404 Not Found */}

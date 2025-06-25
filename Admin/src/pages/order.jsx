@@ -234,8 +234,8 @@ const OrderListPage = () => {
   return (
     <div className="min-h-screen w-screen flex bg-gray-100">
       <Sidebar className="w-64" />
-      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-white overflow-x-hidden">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Customer Orders</h2>
+      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-white overflow-x-hidden ">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 mt-6 md:mt-0">Customer Orders</h2>
         <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center w-full sm:w-auto">
             <div className="relative w-full sm:w-64">
@@ -391,7 +391,7 @@ const OrderListPage = () => {
                         >
                           {order.isPaid ? (
                             <>
-                              <CheckCircle className="w-4 h-4 mr-1" /> Paid
+                              <CheckCircle className="w-4 h-4 mr-1" /> Completed
                             </>
                           ) : (
                             <>
@@ -530,7 +530,7 @@ const OrderListPage = () => {
                     className="w-full p-2 border border-gray-300 rounded-lg bg-white"
                   >
                     <option value="Pending">Pending</option>
-                    <option value="Paid">Paid</option>
+                    <option value="Paid">Completed</option>
                   </select>
                   {selectedOrder.isPaid && (
                     <p className="text-xs text-gray-500 mt-1">Paid status not reversible.</p>
@@ -627,4 +627,4 @@ const OrderListPage = () => {
   );
 };
 
-export default OrderListPage;
+export default OrderListPage; 

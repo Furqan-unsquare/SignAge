@@ -6,7 +6,7 @@ const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 
 const getProjects = async (req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 });
-    res.status(200).json({ data: projects });
+    res.status(200).json( projects );
   } catch (error) {
     console.error('Error fetching projects:', error);
     res.status(500).json({ message: 'Server error' });

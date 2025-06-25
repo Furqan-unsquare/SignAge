@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, Plus, X } from 'lucide-react';
-import Sidebar from '../components/Sidebar';
+import React, { useState, useEffect, Suspense } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Trash2, Plus, X } from "lucide-react";
+import Sidebar from "../components/Sidebar";
 
 const AdminGallery = () => {
   const [projects, setProjects] = useState([]);
@@ -10,10 +10,10 @@ const AdminGallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    category: 'exterior',
+    title: "",
+    category: "exterior",
     featured: false,
-    imageUrl: '',
+    imageUrl: "",
   });
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -23,10 +23,12 @@ const AdminGallery = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/projects');
-        if (!response.ok) throw new Error('Failed to fetch projects');
-        const { data } = await response.json();
-        setProjects(data);
+        const response = await fetch("http://localhost:5000/api/projects");
+        if (!response.ok) throw new Error("Failed to fetch projects");
+        const result = await response.json();
+        // Handle different response structures
+        const projectData = Array.isArray(result) ? result : result.data || [];
+        setProjects(projectData);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -40,7 +42,7 @@ const AdminGallery = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
@@ -53,9 +55,9 @@ const AdminGallery = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
-      setFormData((prev) => ({ ...prev, imageUrl: '' })); // Clear URL if file is selected
+      setFormData((prev) => ({ ...prev, imageUrl: "" })); // Clear URL if file is selected
     } else {
-      alert('Please select an image smaller than 2MB');
+      alert("Please select an image smaller than 2MB");
     }
   };
 
@@ -64,21 +66,21 @@ const AdminGallery = () => {
     setIsSubmitting(true);
 
     const form = new FormData();
-    form.append('title', formData.title);
-    form.append('category', formData.category);
-    form.append('featured', formData.featured);
+    form.append("title", formData.title);
+    form.append("category", formData.category);
+    form.append("featured", formData.featured);
     if (imageFile) {
-      form.append('image', imageFile);
+      form.append("image", imageFile);
     } else if (formData.imageUrl) {
-      form.append('imageUrl', formData.imageUrl);
+      form.append("imageUrl", formData.imageUrl);
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/projects', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/projects", {
+        method: "POST",
         body: form,
       });
-      if (!response.ok) throw new Error('Failed to add project');
+      if (!response.ok) throw new Error("Failed to add project");
       const { data } = await response.json();
       setProjects([data, ...projects]);
       resetForm();
@@ -91,12 +93,12 @@ const AdminGallery = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this project?')) return;
+    if (!window.confirm("Are you sure you want to delete this project?")) return;
     try {
       const response = await fetch(`http://localhost:5000/api/projects/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
-      if (!response.ok) throw new Error('Failed to delete project');
+      if (!response.ok) throw new Error("Failed to delete project");
       setProjects(projects.filter((project) => project._id !== id));
     } catch (err) {
       setError(err.message);
@@ -104,7 +106,7 @@ const AdminGallery = () => {
   };
 
   const resetForm = () => {
-    setFormData({ title: '', category: 'exterior', featured: false, imageUrl: '' });
+    setFormData({ title: "", category: "exterior", featured: false, imageUrl: "" });
     setImageFile(null);
     setImagePreview(null);
     setShowUrlInput(false);
@@ -113,9 +115,9 @@ const AdminGallery = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
-      
+
       <main className="flex-1 p-4 sm:p-6 overflow-auto">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto mt-6 md:mt-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -221,116 +223,125 @@ const AdminGallery = () => {
                     <X className="h-6 w-6" />
                   </button>
                 </div>
-<div className="flex flex-col lg:flex-row gap-6 max-h-[90vh] ">
- 
-                {/* FORM SECTION */}
-                
-  <div className="w-full overflow-y-auto lg:overflow-hidden">
-                <form onSubmit={handleSubmit} className="p-4 space-y-4">
-                  <div>
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                    <input
-                      type="text"
-                      id="title"
-                      name="title"
-                      value={formData.title}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border text-gray-800 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
-                      placeholder="Project title"
-                      required
-                    />
+                <div className="flex flex-col lg:flex-row gap-6 max-h-[90vh]">
+                  {/* FORM SECTION */}
+                  <div className="w-full overflow-y-auto lg:overflow-hidden">
+                    <form onSubmit={handleSubmit} className="p-4 space-y-4">
+                      <div>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                          Title
+                        </label>
+                        <input
+                          type="text"
+                          id="title"
+                          name="title"
+                          value={formData.title}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 border text-gray-800 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
+                          placeholder="Project title"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                          Category
+                        </label>
+                        <select
+                          id="category"
+                          name="category"
+                          value={formData.category}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-2 text-gray-800 border rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
+                        >
+                          <option value="exterior">Exterior Signs</option>
+                          <option value="interior">Interior Signs</option>
+                          <option value="digital">Digital Displays</option>
+                          <option value="vehicle">Vehicle Graphics</option>
+                        </select>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id="featured"
+                          name="featured"
+                          checked={formData.featured}
+                          onChange={handleInputChange}
+                          className="h-4 w-4 text-[#EA3C1F] focus:ring-[#EA3C1F] border-gray-300 rounded"
+                        />
+                        <label htmlFor="featured" className="ml-2 text-sm text-gray-700">
+                          Featured Project
+                        </label>
+                      </div>
+                      <div>
+                        <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
+                          Upload Image (max 2MB)
+                        </label>
+                        <input
+                          type="file"
+                          id="image"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="w-full px-3 py-2 border rounded-lg file:mr-2 file:py-1 file:px-3 file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+                        />
+                      </div>
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: showUrlInput ? "auto" : 0, opacity: showUrlInput ? 1 : 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
+                          Image URL
+                        </label>
+                        <input
+                          type="url"
+                          id="imageUrl"
+                          name="imageUrl"
+                          value={formData.imageUrl}
+                          onChange={(e) => {
+                            handleInputChange(e);
+                            setImagePreview(e.target.value);
+                            setImageFile(null); // Clear file if URL is entered
+                          }}
+                          className="w-full px-3 py-2 border text-gray-800 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
+                          placeholder="https://example.com/image.jpg"
+                        />
+                      </motion.div>
+                      <button
+                        type="button"
+                        onClick={() => setShowUrlInput(!showUrlInput)}
+                        className="text-sm text-[#EA3C1F] hover:underline"
+                      >
+                        {showUrlInput ? "Hide URL Input" : "Want to enter URL?"}
+                      </button>
+                      {/* PREVIEW SECTION */}
+                      {imagePreview && (
+                        <div className="w-full lg:w-1/3 p-4 bg-gray-50 rounded-lg shadow-inner flex flex-col items-center justify-start">
+                          <p className="text-sm text-gray-700 mb-2 font-semibold self-start">Preview:</p>
+                          <img
+                            src={imagePreview}
+                            alt="Preview"
+                            className="w-40 sm:w-56 lg:w-full max-h-60 sm:max-h-72 lg:max-h-80 object-contain rounded-lg border"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                      <div className="pt-4">
+                        <button
+                          type="submit"
+                          disabled={isSubmitting || (!imageFile && !formData.imageUrl)}
+                          className={`w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-4 rounded-lg font-medium hover:shadow-md transition-all ${
+                            isSubmitting || (!imageFile && !formData.imageUrl)
+                              ? "opacity-75 cursor-not-allowed"
+                              : ""
+                          }`}
+                        >
+                          {isSubmitting ? "Adding..." : "Add Project"}
+                        </button>
+                      </div>
+                    </form>
                   </div>
-                  <div>
-                    <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                    <select
-                      id="category"
-                      name="category"
-                      value={formData.category}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 text-gray-800 border rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
-                    >
-                      <option value="exterior">Exterior Signs</option>
-                      <option value="interior">Interior Signs</option>
-                      <option value="digital">Digital Displays</option>
-                      <option value="vehicle">Vehicle Graphics</option>
-                    </select>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="featured"
-                      name="featured"
-                      checked={formData.featured}
-                      onChange={handleInputChange}
-                      className="h-4 w-4 text-[#EA3C1F] focus:ring-[#EA3C1F] border-gray-300 rounded"
-                    />
-                    <label htmlFor="featured" className="ml-2 text-sm text-gray-700">Featured Project</label>
-                  </div>
-                  <div>
-                    <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">Upload Image (max 2MB)</label>
-                    <input
-                      type="file"
-                      id="image"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="w-full px-3 py-2 border rounded-lg file:mr-2 file:py-1 file:px-3 file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
-                    />
-                  </div>
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: showUrlInput ? 'auto' : 0, opacity: showUrlInput ? 1 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="overflow-hidden"
-                  >
-                    <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                    <input
-                      type="url"
-                      id="imageUrl"
-                      name="imageUrl"
-                      value={formData.imageUrl}
-                      onChange={(e) => {
-                        handleInputChange(e);
-                        setImagePreview(e.target.value);
-                        setImageFile(null); // Clear file if URL is entered
-                      }}
-                      className="w-full px-3 py-2 border text-gray-800 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
-                      placeholder="https://example.com/image.jpg"
-                    />
-                  </motion.div>
-                  <button
-                    type="button"
-                    onClick={() => setShowUrlInput(!showUrlInput)}
-                    className="text-sm text-[#EA3C1F] hover:underline"
-                  >
-                    {showUrlInput ? 'Hide URL Input' : 'Want to enter URL?'}
-                  </button>
-                  {/* PREVIEW SECTION */}
-                   {imagePreview && (
-    <div className="w-full lg:w-1/3 p-4 bg-gray-50 rounded-lg shadow-inner flex flex-col items-center justify-start">
-      <p className="text-sm text-gray-700 mb-2 font-semibold self-start">Preview:</p>
-      <img
-        src={imagePreview}
-        alt="Preview"
-        className="w-40 sm:w-56 lg:w-full max-h-60 sm:max-h-72 lg:max-h-80 object-contain rounded-lg border"
-        loading="lazy"
-      />
-    </div>
-  )}
-                 
-                  <div className="pt-4">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting || (!imageFile && !formData.imageUrl)}
-                      className={`w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-4 rounded-lg font-medium hover:shadow-md transition-all ${
-                        isSubmitting || (!imageFile && !formData.imageUrl) ? 'opacity-75 cursor-not-allowed' : ''
-                      }`}
-                    >
-                      {isSubmitting ? 'Adding...' : 'Add Project'}
-                    </button>
-                  </div>
-                </form>
-                </div> 
-                </div>  
+                </div>
               </motion.div>
             </motion.div>
           )}

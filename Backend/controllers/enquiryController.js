@@ -25,7 +25,7 @@ const createEnquiry = async (req, res) => {
 const getEnquiries = async (req, res) => {
   try {
     const enquiries = await Enquiry.find().sort({ createdAt: -1 });
-    res.status(200).json({ data: enquiries });
+    res.status(200).json( enquiries );
   } catch (error) {
     console.error('Error fetching enquiries:', error);
     res.status(500).json({ message: 'Server error' });
