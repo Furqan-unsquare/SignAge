@@ -41,36 +41,39 @@ const ItemManagement = () => {
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
 
               {/* Tabs Neon */}
-              <TabsList className="bg-white shadow-lg border-0 p-1 h-auto mb-6 rounded-xl overflow-x-auto">
-                {signageTypes.map((type) => (
-                  <TabsTrigger
-                    key={type.id}
-                    value={type.id}
-                    disabled={type.disabled}
-                    className={`
-                      relative px-4 py-2 md:px-6 md:py-3 mx-1  font-medium transition-all duration-300 text-sm md:text-base
-                      ${!type.disabled 
-                        ? 'data-[state=active]:bg-gradient-to-r data-[state=active]:text-black hover:bg-slate-50' 
-                        : 'opacity-50 cursor-not-allowed'
-                      }
-                    `}
-                    style={{
-                      background: activeTab === type.id && !type.disabled 
-                        ? `linear-gradient(135deg, ${type.color.split(' ')[1]} 0%, ${type.color.split(' ')[3]} 100%)`
-                        : undefined
-                    }}
-                  >
-                    <span className="whitespace-nowrap">
-                      {type.name}
-                      {type.disabled && (
-                        <span className="ml-1 md:ml-2 text-xs bg-slate-200 text-slate-600 px-1 md:px-2 py-0.5 rounded-full">
-                          Soon
-                        </span>
-                      )}
-                    </span>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+             <div className="w-full overflow-x-auto">
+                <TabsList className="flex bg-white shadow-lg border-0 p-1 h-auto mb-6 rounded-xl min-w-max sm:min-w-full justify-start">
+                  {signageTypes.map((type) => (
+                    <TabsTrigger
+                      key={type.id}
+                      value={type.id}
+                      disabled={type.disabled}
+                      className={`
+                        relative px-4 py-2 md:px-6 md:py-3 mx-1 font-medium transition-all duration-300 text-sm md:text-base whitespace-nowrap
+                        ${!type.disabled 
+                          ? 'data-[state=active]:bg-gradient-to-r data-[state=active]:text-black hover:bg-slate-50' 
+                          : 'opacity-50 cursor-not-allowed'
+                        }
+                      `}
+                      style={{
+                        background:
+                          activeTab === type.id && !type.disabled
+                            ? `linear-gradient(135deg, ${type.color.split(' ')[1]} 0%, ${type.color.split(' ')[3]} 100%)`
+                            : undefined,
+                      }}
+                    >
+                      <span>
+                        {type.name}
+                        {type.disabled && (
+                          <span className="ml-1 md:ml-2 text-xs bg-slate-200 text-slate-600 px-1 md:px-2 py-0.5 rounded-full">
+                            Soon
+                          </span>
+                        )}
+                      </span>
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
 
               {/* Neon Signage Configuration */}
               <TabsContent value="neon" className="space-y-4 md:space-y-6">

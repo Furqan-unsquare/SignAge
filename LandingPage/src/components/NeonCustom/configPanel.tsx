@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState } from "react"
 import { Star, Info, Phone } from "lucide-react"
@@ -61,133 +60,137 @@ export const ConfigurationPanel = ({
   };
 
   return (
-    <div className="overflow-y-auto max-h-full pr-2 space-y-5 scrollbar-hidden ">
+    <div className="w-full bg-black text-white flex flex-col" style={{ height: 'calc(100vh - 200px)' }}>
       {/* Header with Total Price */}
-      <div className="flex justify-between sticky top-0 bg-black z-40 items-start">
+      <div className="flex justify-between items-start px-4 pt-4">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Customise Neon Sign</h1>
+          <h1 className="text-xl font-bold mb-2">Customise Neon Sign</h1>
           <div className="flex items-center gap-2 mb-2">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span className="text-sm text-gray-400">363 reviews</span>
+            <span className="text-xs text-gray-400">363 reviews</span>
           </div>
         </div>
-        <div className="bg-purple-600 text-right px-4 py-2 rounded-lg min-w-24">
-          <div className="text-sm ">Total</div>
-          <div className="text-xl font-bold">₹{totalPrice}</div>
+        <div className="bg-purple-600 text-right px-3 py-1 rounded-lg min-w-20">
+          <div className="text-xs">Total</div>
+          <div className="text-lg font-bold">₹{totalPrice}</div>
         </div>
       </div>
 
-      {/* Text Input */}
-      <div>
-        <label className="block text-lg font-semibold mb-3">Type Your Text</label>
-        <input
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
-          placeholder="Enter your text"
-          required
-          // maxLength={20}
-        />
-      </div>
-
-      {/* Font Selection */}
-      <div>
-        <label className="block text-lg font-semibold mb-3">Pick Your Font</label>
-        <div className="grid grid-cols-3 gap-2">
-          {fonts.map((font) => (
-            <button
-              key={font.name}
-              onClick={() => setSelectedFont(font.name)}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                selectedFont === font.name
-                  ? "border-purple-500 bg-purple-600"
-                  : "border-gray-600 bg-gray-800 hover:border-gray-500"
-              }`}
-            >
-              <div className="text-sm" style={{ fontFamily: font.fontFamily }}>
-                {font.name}
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Color Selection */}
-      <div>
-        <label className="block text-lg font-semibold mb-3">Select Your Colour</label>
-        <div className="flex flex-wrap gap-3 pl-2">
-          {colors.map((color) => (
-            <button
-              key={color.name}
-              onClick={() => setSelectedColor(color.value)}
-              className={`w-10 h-10 rounded-full border-4 transition-all ${
-                selectedColor === color.value 
-                  ? "border-white scale-110" 
-                  : "border-gray-600 hover:border-gray-400"
-              }`}
-              style={{ backgroundColor: color.value }}
-              title={color.name}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Size Selection */}
-      <div>
-        <div className="flex items-center gap-2 mb-3">
-          <label className="text-lg font-semibold">Select Size</label>
-          <Info className="w-4 h-4 text-gray-400" />
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          {sizes.map((size) => (
-            <button
-              key={size.name}
-              onClick={() => setSelectedSize(size.name)}
-              className={`p-3 rounded-lg border-2 transition-all ${
-                selectedSize === size.name
-                  ? "border-purple-500 bg-purple-600"
-                  : "border-gray-600 bg-gray-800 hover:border-gray-500"
-              }`}>
-              <div className="font-semibold">{size.name}</div>
-              <div className="text-sm text-gray-300">Width: {size.width}</div>
-              <div className="text-sm text-gray-300">Height: {size.height}</div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile Number Input */}
-      <div>
-        <label className="block text-lg font-semibold mb-3">Mobile Number</label>
-        <div className="relative">
-          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto px-4 space-y-4 pb-4">
+        {/* Text Input */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Type Your Text</label>
           <input
             type="text"
-            value={mobileNumber}
-            onChange={handleMobileChange}
-            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-10 py-3 text-white focus:outline-none focus:border-purple-500"
-            placeholder="Enter 10-digit mobile number"
-            minLength={10}
-            maxLength={12}
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500"
+            placeholder="Enter your text"
             required
           />
         </div>
+
+        {/* Font Selection */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Pick Your Font</label>
+          <div className="grid grid-cols-2 gap-2">
+            {fonts.map((font) => (
+              <button
+                key={font.name}
+                onClick={() => setSelectedFont(font.name)}
+                className={`p-2 rounded-lg border-2 transition-all ${
+                  selectedFont === font.name
+                    ? "border-purple-500 bg-purple-600"
+                    : "border-gray-600 bg-gray-800 hover:border-gray-500"
+                }`}
+              >
+                <div className="text-xs" style={{ fontFamily: font.fontFamily }}>
+                  {font.name}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Color Selection */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Select Your Colour</label>
+          <div className="flex flex-wrap gap-2">
+            {colors.map((color) => (
+              <button
+                key={color.name}
+                onClick={() => setSelectedColor(color.value)}
+                className={`w-8 h-8 rounded-full border-3 transition-all ${
+                  selectedColor === color.value 
+                    ? "border-white scale-110" 
+                    : "border-gray-600 hover:border-gray-400"
+                }`}
+                style={{ backgroundColor: color.value }}
+                title={color.name}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Size Selection */}
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <label className="text-sm font-semibold">Select Size</label>
+            <Info className="w-3 h-3 text-gray-400" />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {sizes.map((size) => (
+              <button
+                key={size.name}
+                onClick={() => setSelectedSize(size.name)}
+                className={`p-2 rounded-lg border-2 transition-all ${
+                  selectedSize === size.name
+                    ? "border-purple-500 bg-purple-600"
+                    : "border-gray-600 bg-gray-800 hover:border-gray-500"
+                }`}>
+                <div className="text-xs font-semibold">{size.name}</div>
+                <div className="text-xs text-gray-300">Width: {size.width}</div>
+                <div className="text-xs text-gray-300">Height: {size.height}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Number Input */}
+        <div>
+          <label className="block text-sm font-semibold mb-1">Mobile Number</label>
+          <div className="relative">
+            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3" />
+            <input
+              type="text"
+              value={mobileNumber}
+              onChange={handleMobileChange}
+              className="w-full bg-gray-800 border border-gray-600 rounded-lg px-8 py-2 text-white focus:outline-none focus:border-purple-500"
+              placeholder="Enter 10-digit mobile number"
+              minLength={10}
+              maxLength={12}
+              required
+            />
+          </div>
+        </div>
       </div>
 
-      {/* WhatsApp Button */}
-      <WhatsAppButton 
-        text={text}
-        selectedFont={selectedFont}
-        selectedColor={colors.find(c => c.value === selectedColor)?.name || selectedColor}
-        selectedSize={selectedSize}
-        phoneNumber={mobileNumber}
-        totalPrice={totalPrice}
-      />
+      {/* Fixed WhatsApp Button at bottom */}
+      <div className="px-4 pb-4">
+        <WhatsAppButton 
+          text={text}
+          selectedFont={selectedFont}
+          selectedColor={colors.find(c => c.value === selectedColor)?.name || selectedColor}
+          selectedSize={selectedSize}
+          phoneNumber={mobileNumber}
+          totalPrice={totalPrice}
+        />
+      </div>
     </div>
   )
 }

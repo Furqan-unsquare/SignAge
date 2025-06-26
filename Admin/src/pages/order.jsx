@@ -232,9 +232,9 @@ const OrderListPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-screen flex bg-gray-100">
+    <div className="min-h-screen w-screen flex">
       <Sidebar className="w-64" />
-      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-white overflow-x-hidden ">
+      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 overflow-x-hidden ">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 mt-6 md:mt-0">Customer Orders</h2>
         <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center w-full sm:w-auto">

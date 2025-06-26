@@ -108,7 +108,7 @@ const Collections = () => {
 
     // Navigate to blogs
     const navigateToBlogs = (collectionId) => {
-        navigate(`/blog`); // Changed from history.push to navigate
+        navigate(`/custom`); // Changed from history.push to navigate
     };
 
     // Get visible items for desktop
@@ -174,7 +174,7 @@ const Collections = () => {
                             className="flex-shrink-0 w-4/5 scroll-snap-align-start"
                             onClick={() => navigateToBlogs(collection.id)}
                         >
-                            <div className="group cursor-pointer transform transition-all duration-500 hover:scale-105">
+                            <div className="group cursor-pointer transform transition-all duration-500 h5">
                                 <div className="relative bg-black rounded-2xl overflow-hidden border-4 border-transparent hover:border-[#fdca07] transition-all duration-300">
                                     <div className="relative h-80 overflow-hidden">
                                         <img
@@ -211,7 +211,7 @@ const Collections = () => {
                         {visibleItems.map((collection) => (
                             <div
                                 key={collection.id}
-                                className="group cursor-pointer transform transition-all duration-500 hover:scale-105 flex-shrink-0 w-full max-w-xs"
+                                className="group cursor-pointer transform transition-all duration-500 hover:scale-5 flex-shrink-0 w-full max-w-xs"
                                 style={{ minWidth: 'calc(20% - 1.2rem)' }}
                                 onClick={() => navigateToBlogs(collection.id)}
                             >

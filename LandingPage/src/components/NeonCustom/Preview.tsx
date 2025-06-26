@@ -20,7 +20,8 @@
       const glowEffect = `
         0 0 4px #fff,
         0 0 10px ${selectedColor},
-        0 0 30px rgba(${hexToRgb(selectedColor)}, 0.7)
+        0 0 20px rgba(${hexToRgb(selectedColor)}, 0.5),
+        0 0 30px rgba(${hexToRgb(selectedColor)}, 0.3)
       `;
 
       return {
@@ -66,7 +67,7 @@
             className="font-bold break-words"
               style={{
                 ...previewStyle, 
-                fontSize: `${Math.max(2.2, 5 - text.length * 0.15)}rem`, 
+                fontSize: `${Math.max(2.2, 5 - text.length * 0.2)}rem`, 
                 transition: "font-size 0.3s ease-in-out"
               }}
             >
