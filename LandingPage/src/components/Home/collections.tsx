@@ -124,15 +124,14 @@ const Collections = () => {
     const visibleItems = getVisibleItems();
 
     return (
-        <div className="relative min-h-full bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-8 md:py-16 px-4">
+        <div className="relative min-h-full bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-8 md:py-5 md:pl-4">
             {/* Header Section */}
-            <div className="max-w-7xl mx-auto md:mb-12">
+            <div className="px-4 md:px-10 mx-auto md:mb-12">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center md:gap-4">
                         <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-wider">
                             Explore Our Collections
                         </h2>
-                        <div className="w-32 h-1 bg-[#fdca07] rounded-full"></div>
                     </div>
 
                     {/* Navigation Arrows - Desktop Only */}
@@ -154,7 +153,7 @@ const Collections = () => {
             </div>
 
             {/* Collections Container */}
-            <div className="max-w-7xl mx-auto">
+            <div className="pl-4 md:pl-10 mx-auto">
                 {/* Mobile Scroll Container */}
                 <div 
                     ref={containerRef}
@@ -244,13 +243,6 @@ const Collections = () => {
                         ))}
                     </div>
                 </div>
-            </div>
-
-            {/* Current Item Counter - Desktop Only */}
-            <div className="hidden md:block absolute top-32 right-8 bg-black/50 rounded-lg px-4 py-2">
-                <span className="text-white font-bold">
-                    {startIndex + 1}-{Math.min(startIndex + itemsToShow, collectionsData.length)} of {collectionsData.length}
-                </span>
             </div>
         </div>
     );

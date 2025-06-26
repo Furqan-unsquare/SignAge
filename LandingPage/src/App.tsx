@@ -15,6 +15,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/Contact";
 import Custom from "./pages/Custom";
 import NeonCustom from "./pages/NeonCustom";
+import PremiumFloatingButton from "./components/FloatingMobileCTA";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +40,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-
+        <PremiumFloatingButton />
         <Footer />
       </BrowserRouter>
     </TooltipProvider>

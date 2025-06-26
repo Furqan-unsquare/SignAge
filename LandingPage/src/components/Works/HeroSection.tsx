@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
       src: "https://i.pinimg.com/736x/b5/75/74/b57574bf086ccb4efdd914d1d6efc6db.jpg",
       rotate: 0,
       x: 0,
-      y: 0,
+      y: -5,
       scale: 1,
       zIndex: 30,
     },

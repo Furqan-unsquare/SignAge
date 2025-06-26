@@ -61,15 +61,13 @@ const HeroSection = () => {
             <div className="w-2 h-2 bg-[#fdca07] rounded-full animate-pulse"></div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-wider leading-tight">
-            CUSTOMIZE
-            <br />
-            <span className="text-[#fdca07]">YOUR OWN</span>
-            <br />
+          <h1 className="text-5xl lg:text-7xl font-black text-white uppercase tracking-wider leading-tight">
+            CUSTOMIZE 
+            <span className="text-[#fdca07]"> YOUR <br /> OWN </span>
             SIGNAGE
           </h1>
 
-          <p className="text-md md:text-xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-md md:text-lg text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
             Bring your vision to life with our premium LED neon signs. From concept to creation, design the perfect
             signage that represents your unique style and brand.
           </p>

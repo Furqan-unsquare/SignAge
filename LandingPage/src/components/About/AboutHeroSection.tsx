@@ -1,88 +1,105 @@
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from 'react';
+import { Play, Pause } from 'lucide-react';
 
-const AboutHeroSection: React.FC = () => {
-// Utility component to reuse
-const MarqueeLine: React.FC = () => (
-  <div className="overflow-hidden whitespace-nowrap w-full">
-    <div className="animate-marquee inline-block whitespace-nowrap tracking-tight leading-none scale-x-[0.7] scale-y-[2.8] transform  text-[#FDCA07] text-6xl sm:text-4xl md:text-6xl font-extrabold px-2">
-      <span className="mx-4">ABOUT US ✦ ABOUT US ✦ ABOUT US ✦ ABOUT US ✦ ABOUT US ✦ ABOUT US ✦ ABOUT US ✦</span>
-    </div>
-  </div>
-);
+export default function HeroSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-10 px-2 sm:px-6 lg:px-8 overflow-hidden relative flex items-center justify-center">
-      {/* Centered 3D Graphic with Realistic Shadow (Static) */}
-      {[{ id: 1, size: "w-56 h-56 -mt-4  md:w-56 md:h-56", position: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2", rotation: "rotate-3" }].map((graphic) => (
-        <div
-          key={graphic.id}
-          className={`absolute ${graphic.size} ${graphic.position} z-40 transform ${graphic.rotation} drop-shadow-2xl`}>
-          <img
-            src="/3D_graphics.png"
-            alt="Decorative 3D graphic"
-            className="w-full h-full object-contain"
-          />
-        </div>
-      ))}
+    <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
 
-      {/* Floating 3D Graphics with Realistic Shadow (Animated) */}
-      {[
-        {
-          id: 2,
-          image: "/3D_graphics-1.png",
-          size: "w-34 h-28 sm:w-12 sm:h-20 md:w-20 md:h-32",
-          position: "top-24 left-4 md:top-10 md:left-16",
-          rotation: "-rotate-2",
-          animation: { y: [0, -10, 0], rotate: [0, 2, -2, 0] },
-        },
-        {
-          id: 3,
-          image: "/3D_graphics-2.png",
-          size: "w-24 h-29 sm:w-14 sm:h-22 md:w-24 md:h-36",
-          position: "top-48 right-4 md:bottom-10 md:right-5",
-          rotation: "rotate-1",
-          animation: { y: [0, 10, 0], rotate: [0, -2, 2, 0] },
-        },
-        {
-          id: 4,
-          image: "/3D_graphics-3.png",
-          size: "w-24 h-24 sm:w-10 sm:h-16 md:w-16 md:h-24",
-          position: "bottom-32 left-16 md:bottom-1 md:left-36",
-          rotation: "rotate-90",
-          animation: { y: [0, -8, 0], rotate: [0, 6, -6, 0] },
-        },
-      ].map((graphic) => (
-        <motion.div
-          key={graphic.id}
-          className={`absolute ${graphic.size} ${graphic.position} z-40 transform ${graphic.rotation} drop-shadow-2xl`}
-          animate={graphic.animation}
-          transition={{
-            duration: 6 + Math.random() * 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 2,
-          }}
-        >
-          <img
-            src={graphic.image}
-            alt={`Floating object ${graphic.id}`}
-            className="w-full h-full object-contain"
-          />
-        </motion.div>
-      ))}
-
-      <div className="max-w-7xl w-full mx-auto relative z-20">
-        {/* Marquee Title (Three Lines) */}
-        <div className="mb-10 space-y-2 sm:space-y-4">
-          <MarqueeLine />
-          <MarqueeLine />
-          <MarqueeLine />
+      {/* Hero Content */}
+      <div className="container mx-auto px-4 md:px-8 py-8 pt-24 md:pt-36">
+        <div className="grid gap-12 lg:gap-16 items-center ">
           
+          {/* Left Content */}
+          <div className="text-center space-y-6 md:space-y-8">
+            <div className="space-y-4 ">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#FDCA07] font-bold">
+                Discover Who We Are
+                and Why
+              </h1>
+              
+              <div className='flex justify-center gap-4'>
+                <h2 className="font-script text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-relaxed">
+                We Illuminate Your Brand
+                </h2>
+                
+                  <div className="relative flex items-center">
+                    <img
+                      src="https://i.pinimg.com/736x/90/7a/09/907a09bfde335952a16b6424a9197dad.jpg"
+                      alt="testimonial-3"
+                      className="w-10 h-10 md:w-14 md:h-14 object-contain rounded-full shadow-md z-10 left-0"
+                    />
+                    <img
+                      src="https://i.pinimg.com/736x/7c/83/da/7c83da8eaf0af177ef6096a0a9628d60.jpg"
+                      alt="testimonial-1"
+                      className="w-10 h-10 md:w-14 md:h-14 object-contain rounded-full shadow-md z-30 left-12 md:left-16"
+                    />
+                    <img
+                      src="https://i.pinimg.com/736x/16/0b/ec/160beceffcdcf9c9812e61efb76ec952.jpg"
+                      alt="testimonial-2"
+                      className="w-10 h-10 md:w-14 md:h-14 object-contain rounded-full shadow-md z-20 absolute left-6 md:left-8"
+                    />
+                  </div>
+              </div>
+            </div>
+
+            <p className="text-white text-base md:text-lg leading-relaxed max-w-5xl mx-auto line-clamp-2">
+              We're a team of visionaries, and innovators building the future of visual communication. Our goal is to help every business create bold, 
+              impactful signage. We transform spaces and elevate brands, making your message seen and remembered.
+            </p>
+
+            <button className="bg-gradient-to-r from-yellow-600 to-green-600 text-white px-8 py-3 md:px-10 md:py-4 rounded-full font-medium text-sm md:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+              Know Us
+            </button>
+          </div>
+
+          {/* Right Content - Video */}
+          <div className="relative">
+            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl bg-gray-100">
+              {/* Video Element */}
+              <video
+                ref={videoRef}
+                className="w-full h-64 md:h-80 lg:h-96 object-cover"
+                muted
+                loop
+                autoPlay
+                >
+                {/* Placeholder for video source */}
+                <source src="/about.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              
+              
+              {/* Decorative Elements */}
+              <div className="absolute top-4 right-4 w-3 h-3 bg-white rounded-full opacity-60"></div>
+              <div className="absolute bottom-4 left-4 w-3 h-3 bg-white rounded-full opacity-60"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
+
+      {/* Additional Styling for Fonts */}
+      <style jsx>{`
+        .font-script {
+          font-family: 'Brush Script MT', cursive;
+        }
+        .font-serif {
+          font-family: 'Georgia', serif;
+        }
+      `}</style>
     </div>
   );
-};
-
-export default AboutHeroSection;
+}

@@ -1,179 +1,115 @@
-import { Zap, Monitor, Building, Camera, Star, Palette } from 'lucide-react';
-import { Card, CardContent } from '@/components/UI/card';
-import { useEffect } from 'react';
+import React from 'react';
+import { ArrowRight, Star } from 'lucide-react';
 
-const Services = () => {
+const SignageServices = () => {
   const services = [
     {
-      icon: Zap,
-      title: 'NEON SIGNS',
-      description: 'Vibrant glowing signs that electrify your storefront with retro-modern appeal',
-      color: 'yellow',
-      border: 'border-pink-500',
-      textColor: 'text-pink-500',
-      shape: 'rounded-lg',
-      bg: 'bg-yellow-400',
-      ropeColor: 'bg-pink-400'
+      id: 1,
+      title: "Neon Signs",
+      description: "Vibrant illuminated signage that makes your business stand out at night",
+      img: "https://i.pinimg.com/736x/07/e2/ec/07e2ec074af3cc99c9168ace13d569e9.jpg",
+      features: ["Custom shapes", "Multiple colors", "Energy efficient"]
     },
     {
-      icon: Monitor,
-      title: 'DIGITAL DISPLAYS',
-      description: 'Dynamic LED screens that showcase your content with brilliant clarity',
-      color: 'blue',
-      border: 'border-blue-500',
-      textColor: 'text-blue-500',
-      shape: 'rounded-t-lg rounded-br-none',
-      bg: 'bg-blue-100',
-      ropeColor: 'bg-blue-400'
+      id: 2,
+      title: "Channel Letters",
+      description: "3D dimensional signs for maximum visibility and brand recognition",
+      img: "https://www.halolitsigns.com/wp-content/uploads/2022/10/halo-lit-channel-letters.jpg",
+      features: ["Indoor/outdoor", "Various materials", "LED illuminated"]
     },
     {
-      icon: Building,
-      title: 'BUSINESS SIGNAGE',
-      description: 'Professional corporate signs that establish your brand presence',
-      color: 'purple',
-      border: 'border-purple-500',
-      textColor: 'text-purple-500',
-      shape: 'rounded-full',
-      bg: 'bg-purple-100',
-      ropeColor: 'bg-purple-400'
+      id: 3,
+      title: "Digital Signage",
+      description: "Dynamic digital displays for engaging customer experiences",
+      img: "https://i.pinimg.com/736x/20/3b/e2/203be2faf3c934dbc62aa7b5142262a9.jpg",
+      features: ["Content management", "Touch screen", "Real-time updates"]
     },
     {
-      icon: Camera,
-      title: 'RESTAURANT SIGNS',
-      description: 'Appetizing signage that draws customers like moths to a flame',
-      color: 'red',
-      border: 'border-red-500',
-      textColor: 'text-red-500',
-      shape: 'rounded-lg skew-x-3',
-      bg: 'bg-red-100',
-      ropeColor: 'bg-red-400'
+      id: 4,
+      title: "Vinyl Banners",
+      description: "Cost-effective temporary signage for promotions and events",
+      img: "https://i.pinimg.com/736x/d7/f6/da/d7f6da3fcb83f9cd341be22395d8b2a9.jpg",
+      features: ["Weather resistant", "Quick turnaround", "Various sizes"]
     },
     {
-      icon: Star,
-      title: 'EVENT SIGNAGE',
-      description: 'Eye-catching temporary signs that make your event unforgettable',
-      color: 'green',
-      border: 'border-green-500',
-      textColor: 'text-green-500',
-      shape: 'rounded-lg rotate-1',
-      bg: 'bg-green-100',
-      ropeColor: 'bg-green-400'
+      id: 5,
+      title: "Monument Signs",
+      description: "Permanent ground signs that establish your business presence",
+      img: "https://i.pinimg.com/736x/db/6a/f4/db6af4d66c19dcdc52a7d8f33afdad35.jpg",
+      features: ["Durable materials", "Custom designs", "LED lighting"]
     },
     {
-      icon: Palette,
-      title: 'CUSTOM DESIGN',
-      description: 'Bespoke signage solutions tailored to your unique vision',
-      color: 'pink',
-      border: 'border-yellow-500',
-      textColor: 'text-yellow-500',
-      shape: 'rounded-lg scale-105',
-      bg: 'bg-pink-100',
-      ropeColor: 'bg-yellow-400'
+      id: 6,
+      title: "Window Graphics",
+      description: "Transform your windows into powerful advertising space",
+      img: "https://i.pinimg.com/736x/5c/c2/29/5cc229522d3358bf57af4f572cdf35d4.jpg",
+      features: ["Frosted designs", "Full-color prints", "Removable options"]
     }
   ];
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-xl"></div>
-        <div className="absolute bottom-1/3 right-10 w-48 h-48 bg-yellow-400/20 rounded-full blur-xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black mb-6 text-white">
-            OUR <span className="text-yellow-300">SERVICES</span>
+    <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] pt-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center ">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Our Signage Services
           </h2>
-          <p className="text-xl text-yellow-100 max-w-3xl mx-auto">
-            We craft signage that doesn't just inform - it captivates and converts
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            Premium signage solutions to elevate your brand visibility
           </p>
+          <div className="flex justify-center mt-6">
+            <div className="w-24 h-1 bg-white/50 rounded-full" />
+          </div>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4 md:px-0">
-          {services.map((service, index) => (
-            <div key={service.title} className="relative group h-full ">
-              {/* Ropes positioned at 1/4 and 3/4 width */}
-              <div className="absolute -top-6 left-1/4 w-1 h-8 transform -translate-x-1/2 z-10">
-                <div className={`w-full h-full ${service.ropeColor} rounded-t-full`}></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-black py-10">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              className="group relative rounded-xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20"
+            >
+              {/* Image */}
+              <img
+                src={service.img}
+                alt={service.title}
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent" />
+
+              {/* Content Overlay */}
+              <div className="absolute bottom-0 p-6 z-10 text-white w-full">
+                <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
+                {/* Optional: Short description */}
+                {/* <p className="text-sm mb-4">{service.description}</p> */}
+                {/* add a navigate onclick below button */}
+                <button onClick={() => window.location.href = `/work`} 
+                className="flex items-center text-white font-medium hover:text-yellow-300 transition-colors">
+                  View examples
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </button>
               </div>
-              <div className="absolute -top-6 left-3/4 w-1 h-8 transform -translate-x-1/2 z-10">
-                <div className={`w-full h-full ${service.ropeColor} rounded-t-full`}></div>
-              </div>
-
-              {/* Unique signage for each service */}
-              <Card className={`h-full ${service.shape} ${service.bg} border-4 ${service.border} transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-yellow-400/30 overflow-hidden`}>
-                <CardContent className="p-6 text-center relative h-full flex flex-col">
-                  {/* Icon with creative background */}
-                  <div className={`w-20 h-20 mx-auto mb-6 ${service.shape} ${service.border} ${service.bg} flex items-center justify-center transition-transform duration-500 group-hover:rotate-12 group-hover:scale-125`}>
-                    <service.icon className={`w-10 h-10 ${service.textColor}`} />
-                  </div>
-
-                  {/* Title with creative typography */}
-                  <h3 className={`text-3xl font-extrabold mb-4 ${service.textColor} tracking-tight`}>
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-800 mb-6 flex-grow">
-                    {service.description}
-                  </p>
-
-                  {/* Decorative element */}
-                  <div className="w-full h-1.5 bg-white/50 rounded-full overflow-hidden">
-                    <div className={`h-full ${service.bg} animate-progress`}></div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-20">
-          <a href="/custom">
-          <div className="inline-flex items-center px-10 py-5 bg-yellow-400 border-4 border-white rounded-full text-gray-900 font-black text-xl hover:scale-105 transition-all duration-300 cursor-pointer shadow-xl hover:shadow-yellow-400/50 group">
-            LET'S CREATE SOMETHING AMAZING!
-            <Zap className="w-6 h-6 ml-3 hidden md:block text-gray-900 group-hover:animate-bounce" />
-          </div>
-          </a>
+
+        {/* CTA */}
+        <div className=" text-center">
+          <button onClick={() => window.location.href = `/custom`} 
+          className="bg-white text-[#EA3C1F] px-4 md:px-8 py-2 md:py-4 rounded-full font-bold text-lg hover:bg-white/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+            Get Your Custom Signage
+          </button>
+          <p className="text-white/80 mt-4">
+            Contact us for a free consultation and quote
+          </p>
         </div>
       </div>
-
-      {/* Scrolling marquee text - bright yellow */}
-      <div className="absolute bottom-0 left-0 right-0 overflow-hidden py-6  mb-[-20px] bg-yellow-400/10 backdrop-blur-sm ">
-        <div className="inline-block whitespace-nowrap animate-marquee pt-20">
-          <span className="text-4xl md:text-5xl font-black text-yellow-300 uppercase tracking-wider mx-8">
-            ✦ CUSTOM SIGNAGE ✦ NEON LIGHTS ✦ LED DISPLAYS ✦ CHANNEL LETTERS ✦ WAYFINDING ✦ WINDOW GRAPHICS ✦
-          </span>
-          <span className="text-4xl md:text-5xl font-black text-yellow-300 uppercase tracking-wider mx-8">
-            ✦ CUSTOM SIGNAGE ✦ NEON LIGHTS ✦ LED DISPLAYS ✦ CHANNEL LETTERS ✦ WAYFINDING ✦ WINDOW GRAPHICS ✦
-          </span>
-        </div>
-      </div>
-
-      {/* Global styles */}
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 25s linear infinite;
-          display: inline-block;
-        }
-        @keyframes progress {
-          0% { width: 0; }
-          100% { width: 100%; }
-        }
-        .animate-progress {
-          animation: progress 3s ease-in-out infinite alternate;
-        }
-      `}</style>
-    </section>
+    </div>
   );
 };
 
-export default Services;
+export default SignageServices;

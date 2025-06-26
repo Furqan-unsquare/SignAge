@@ -19,7 +19,7 @@ const CTA = () => {
   const imagePositions = [
   { x: -160, y: 0, rotate: -15 },
   { x: -80, y: -10, rotate: -8 },
-  { x: 0,   y: -15, rotate: 0 },     // Center image
+  { x: 0,   y: -18, rotate: 0 },     // Center image
   { x: 80,  y: -10, rotate: 8 },
   { x: 160,  y: 0, rotate: 15 }
 ];

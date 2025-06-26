@@ -4,7 +4,7 @@ import NeonCraftSection from '@/components/Home/Features';
 import Testimonials from '@/components/Home/Testimonials';
 import FAQ from '@/components/Home/FAQ';
 import Collections from '@/components/Home/collections';
-import CustomProducts from '@/components/Home/custom';
+import CustomProducts from '@/components/Home/Connect';
 
 const Index = () => {
   return (

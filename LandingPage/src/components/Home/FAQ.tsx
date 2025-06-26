@@ -25,29 +25,17 @@ const FAQ = () => {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[#fdca07] rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-yellow-300 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-white rounded-full blur-2xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
+    <section className="relative pb-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] overflow-hidden">
+     <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="flex justify-center mb-6">
-            <div className="bg-[#fdca07] p-4 rounded-2xl border-4 border-white shadow-[0_0_30px_rgba(253,202,7,0.5)]">
-              <HelpCircle className="w-16 h-16 text-white" />
-            </div>
-          </div>
-          <h2 className="text-3xl md:text-7xl font-black mb-6 uppercase tracking-wider">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-wider">
             <span className="text-[#fdca07] drop-shadow-2xl">FREQUENTLY </span>
             <span className="text-white drop-shadow-2xl">ASKED</span>
             <br />
             <span className="text-white drop-shadow-2xl">QUESTIONS</span>
           </h2>
-          <p className="text-ms  md:text-2xl text-yellow-100 max-w-3xl mx-auto font-bold uppercase tracking-wide drop-shadow-lg">
+          <p className="text-ms  md:text-lg text-yellow-100 max-w-3xl mx-auto font-bold uppercase tracking-wide drop-shadow-lg">
             Everything you need to know about premium signage solutions
           </p>
           <div className="mt-8 flex justify-center">
@@ -60,14 +48,12 @@ const FAQ = () => {
           {faqs.map((faq, index) => (
             <Card
               key={index}
-              className="bg-white/95 backdrop-blur-sm hover:border-[#fdca07] transition-all duration-300 hover:shadow-[0_0_30px_rgba(253,202,7,0.3)] hover:scale-[1.02] rounded-2xl overflow-hidden"
-            >
+              className="bg-white/95 backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] rounded-2xl overflow-hidden">
               <CardContent className="p-0">
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full p-8 text-left flex items-center justify-between hover:bg-[#fdca07]/10 transition-all duration-300 group"
-                >
-                  <h3 className="text-md md:text-2xl font-black text-[#EA3C1F] pr-4 uppercase tracking-wide group-hover:text-[#EB3C20] transition-colors duration-300">
+                  className="w-full py-4 px-4 md:px-10 text-left flex items-center justify-between transition-all duration-300 group">
+                  <h3 className="text-md md:text-xl font-bold text-[#EA3C1F] pr-4 uppercase tracking-wide  transition-colors duration-300">
                     {faq.question}
                   </h3>
                   <div className="bg-[#EA3C1F] p-2 rounded-full transition-all duration-300 flex-shrink-0">
@@ -80,8 +66,8 @@ const FAQ = () => {
                 </button>
 
                 {openFAQ === index && (
-                  <div className="px-8 py-6 border-t-4 border-[#fdca07]/20 bg-gradient-to-r from-[#fdca07]/5 to-transparent">
-                    <p className="text-[#EA3C1F] leading-relaxed  font-semibold md:text-lg">
+                  <div className="px-8 py-6 border-t">
+                    <p className="text-[#EA3C1F] leading-relaxed  font-semibold md:text-sm">
                       {faq.answer}
                     </p>
                   </div>
@@ -90,21 +76,6 @@ const FAQ = () => {
             </Card>
           ))}
         </div>
-
-        {/* CTA Section
-        <div className="text-center mt-20">
-          <div className="bg-[#fdca07] border-4 border-white rounded-2xl p-8 md:p-12 max-w-3xl mx-auto shadow-[0_0_50px_rgba(253,202,7,0.3)] hover:shadow-[0_0_70px_rgba(253,202,7,0.5)] transition-all duration-300 hover:scale-105">
-            <h3 className="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-wider drop-shadow-2xl">
-              Still have questions?
-            </h3>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 font-bold uppercase tracking-wide drop-shadow-lg">
-              Our signage experts are ready to illuminate your vision
-            </p>
-            <button className="bg-white text-[#EA3C1F] font-black px-12 py-4 rounded-2xl hover:scale-110 transition-all duration-300 shadow-lg text-xl uppercase tracking-wide border-4 border-transparent hover:border-[#EA3C1F] hover:bg-[#EA3C1F] hover:text-white">
-              Contact Us Today
-            </button>
-          </div>
-        </div> */}
       </div>
     </section>
   );
