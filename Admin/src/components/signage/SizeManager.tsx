@@ -3,14 +3,16 @@ import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
+import SizeModal from './modals/SizeModal'; // adjust the path as needed
 import { Edit2, Trash2, Plus, Ruler } from 'lucide-react';
 
 const API_URL = 'http://localhost:5000/api/sizes';
 
 const SizeManager = () => {
   const [sizes, setSizes] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  
   const [formData, setFormData] = useState({
     name: '',
     width: '',
@@ -52,19 +54,19 @@ const SizeManager = () => {
       height: size.height?.toString() || '',
       rate: size.rate?.toString() || '',
     });
-    setIsEditing(true);
+    setShowModal(true);
   };
 
   const handleAddNew = () => {
     setEditingId(null);
     setFormData({ name: '', width: '', height: '', rate: '' });
-    setIsEditing(true);
+    setShowModal(true);
   };
 
   const handleCancel = () => {
-    setEditingId(null);
+    setShowModal(false);
     setFormData({ name: '', width: '', height: '', rate: '' });
-    setIsEditing(false);
+    setEditingId(null);
   };
 
   const handleSubmit = async (e) => {
@@ -102,66 +104,26 @@ const SizeManager = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <div className="text-sm text-slate-600">{sizes.length} size{sizes.length !== 1 ? 's' : ''}</div>
-        {!isEditing && (
-          <Button onClick={handleAddNew} className="gap-2">
-            <Plus className="w-4 h-4" />
-            Add Size
-          </Button>
-        )}
+        <div className="text-sm text-slate-600">
+          {sizes.length} size{sizes.length !== 1 ? 's' : ''}
+        </div>
+        <Button onClick={handleAddNew} className="gap-2 bg-gray-100">
+          <Plus className="w-4 h-4" />
+          Add Size
+        </Button>
       </div>
 
-      {isEditing && (
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white border p-4 rounded shadow">
-          <div>
-            <label className="text-sm font-medium text-slate-600 block mb-1">Name</label>
-            <Input
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-          </div>
-          <div>
-            <label className="text-sm font-medium text-slate-600 block mb-1">Width (inches)</label>
-            <Input
-              type="number"
-              value={formData.width}
-              onChange={(e) => setFormData({ ...formData, width: e.target.value })}
-              required
-              min="0"
-            />
-          </div>
-          <div>
-            <label className="text-sm font-medium text-slate-600 block mb-1">Height (inches)</label>
-            <Input
-              type="number"
-              value={formData.height}
-              onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-              required
-              min="0"
-            />
-          </div>
-          <div>
-            <label className="text-sm font-medium text-slate-600 block mb-1">Rate (₹)</label>
-            <Input
-              type="number"
-              value={formData.rate}
-              onChange={(e) => setFormData({ ...formData, rate: e.target.value })}
-              required
-              min="0"
-            />
-          </div>
+   <SizeModal
+  isOpen={showModal}
+  onClose={handleCancel}
+  size={editingId ? { id: editingId, ...formData } : null}
+  onSuccess={() => {
+    fetchSizes();
+    handleCancel();
+  }}
+/>
 
-          <div className="col-span-full flex justify-end gap-2 mt-2">
-            <Button type="button" variant="outline" onClick={handleCancel}>
-              Cancel
-            </Button>
-            <Button type="submit">
-              {editingId ? 'Update Size' : 'Add Size'}
-            </Button>
-          </div>
-        </form>
-      )}
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sizes.map((size) => (

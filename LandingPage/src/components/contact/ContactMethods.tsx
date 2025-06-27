@@ -68,7 +68,7 @@ const ContactSection = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-full px-4 py-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-full px-4 md:px-20 py-2">
         {/* Map Section - Always Visible */}
         <div className="relative h-96 lg:h-auto">
           <div className="absolute inset-0 rounded-t-xl lg:rounded-r-none lg:rounded-l-xl overflow-hidden">
@@ -87,10 +87,9 @@ const ContactSection = () => {
         {/* Contact Form Section */}
         <div className="bg-white p-6 md:p-8 lg:p-12 flex flex-col justify-center rounded-b-xl lg:rounded-l-none lg:rounded-r-xl">
           <div className="max-w-xl mx-auto w-full">
-            <div className="relative inline-block mb-8">
-              <div className="absolute inset-0 bg-yellow-400 rounded-lg transform rotate-1 blur-sm opacity-60"></div>
-              <div className="relative bg-gradient-to-br from-[#EA3C1F] via-[#F26742] to-[#EB3C20] px-6 py-3 rounded-lg shadow-xl">
-                <h2 className="text-2xl md:text-3xl font-black text-white text-center">
+            <div className="relative mb-8 hidden md:block">
+              <div className="relative px-6 py-3">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 text-center">
                   GET IN TOUCH
                 </h2>
               </div>

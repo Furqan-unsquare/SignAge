@@ -42,7 +42,7 @@ const ItemManagement = () => {
 
               {/* Tabs Neon */}
              <div className="w-full overflow-x-auto">
-                <TabsList className="flex bg-white shadow-lg border-0 p-1 h-auto mb-6 rounded-xl min-w-max sm:min-w-full justify-start">
+                <TabsList className="flex bg-white shadow-md border-0 p-1 h-auto mb-6 rounded-xl min-w-max sm:min-w-full justify-start">
                   {signageTypes.map((type) => (
                     <TabsTrigger
                       key={type.id}

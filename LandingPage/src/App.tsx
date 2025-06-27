@@ -15,6 +15,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/Contact";
 import Custom from "./pages/Custom";
 import NeonCustom from "./pages/NeonCustom";
+import FramerCustom from "./pages/NeonCustom"
 import PremiumFloatingButton from "./components/FloatingMobileCTA";
 
 const queryClient = new QueryClient();
@@ -32,12 +33,16 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/work" element={<Work />} />
-            <Route path="/NeonCustom" element={<NeonCustom />} />
             <Route path="/custom" element={<Custom />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<ArticleDetail />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="*" element={<NotFound />} />
+
+            <Route path="/NeonCustom" element={<NeonCustom />} />
+            <Route path="/framerCustom" element={<FramerCustom />} />
+            <Route path="/NeonCustom" element={<NeonCustom />} />
+            <Route path="/NeonCustom" element={<NeonCustom />} />
           </Routes>
         </main>
         <PremiumFloatingButton />

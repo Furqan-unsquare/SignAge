@@ -106,11 +106,11 @@ const ColorManager = () => {
       <div className="flex justify-end">
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => resetForm()}>
-              <Plus className="w-4 h-4 mr-2" /> Add Color
+            <Button onClick={() => resetForm()} className='bg-gray-100'>
+              <Plus className="w-4 h-4 mr-2 " /> Add Color
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className='bg-gray-100 text-gray-800'>
             <DialogHeader>
               <DialogTitle>
                 {editingId ? 'Edit Color' : 'Add New Color'}

@@ -67,13 +67,13 @@
             className="font-bold break-words"
               style={{
                 ...previewStyle, 
-                fontSize: `${Math.max(2.2, 5 - text.length * 0.2)}rem`, 
+                fontSize: text
+                  ? `${Math.max(2.2, 5 - text.length * 0.2)}rem` : `4rem`, 
                 transition: "font-size 0.3s ease-in-out"
               }}
             >
               {text || "Preview"}
             </div>
-
         </div>
 
         {/* Corner accents */}

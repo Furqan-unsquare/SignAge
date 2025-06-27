@@ -33,7 +33,7 @@ const navigate = useNavigate();
     <section 
       id="cta" 
   ref={ref}
-      className="pb-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]  relative overflow-hidden">
+      className="py-10 md:py-0 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]  relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
         {/* Stacked Images with Animation */}
         <motion.div 

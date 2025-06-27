@@ -59,15 +59,17 @@ const ProjectGallery = () => {
   // Fetch projects from API
   useEffect(() => {
     const fetchProjects = async () => {
-      try {
-        const response = await fetch('http://192.168.1.7:5000/api/projects');
-        if (!response.ok) throw new Error('Failed to fetch projects');
-        const { data } = await response.json();
-        setProjects(data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
+  try {
+    const response = await fetch('http://localhost:5000/api/projects');
+    if (!response.ok) throw new Error('Failed to fetch projects');
+    const data = await response.json(); // Don't destructure here
+    console.log("Fetched projects:", data);
+    setProjects(data); // should be an array
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+  }
+};
+
 
     fetchProjects();
   }, []);
@@ -90,7 +92,7 @@ const ProjectGallery = () => {
   };
 
   return (
-    <section className="pb-16 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]" id="project">
+    <section className="pb-0 md:pb-10 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]" id="project">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -108,30 +110,31 @@ const ProjectGallery = () => {
         </motion.div>
 
         {/* Filters */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {filters.map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => {
-                setActiveFilter(filter.id);
-                const isMobile = window.innerWidth < 768;
-                setVisibleCount(isMobile ? 3 : 9);
-              }}
-              className={`px-5 py-2 rounded-full transition-colors ${
-                activeFilter === filter.id
-                  ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
-                  : "bg-white/10 text-white hover:bg-white/20"
-              }`}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </motion.div>
+       <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  className="flex justify-center lg:justify-center gap-3 mb-12 overflow-x-auto whitespace-nowrap scrollbar-hide px-2 sm:px-0"
+>
+  {filters.map((filter) => (
+    <button
+      key={filter.id}
+      onClick={() => {
+        setActiveFilter(filter.id);
+        const isMobile = window.innerWidth < 768;
+        setVisibleCount(isMobile ? 3 : 9);
+      }}
+      className={`px-5 py-2 rounded-full transition-colors ${
+        activeFilter === filter.id
+          ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
+          : "bg-white/10 text-white hover:bg-white/20"
+      }`}
+    >
+      {filter.label}
+    </button>
+  ))}
+</motion.div>
+
 
         {/* Masonry Gallery */}
         <motion.div

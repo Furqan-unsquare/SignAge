@@ -60,7 +60,7 @@ const ColorModal = ({ isOpen, onClose, color }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className='bg-gray-200 text-gray-800'>
         <DialogHeader>
           <DialogTitle>{color ? 'Edit Color' : 'Add New Color'}</DialogTitle>
         </DialogHeader>

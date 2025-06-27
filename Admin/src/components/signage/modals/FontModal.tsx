@@ -55,7 +55,7 @@ const FontModal = ({ isOpen, onClose, font }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className='bg-gray-200 text-gray-800'>
         <DialogHeader>
           <DialogTitle>
             {font ? 'Edit Font' : 'Add New Font'}

@@ -84,7 +84,7 @@ let orderId = `NEO-${randomId}-${day}${month}`;
       throw new Error(serverMessage);
     }
 
-    orderId = responseBody._id || orderId; // Use actual Mongo ID if available
+    orderId = responseBody.orderId; // Use actual Mongo ID if available
   } catch (err: any) {
     console.error("Error sending order:", err);
     alert(err.message || "Something went wrong while placing the order.");

@@ -7,6 +7,7 @@ import { HowToInstall } from "./HowToInstall"
 import { WhatsInTheBox } from "./WhatsInTheBox"
 import { Testimonials } from "./Testimonials"
 import { FAQs } from "./FAQs"
+import { Sidebar } from "./Sidebar"
 
 export interface FontOption {
     name: string
@@ -87,9 +88,11 @@ export const NeonConfigurator = () => {
 
     return (
         <div className="bg-black text-white pt-20">
+            <Sidebar />
             <div className="min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 pb-4 md:pt-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-screen lg:h-[calc(100vh-4rem)]">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-screen">
+
                         <PreviewPane
                             text={text}
                             selectedFont={selectedFont}

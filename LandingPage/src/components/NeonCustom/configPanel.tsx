@@ -60,7 +60,7 @@ export const ConfigurationPanel = ({
   };
 
   return (
-    <div className="w-full bg-black text-white flex flex-col" style={{ height: 'calc(100vh - 200px)' }}>
+    <div className="w-full bg-black text-white flex flex-col">
       {/* Header with Total Price */}
       <div className="flex justify-between items-start px-4 pt-4">
         <div>

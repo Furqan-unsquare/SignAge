@@ -34,7 +34,7 @@ const FontManager = () => {
           <div className="text-sm text-slate-600">
             {fonts.length} font{fonts.length !== 1 ? 's' : ''} configured
           </div>
-          <Button onClick={handleAdd} className="gap-2">
+          <Button onClick={handleAdd} className="gap-2 bg-gray-100">
             <Plus className="w-4 h-4" />
             Add Font
           </Button>
