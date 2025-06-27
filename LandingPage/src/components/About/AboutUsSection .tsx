@@ -44,7 +44,7 @@ const AboutUsSection: React.FC = () => {
 
   return (
     <section
-      ref={sectionRef}
+      ref={sectionRef} id="who-we-are"
       className="relative py-16 md:py-24 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

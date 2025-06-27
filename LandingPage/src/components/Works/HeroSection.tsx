@@ -85,8 +85,7 @@ const HeroSection: React.FC = () => {
               style={{ 
                 zIndex: img.zIndex,
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
-              }}
-            >
+              }}>
               <img
                 src={`${img.src}?w=400&h=500&fit=crop`}
                 alt={`Featured project ${index + 1}`}
@@ -125,6 +124,7 @@ const HeroSection: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.9 }}
             className="flex flex-col-2 gap-4 justify-center">
+              <a href="#project">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -133,15 +133,17 @@ const HeroSection: React.FC = () => {
             >
               <span className="relative z-10 flex items-center">
                 View Our Work </span>
-            </motion.button>
+            </motion.button></a>
 
-            <motion.button
+            
+              <a href="/contact-us">
+              <motion.button
               whileHover={{ scale: 1.05, borderColor: "#FDCA07" }}
               whileTap={{ scale: 0.95 }}
               className="border-2 border-white/30 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full font-semibold transition-all"
             >
               Get In Touch
-            </motion.button>
+            </motion.button></a>
           </motion.div>
         </div>
       </div>

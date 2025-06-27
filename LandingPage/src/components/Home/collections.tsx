@@ -108,7 +108,7 @@ const Collections = () => {
 
     // Navigate to blogs
     const navigateToBlogs = (collectionId) => {
-        navigate(`/custom`); // Changed from history.push to navigate
+        navigate(`/work`); // Changed from history.push to navigate
     };
 
     // Get visible items for desktop

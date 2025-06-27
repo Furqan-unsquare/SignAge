@@ -127,7 +127,7 @@ const ContentHub = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
-              onClick={() => navigate("/custom")}
+              onClick={() => navigate("/custom#customize")}
               className="px-8 py-4 bg-[#EA3C1F] text-white font-bold rounded-lg hover:bg-[#c53219] transition-colors">
                 Start Designing 
               </button>

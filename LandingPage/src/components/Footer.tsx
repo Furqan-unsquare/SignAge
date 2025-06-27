@@ -1,8 +1,10 @@
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-t from-[#ff8d79] to-[#ff6a50] border-t text-white pt-12 pb-6 md:pt-16 md:pb-8">
+    <footer className="bg-gradient-to-t from-[#ec6952] to-[#ff4f2f] border-t border-gray-400 text-white pt-12 pb-6 md:pt-16 md:pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
           
@@ -25,23 +27,23 @@ const Footer = () => {
               <a href="#" className="text-white hover:text-[#FDCA07] transition-colors" aria-label="LinkedIn">
                 <Linkedin className="w-5 h-5 md:w-6 md:h-6" />
               </a>
-            </div>
+            </div> 
           </div>
 
           {/* Links Grid - 2 columns on mobile, then spreads out */}
           <div className="grid md:grid-cols-3 gap-8 sm:gap-6 md:gap-8 sm:col-span-2 lg:col-span-3">
             {/* Quick Links */}
-            <div>
-              <h4 className="text-lg font-bold text-[#FDCA07] mb-4 md:mb-6">Quick Links</h4>
-              <ul className="space-y-2 md:space-y-3">
-                <li><a href="/" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Home</a></li>
-                <li><a href="/about" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">About Us</a></li>
-                <li><a href="/products" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Our Products</a></li>
-                <li><a href="/gallery" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Gallery</a></li>
-                <li><a href="/blog" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Blog</a></li>
-                <li><a href="/contact" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Contact</a></li>
-              </ul>
-            </div>
+           <div>
+            <h4 className="text-lg font-bold text-[#FDCA07] mb-4 md:mb-6">Quick Links</h4>
+            <ul className="space-y-2 md:space-y-3">
+              <li><Link to="/" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Home</Link></li>
+              <li><Link to="/about" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">About Us</Link></li>
+              <li><Link to="/NeonCustom" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Our Products</Link></li>
+              <li><Link to="/work" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Gallery</Link></li>
+              <li><Link to="/blog" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Blog</Link></li>
+              <li><Link to="/contact-us" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Contact</Link></li>
+            </ul>
+          </div>
 
             {/* Products */}
             <div>
@@ -89,9 +91,9 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Electrify Signs. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <a href="/privacy-policy" className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">Privacy Policy</a>
-            <a href="/terms-of-service" className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">Terms of Service</a>
-            <a href="/faq" className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">FAQ</a>
+            <p className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">Privacy Policy</p>
+            <p className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">Terms of Service</p>
+            <p className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">FAQ</p>
           </div>
         </div>
       </div>

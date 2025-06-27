@@ -7,7 +7,7 @@ const CustomProducts = () => {
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           
           {/* Left Side - Product Image */}
-          <div className="lg:w-1/2">
+          <div className="max-w-lg">
             <div className="bg-black rounded-2xl overflow-hidden shadow-xl relative">
               <img 
                 src="https://i.pinimg.com/736x/26/cf/6b/26cf6b2063eea89b3fbda8a863ddb60a.jpg" 
@@ -20,7 +20,7 @@ const CustomProducts = () => {
           </div>
 
           {/* Right Side - Content */}
-          <div className="lg:w-1/2 text-white space-y-8">
+          <div className="lg:w-1/2 text-white space-y-4 md:space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">
                 Talk to us to <span className="text-yellow-400">place your order</span>

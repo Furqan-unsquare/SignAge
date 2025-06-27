@@ -39,7 +39,9 @@ const NeonCraftSection = () => {
                             ))}
                         </div>
 
-                        <button className="mt-6 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-colors">
+                        <button
+                        onClick={() => window.location.href = '/work'} 
+                        className="mt-6 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-colors">
                             See Our Craft
                             <Zap className="w-4 h-4" />
                         </button>

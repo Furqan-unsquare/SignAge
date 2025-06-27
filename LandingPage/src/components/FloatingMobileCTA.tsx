@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { ChevronDown, Phone, MapPin, MessageCircle, Instagram } from 'lucide-react';
+import { FaWhatsapp, FaInstagram, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { ChevronDown } from "lucide-react"; // Keep this for the arrow
 import gsap from 'gsap';
 
 const PremiumFloatingButton = () => {
@@ -62,33 +63,34 @@ const PremiumFloatingButton = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {/* Social Buttons */}
-      <div className="absolute bottom-full right-0 mb-3 pr-2 space-y-2">
+      <div className="absolute bottom-full right-0 mb-3 pr-4 space-y-2">
         {[
-          {
-            icon: <MessageCircle className="w-5 h-5" />,
-            color: "bg-[#25D366] hover:bg-[#128C7E]",
-            tooltip: "WhatsApp Chat",
-            href: "https://wa.me/91xxxxxxxxxx",
-          },
-          {
-            icon: <Instagram className="w-5 h-5" />,
-            color: "bg-gradient-to-tr from-[#833AB4] via-[#C13584] to-[#E1306C]",
-            tooltip: "Instagram DM",
-            href: "https://instagram.com/yourhandle",
-          },
-          {
-            icon: <Phone className="w-5 h-5" />,
-            color: "bg-[#4285F4]",
-            tooltip: "Call Us",
-            href: "tel:+919999999999",
-          },
-          {
-            icon: <MapPin className="w-5 h-5" />,
-            color: "bg-[#EA4335]",
-            tooltip: "Location",
-            href: "https://maps.google.com/?q=Your+Location",
-          },
-        ].map((item, index) => (
+  {
+    icon: <FaWhatsapp className="w-5 h-5" />,
+    color: "bg-[#25D366] hover:bg-[#128C7E]",
+    tooltip: "WhatsApp Chat",
+    href: "https://wa.me/91xxxxxxxxxx",
+  },
+  {
+    icon: <FaInstagram className="w-5 h-5" />,
+    color: "bg-gradient-to-tr from-[#833AB4] via-[#C13584] to-[#E1306C]",
+    tooltip: "Instagram DM",
+    href: "https://instagram.com/yourhandle",
+  },
+  {
+    icon: <FaPhoneAlt className="w-5 h-5" />,
+    color: "bg-[#4285F4]",
+    tooltip: "Call Us",
+    href: "tel:+919999999999",
+  },
+  {
+    icon: <FaMapMarkerAlt className="w-5 h-5" />,
+    color: "bg-[#EA4335]",
+    tooltip: "Location",
+    href: "https://maps.google.com/?q=Your+Location",
+  },
+]
+.map((item, index) => (
           <a
             key={index}
             href={item.href}
@@ -108,7 +110,7 @@ const PremiumFloatingButton = () => {
       <button
         ref={buttonRef}
         onClick={toggleMenu}
-        className="relative w-16 h-16 rounded-full transition-all duration-200 focus:outline-none backdrop-blur-md shadow-xl"
+        className="relative w-20 h-20 rounded-full transition-all duration-200 focus:outline-none backdrop-blur-md shadow-xl"
         aria-expanded={isOpen}>
         {/* Rotating Text SVG */}
 
@@ -129,14 +131,14 @@ const PremiumFloatingButton = () => {
 
           </defs>
           <text
-            fontSize="10"
+            fontSize="12"
             fill="white"
             fontFamily="'Inter', sans-serif"
             fontWeight="500"
             letterSpacing="0.5"
           >
             <textPath href="#circlePath" startOffset="0%">
-              • Contact • Connect • Support • Contact • Connect • Support •
+              • Contact • Support • Contact • Support • Contact  
             </textPath>
           </text>
         </svg>

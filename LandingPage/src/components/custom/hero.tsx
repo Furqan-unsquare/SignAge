@@ -61,13 +61,13 @@ const HeroSection = () => {
             <div className="w-2 h-2 bg-[#fdca07] rounded-full animate-pulse"></div>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-black text-white uppercase tracking-wider leading-tight">
+          <h1 className="text-3xl lg:text-7xl font-black text-white uppercase tracking-wider leading-tight">
             CUSTOMIZE 
             <span className="text-[#fdca07]"> YOUR <br /> OWN </span>
             SIGNAGE
           </h1>
 
-          <p className="text-md md:text-lg text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm line-clamp-2 md:text-lg text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
             Bring your vision to life with our premium LED neon signs. From concept to creation, design the perfect
             signage that represents your unique style and brand.
           </p>
@@ -93,7 +93,7 @@ const HeroSection = () => {
         </div>
 
         {/* Feature Pills */}
-        <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
+        <div className="hidden md:flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
           {[
             "Free Design Consultation",
             "Unlimited Revisions",
@@ -111,7 +111,7 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a href="#category">
+          <a href="#customize">
           <button className="group relative bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-xl md:text-2xl uppercase tracking-wider px-10 py-5 rounded-2xl  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#fdca07]">
             <div className="flex items-center gap-4">
               <Palette className="w-6 h-6" />

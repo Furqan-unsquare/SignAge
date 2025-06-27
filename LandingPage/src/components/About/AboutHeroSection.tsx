@@ -61,9 +61,10 @@ export default function HeroSection() {
               impactful signage. We transform spaces and elevate brands, making your message seen and remembered.
             </p>
 
+            <a href="#who-we-are">
             <button className="bg-gradient-to-r from-yellow-600 to-green-600 text-white px-8 py-3 md:px-10 md:py-4 rounded-full font-medium text-sm md:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
               Know Us
-            </button>
+            </button></a>
           </div>
 
           {/* Right Content - Video */}
