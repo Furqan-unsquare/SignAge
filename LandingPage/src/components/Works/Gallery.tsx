@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from 'react-router-dom';
 
 const ProjectGallery = () => {
   // State management
+  const location = useLocation();
   const [projects, setProjects] = useState([]);
   const [activeFilter, setActiveFilter] = useState("all");
   const [visibleCount, setVisibleCount] = useState(9);
@@ -34,6 +36,31 @@ const ProjectGallery = () => {
     },
   };
 
+  // Parse category from URL query
+useEffect(() => {
+  if (location.hash) {
+    const [hash, queryString] = location.hash.split("?");
+    const params = new URLSearchParams(queryString);
+    const category = params.get("category");
+
+    if (category) {
+      setActiveFilter(category);
+      const isMobile = window.innerWidth < 768;
+      setVisibleCount(isMobile ? 3 : 9);
+    }
+
+    // Scroll to section smoothly
+    const section = document.getElementById(hash.replace("#", ""));
+    if (section) {
+      setTimeout(() => {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    }
+  }
+}, [location]);
+
+
+
   // Detect screen size and adjust initial visibleCount
   useEffect(() => {
     const handleResize = () => {
@@ -47,14 +74,25 @@ const ProjectGallery = () => {
   }, []);
 
   // Filter options
-  const filters = [
-    { id: "all", label: "All Projects" },
-    { id: "exterior", label: "Exterior Signs" },
-    { id: "interior", label: "Interior Signs" },
-    { id: "digital", label: "Digital Displays" },
-    { id: "vehicle", label: "Vehicle Graphics" },
-    { id: "featured", label: "Featured Work" },
-  ];
+const productLinks = [
+  { id: "all", label: "All Projects" },
+  { id: "acrylic", label: "Acrylic Letter/Signboard" },
+  { id: "aluminium", label: "Aluminium Ch. Letter" },
+  { id: "3d-steel", label: "3D Steel Letters" },
+  { id: "laser-router", label: "Laser Router Cutting" },
+  { id: "glow-sign", label: "Glow Signboard Flex" },
+  { id: "acp", label: "ACP Signboard" },
+  { id: "photos", label: "Signboard Photos" },
+  { id: "office-name", label: "Office Name Plate" },
+  { id: "led-scrolling", label: "LED Scrolling Board" },
+  { id: "featured", label: "Featured Projects" },
+];
+
+
+productLinks.map((item) => (
+  <a href={`/#project?category=${item.id}`} className="...">{item.label}</a>
+));
+
 
   // Fetch projects from API
   useEffect(() => {
@@ -75,12 +113,12 @@ const ProjectGallery = () => {
   }, []);
 
   // Filter projects
-  const filteredProjects = projects.filter(
-    (project) =>
-      activeFilter === "all" ||
-      project.category === activeFilter ||
-      (activeFilter === "featured" && project.featured)
-  );
+const filteredProjects = projects.filter((project) => {
+  if (activeFilter === "all") return true;
+  if (activeFilter === "featured") return project.featured === true;
+  return project.category === activeFilter;
+});
+
 
   // Load more projects
   const loadMore = () => {
@@ -109,30 +147,52 @@ const ProjectGallery = () => {
           </p>
         </motion.div>
 
-        {/* Filters */}
-       <motion.div
+      {/* Filter Section */}
+<motion.div
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   transition={{ duration: 0.6, delay: 0.2 }}
-  className="flex justify-center lg:justify-center gap-3 mb-12 overflow-x-auto whitespace-nowrap scrollbar-hide px-2 sm:px-0"
+  className="mb-12 px-4 sm:px-0"
 >
-  {filters.map((filter) => (
-    <button
-      key={filter.id}
-      onClick={() => {
-        setActiveFilter(filter.id);
+  {/* Mobile Dropdown */}
+  <div className="sm:hidden mb-4">
+    <select
+      value={activeFilter}
+      onChange={(e) => {
+        setActiveFilter(e.target.value);
         const isMobile = window.innerWidth < 768;
         setVisibleCount(isMobile ? 3 : 9);
       }}
-      className={`px-5 py-2 rounded-full transition-colors ${
-        activeFilter === filter.id
-          ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
-          : "bg-white/10 text-white hover:bg-white/20"
-      }`}
+      className="w-full p-2 rounded-lg bg-white text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07]"
     >
-      {filter.label}
-    </button>
-  ))}
+      {productLinks.map((link) => (
+        <option key={link.id} value={link.id}>
+          {link.label}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  {/* Desktop Button Grid */}
+  <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+    {productLinks.map((link) => (
+      <button
+        key={link.id}
+        onClick={() => {
+          setActiveFilter(link.id);
+          const isMobile = window.innerWidth < 768;
+          setVisibleCount(isMobile ? 3 : 9);
+        }}
+        className={`px-4 py-2 rounded-2xl text-sm text-center transition-colors ${
+          activeFilter === link.id
+            ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }`}
+      >
+        {link.label}
+      </button>
+    ))}
+  </div>
 </motion.div>
 
 
@@ -141,8 +201,7 @@ const ProjectGallery = () => {
           variants={container}
           initial="hidden"
           animate="show"
-          className="columns-1 sm:columns-2 lg:columns-3 gap-6 mb-12"
-        >
+          className="columns-1 sm:columns-2 lg:columns-3 gap-6 mb-10">
           <AnimatePresence>
             {filteredProjects.slice(0, visibleCount).map((project) => (
               <motion.div

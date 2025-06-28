@@ -1,82 +1,88 @@
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-t from-[#ec6952] to-[#ff4f2f] border-t border-gray-400 text-white pt-12 pb-6 md:pt-16 md:pb-8">
+    <footer className="bg-gradient-to-t from-[#ec6952] to-[#ff4f2f] text-white pt-12 pb-8 md:pt-16 md:pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 md:mb-12">
           
-          {/* Company Info - Full width on mobile, then first column */}
-          <div className="sm:col-span-2 lg:col-span-1 space-y-4 md:space-y-6">
+          {/* Company Info */}
+          <div className="md:col-span-2 lg:col-span-1 space-y-4">
             <h3 className="text-2xl font-bold text-[#FDCA07]">Electrify Signs</h3>
-            <p className="text-white/90 text-sm md:text-base">
+            <p className="text-white/90 text-sm md:text-base leading-relaxed">
               Illuminating brands with custom neon signs and LED displays since 2015.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors" aria-label="Facebook">
-                <Facebook className="w-5 h-5 md:w-6 md:h-6" />
+            <div className="flex space-x-4 pt-2">
+              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Facebook">
+                <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors" aria-label="Instagram">
-                <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Instagram">
+                <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors" aria-label="Twitter">
-                <Twitter className="w-5 h-5 md:w-6 md:h-6" />
+              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Twitter">
+                <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5 md:w-6 md:h-6" />
+              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="LinkedIn">
+                <Linkedin className="w-5 h-5" />
               </a>
             </div> 
           </div>
 
-          {/* Links Grid - 2 columns on mobile, then spreads out */}
-          <div className="grid md:grid-cols-3 gap-8 sm:gap-6 md:gap-8 sm:col-span-2 lg:col-span-3">
-            {/* Quick Links */}
-           <div>
-            <h4 className="text-lg font-bold text-[#FDCA07] mb-4 md:mb-6">Quick Links</h4>
-            <ul className="space-y-2 md:space-y-3">
-              <li><Link to="/" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">About Us</Link></li>
-              <li><Link to="/NeonCustom" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Our Products</Link></li>
-              <li><Link to="/work" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Gallery</Link></li>
-              <li><Link to="/blog" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Blog</Link></li>
-              <li><Link to="/contact-us" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Contact</Link></li>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold text-[#FDCA07] mb-4">Quick Links</h4>
+            <div className="grid grid-cols-2 sm:grid-cols-1 gap-x-6 gap-y-3">
+            <ul className="space-y-3">
+              <li><Link to="/" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Home</Link></li>
+              <li><Link to="/about" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">About Us</Link></li>
+              <li><Link to="/NeonCustom" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Our Products</Link></li>
+              </ul>
+            <ul className="space-y-3">
+              <li><Link to="/work" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Gallery</Link></li>
+              <li><Link to="/blog" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Blog</Link></li>
+              <li><Link to="/contact-us" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Contact</Link></li>
             </ul>
           </div>
+          </div>
 
-            {/* Products */}
-            <div>
-              <h4 className="text-lg font-bold text-[#FDCA07] mb-4 md:mb-6">Our Products</h4>
-              <ul className="space-y-2 md:space-y-3">
-                <li><a href="/products/neon-signs" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Neon Signs</a></li>
-                <li><a href="/products/led-displays" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">LED Displays</a></li>
-                <li><a href="/products/channel-letters" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Channel Letters</a></li>
-                <li><a href="/products/custom-signs" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Custom Signs</a></li>
-                <li><a href="/products/3d-letters" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">3D Letters</a></li>
-                <li><a href="/products/light-boxes" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">Light Boxes</a></li>
+          {/* Our Products */}
+          <div>
+            <h4 className="text-lg font-semibold text-[#FDCA07] mb-4">Our Products</h4>
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-6 gap-y-3">
+              <ul className="space-y-3">
+                <li><a href="/products/acrylic-letter" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Acrylic Letter/Signboard</a></li>
+                <li><a href="/products/aluminium-channel-letter" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Ch. Letter</a></li>
+                <li><a href="/products/3d-steel-letters" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">3D Steel Letters</a></li>
+                <li><a href="/products/laser-router-cutting" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Laser Router Cutting</a></li>
+              </ul>
+              <ul className="space-y-3">
+                <li><a href="/products/glow-signboard-flex" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Glow Signboard Flex</a></li>
+                <li><a href="/products/acp-signboard" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">ACP Signboard</a></li>
+                <li><a href="/products/office-name-plate" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Office Name Plate</a></li>
+                <li><a href="/products/led-scrolling-board" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">LED Scrolling Board</a></li>
               </ul>
             </div>
+          </div>
 
-            {/* Contact Info */}
-            <div className="col-span-2 sm:col-span-1">
-              <h4 className="text-lg font-bold text-[#FDCA07] mb-4 md:mb-6">Contact Us</h4>
-              <div className="space-y-3 md:space-y-4">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 md:w-5 md:h-5 mt-0.5 text-[#FDCA07] flex-shrink-0" />
-                  <div>
-                    <p className="text-white/90 text-sm md:text-base">123 Neon Street</p>
-                    <p className="text-white/90 text-sm md:text-base">Design City, DC 10001</p>
-                  </div>
+          {/* Contact Info */}
+          <div className='md:ml-20'>
+            <h4 className="text-lg font-semibold text-[#FDCA07] mb-4">Contact Us</h4>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 mt-0.5 text-[#FDCA07] flex-shrink-0" />
+                <div>
+                  <p className="text-white/90 text-sm md:text-base">123 Neon Street</p>
+                  <p className="text-white/90 text-sm md:text-base">Design City, DC 10001</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 md:w-5 md:h-5 text-[#FDCA07] flex-shrink-0" />
-                  <a href="tel:+15551234567" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">+1 (555) 123-4567</a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 md:w-5 md:h-5 text-[#FDCA07] flex-shrink-0" />
-                  <a href="mailto:info@electrifysigns.com" className="text-white/90 hover:text-white text-sm md:text-base transition-colors">info@electrifysigns.com</a>
-                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-[#FDCA07] flex-shrink-0" />
+                <a href="tel:+15551234567" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200">+1 (555) 123-4567</a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-[#FDCA07] flex-shrink-0" />
+                <a href="mailto:info@electrifysigns.com" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200">info@electrifysigns.com</a>
               </div>
             </div>
           </div>
@@ -86,14 +92,14 @@ const Footer = () => {
         <div className="border-t border-white/20 my-6 md:my-8"></div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/80 text-xs md:text-sm">
             &copy; {new Date().getFullYear()} Electrify Signs. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <p className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">Privacy Policy</p>
-            <p className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">Terms of Service</p>
-            <p className="text-white/80 hover:text-white text-xs md:text-sm transition-colors">FAQ</p>
+          <div className="flex space-x-6">
+            <a href="#" className="text-white/80 hover:text-white text-xs md:text-sm transition-colors duration-200">Privacy Policy</a>
+            <a href="#" className="text-white/80 hover:text-white text-xs md:text-sm transition-colors duration-200">Terms of Service</a>
+            <a href="#" className="text-white/80 hover:text-white text-xs md:text-sm transition-colors duration-200">Sitemap</a>
           </div>
         </div>
       </div>

@@ -12,17 +12,22 @@ const Header = () => {
     { name: "Custom", href: "/custom" },
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact-us" },
+    { name: "Contact", href: "/#contact" },
   ];
 
-  const productTypes = [
-    { name: "Channel Letters", href: "/products/channel-letters" },
-    { name: "Neon Signs", href: "/products/neon-signs" },
-    { name: "LED Signs", href: "/products/led-signs" },
-    { name: "Acrylic Signs", href: "/products/acrylic-signs" },
-    { name: "Monument Signs", href: "/products/monument-signs" },
-    { name: "Pylon Signs", href: "/products/pylon-signs" },
-  ];
+const productTypes = [
+  { name: "Acrylic Letter/Signboard", id: "acrylic" },
+  { name: "Aluminium Ch. Letter", id: "aluminium" },
+  { name: "3D Steel Letters", id: "3d-steel" },
+  { name: "Laser Router Cutting", id: "laser-router" },
+  { name: "Glow Signboard Flex", id: "glow-sign" },
+  { name: "ACP Signboard", id: "acp" },
+  { name: "Signboard Photos", id: "photos" },
+  { name: "Office Name Plate", id: "office-name" },
+  { name: "LED Scrolling Board", id: "led-scrolling" },
+];
+
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -104,7 +109,8 @@ const Header = () => {
                     {productTypes.map((product) => (
                       <a
                         key={product.name}
-                        href={product.href}
+                        href={`/work#project?category=${product.id}`}
+
                         className="block px-4 py-2 text-gray-100 hover:text-gray-300"
                       >
                         {product.name}

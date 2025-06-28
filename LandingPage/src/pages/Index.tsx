@@ -10,6 +10,7 @@ import ContactMethods from '@/components/Home/ContactMethods';
 import ContactCTA from '@/components/Home/ContactCTA';
 
 const Index = () => {
+  
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] text-gray-800">
       <Hero />

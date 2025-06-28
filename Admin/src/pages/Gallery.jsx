@@ -11,13 +11,25 @@ const AdminGallery = () => {
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    category: "exterior",
+    category: "acrylic",
     featured: false,
     imageUrl: "",
   });
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const productTypes = [
+  { name: "Acrylic Letter/Signboard", id: "acrylic" },
+  { name: "Aluminium Ch. Letter", id: "aluminium" },
+  { name: "3D Steel Letters", id: "3d-steel" },
+  { name: "Laser Router Cutting", id: "laser-router" },
+  { name: "Glow Signboard Flex", id: "glow-sign" },
+  { name: "ACP Signboard", id: "acp" },
+  { name: "Signboard Photos", id: "photos" },
+  { name: "Office Name Plate", id: "office-name" },
+  { name: "LED Scrolling Board", id: "led-scrolling" },
+];
 
   // Fetch projects
   useEffect(() => {
@@ -106,7 +118,7 @@ const AdminGallery = () => {
   };
 
   const resetForm = () => {
-    setFormData({ title: "", category: "exterior", featured: false, imageUrl: "" });
+    setFormData({ title: "", category: "acrylic", featured: false, imageUrl: "" });
     setImageFile(null);
     setImagePreview(null);
     setShowUrlInput(false);
@@ -253,10 +265,11 @@ const AdminGallery = () => {
                           onChange={handleInputChange}
                           className="w-full px-3 py-2 text-gray-800 border rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
                         >
-                          <option value="exterior">Exterior Signs</option>
-                          <option value="interior">Interior Signs</option>
-                          <option value="digital">Digital Displays</option>
-                          <option value="vehicle">Vehicle Graphics</option>
+                          {productTypes.map((type) => (
+                            <option key={type.id} value={type.id}>
+                              {type.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div className="flex items-center">
