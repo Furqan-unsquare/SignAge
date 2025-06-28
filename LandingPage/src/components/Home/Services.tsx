@@ -98,12 +98,12 @@ const SignageServices = () => {
 
 
         {/* CTA */}
-        <div className=" text-center">
+        <div className=" text-center pb-10">
           <button onClick={() => window.location.href = `/custom`} 
           className="bg-white text-[#EA3C1F] px-4 md:px-8 py-2 md:py-4 rounded-full font-bold text-lg hover:bg-white/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
             Get Your Custom Signage
           </button>
-          <p className="text-white/80 mt-4">
+          <p className="text-xl text-white/80 mt-4">
             Contact us for a free consultation and quote
           </p>
         </div>

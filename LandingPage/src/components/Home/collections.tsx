@@ -124,7 +124,7 @@ const Collections = () => {
     const visibleItems = getVisibleItems();
 
     return (
-        <div className="relative min-h-full bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-8 md:py-5 md:pl-4">
+        <div className="relative min-h-full bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-8 md:py-14 md:pl-4">
             {/* Header Section */}
             <div className="px-4 md:px-10 mx-auto md:mb-12">
                 <div className="flex items-center justify-between">
@@ -153,7 +153,7 @@ const Collections = () => {
             </div>
 
             {/* Collections Container */}
-            <div className="pl-4 md:pl-10 mx-auto">
+            <div className="pl-4 md:pl-10 pb-5 mx-auto">
                 {/* Mobile Scroll Container */}
                 <div 
                     ref={containerRef}

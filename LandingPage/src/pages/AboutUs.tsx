@@ -1,8 +1,6 @@
 
 import AboutHeroSection from "../components/About/AboutHeroSection";
-import ValuesSection from "../components/About/ValuesSection";
 import AboutCTA from "../components/About/AboutCTA";
-import AboutUsSection from "@/components/About/AboutUsSection ";
 import { Helmet } from 'react-helmet';
 
 const AboutUs = () => {
@@ -14,10 +12,8 @@ const AboutUs = () => {
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
 
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] overflow-x-hidden">
       <AboutHeroSection />
-      <AboutUsSection />
-      <ValuesSection />
       <AboutCTA />
     </div>
     </>

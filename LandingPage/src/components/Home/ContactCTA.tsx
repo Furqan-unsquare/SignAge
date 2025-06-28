@@ -57,28 +57,9 @@ const ContactCTA = () => {
         </div>
       </div>
 
-      {/* Scrolling marquee text */}
-      <div className="absolute bottom-0 left-0 right-0 overflow-hidden py-2 ">
-        <div className="inline-block whitespace-nowrap animate-marquee">
-          <span className="text-3xl font-black text-yellow-300 uppercase tracking-wider mx-8">
-            ✦ FREE QUOTES ✦ 24/7 SUPPORT ✦ 5-YEAR WARRANTY ✦ INSTALLATION INCLUDED ✦
-          </span>
-          <span className="text-3xl font-black text-yellow-300 uppercase tracking-wider mx-8">
-            ✦ FREE QUOTES ✦ 24/7 SUPPORT ✦ 5-YEAR WARRANTY ✦ INSTALLATION INCLUDED ✦
-          </span>
-        </div>
-      </div>
+    
 
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-          display: inline-block;
-        }
-      `}</style>
+     
     </section>
   );
 };

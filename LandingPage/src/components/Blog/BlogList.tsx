@@ -16,7 +16,7 @@ const BlogList: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [visibleCount, setVisibleCount] = useState<number>(3);
+  const [visibleCount, setVisibleCount] = useState<number>(6);
 
   // Fetch data from data.json
   useEffect(() => {

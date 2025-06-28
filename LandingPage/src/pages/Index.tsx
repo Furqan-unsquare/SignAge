@@ -5,17 +5,23 @@ import Testimonials from '@/components/Home/Testimonials';
 import FAQ from '@/components/Home/FAQ';
 import Collections from '@/components/Home/collections';
 import CustomProducts from '@/components/Home/Connect';
+import Marquee from '@/components/Home/Marquee';
+import ContactMethods from '@/components/Home/ContactMethods';
+import ContactCTA from '@/components/Home/ContactCTA';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 text-gray-800">
+    <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] text-gray-800">
       <Hero />
+      <Marquee />
       <Services />
       <NeonCraftSection />
       <Collections />
       <CustomProducts />
       <Testimonials />
+      <ContactMethods />
       <FAQ />
+      <ContactCTA />
     </div>
   );
 };

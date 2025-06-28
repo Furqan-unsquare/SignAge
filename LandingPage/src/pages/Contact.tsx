@@ -1,6 +1,6 @@
 import ContactHero from '@/components/Contact/ContactHero';
-import ContactMethods from '@/components/Contact/ContactMethods';
-import ContactCTA from '@/components/Contact/ContactCTA';
+import ContactMethods from '@/components/Home/ContactMethods';
+import ContactCTA from '@/components/Home/ContactCTA';
 import { Helmet } from 'react-helmet';
 
 const Contact = () => {

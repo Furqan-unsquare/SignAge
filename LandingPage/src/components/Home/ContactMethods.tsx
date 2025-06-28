@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MarqueeIcons from './Marquee';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -54,19 +55,7 @@ const ContactSection = () => {
   return (
     <div className="relative overflow-hidden">
       {/* Marquee Top - Smoother Animation */}
-      <div className="py-3 overflow-hidden">
-        <div className="marquee whitespace-nowrap text-yellow-300 text-2xl md:text-4xl font-bold">
-          {[...Array(3)].map((_, i) => (
-            <React.Fragment key={i}>
-              <span className="mx-8">✧ SIGN MAKERS ✧</span>
-              <span className="mx-8">✧ BRANDING EXPERTS ✧</span>
-              <span className="mx-8">✧ CUSTOM DESIGNS ✧</span>
-              <span className="mx-8">✧ FAST TURNAROUND ✧</span>
-              <span className="mx-8">✧ PREMIUM MATERIALS ✧</span>
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
+      <MarqueeIcons />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-full px-4 md:px-20 py-2">
         {/* Map Section - Always Visible */}
