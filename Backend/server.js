@@ -26,7 +26,9 @@ app.use('/api/enquiry', middleware, require('./routes/sendenquiry'));
 app.use('/api/enquiries', require('./routes/enquiryRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/orders', require('./routes/order'));
+app.use('/api/blogs', require('./routes/blogRoutes'));
 app.use('/api/auth', require('./routes/auth'));
+
 app.use('/api', configRoutes);
 app.use('/api/signage-types', signageTypeRoutes);
 

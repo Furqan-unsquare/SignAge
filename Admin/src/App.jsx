@@ -4,7 +4,7 @@ import DashboardPage from './pages/Dashboard';
 import RequireAuth from './components/auth';
 import ItemManagement from './pages/ItemManagement';
 import OrderListPage from './pages/Order';
-
+import Blog from './pages/Blog';
 import EnquiryListPage from './pages/Enquiry';
 import AdminGallery from './pages/AdminGallery';
 import NotFoundPage from './components/NotFoundPage';
@@ -20,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<RequireAuth><DashboardPage /></RequireAuth>} />
         <Route path="/pricing" element={<RequireAuth><ItemManagement /></RequireAuth>} />
         <Route path="/orders" element={<RequireAuth><OrderListPage /></RequireAuth>} />
+        <Route path="/blog" element={<RequireAuth><Blog /></RequireAuth>} />
         <Route path="/gallery" element={<RequireAuth><AdminGallery /></RequireAuth>} />
         <Route path="/enquiry" element={<RequireAuth><EnquiryListPage /></RequireAuth>} />
         

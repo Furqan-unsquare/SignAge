@@ -7,7 +7,8 @@ import {
   FiLogOut,
   FiMenu,
   FiX,
-  FiImage
+  FiImage,
+  FiBook
 } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
@@ -37,6 +38,7 @@ const Sidebar = () => {
         { path: "/dashboard", name: "Dashboard", icon: <FiHome size={20} /> },
         { path: "/orders", name: "Orders", icon: <FiShoppingCart size={20} /> },
         { path: "/pricing", name: "Management", icon: <FiMenu size={20} /> },
+        { path: "/blog", name: "Blog/Article", icon: <FiBook size={20} /> },
         { path: "/gallery", name: "Galery", icon: <FiImage size={20} /> },
         { path: "/enquiry", name: "Enquiries", icon: <FiMessageSquare size={20} /> },
     ];
