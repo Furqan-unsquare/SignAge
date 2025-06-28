@@ -271,7 +271,7 @@ const EnquiryListPage = () => {
             <div className="text-sm text-gray-500">
               Showing {indexOfFirstEnquiry + 1} to {Math.min(indexOfLastEnquiry, filteredEnquiries.length)} of {filteredEnquiries.length} entries
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-gray-500">
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
