@@ -174,7 +174,7 @@ const filteredProjects = projects.filter((project) => {
   </div>
 
   {/* Desktop Button Grid */}
-  <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+  <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
     {productLinks.map((link) => (
       <button
         key={link.id}
