@@ -192,17 +192,26 @@ const ContactSection = () => {
             </div>
             
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
-                placeholder="(123) 456-7890"
-              />
-            </div>
+  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+  <input
+    type="tel"
+    id="phone"
+    name="phone"
+    value={formData.phone}
+    onChange={(e) => {
+      const value = e.target.value.replace(/\D/g, ""); // Remove non-digits
+      if (value.length <= 10) {
+        handleInputChange({ target: { name: "phone", value } });
+      }
+    }}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
+    placeholder="1234567890"
+    maxLength={10}
+    inputMode="numeric"
+    pattern="[0-9]{10}"
+  />
+</div>
+
             
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>

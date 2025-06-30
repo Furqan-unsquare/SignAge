@@ -72,7 +72,13 @@
                 transition: "font-size 0.3s ease-in-out"
               }}
             >
-              {text || "Preview"}
+              {(text || "Preview").split("\n").map((line, idx) => (
+  <React.Fragment key={idx}>
+    {line}
+    <br />
+  </React.Fragment>
+))}
+
             </div>
         </div>
 

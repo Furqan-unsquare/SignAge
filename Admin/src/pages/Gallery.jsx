@@ -1,10 +1,11 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trash2, Plus, X } from "lucide-react";
+import { Trash2, Plus, X, Filter } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 
 const AdminGallery = () => {
   const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,18 +19,25 @@ const AdminGallery = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const productTypes = [
-  { name: "Acrylic Letter/Signboard", id: "acrylic" },
-  { name: "Aluminium Ch. Letter", id: "aluminium" },
-  { name: "3D Steel Letters", id: "3d-steel" },
-  { name: "Laser Router Cutting", id: "laser-router" },
-  { name: "Glow Signboard Flex", id: "glow-sign" },
-  { name: "ACP Signboard", id: "acp" },
-  { name: "Signboard Photos", id: "photos" },
-  { name: "Office Name Plate", id: "office-name" },
-  { name: "LED Scrolling Board", id: "led-scrolling" },
-];
+    { name: "Acrylic Letter/Signboard", id: "acrylic" },
+    { name: "Aluminium Ch. Letter", id: "aluminium" },
+    { name: "3D Steel Letters", id: "3d-steel" },
+    { name: "Laser Router Cutting", id: "laser-router" },
+    { name: "Glow Signboard Flex", id: "glow-sign" },
+    { name: "ACP Signboard", id: "acp" },
+    { name: "Signboard Photos", id: "photos" },
+    { name: "Office Name Plate", id: "office-name" },
+    { name: "LED Scrolling Board", id: "led-scrolling" },
+  ];
+
+  const filterCategories = [
+    { name: "All Projects", id: "all" },
+    ...productTypes,
+    { name: "Featured Projects", id: "featured" },
+  ];
 
   // Fetch projects
   useEffect(() => {
@@ -41,6 +49,7 @@ const AdminGallery = () => {
         // Handle different response structures
         const projectData = Array.isArray(result) ? result : result.data || [];
         setProjects(projectData);
+        setFilteredProjects(projectData);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -49,6 +58,17 @@ const AdminGallery = () => {
     };
     fetchProjects();
   }, []);
+
+  // Filter projects when category changes
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      setFilteredProjects(projects);
+    } else if (selectedCategory === "featured") {
+      setFilteredProjects(projects.filter(project => project.featured));
+    } else {
+      setFilteredProjects(projects.filter(project => project.category === selectedCategory));
+    }
+  }, [selectedCategory, projects]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -124,6 +144,26 @@ const AdminGallery = () => {
     setShowUrlInput(false);
   };
 
+  const getCategoryName = (id) => {
+    const category = productTypes.find(type => type.id === id);
+    return category ? category.name : "Featured Projects";
+  };
+
+  // Group projects by category when filtered by "all"
+  const groupedProjects = selectedCategory === "all" ? 
+    productTypes.reduce((acc, type) => {
+      const categoryProjects = projects.filter(project => project.category === type.id);
+      if (categoryProjects.length > 0) {
+        acc.push({ category: type.id, projects: categoryProjects });
+      }
+      return acc;
+    }, []).concat(
+      projects.filter(project => project.featured).length > 0 ? 
+      { category: "featured", projects: projects.filter(project => project.featured) } : 
+      []
+    ) : 
+    [{ category: selectedCategory, projects: filteredProjects }];
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
@@ -133,10 +173,30 @@ const AdminGallery = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+            className="mb-8 flex justify-between items-center"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Gallery Management</h2>
-            <p className="text-gray-600 mt-2">Manage your project gallery</p>
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Gallery Management</h2>
+              <p className="text-gray-600 mt-2">Manage your project gallery</p>
+            </div>
+            
+            {/* Filter Dropdown */}
+            <div className="relative">
+              <div className="flex items-center space-x-2 bg-white rounded-lg shadow-sm px-3 py-2 border">
+                <Filter className="h-5 w-5 text-green-500" />
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="appearance-none bg-transparent pr-8 py-1 px-2 text-gray-700 focus:outline-none"
+                >
+                  {filterCategories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </motion.div>
 
           {/* Floating Action Button */}
@@ -160,48 +220,65 @@ const AdminGallery = () => {
           ) : projects.length === 0 ? (
             <div className="text-center text-gray-600 py-8">No projects found. Add your first project!</div>
           ) : (
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ staggerChildren: 0.1 }}
-            >
-              {projects.map((project) => (
-                <motion.div
-                  key={project._id}
-                  className="relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  layout
-                >
-                  <Suspense fallback={<div className="w-full h-48 bg-gray-200 animate-pulse"></div>}>
-                    <img
-                      src={project.imageThumbnail || project.image}
-                      alt={project.title}
-                      className="w-full h-60 object-cover"
-                      loading="lazy"
-                    />
-                  </Suspense>
-                  <div className="px-4 py-2 absolute bottom-0 w-full bg-gradient-to-b from-transparent to-black/60">
-                    <h4 className="text-lg font-semibold text-gray-50 truncate">{project.title}</h4>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-200 capitalize">{project.category}</span>
-                      {project.featured && (
-                        <span className="px-2 py-1 text-xs bg-[#FDCA07] text-gray-800 rounded-full">Featured</span>
-                      )}
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleDelete(project._id)}
-                    className="absolute top-2 right-2 p-2 bg-green-500 text-white rounded-full hover:bg-red-600 transition-colors"
-                    aria-label="Delete project"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </motion.div>
+            <div className="space-y-8">
+              {groupedProjects.map((group) => (
+                <div key={group.category} className="space-y-4">
+                  {/* Category Heading */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="bg-gradient-to-r from-green-600 via-green-300 to-gray-100 rounded-lg px-4 py-2 max-w-sm">
+                    <h3 className="text-xl font-bold text-white">
+                      {getCategoryName(group.category)}
+                      {group.category === "featured" && " ★"}
+                    </h3>
+                  </motion.div>
+
+                  {/* Projects Grid */}
+                  <motion.div
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ staggerChildren: 0.1 }}>
+                    {group.projects.map((project) => (
+                      <motion.div
+                        key={project._id}
+                        className="relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        layout
+                      >
+                        <Suspense fallback={<div className="w-full h-48 bg-gray-200 animate-pulse"></div>}>
+                          <img
+                            src={project.imageThumbnail || project.image}
+                            alt={project.title}
+                            className="w-full h-60 object-cover"
+                            loading="lazy"
+                          />
+                        </Suspense>
+                        <div className="px-4 py-2 absolute bottom-0 w-full bg-gradient-to-b from-transparent to-black/60">
+                          <h4 className="text-lg font-semibold text-gray-50 truncate">{project.title}</h4>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-200 capitalize">{project.category}</span>
+                            {project.featured && (
+                              <span className="px-2 py-1 text-xs bg-[#FDCA07] text-gray-800 rounded-full">Featured</span>
+                            )}
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleDelete(project._id)}
+                          className="absolute top-2 right-2 p-2 bg-green-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                          aria-label="Delete project"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
 
@@ -316,7 +393,7 @@ const AdminGallery = () => {
                             setImagePreview(e.target.value);
                             setImageFile(null); // Clear file if URL is entered
                           }}
-                          className="w-full px-3 py-2 border text-gray-800 rounded-lg focus:ring-2 focus:ring-[#EA3C1F] focus:border-[#EA3C1F]"
+                          className="w-full px-3 py-2 border text-gray-800 rounded-lg"
                           placeholder="https://example.com/image.jpg"
                         />
                       </motion.div>

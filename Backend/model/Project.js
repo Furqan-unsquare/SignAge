@@ -11,11 +11,23 @@ const projectSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  category: {
-    type: String,
-    required: true,
-    enum: ['exterior', 'interior', 'digital', 'vehicle'],
-  },
+ category: {
+  type: String,
+  required: true,
+  enum: [
+    "acrylic",
+    "aluminium",
+    "3d-steel",
+    "laser-router",
+    "glow-sign",
+    "acp",
+    "photos",
+    "office-name",
+    "led-scrolling",
+    "featured"
+  ],
+},
+
   featured: {
     type: Boolean,
     default: false,

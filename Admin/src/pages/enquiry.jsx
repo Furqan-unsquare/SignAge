@@ -13,7 +13,7 @@ const EnquiryListPage = () => {
   const [sortField, setSortField] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
-  const [enquiriesPerPage] = useState(5);
+  const [enquiriesPerPage] = useState(10);
   const [expandedMessages, setExpandedMessages] = useState({});
 
   useEffect(() => {

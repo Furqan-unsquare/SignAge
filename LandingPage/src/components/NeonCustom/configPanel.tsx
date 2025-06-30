@@ -85,7 +85,7 @@ export const ConfigurationPanel = ({
         {/* Text Input */}
         <div>
           <label className="block text-sm font-semibold mb-1">Type Your Text</label>
-          <input
+          <textarea
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
