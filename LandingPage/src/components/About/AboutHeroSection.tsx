@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const CoverSection = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div>
       {/* Hero Section with Full Background */}
-      <div className="relative h-screen overflow-hidden">
+      <div className="relative h-[600px] md:h-screen overflow-hidden">
         {/* Full Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -47,16 +45,16 @@ const CoverSection = () => {
       </div>
 
       {/* Journey Section */}
-      <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]  text-white pt-20 pb-24 rounded-t-[4rem] -mt-40 relative z-10">
+      <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]  text-white pt-20 rounded-t-[4rem] -mt-40 relative z-10">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* First Section - Image Right */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
             <div>
-              <h3 className="text-white/80 text-sm uppercase tracking-wider mb-4">Our Foundation</h3>
+              <h3 className="text-white/80 text-sm uppercase tracking-wider mb-4 -mt-4 md:mt-0">Our Foundation</h3>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium mb-6">
                 Crafting Visual Identities
               </h2>
-              <p className="text-white/90 text-lg leading-relaxed">
+              <p className="text-white/90 line-clamp-4 md:line-clamp-6 md:text-lg leading-relaxed">
                Founded in 2015, we began as a passionate team dedicated to transforming spaces through innovative signage solutions. Our journey began with a singular vision: to make brands not just seen, but remembered. We understood that in a crowded marketplace, powerful visual communication is key. From our humble beginnings, we focused on precision, quality materials, and a deep understanding of what makes a brand shine brighter through exceptional visual communication.
               </p>
             </div>
@@ -93,17 +91,9 @@ const CoverSection = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium mb-6">
                 Industry Leading Innovation
               </h2>
-              <p className="text-white/90 text-lg leading-relaxed">
+              <p className="text-white/90 line-clamp-4 md:line-clamp-6 md:text-lg leading-relaxed">
                 Over the years, we've evolved beyond traditional signage, growing into industry leaders by continually pushing the boundaries of visual communication. Our commitment extends to embracing sustainable practices, utilizing eco-friendly materials whenever possible, and adopting energy-efficient lighting solutions. We invest in cutting-edge technology and ongoing training to ensure our team is equipped to deliver visually stunning brand experiences that are not only impactful but also environmentally responsible.
               </p>
-              {!isExpanded && (
-                <button
-                  onClick={() => setIsExpanded(true)}
-                  className="mt-6 px-6 py-3 bg-white text-[#EA3C1F] font-medium rounded-full hover:bg-gray-100 transition-colors sm:hidden"
-                >
-                  Read More
-                </button>
-              )}
             </div>
           </div>
         </div>

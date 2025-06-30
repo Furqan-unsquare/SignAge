@@ -198,15 +198,16 @@ const productTypes = [
                           className="pl-4 mt-2 space-y-2"
                         >
                           {productTypes.map((item) => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              onClick={() => setIsMenuOpen(false)}
-                              className="text-white text-sm hover:text-yellow-400"
-                            >
-                              {item.name}
-                            </a>
-                          ))}
+                        <a
+                          key={item.name}
+                          href={`/work#project?category=${item.id}`}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block w-full text-left text-white text-sm px-4 py-2 rounded-md hover:bg-yellow-500/20 transition"
+                        >
+                          {item.name}
+                        </a>
+                      ))}
+
                         </motion.div>
                       )}
                     </AnimatePresence>

@@ -18,7 +18,7 @@ const ContactCTA = () => {
             <h2 className="text-2xl md:text-5xl font-black text-gray-800 mb-2">
               READY TO <span className="text-[#EA3C1F]">ELECTRIFY</span>
             </h2>
-            <h3 className="text-3xl md:text-4xl font-black text-gray-800">
+            <h3 className="text-2xl md:text-4xl font-black text-gray-800">
               YOUR BRAND?
             </h3>
           </div>
@@ -29,14 +29,14 @@ const ContactCTA = () => {
         </p>
 
         {/* Signage-style buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-6  justify-center items-center">
           <div className="relative group">
             <div className="absolute -top-4 left-1/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
             <div className="absolute -top-4 left-3/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
 
             <Button size="lg"
               className="relative z-10 bg-yellow-400 border-4 border-white text-gray-900 font-bold px-10 py-5 text-xl hover:bg-yellow-300 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/50 group">
-              CALL NOW: +1 (555) 123-SIGN
+              Call on: +91 0000000000
               <Phone className="w-5 h-5 ml-2 group-hover:animate-pulse" />
             </Button>
           </div>
@@ -48,9 +48,8 @@ const ContactCTA = () => {
             <Button
               variant="outline"
               size="lg"
-              className="relative z-10 bg-gray-100 border-4 border-yellow-400 text-gray-800 font-bold px-10 py-5 text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/30 group"
-            >
-              SCHEDULE CONSULTATION
+              className="relative z-10 bg-gray-100 border-4 border-yellow-400 text-gray-800 font-bold px-10 py-5 text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/30 group">
+              Reach Address
               <Zap className="w-5 h-5 ml-2 text-yellow-500 group-hover:animate-bounce" />
             </Button>
           </div>

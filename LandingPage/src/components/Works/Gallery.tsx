@@ -163,7 +163,7 @@ const filteredProjects = projects.filter((project) => {
         const isMobile = window.innerWidth < 768;
         setVisibleCount(isMobile ? 3 : 9);
       }}
-      className="w-full p-2 rounded-lg bg-white text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07]"
+      className="w-full p-2 rounded-lg bg-gray-200 text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07]"
     >
       {productLinks.map((link) => (
         <option key={link.id} value={link.id}>

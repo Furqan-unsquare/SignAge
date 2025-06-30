@@ -26,7 +26,7 @@ const MarqueeIcons = () => {
         {[...features, ...features].map((feature, index) => (
           <motion.div
             key={index}
-            className="flex items-center space-x-2 text-white text-sm sm:text-base font-bold"
+            className="flex items-center space-x-2 text-white  sm:text-base font-bold"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: index * 0.1 }}

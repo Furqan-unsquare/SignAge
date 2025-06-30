@@ -6,7 +6,7 @@ const NeonCraftSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Left: Content */}
-          <div className="lg:w-1/2 space-y-6 text-white">
+          <div className="px-4 lgw-1/2 space-y-6 text-white">
             <h2 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
               100% IN-HOUSE
               <br />

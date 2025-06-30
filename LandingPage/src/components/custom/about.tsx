@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, Zap, Palette, Clock, Award, Shield } from 'lucide-react'
+import { ArrowRight, Zap, Palette, Award, Shield } from 'lucide-react'
 
 const AboutSection = () => {
   const features = [
@@ -8,11 +8,6 @@ const AboutSection = () => {
       icon: <Palette className="w-5 h-5" />,
       title: "Free Design Service",
       description: "Unlimited mockups until you're 100% satisfied with your custom sign.",
-    },
-    {
-      icon: <Clock className="w-5 h-5" />,
-      title: "24-Hour Turnaround",
-      description: "Quick design concepts with rush order options available.",
     },
     {
       icon: <Award className="w-5 h-5" />,
@@ -27,7 +22,7 @@ const AboutSection = () => {
   ]
 
   return (
-    <section className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-16 px-4" id="about">
+    <section className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-16 px-6 md:px-4" id="about">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Content Column */}
@@ -37,7 +32,7 @@ const AboutSection = () => {
                 India's Premier <span className="text-yellow-400">Custom Neon</span> Design Studio
               </h2>
               
-              <p className="text-white/90 text-lg">
+              <p className="text-white/90 md:text-lg">
                 With 10,000+ custom signs created, we're the trusted choice for premium LED neon signage across India.
               </p>
 

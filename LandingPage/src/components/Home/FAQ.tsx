@@ -56,7 +56,7 @@ const FAQ = () => {
                   onClick={() => toggleFAQ(index)}
                   className="w-full py-4 px-6 md:px-10 text-left flex items-center justify-between group"
                 >
-                  <h3 className="text-md md:text-lg font-semibold text-yellow-300 pr-4 uppercase tracking-wide">
+                  <h3 className="text-sm md:text-lg font-semibold text-yellow-300 pr-4 uppercase tracking-wide">
                     {faq.question}
                   </h3>
                   <div className="bg-yellow-400 p-2 rounded-full shadow-sm">

@@ -12,14 +12,12 @@ export default function HomePage() {
         <link rel="canonical" href="https://yourdomain.com/" />
         </Helmet>
         
-        <div className="min-h-screen">
-            
+        <div className="min-h-screen">            
             <main>
                 <HeroSection />
                 <ProductsSection />
                 <AboutSection />
-            </main>
-           
+            </main>           
         </div>
         
         </>

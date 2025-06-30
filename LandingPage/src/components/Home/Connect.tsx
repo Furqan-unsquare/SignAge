@@ -3,7 +3,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 
 const CustomProducts = () => {
   return (
-    <section className="bg-[#1a1a1a]/60 backdrop-blur-sm py-16 px-4">
+    <section className="bg-[#1a1a1a]/60 backdrop-blur-sm py-16 px-8 md:px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-14 lg:gap-20">
           

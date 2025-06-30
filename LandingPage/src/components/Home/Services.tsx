@@ -55,7 +55,7 @@ const SignageServices = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Our Signage Services
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="md:text-xl text-white/90 max-w-3xl mx-auto">
             Premium signage solutions to elevate your brand visibility
           </p>
           <div className="flex justify-center mt-6">
@@ -103,7 +103,7 @@ const SignageServices = () => {
           className="bg-white text-[#EA3C1F] px-4 md:px-8 py-2 md:py-4 rounded-full font-bold text-lg hover:bg-white/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
             Get Your Custom Signage
           </button>
-          <p className="text-xl text-white/80 mt-4">
+          <p className="md:text-xl text-white/80 mt-4">
             Contact us for a free consultation and quote
           </p>
         </div>

@@ -1,26 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ContentHub = () => {
   const navigate = useNavigate();
+  const [blogs, setBlogs] = useState(2);
 
-  const content = {
-    caseStudies: [
-      {
-        id: 1,
-        title: "Local Retail Transformation",
-        description: "How we helped a neighborhood boutique increase online sales by 250%",
-        image: "https://i.pinimg.com/736x/92/31/70/923170f9c5aa85f25ccc40d6c5eef375.jpg",
-        client: "Maple Street Boutique",
-      },
-      {
-        id: 2,
-        title: "Community Restaurant Revival",
-        description: "Digital overhaul for a beloved local eatery post-pandemic",
-        image: "https://i.pinimg.com/736x/6f/ae/4f/6fae4fe9fc66c7c8c186f94557ff6c42.jpg",
-        client: "The Corner Bistro",
-      }
-    ]
-  };
+  useEffect(() => {
+    // Replace with your actual endpoint
+    axios.get("http://localhost:5000/api/blogs") // Filter success case studies if needed
+      .then((res) => {
+        setBlogs(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching blogs", err);
+      });
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
@@ -30,29 +25,30 @@ const ContentHub = () => {
           <h2 className="text-4xl md:text-5xl font-extrabold text-[#FDCA07] mb-2">
             Success Stories
           </h2>
-          <p className="text-white/90 text-lg max-w-xl mx-auto">
+          <p className="text-white/90 md:text-lg max-w-xl mx-auto">
             Real impact. Real businesses. See how our solutions transformed brands.
           </p>
         </div>
 
-        {/* Content Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
-          {content.caseStudies.map((item) => (
+        {/* Blog Cards */}
+        <div className="grid md:grid-cols-2 gap-8 mb-10">
+          {Array.isArray(blogs) && blogs.slice(0, 2).map((blog) => (
+
             <div
-              key={item.id}
-              className="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 hover:border-[#FDCA07] transition-all duration-300 shadow-lg"
+              key={blog.id}
+              onClick={() => navigate(`/blog/${blog._id}`)}
+              className="cursor-pointer bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 hover:border-[#FDCA07] transition-all duration-300 shadow-lg"
             >
               <div className="h-60 w-full overflow-hidden relative">
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  src={blog.image}
+                  alt={blog.title}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
               <div className="p-6 space-y-2">
-                <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                <p className="text-[#FDCA07] font-medium">{item.client}</p>
-                <p className="text-white/80 text-sm">{item.description}</p>
+                <h3 className="text-xl font-bold text-white">{blog.title}</h3>
+                <p className="text-white/80 text-sm line-clamp-2">{blog.description}</p>
               </div>
             </div>
           ))}
