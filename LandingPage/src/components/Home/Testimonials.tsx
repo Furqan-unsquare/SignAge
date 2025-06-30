@@ -37,7 +37,7 @@ const Testimonials = () => {
     : testimonials.slice(0, 1);
 
   return (
-    <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-16 px-4">
+    <div className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

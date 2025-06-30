@@ -39,10 +39,10 @@ const NeonCraftSection = () => {
 
             {/* CTA */}
             <button
-              onClick={() => window.location.href = '/work'}
+              onClick={() => window.location.href = '/custom'}
               className="mt-8 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-all"
             >
-              See Our Craft
+              Customize Yours
               <Zap className="w-4 h-4" />
             </button>
           </div>
@@ -52,7 +52,7 @@ const NeonCraftSection = () => {
             <div className="rounded-xl overflow-hidden border-2 border-yellow-300 shadow-xl">
               <div className="aspect-video bg-gray-900">
                 <img
-                  src="https://i.pinimg.com/736x/07/e2/ec/07e2ec074af3cc99c9168ace13d569e9.jpg"
+                  src="/assets/9.jpg"
                   alt="Neon sign craftsmanship"
                   className="w-full h-full object-cover"
                 />

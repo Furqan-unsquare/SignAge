@@ -25,7 +25,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="relative pt-14 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] overflow-hidden">
+    <section className="relative pt-14 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
 
         {/* Header */}

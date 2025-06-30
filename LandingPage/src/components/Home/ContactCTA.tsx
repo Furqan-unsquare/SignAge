@@ -3,7 +3,7 @@ import { Button } from '@/components/UI/button';
 
 const ContactCTA = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-yellow-400/20 rounded-full blur-xl"></div>
@@ -36,7 +36,7 @@ const ContactCTA = () => {
 
             <Button size="lg"
               className="relative z-10 bg-yellow-400 border-4 border-white text-gray-900 font-bold px-10 py-5 text-xl hover:bg-yellow-300 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/50 group">
-              Call on: +91 0000000000
+              Call on: +91 9594274068
               <Phone className="w-5 h-5 ml-2 group-hover:animate-pulse" />
             </Button>
           </div>
@@ -49,7 +49,7 @@ const ContactCTA = () => {
               variant="outline"
               size="lg"
               className="relative z-10 bg-gray-100 border-4 border-yellow-400 text-gray-800 font-bold px-10 py-5 text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/30 group">
-              Reach Address
+              Ansh Enterprises
               <Zap className="w-5 h-5 ml-2 text-yellow-500 group-hover:animate-bounce" />
             </Button>
           </div>

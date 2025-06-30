@@ -11,7 +11,7 @@ const CustomProducts = () => {
           <div className="w-full lg:w-1/2">
             <div className="relative overflow-hidden rounded-3xl shadow-[0_4px_60px_rgba(253,202,7,0.2)] border border-yellow-400/10">
               <img 
-                src="https://i.pinimg.com/736x/ab/57/84/ab5784cc9d32cf8f200ed93e03e1a675.jpg" 
+                src="/assets/7.jpg" 
                 alt="Custom neon sign" 
                 className="w-full object-cover rounded-3xl max-h-[420px]"
               />

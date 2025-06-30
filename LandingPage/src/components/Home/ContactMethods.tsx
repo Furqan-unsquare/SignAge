@@ -71,13 +71,13 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="relative overflow-hidden" id='contact'>
+    <div className="relative overflow-hidden">
       {/* Marquee Top - Smoother Animation */}
       <MarqueeIcons />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 min-h-[calc(100vh-200px)] px-4 md:px-8 py-8 gap-6 max-w-7xl mx-auto">
         {/* Contact Details Section */}
-        <div className="bg-gradient-to-br from-[#EA3C1F] to-[#F26742] text-white rounded-xl p-6 md:p-8 flex flex-col justify-between">
+        <div className="bg-gradient-to-t from-red-500 to-red-600 text-white rounded-xl p-6 md:p-8 flex flex-col justify-between">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-2">Let's Start a Conversation</h2>
             <h3 className="text-xl md:text-2xl font-semibold mb-6 opacity-90">Get In Touch</h3>
@@ -130,9 +130,9 @@ const ContactSection = () => {
         </div>
 
         {/* Map Section */}
-        <div className="rounded-xl overflow-hidden h-full">
+        <div className="rounded-xl overflow-hidden h-full"  id='contact'>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215256018003!2d-73.9878449241643!3d40.7484409713899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d235.4915729373084!2d72.9536842!3d19.2010906!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b981c385a423%3A0x521d262d07f9a58c!2sAnsh%20Enterprises%20%7C%20Acrylic%20SignBoard%20Manufacturers!5e0!3m2!1sen!2sin!4v1751286722420!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}

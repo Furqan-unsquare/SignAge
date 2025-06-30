@@ -2,53 +2,42 @@ import React from 'react';
 import { ArrowRight, Star } from 'lucide-react';
 
 const SignageServices = () => {
-  const services = [
-    {
-      id: 1,
-      title: "Neon Signs",
-      description: "Vibrant illuminated signage that makes your business stand out at night",
-      img: "https://i.pinimg.com/736x/07/e2/ec/07e2ec074af3cc99c9168ace13d569e9.jpg",
-      features: ["Custom shapes", "Multiple colors", "Energy efficient"]
-    },
-    {
-      id: 2,
-      title: "Channel Letters",
-      description: "3D dimensional signs for maximum visibility and brand recognition",
-      img: "https://www.halolitsigns.com/wp-content/uploads/2022/10/halo-lit-channel-letters.jpg",
-      features: ["Indoor/outdoor", "Various materials", "LED illuminated"]
-    },
-    {
-      id: 3,
-      title: "Digital Signage",
-      description: "Dynamic digital displays for engaging customer experiences",
-      img: "https://i.pinimg.com/736x/20/3b/e2/203be2faf3c934dbc62aa7b5142262a9.jpg",
-      features: ["Content management", "Touch screen", "Real-time updates"]
-    },
-    {
-      id: 4,
-      title: "Vinyl Banners",
-      description: "Cost-effective temporary signage for promotions and events",
-      img: "https://i.pinimg.com/736x/d7/f6/da/d7f6da3fcb83f9cd341be22395d8b2a9.jpg",
-      features: ["Weather resistant", "Quick turnaround", "Various sizes"]
-    },
-    {
-      id: 5,
-      title: "Monument Signs",
-      description: "Permanent ground signs that establish your business presence",
-      img: "https://i.pinimg.com/736x/db/6a/f4/db6af4d66c19dcdc52a7d8f33afdad35.jpg",
-      features: ["Durable materials", "Custom designs", "LED lighting"]
-    },
-    {
-      id: 6,
-      title: "Window Graphics",
-      description: "Transform your windows into powerful advertising space",
-      img: "https://i.pinimg.com/736x/5c/c2/29/5cc229522d3358bf57af4f572cdf35d4.jpg",
-      features: ["Frosted designs", "Full-color prints", "Removable options"]
-    }
-  ];
+const services = [
+  {
+    id: 1,
+    title: "Acrylic Letter / Signboard",
+    img: "/assets/1.jpg",
+  },
+  {
+    id: 2,
+    title: "Aluminium Channel Letter",
+    img: "/assets/2.jpg",
+  },
+  {
+    id: 3,
+    title: "3D Steel Signage",
+    img: "/assets/3.jpg",
+  },
+  {
+    id: 4,
+    title: "Printed Name Plate",
+    img: "/assets/8.jpg",
+  },
+  {
+    id: 5,
+    title: "Glow Signs",
+    img: "/assets/5.jpg",
+  },
+  {
+    id: 6,
+    title: "LED Scrolling Signs",
+    img: "/assets/9.jpg",
+  }
+];
+
 
   return (
-    <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] pt-16 px-4 sm:px-6 lg:px-8">
+    <div className="pt-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center ">

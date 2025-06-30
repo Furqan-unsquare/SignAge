@@ -18,7 +18,7 @@ const ContentHub = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
+    <section className="py-20">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
@@ -33,17 +33,15 @@ const ContentHub = () => {
         {/* Blog Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-10">
           {Array.isArray(blogs) && blogs.slice(0, 2).map((blog) => (
-
             <div
               key={blog.id}
               onClick={() => navigate(`/blog/${blog._id}`)}
-              className="cursor-pointer bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 hover:border-[#FDCA07] transition-all duration-300 shadow-lg"
-            >
+              className="cursor-pointer bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 hover:border-[#FDCA07] transition-all duration-300 shadow-lg">
               <div className="h-60 w-full overflow-hidden relative">
                 <img
                   src={blog.image}
                   alt={blog.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300"
                 />
               </div>
               <div className="p-6 space-y-2">
@@ -55,7 +53,7 @@ const ContentHub = () => {
         </div>
 
         {/* CTA */}
-        <div className="bg-[#FDCA07] rounded-2xl p-10 md:p-14 text-center shadow-xl relative overflow-hidden">
+        <div className="bg-[#fdaf07] rounded-2xl p-10 md:p-14 text-center shadow-xl relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#EA3C1F] rounded-full opacity-10"></div>
           <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[#EA3C1F] rounded-full opacity-10"></div>
 

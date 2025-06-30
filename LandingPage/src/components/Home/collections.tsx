@@ -3,55 +3,44 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const collectionsData = [
-    {
-        id: 1,
-        title: "Gaming",
-        image: "/assets/neon.png",
-        description: "LED Gaming Signs",
-    },
-    {
-        id: 2,
-        title: "Cafe & Restaurant",
-        image: "https://i.pinimg.com/736x/0d/8d/f7/0d8df70441cdc91668537bd5fac7c88d.jpg",
-        description: "Food & Beverage Signage",
-    },
-    {
-        id: 3,
-        title: "Neon Wings",
-        image: "/assets/image.png",
-        description: "Decorative Wing Designs",
-    },
-    {
-        id: 4,
-        title: "Under ₹4000",
-        image: "https://i.pinimg.com/736x/ca/5b/4e/ca5b4efebe421c1e174c566defa4e0a9.jpg",
-        description: "Budget-Friendly Options",
-    },
-    {
-        id: 5,
-        title: "Kids",
-        image: "/assets/image.png",
-        description: "Children's Room Decor",
-    },
-    {
-        id: 6,
-        title: "Sports",
-        image: "https://i.pinimg.com/736x/df/fd/96/dffd965eec2ab8add39d2ef248a3d073.jpg",
-        description: "Sports Theme Signs",
-    },
-    {
-        id: 7,
-        title: "Music",
-        image: "https://i.pinimg.com/736x/0d/8d/f7/0d8df70441cdc91668537bd5fac7c88d.jpg",
-        description: "Musical Instruments",
-    },
-    {
-        id: 8,
-        title: "Love",
-        image: "https://i.pinimg.com/736x/ca/5b/4e/ca5b4efebe421c1e174c566defa4e0a9.jpg",
-        description: "Romantic Designs",
-    },
+  {
+    id: 1,
+    title: "Acrylic Letter",
+    image: "/assets/1.jpg",
+    description: "Vibrant, glossy acrylic letters perfect for indoor and outdoor branding.",
+  },
+  {
+    id: 2,
+    title: "Aluminium CH.",
+    image: "/assets/2.jpg",
+    description: "Durable, professional signage ideal for corporate and commercial spaces.",
+  },
+  {
+    id: 3,
+    title: "3D Steel Signage",
+    image: "/assets/3.jpg",
+    description: "Premium stainless steel letters that offer bold depth and luxury appeal.",
+  },
+  {
+    id: 4,
+    title: "Printed Name Plate",
+    image: "/assets/8.jpg",
+    description: "Custom printed plates for desks, doors, and offices with a clean finish.",
+  },
+  {
+    id: 5,
+    title: "Glow Signs",
+    image: "/assets/5.jpg",
+    description: "Illuminated boards that shine brightly at night for high visibility.",
+  },
+  {
+    id: 6,
+    title: "LED Scrolling Signs",
+    image: "/assets/9.jpg",
+    description: "Dynamic LED boards for scrolling text—ideal for announcements and ads.",
+  },
 ];
+
 
 const Collections = () => {
     const navigate = useNavigate(); // Changed from useHistory to useNavigate
@@ -124,7 +113,7 @@ const Collections = () => {
     const visibleItems = getVisibleItems();
 
     return (
-        <div className="relative min-h-full bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-8 md:py-14 md:pl-4">
+        <div className="relative min-h-full py-8 md:py-14 md:pl-4">
             {/* Header Section */}
             <div className="px-4 md:px-10 mx-auto md:mb-12">
                 <div className="flex items-center justify-between">
@@ -212,8 +201,7 @@ const Collections = () => {
                                 key={collection.id}
                                 className="group cursor-pointer transform transition-all duration-500 hover:scale-5 flex-shrink-0 w-full max-w-xs"
                                 style={{ minWidth: 'calc(20% - 1.2rem)' }}
-                                onClick={() => navigateToBlogs(collection.id)}
-                            >
+                                onClick={() => navigateToBlogs(collection.id)}>
                                 <div className="relative bg-black rounded-2xl overflow-hidden border-4 border-transparent hover:border-[#fdca07] transition-all duration-300">
                                     <div className="relative h-80  overflow-hidden">
                                         <img
@@ -225,16 +213,20 @@ const Collections = () => {
                                         <div className="absolute inset-0 bg-[#fdca07]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
                                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-wide mb-1">
-                                                    {collection.title}
-                                                </h3>
-                                                <p className="text-sm text-gray-300 font-medium">{collection.description}</p>
-                                            </div>
-                                            <div className="w-8 h-8 rounded-full bg-[#fdca07] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                                                <ArrowRight className="w-4 h-4 text-black font-bold" />
-                                            </div>
+                                       <div className="flex items-center justify-between gap-4">
+                                        <div className="flex-1">
+                                            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-wide mb-1">
+                                            {collection.title}
+                                            </h3>
+                                            <p className="text-sm text-gray-300 font-medium line-clamp-1">
+                                            {collection.description}
+                                            </p>
+                                        </div>
+
+                                        {/* Arrow Icon Button */}
+                                        <div className="min-w-[40px] min-h-[40px] rounded-full bg-[#fdca07] flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                                            <ArrowRight className="w-5 h-5 text-black" />
+                                        </div>
                                         </div>
                                     </div>
                                     <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_30px_#fdca07] pointer-events-none"></div>

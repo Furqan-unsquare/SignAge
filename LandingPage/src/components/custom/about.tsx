@@ -22,7 +22,7 @@ const AboutSection = () => {
   ]
 
   return (
-    <section className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-16 px-6 md:px-4" id="about">
+    <section className="py-16 px-6 md:px-4" id="about">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Content Column */}

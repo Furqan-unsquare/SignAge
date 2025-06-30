@@ -1,30 +1,48 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Edit2, Trash2, Plus } from 'lucide-react';
-import { useSignage } from '../../contexts/SignageContext';
 import FontModal from './modals/FontModal';
 
+const API_URL = 'http://localhost:5000/api/fonts';
+
 const FontManager = () => {
-  const { fonts, deleteFont } = useSignage();
+  const [fonts, setFonts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingFont, setEditingFont] = useState(null);
 
-  const handleEdit = (font) => {
-    setEditingFont(font);
-    setIsModalOpen(true);
+  const fetchFonts = async () => {
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      setFonts(data);
+    } catch (err) {
+      console.error('Error fetching fonts:', err);
+    }
   };
+
+  useEffect(() => {
+    fetchFonts();
+  }, []);
 
   const handleAdd = () => {
     setEditingFont(null);
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setEditingFont(null);
+  const handleEdit = (font) => {
+    setEditingFont(font);
+    setIsModalOpen(true);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      fetchFonts();
+    } catch (err) {
+      console.error('Error deleting font:', err);
+    }
   };
 
   return (
@@ -42,7 +60,7 @@ const FontManager = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {fonts.map((font) => (
-            <Card key={font.id} className="hover:shadow-md transition-shadow duration-200">
+            <Card key={font._id} className="hover:shadow-md transition-shadow duration-200">
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -63,44 +81,24 @@ const FontManager = () => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => deleteFont(font.id)}
+                      onClick={() => handleDelete(font._id)}
                       className="h-8 w-8 p-0 text-red-600 hover:text-red-700"
                     >
                       <Trash2 className="w-3 h-3" />
                     </Button>
                   </div>
                 </div>
-                
-                {font.previewImage && (
-                  <div className="bg-slate-100 rounded-md p-3 text-center">
-                    <img 
-                      src={font.previewImage} 
-                      alt={`${font.name} preview`}
-                      className="w-full h-12 object-contain"
-                    />
-                  </div>
-                )}
               </CardContent>
             </Card>
           ))}
         </div>
-
-        {fonts.length === 0 && (
-          <Card className="border-dashed border-2 border-slate-300">
-            <CardContent className="py-12 text-center">
-              <p className="text-slate-500 mb-4">No fonts configured yet</p>
-              <Button onClick={handleAdd} variant="outline">
-                Add Your First Font
-              </Button>
-            </CardContent>
-          </Card>
-        )}
       </div>
 
       <FontModal
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        onClose={() => setIsModalOpen(false)}
         font={editingFont}
+        refresh={fetchFonts}
       />
     </>
   );

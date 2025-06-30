@@ -8,7 +8,7 @@ const Header = () => {
   const [isAnimating, setIsAnimating] = useState(true);
 
   const navItems = [
-    { name: "Work", href: "/work" },
+    // { name: "Work", href: "/work" },
     { name: "Custom", href: "/custom" },
     { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
@@ -26,8 +26,6 @@ const productTypes = [
   { name: "Office Name Plate", id: "office-name" },
   { name: "LED Scrolling Board", id: "led-scrolling" },
 ];
-
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,8 +49,6 @@ const productTypes = [
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-24 relative">
-          {/* Logo and Products Dropdown - Left Side */}
-          <div className="flex items-center space-x-8">
             {/* Logo */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -74,16 +70,17 @@ const productTypes = [
                   className="w-16 h-16 md:w-20 md:h-20"
                 />
               </a>
-            </motion.div>
+            </motion.div>    
 
-            {/* Products Dropdown - Desktop Only */}
+          {/* Desktop Navigation - Right Side */}
+          <nav className="hidden md:flex items-center space-x-8 lg:space-x-10"> {/* Products Dropdown - Desktop Only */}
             <motion.div
               className="hidden md:block relative"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
               <button
-                className="flex items-center text-white font-anton text-lg hover:text-[#FDCA07] transition-colors duration-300"
+                className="flex items-center text-white font-anton text-lg hover:text-red-400 transition-colors duration-300"
                 onMouseEnter={() => setIsProductsOpen(true)}
                 onClick={() => setIsProductsOpen(!isProductsOpen)}
               >
@@ -120,11 +117,8 @@ const productTypes = [
                 </motion.div>
               )}
             </motion.div>
-          </div>
-
-          {/* Desktop Navigation - Right Side */}
-          <nav className="hidden md:flex items-center space-x-8 lg:space-x-10">
             {navItems.map((item, idx) => (
+              
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: -40 }}
@@ -141,7 +135,7 @@ const productTypes = [
               >
                 <a
                   href={item.href}
-                  className="relative text-white font-anton text-lg hover:text-[#FDCA07] transition-colors duration-300"
+                  className="relative text-white font-anton text-lg hover:text-red-400 transition-colors duration-300"
                 >
                   {item.name}
                   <motion.span

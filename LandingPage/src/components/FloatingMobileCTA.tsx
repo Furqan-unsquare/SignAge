@@ -69,7 +69,7 @@ const PremiumFloatingButton = () => {
     icon: <FaWhatsapp className="w-5 h-5" />,
     color: "bg-[#25D366] hover:bg-[#128C7E]",
     tooltip: "WhatsApp Chat",
-    href: "https://wa.me/91xxxxxxxxxx",
+    href: "https://wa.me/+917738205322",
   },
   {
     icon: <FaInstagram className="w-5 h-5" />,
@@ -81,13 +81,13 @@ const PremiumFloatingButton = () => {
     icon: <FaPhoneAlt className="w-5 h-5" />,
     color: "bg-[#4285F4]",
     tooltip: "Call Us",
-    href: "tel:+919999999999",
+    href: "tel:+919594274068",
   },
   {
     icon: <FaMapMarkerAlt className="w-5 h-5" />,
     color: "bg-[#EA4335]",
     tooltip: "Location",
-    href: "https://maps.google.com/?q=Your+Location",
+    href: "https://maps.app.goo.gl/UGTpFgRmeMELYazY7",
   },
 ]
 .map((item, index) => (

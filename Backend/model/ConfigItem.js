@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 // Font Schema
 const fontSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  rate: { type: Number, required: true, min: 0 },
-  preview: { type: String }
+  rate: { type: Number, required: true, min: 0 }
 }, { timestamps: true });
 
 // Color Schema

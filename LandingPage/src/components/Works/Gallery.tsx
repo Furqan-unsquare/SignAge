@@ -130,7 +130,7 @@ const filteredProjects = projects.filter((project) => {
   };
 
   return (
-    <section className="pb-0 md:pb-10 bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]" id="project">
+    <section className="pb-0 md:pb-10 bg-gradient-to-r from-red-600  to-red-600 pt-16 px-6 sm:px-8 lg:px-12 rounded-t-[3rem] -mt-40 relative " id="project">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -139,7 +139,7 @@ const filteredProjects = projects.filter((project) => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-[#FDCA07] mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-100 mb-4">
             Our Project Portfolio
           </h2>
           <p className="text-sm md:text-xl text-white/90 max-w-3xl mx-auto">

@@ -88,7 +88,7 @@ const ArticleDetail: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
@@ -100,7 +100,7 @@ const ArticleDetail: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="inline-block mb-6">
           <svg className="w-16 h-16 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path

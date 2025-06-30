@@ -17,27 +17,25 @@ const CoverSection = () => {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 py-40  px-6 sm:px-8 lg:px-12">
+        <div className="relative z-10 py-40 px-6 sm:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl"
+            className="max-w-lg"
           >
             <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-tight mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight mb-6"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-            >
-              Illuminating Brands, <br /> Defining Spaces
+              transition={{ duration: 1, delay: 0.3 }}>
+                About Us
             </motion.h1>
             <motion.p 
-              className="text-white/90 text-lg sm:text-xl max-w-lg leading-relaxed"
+              className="text-white/90 text-lg sm:text-xl leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
+              transition={{ duration: 0.8, delay: 0.6 }}>
               More Than Just Signs: Our Journey of Innovation and Visual Impact
             </motion.p>
           </motion.div>
@@ -45,7 +43,7 @@ const CoverSection = () => {
       </div>
 
       {/* Journey Section */}
-      <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]  text-white pt-20 rounded-t-[4rem] -mt-40 relative z-10">
+      <div className="bg-gradient-to-r from-red-600 via-red-500 to-red-600   text-white pt-20 rounded-t-[4rem] -mt-40 relative z-10">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* First Section - Image Right */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">
@@ -66,7 +64,7 @@ const CoverSection = () => {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
                 className="w-full  max-w-xl rounded-2xl shadow-2xl"
-                src="https://i.pinimg.com/736x/34/33/f0/3433f083b186a7edbf02e8cf1968c356.jpg" 
+                src="/assets/1.jpg" 
                 alt="Signage manufacturing process" 
               />
             </div>
@@ -81,7 +79,7 @@ const CoverSection = () => {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
                 className="w-full max-w-xl rounded-2xl shadow-2xl"
-                src="https://i.pinimg.com/736x/f3/b9/f7/f3b9f7af5d3954fd5ea379ffc872c2a4.jpg" 
+                src="/assets/8.jpg" 
                 alt="Modern signage installation" 
               />
             </div>

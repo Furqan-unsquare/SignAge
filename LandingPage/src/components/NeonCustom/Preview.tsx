@@ -102,6 +102,7 @@ const getFontSize = (text: string) => {
                        drop-shadow(0 0 5px ${activeColor})
                        drop-shadow(0 0 10px ${activeColor})`,
               whiteSpace: "pre-line",
+              fontFamily: selectedFont
             }}
           >
           {(text || "Preview")

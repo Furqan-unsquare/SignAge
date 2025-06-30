@@ -22,31 +22,31 @@ const customOptions: CustomOption[] = [
     image: "/placeholder.svg?height=300&width=250",
     features: ["50+ Font Styles", "Unlimited Colors", "Size Customization", "Symbol Integration"],
   },
-  {
-    id: 2,
-    title: "Logo & Branding",
-    description: "Transform your business logo into stunning LED neon signage",
-    icon: <Building className="w-6 h-6" />,
-    image: "/placeholder.svg?height=300&width=250",
-    features: ["Vector Conversion", "Brand Colors", "Multiple Sizes", "Indoor/Outdoor"],
-    popular: true,
-  },
-  {
-    id: 3,
-    title: "Custom Shapes",
-    description: "Unique shapes, symbols, and artistic designs tailored to your vision",
-    icon: <Palette className="w-6 h-6" />,
-    image: "/placeholder.svg?height=300&width=250",
-    features: ["Any Shape Possible", "3D Effects", "Multi-Color", "Animation Options"],
-  },
-  {
-    id: 4,
-    title: "Personal Messages",
-    description: "Wedding signs, home decor, gifts, and personal celebration signage",
-    icon: <Heart className="w-6 h-6" />,
-    image: "/placeholder.svg?height=300&width=250",
-    features: ["Wedding Specials", "Home Decor", "Gift Options", "Personal Touch"],
-  },
+  // {
+  //   id: 2,
+  //   title: "Logo & Branding",
+  //   description: "Transform your business logo into stunning LED neon signage",
+  //   icon: <Building className="w-6 h-6" />,
+  //   image: "/placeholder.svg?height=300&width=250",
+  //   features: ["Vector Conversion", "Brand Colors", "Multiple Sizes", "Indoor/Outdoor"],
+  //   popular: true,
+  // },
+  // {
+  //   id: 3,
+  //   title: "Custom Shapes",
+  //   description: "Unique shapes, symbols, and artistic designs tailored to your vision",
+  //   icon: <Palette className="w-6 h-6" />,
+  //   image: "/placeholder.svg?height=300&width=250",
+  //   features: ["Any Shape Possible", "3D Effects", "Multi-Color", "Animation Options"],
+  // },
+  // {
+  //   id: 4,
+  //   title: "Personal Messages",
+  //   description: "Wedding signs, home decor, gifts, and personal celebration signage",
+  //   icon: <Heart className="w-6 h-6" />,
+  //   image: "/placeholder.svg?height=300&width=250",
+  //   features: ["Wedding Specials", "Home Decor", "Gift Options", "Personal Touch"],
+  // },
 ]
 
 const ProductsSection = () => {
@@ -75,70 +75,61 @@ const ProductsSection = () => {
         </div>
 
         {/* Customization Options Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1  gap-8 mb-16">
           {customOptions.map((option) => (
-            <div
-              key={option.id}
-              className="group cursor-pointer relative"
-              onMouseEnter={() => setHoveredCard(option.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              {/* Popular Badge */}
-              {option.popular && (
-                <div className="absolute -top-3 -right-3 z-10 bg-[#fdca07] text-black font-black text-xs uppercase px-3 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-current" />
-                  Popular
-                </div>
-              )}
+        <div
+  key={option.id}
+  className="group cursor-pointer flex flex-col lg:flex-row bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 transition-all duration-300"
+  onMouseEnter={() => setHoveredCard(option.id)}
+  onMouseLeave={() => setHoveredCard(null)}
+>
+  {/* Left Content */}
+  <div className="flex flex-1 flex-col justify-between p-6 lg:p-8 space-y-4">
+    {/* Icon */}
+    <div className="w-12 h-12 bg-[#fdca07] rounded-xl flex items-center justify-center text-black">
+      {option.icon}
+    </div>
 
-              <div className="relative bg-gray-900 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#fdca07] transition-all duration-300 h-full">
-                {/* Image Container */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={option.image || "/placeholder.svg"}
-                    alt={option.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+    {/* Title + Description */}
+    <div>
+      <h3 className="text-2xl font-black text-white uppercase tracking-wide mb-2">
+        {option.title}
+      </h3>
+      <p className="text-gray-400 text-sm leading-relaxed">
+        {option.description}
+      </p>
+    </div>
 
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+    {/* Features */}
+    <div className="space-y-2">
+      {option.features.map((feature, index) => (
+        <div key={index} className="flex items-center gap-2 text-sm text-gray-300">
+          <div className="w-1.5 h-1.5 bg-[#fdca07] rounded-full"></div>
+          <span>{feature}</span>
+        </div>
+      ))}
+    </div>
 
-                  {/* Icon */}
-                  <div className="absolute top-4 left-4 w-12 h-12 bg-[#fdca07] rounded-xl flex items-center justify-center text-black">
-                    {option.icon}
-                  </div>
+    {/* CTA Button */}
+    <a href="/neonCustom">
+      <button className="w-full mt-4 bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#fdca07] hover:to-yellow-400 text-white hover:text-black font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform">
+        Customize Now
+      </button>
+    </a>
+  </div>
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-[#fdca07]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+  {/* Right Image */}
+  <div className="relative lg:w-1/2 h-64 lg:h-auto">
+    <img
+      src="https://i.pinimg.com/736x/2d/cd/1e/2dcd1eeb4f31bab402110771445d9d7a.jpg"
+      alt={option.title}
+      className="w-full h-full object-cover transition-transform duration-500"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+  </div>
+</div>
 
-                {/* Content */}
-                <div className="p-6 space-y-4">
-                  <h3 className="text-xl font-black text-white uppercase tracking-wide">{option.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{option.description}</p>
 
-                  {/* Features */}
-                  <div className="space-y-2">
-                    {option.features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2 text-xs text-gray-300">
-                        <div className="w-1.5 h-1.5 bg-[#fdca07] rounded-full"></div>
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA Button */}
-                  <a href="/neonCustom">
-                  <button className="w-full bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#fdca07] hover:to-yellow-400 text-white hover:text-black font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform group-hover:scale-105 mt-6">
-                    CUSTOMIZE NOW
-                  </button>
-                  </a>
-                </div>
-
-                {/* Glow Effect */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_20px_#fdca07] pointer-events-none"></div>
-              </div>
-            </div>
           ))}
         </div>
 

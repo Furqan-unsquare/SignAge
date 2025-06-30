@@ -18,10 +18,6 @@ app.use(express.json());
 connectDB();
 console.log("db connected");
 
-// app.use('/api/colors', middleware, require('./routes/price/color'));
-// app.use('/api/sizes', middleware, require('./routes/price/size'));
-// app.use('/api/types', middleware, require('./routes/price/type'));
-// app.use('/api/fonts', middleware, require('./routes/price/font'));
 app.use('/api/enquiry', middleware, require('./routes/sendenquiry'));
 app.use('/api/enquiries', require('./routes/enquiryRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));

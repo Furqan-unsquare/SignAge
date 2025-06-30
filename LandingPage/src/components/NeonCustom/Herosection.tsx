@@ -7,7 +7,7 @@ import { HowToInstall } from "./HowToInstall"
 import { WhatsInTheBox } from "./WhatsInTheBox"
 import { Testimonials } from "./Testimonials"
 import { FAQs } from "./FAQs"
-import { Sidebar } from "./Sidebar"
+// import { Sidebar } from "./Sidebar"
 
 export interface FontOption {
     name: string
@@ -33,7 +33,7 @@ export const NeonConfigurator = () => {
     const [phoneNumber, setPhoneNumber] = useState("")
     const [text, setText] = useState("")
     const [selectedFont, setSelectedFont] = useState("Pacifico")
-    const [selectedColor, setSelectedColor] = useState("#ffffff")
+    const [selectedColor, setSelectedColor] = useState("#ffffff00")
     const [selectedSize, setSelectedSize] = useState("Regular")
     const [totalPrice, setTotalPrice] = useState(0)
     const [fonts, setFonts] = useState<FontOption[]>([])
@@ -42,35 +42,57 @@ export const NeonConfigurator = () => {
     const [letterCharge, setLetterCharge] = useState(0)
 
     // Fetch data from APIs
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const [letterRes, colorRes, sizeRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/letter-charges'),
-                    fetch('http://localhost:5000/api/colors'),
-                    fetch('http://localhost:5000/api/sizes'),
-                ])
-                if (!letterRes.ok || !colorRes.ok || !sizeRes.ok) throw new Error('Failed to fetch data')
-                const [letterData, colorData, sizeData] = await Promise.all([
-                    letterRes.json(),
-                    colorRes.json(),
-                    sizeRes.json(),
-                ])
-                setLetterCharge(letterData[0]?.charge || 0)
-                setColors(colorData)
-                setSizes(sizeData)
-                // Fonts remain hardcoded as per original design (no API endpoint provided)
-                setFonts([
-                    { name: "Pacifico", fontFamily: "'Pacifico', cursive", rate: 0 },
-                    { name: "Boxy", fontFamily: "'Arial Black', sans-serif", rate: 200 },
-                    { name: "Play", fontFamily: "'Play', sans-serif", rate: 150 }
-                ])
-            } catch (err) {
-                console.error('Error fetching configuration data:', err)
-            }
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const [letterRes, colorRes, sizeRes, fontRes] = await Promise.all([
+                fetch('http://localhost:5000/api/letter-charges'),
+                fetch('http://localhost:5000/api/colors'),
+                fetch('http://localhost:5000/api/sizes'),
+                fetch('http://localhost:5000/api/fonts')
+            ])
+
+            if (!letterRes.ok || !colorRes.ok || !sizeRes.ok || !fontRes.ok)
+                throw new Error('Failed to fetch data')
+
+            const [letterData, colorData, sizeData, fontData] = await Promise.all([
+                letterRes.json(),
+                colorRes.json(),
+                sizeRes.json(),
+                fontRes.json()
+            ])
+
+            setLetterCharge(letterData[0]?.charge || 0)
+            setColors(colorData)
+            setSizes(sizeData)
+
+            // Load Google fonts
+            fontData.forEach((font) => {
+                const formatted = font.name.replace(/ /g, '+');
+                const fontUrl = `https://fonts.googleapis.com/css2?family=${formatted}&display=swap`;
+                if (!document.querySelector(`link[href="${fontUrl}"]`)) {
+                    const link = document.createElement('link');
+                    link.href = fontUrl;
+                    link.rel = 'stylesheet';
+                    document.head.appendChild(link);
+                }
+            })
+
+            setFonts(
+                fontData.map((font) => ({
+                    name: font.name,
+                    fontFamily: `'${font.name}', cursive`,
+                    rate: font.rate
+                }))
+            )
+        } catch (err) {
+            console.error('Error fetching configuration data:', err)
         }
-        fetchData()
-    }, [])
+    }
+
+    fetchData()
+}, [])
+
 
     const calculatePrice = () => {
         const basePrice = 0
@@ -88,7 +110,7 @@ export const NeonConfigurator = () => {
 
     return (
         <div className="bg-black text-white pt-20">
-            <Sidebar />
+            {/* <Sidebar /> */}
             <div className="min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 pb-4 md:pt-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-screen">
