@@ -9,7 +9,7 @@ const ContactHero = () => {
     ];
 
     return (
-        <section className="pt-40 pb-16 relative overflow-hidden  bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
+        <section className="pt-40 pb-16 relative overflow-hidden">
             {/* Background Elements */} 
             <div className="absolute inset-0">
                 <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-400/30 rounded-full blur-3xl"></div>

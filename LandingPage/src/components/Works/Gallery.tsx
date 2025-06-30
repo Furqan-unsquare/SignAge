@@ -130,7 +130,7 @@ const filteredProjects = projects.filter((project) => {
   };
 
   return (
-    <section className="pb-0 md:pb-10 bg-gradient-to-r from-red-600  to-red-600 pt-16 px-6 sm:px-8 lg:px-12 rounded-t-[3rem] -mt-40 relative " id="project">
+    <section className="pb-0 md:pb-10 bg-[#E63025] pt-16 px-6 sm:px-8 lg:px-12 rounded-t-[3rem] -mt-40 relative " id="project">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

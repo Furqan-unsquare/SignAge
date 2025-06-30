@@ -12,7 +12,7 @@ const Work = () => {
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
       
-       <div className="min-h-screen bg-red-600  overflow-x-hidden">
+       <div className="min-h-screen bg-[#E63025] overflow-x-hidden">
       <HeroSection />
       <Gallery />
       <CTA />

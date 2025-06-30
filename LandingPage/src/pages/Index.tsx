@@ -12,7 +12,7 @@ import ContactCTA from '@/components/Home/ContactCTA';
 const Index = () => {
   
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-gray-800">
+    <div className="min-h-screen bg-[#E63025] text-gray-800">
       <Hero />
       <Marquee />
       <Services />

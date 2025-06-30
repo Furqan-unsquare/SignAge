@@ -12,7 +12,7 @@ const AboutUs = () => {
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>
 
-    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 overflow-x-hidden">
+    <div className="min-h-screen bg-[#E63025] overflow-x-hidden">
       <AboutHeroSection />
       <AboutCTA />
     </div>

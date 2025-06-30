@@ -12,7 +12,7 @@ const Contact = () => {
         <link rel="canonical" href="https://yourdomain.com/" />
         </Helmet>
 
-        <div className="bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20]">
+        <div className="bg-[#E63025]">
             {/* Hero Section */}
             <ContactHero />
 

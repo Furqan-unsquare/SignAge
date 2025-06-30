@@ -32,7 +32,7 @@ const navigate = useNavigate();
   return (
     <section 
       id="cta" 
-  ref={ref}
+      ref={ref}
       className="py-10 md:py-0 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
         {/* Stacked Images with Animation */}
@@ -40,8 +40,7 @@ const navigate = useNavigate();
           initial={{ opacity: 0, x: -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative h-96 lg:h-[500px] hidden md:flex items-center justify-center order-2 lg:order-1"
-        >
+          className="relative h-96 lg:h-[500px] hidden md:flex items-center justify-center order-2 lg:order-1">
           {ctaImages.map((image, index) => (
            <motion.div
             key={index}
