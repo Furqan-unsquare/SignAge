@@ -12,8 +12,6 @@ interface ConfigurationPanelProps {
   setSelectedColor: (color: string) => void;
   selectedSize: string;
   setSelectedSize: (size: string) => void;
-  selectedAddOns: string[];
-  handleAddOnToggle: (addOnName: string) => void;
   totalPrice: number;
   fonts: Array<{
     name: string;
@@ -42,8 +40,6 @@ export const ConfigurationPanel = ({
   setSelectedColor,
   selectedSize,
   setSelectedSize,
-  selectedAddOns,
-  handleAddOnToggle,
   totalPrice,
   fonts,
   colors,
@@ -118,24 +114,25 @@ export const ConfigurationPanel = ({
         </div>
 
         {/* Color Selection */}
-        <div>
-          <label className="block text-sm font-semibold mb-1">Select Your Colour</label>
-          <div className="flex flex-wrap gap-2">
-            {colors.map((color) => (
-              <button
-                key={color.name}
-                onClick={() => setSelectedColor(color.value)}
-                className={`w-8 h-8 rounded-full border-3 transition-all ${
-                  selectedColor === color.value 
-                    ? "border-white scale-110" 
-                    : "border-gray-600 hover:border-gray-400"
-                }`}
-                style={{ backgroundColor: color.value }}
-                title={color.name}
-              />
-            ))}
-          </div>
+       <div>
+        <label className="block text-sm font-semibold mb-1">Select Your Colour</label>
+        <div className="flex flex-wrap gap-2">
+          {colors.map((color) => (
+            <button
+              key={color.name}
+              onClick={() => setSelectedColor(color.value)}
+              className={`
+                w-8 h-8 rounded-full border transition-all 
+                ${selectedColor === color.value
+                  ? "border-white scale-110"
+                  : "border-gray-400 hover:border-white"}
+              `}
+              style={{ backgroundColor: color.value }}
+              title={color.name}
+            />
+          ))}
         </div>
+      </div>
 
         {/* Size Selection */}
         <div>

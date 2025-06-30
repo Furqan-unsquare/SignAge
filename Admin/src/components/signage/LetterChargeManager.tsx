@@ -89,21 +89,21 @@ const handleSave = async () => {
     <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
-          <div className="flex-1">
+          <div className="flex-2">
             <Label className="text-sm font-medium text-slate-700 mb-2 block">
               Price Per Letter (₹)
             </Label>
             {isEditing ? (
-              <div className="flex items-center gap-3">
+              <div className="md:flex items-center gap-3">
                 <Input
                   type="number"
                   value={tempPrice}
                   onChange={(e) => setTempPrice(e.target.value)}
-                  className="w-32"
+                  className="w-32 "
                   min="0"
                   step="0.01"
                 />
-                <div className="flex gap-2">
+                <div className="flex gap-2 pt-2">
                   <Button size="sm" onClick={handleSave}>
                     Save
                   </Button>

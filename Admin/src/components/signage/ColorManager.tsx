@@ -101,7 +101,7 @@ const ColorManager = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       {/* Add Color Button */}
       <div className="flex justify-end">
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -116,7 +116,7 @@ const ColorManager = () => {
                 {editingId ? 'Edit Color' : 'Add New Color'}
               </DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+            <form onSubmit={handleSubmit} className="space-y-4 mt-4 ">
               <div>
                 <Label>Color Name</Label>
                 <Input

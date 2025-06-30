@@ -249,7 +249,7 @@ const OrderListPage = () => {
               />
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 ">
             <input
               type="date"
               value={startDate}
@@ -264,14 +264,12 @@ const OrderListPage = () => {
             />
             <button
               onClick={handleDateFilter}
-              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center"
-            >
+              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
               <Calendar className="w-5 h-5 mr-1" /> Filter
             </button>
             <button
               onClick={resetDateFilter}
-              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center"
-            >
+              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
               <RefreshCw className="w-5 h-5" />
             </button>
           </div>
@@ -439,10 +437,10 @@ const OrderListPage = () => {
 
         {/* Edit Modal */}
         {showEditModal && selectedOrder && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-5 md:px-0">
             <div className="bg-white text-gray-800 p-6 rounded-lg w-full max-w-md mx-auto">
               <h3 class="text-lg text-gray-800 font-bold mb-4">Edit Order</h3>
-              <form onSubmit={handleUpdateOrder} className="space-y-4 grid grid-cols-2 gap-4">
+              <form onSubmit={handleUpdateOrder} className="space-y-4 grid grid-cols-2 gap-4 ">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Input Text</label>
                   <input

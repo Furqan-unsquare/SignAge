@@ -7,19 +7,19 @@ export const Testimonials = () => {
       name: "Sarah K.",
       role: "Cafe Owner",
       content: "The custom neon sign completely transformed my coffee shop's ambiance. Customers love taking photos with it!",
-      image: "/assets/testimonial1.jpg"
+      image: "https://i.pinimg.com/736x/e8/b1/f5/e8b1f506358e0a4c56e27eb50b2196c6.jpg"
     },
     {
       name: "Michael T.",
       role: "Home Decor Enthusiast",
       content: "The quality exceeded my expectations. Installation was a breeze and it looks stunning in our living room.",
-      image: "/assets/testimonial2.jpg"
+      image: "https://i.pinimg.com/736x/47/91/f0/4791f027dcad85f85883359daf191c5d.jpg"
     },
     {
       name: "Priya R.",
       role: "Event Planner",
       content: "Used these for a wedding reception. They were the highlight of the decor and so many guests asked about them.",
-      image: "/assets/testimonial3.jpg"
+      image: "https://i.pinimg.com/736x/d3/62/fb/d362fb782bfc64b7b3e36e4b90e1e9f0.jpg"
     }
   ];
 

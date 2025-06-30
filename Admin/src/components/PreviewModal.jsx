@@ -20,98 +20,83 @@ const PreviewModal = ({ show, onClose, order }) => {
     };
   }, [show]);
 
-  // Font definitions (should ideally come from props or shared config)
   const fonts = [
-    { name: "Boxy", fontFamily: "Arial, sans-serif", price: 10 },
-    { name: "Play", fontFamily: '"Times New Roman", serif', price: 12 },
-    { name: "Pacifico", fontFamily: "Helvetica, sans-serif", price: 15 },
+     { name: "Pacifico", fontFamily: "'Pacifico', cursive", rate: 0 },
+     { name: "Boxy", fontFamily: "'Arial Black', sans-serif", rate: 200 },
+     { name: "Play", fontFamily: "'Play', sans-serif", rate: 150 }
+    
   ];
 
-const previewStyle = useMemo(() => {
   const selectedFontObj = fonts.find((f) => f.name === order?.font) || fonts[0];
-  const color = order?.color || "#ffffff";
+  const color = order?.color || "#ffff00";
+  const text = order?.inputText || "Preview";
 
-  const glowEffect = `
-    0 0 4px #fff,
-    0 0 10px ${color},
-    0 0 20px ${color},
-    0 0 40px ${color},
-    0 0 60px ${color},
-    0 0 80px ${color},
-    0 0 100px ${color}
-  `;
-
-  return {
-    fontFamily: selectedFontObj.fontFamily,
-    color: "#ffffff", // make the inner text look bright white
-    textShadow: glowEffect,
-    WebkitTextStroke: `1px ${color}`,
-    fontWeight: 400,
-    fontSize: `${Math.max(2.2, 5 - (order?.inputText?.length || 0) * 0.15)}rem`,
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
-    width: "90%",
-    maxWidth: "800px",
-    lineHeight: 1.1,
-    transition: "font-size 0.3s ease-in-out",
+  const getFontSize = (text) => {
+    const lines = text.split("\n");
+    const maxLineLength = Math.max(...lines.map((line) => line.length));
+    const base = 90;
+    return Math.max(40, base - maxLineLength * 2.5);
   };
-}, [order?.font, order?.color, order?.inputText]);
 
-
-  function hexToRgb(hex) {
-    hex = hex.replace("#", "");
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    return `${r}, ${g}, ${b}`;
-  }
+  const fontSize = getFontSize(text);
 
   if (!show || !order) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-5 md:px-0">
       <div
         ref={modalRef}
-        className="relative bg-gray-900 rounded-2xl p-4 md:p-8 flex items-center justify-center overflow-hidden w-full max-w-3xl min-h-[300px] md:min-h-[400px]"
-      >
+        className="relative bg-gray-900 rounded-2xl p-4 md:p-8 flex items-center justify-center overflow-hidden w-full max-w-3xl min-h-[300px] md:min-h-[400px]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute z-1 top-2 right-2 text-white bg-red-500 rounded-full p-2 hover:bg-red-600">
+          className="absolute z-12 top-2 right-2 text-white bg-red-500 rounded-full p-2 hover:bg-red-600">
           <XCircle className="w-6 h-6" />
         </button>
 
-        {/* Background Image Pattern */}
+        {/* Background */}
         <div className="absolute inset-0 opacity-60">
           <img
             src="https://i.pinimg.com/736x/d7/3f/cf/d73fcf6dabfb1886d4a8a224dce522e5.jpg"
             className="w-full h-full object-cover"
-            alt=""
+            alt="Background"
           />
         </div>
 
-        {/* Preview Text */}
-        <div className="text-center relative z-10 w-full h-full flex items-center justify-center">
-          <div
-            className="font-bold txet-white break-words"
+        {/* SVG Text with glow effect */}
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1000 300"
+          className="absolute top-0 left-0 z-10"
+        >
+          <text
+            x="50%"
+            y="50%"
+            dominantBaseline="middle"
+            textAnchor="middle"
+            fontSize={fontSize}
+            fontFamily={selectedFontObj?.fontFamily || "sans-serif"}
+            fill="#fff"
             style={{
-              ...previewStyle,
-              fontSize: `${Math.max(2.2, 5 - (order?.inputText?.length || 0) * 0.15)}rem`,
-              transition: "font-size 0.3s ease-in-out",
+              filter: `drop-shadow(0 0 0px ${color})
+                       drop-shadow(0 0 5px ${color})
+                       drop-shadow(0 0 10px ${color})`,
+              whiteSpace: "pre-line",
             }}
           >
-            {order?.inputText || "Preview"}
-          </div>
-        </div>
-
-        {/* Corner Accents */}
-        <div className="absolute top-4 left-4 w-3 h-3 border-t-2 border-l-2 border-purple-500"></div>
-        <div className="absolute top-4 right-4 w-3 h-3 border-t-2 border-r-2 border-purple-500"></div>
-        <div className="absolute bottom-4 left-4 w-3 h-3 border-b-2 border-l-2 border-purple-500"></div>
-        <div className="absolute bottom-4 right-4 w-3 h-3 border-b-2 border-r-2 border-purple-500"></div>
+            {text.split("\n").map((line, idx) => (
+              <tspan
+                key={idx}
+                x="50%"
+                dy={idx === 0 ? 0 : "1.2em"}
+                dominantBaseline="middle"
+              >
+                {line}
+              </tspan>
+            ))}
+          </text>
+        </svg>
       </div>
     </div>
   );

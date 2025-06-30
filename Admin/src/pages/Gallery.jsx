@@ -173,7 +173,7 @@ const AdminGallery = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8 flex justify-between items-center"
+            className="mb-8 md:flex justify-between items-center"
           >
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Gallery Management</h2>
@@ -181,7 +181,7 @@ const AdminGallery = () => {
             </div>
             
             {/* Filter Dropdown */}
-            <div className="relative">
+            <div className="relative mt-4 md:mt-0">
               <div className="flex items-center space-x-2 bg-white rounded-lg shadow-sm px-3 py-2 border">
                 <Filter className="h-5 w-5 text-green-500" />
                 <select

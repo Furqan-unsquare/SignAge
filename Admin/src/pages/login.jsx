@@ -151,22 +151,16 @@ const LoginPage = () => {
                             </div>
 
                             <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <input
-                                        id="remember-me"
-                                        name="remember-me"
-                                        type="checkbox"
-                                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                    />
-                                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                                        Remember me
-                                    </label>
-                                </div>
-
                                 <div className="text-sm">
-                                    <Link to="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
-                                        Forgot password?
-                                    </Link>
+                                    <a
+  href="https://wa.me/917045992776?text=Hello%2C%20I%20forgot%20my%20dashboard%20password.%20Could%20you%20please%20assist%20me%3F"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="font-medium text-blue-600 hover:text-blue-500"
+>
+  Forgot password?
+</a>
+
                                 </div>
                             </div>
 
@@ -202,15 +196,18 @@ const LoginPage = () => {
                             </div>
 
                             <div className="mt-6 text-center">
-                                <Link to="/contact-support" className="text-sm font-medium text-blue-600 hover:text-blue-500">
-                                    Contact our support team
-                                </Link>
+                               <a
+                                href="mailto:support@example.com?subject=Support%20Request&body=Hello%2C%20I%20am%20facing%20an%20issue%20related%20to%20my%20dashboard.%20Please%20assist%20me%20with%20this%20as%20soon%20as%20possible."
+                                className="text-sm font-medium text-blue-600 hover:text-blue-500">
+                                Contact our support team
+                                </a>
+
                             </div>
                         </div>
                     </div>
 
                     <div className="mt-8 text-center text-sm text-gray-500">
-                        © {new Date().getFullYear()} Your Company. All rights reserved.
+                        © {new Date().getFullYear()} Unsquare Lab. All rights reserved.
                     </div>
                 </div>
             </div>
