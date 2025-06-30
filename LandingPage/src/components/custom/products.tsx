@@ -8,20 +8,25 @@ interface CustomOption {
   title: string
   description: string
   icon: React.ReactNode
-  image: string
   features: string[]
   popular?: boolean
 }
 
 const customOptions: CustomOption[] = [
   {
-    id: 1,
-    title: "Text & Quotes",
-    description: "Custom text, quotes, names, or messages in your choice of fonts and colors",
-    icon: <Type className="w-6 h-6" />,
-    image: "/placeholder.svg?height=300&width=250",
-    features: ["50+ Font Styles", "Unlimited Colors", "Size Customization", "Symbol Integration"],
-  },
+  id: 1,
+  title: "Neon Custom Design",
+  description: "Design your own neon sign with personalized text, font styles, vibrant colors, and custom sizes – perfect for homes, events, or business branding.",
+  icon: <Type className="w-6 h-6" />,
+  features: [
+    "Personalized Text & Symbols",
+    "50+ Font Styles",
+    "20+ Neon Colors",
+    "Custom Size Options",
+    "Preview Before Purchase"
+  ],
+}
+
   // {
   //   id: 2,
   //   title: "Logo & Branding",
@@ -112,7 +117,7 @@ const ProductsSection = () => {
 
     {/* CTA Button */}
     <a href="/neonCustom">
-      <button className="w-full mt-4 bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#fdca07] hover:to-yellow-400 text-white hover:text-black font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform">
+      <button className="w-full mt-4 bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#EA3C1F] hover:to-red-400 text-white font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform">
         Customize Now
       </button>
     </a>

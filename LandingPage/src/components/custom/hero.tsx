@@ -111,7 +111,7 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a href="#customize">
+          <a href="/neonCustom">
           <button className="group relative bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-xl md:text-2xl uppercase tracking-wider px-10 py-5 rounded-2xl  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#fdca07]">
             <div className="flex items-center gap-4">
               <Palette className="w-6 h-6" />
