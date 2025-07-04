@@ -24,6 +24,8 @@ app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/orders', require('./routes/order'));
 app.use('/api/blogs', require('./routes/blogRoutes'));
 app.use('/api/auth', require('./routes/auth'));
+app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
+app.use("/api/font-files", require("./routes/fontRoutes")); // mount it
 
 app.use('/api', configRoutes);
 app.use('/api/signage-types', signageTypeRoutes);

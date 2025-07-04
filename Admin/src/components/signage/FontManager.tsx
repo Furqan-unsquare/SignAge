@@ -4,21 +4,35 @@ import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Edit2, Trash2, Plus } from 'lucide-react';
 import FontModal from './modals/FontModal';
+import { toast } from '../ui/use-toast';
 
-const API_URL = 'http://localhost:5000/api/fonts';
+const API_URL = 'http://localhost:5000/api/font-files/files';
 
 const FontManager = () => {
   const [fonts, setFonts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingFont, setEditingFont] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchFonts = async () => {
+    setLoading(true);
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
-      setFonts(data);
+      console.log("Fetched fonts:", data);
+
+      if (Array.isArray(data)) {
+        setFonts(data);
+      } else {
+        console.error("Expected an array but got:", data);
+        setFonts([]);
+      }
     } catch (err) {
       console.error('Error fetching fonts:', err);
+      setFonts([]);
+      toast({ title: "Error", description: "Failed to load fonts", variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -27,21 +41,51 @@ const FontManager = () => {
   }, []);
 
   const handleAdd = () => {
-    setEditingFont(null);
+    setEditingFont({ name: '', rate: 0, filename: '' }); // Initialize for new font
     setIsModalOpen(true);
   };
 
   const handleEdit = (font) => {
-    setEditingFont(font);
+    setEditingFont({ ...font }); // Clone to avoid mutation
     setIsModalOpen(true);
   };
 
   const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this font?")) {
+      setLoading(true);
+      try {
+        const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Delete failed');
+        fetchFonts();
+        toast({ title: "Success", description: "Font deleted successfully" });
+      } catch (err) {
+        console.error('Error deleting font:', err);
+        toast({ title: "Error", description: "Failed to delete font", variant: "destructive" });
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleSave = async (fontData) => {
+    setLoading(true);
     try {
-      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      const url = editingFont && editingFont._id ? `${API_URL}/${editingFont._id}` : `${API_URL}`;
+      const method = editingFont && editingFont._id ? 'PUT' : 'POST';
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...fontData, filename: fontData.filename || editingFont?.filename }), // Preserve filename for updates
+      });
+      if (!res.ok) throw new Error(`${method} failed`);
       fetchFonts();
+      toast({ title: "Success", description: `Font ${editingFont && editingFont._id ? 'updated' : 'created'} successfully` });
+      setIsModalOpen(false);
     } catch (err) {
-      console.error('Error deleting font:', err);
+      console.error('Error saving font:', err);
+      toast({ title: "Error", description: `Failed to ${editingFont && editingFont._id ? 'update' : 'create'} font`, variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,17 +94,17 @@ const FontManager = () => {
       <div className="space-y-4">
         <div className="flex justify-between items-center">
           <div className="text-sm text-slate-600">
-            {fonts.length} font{fonts.length !== 1 ? 's' : ''} configured
+            {loading ? 'Loading...' : `${fonts.length} font${fonts.length !== 1 ? 's' : ''} configured`}
           </div>
-          <Button onClick={handleAdd} className="gap-2 bg-gray-100">
+          <Button onClick={handleAdd} className="gap-2 bg-gray-100" disabled={loading}>
             <Plus className="w-4 h-4" />
             Add Font
           </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {fonts.map((font) => (
-            <Card key={font._id} className="hover:shadow-md transition-shadow duration-200">
+          {fonts.map((font, index) => (
+            <Card key={font._id || font.filename || index} className="hover:shadow-md transition-shadow duration-200">
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -75,6 +119,7 @@ const FontManager = () => {
                       variant="ghost"
                       onClick={() => handleEdit(font)}
                       className="h-8 w-8 p-0"
+                      disabled={loading}
                     >
                       <Edit2 className="w-3 h-3" />
                     </Button>
@@ -83,6 +128,7 @@ const FontManager = () => {
                       variant="ghost"
                       onClick={() => handleDelete(font._id)}
                       className="h-8 w-8 p-0 text-red-600 hover:text-red-700"
+                      disabled={loading}
                     >
                       <Trash2 className="w-3 h-3" />
                     </Button>
@@ -98,7 +144,8 @@ const FontManager = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         font={editingFont}
-        refresh={fetchFonts}
+        onSave={handleSave}
+        loading={loading}
       />
     </>
   );
