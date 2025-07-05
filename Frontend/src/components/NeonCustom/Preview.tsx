@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import html2canvas from "html2canvas";
 import { Download } from "lucide-react";
 
@@ -29,7 +29,7 @@ export const PreviewPane = ({
   );
 
   const activeColor = selectedColor || "#ffff00";
-const length = text.length;
+  const length = text.length;
 
   // Convert hex to RGB
   const hexToRgb = (hex: string): string => {
@@ -41,13 +41,37 @@ const length = text.length;
   };
 
   // Calculate font size for SVG (adjust this logic as needed)
-const getFontSize = (text: string) => {
-  const base = 90;
-  if (!text) return base;
-  const lines = text.split("\n");
-  const maxLineLength = Math.max(...lines.map((line) => line.length));
-  return Math.max(40, base - maxLineLength * 2.5);
-};
+  const getFontSize = (text: string) => {
+    const base = 90;
+    if (!text) return base;
+    const lines = text.split("\n");
+    const maxLineLength = Math.max(...lines.map((line) => line.length));
+    return Math.max(40, base - maxLineLength * 2.5);
+  };
+
+  // Load fonts dynamically
+useEffect(() => {
+  fonts.forEach((font) => {
+    const fontUrl = `http://localhost:5000/fonts/${font.fontFamily}`;
+    const fontName = font.name;
+console.log(font.name, font.fontFamily);
+      
+    if (document.getElementById(`font-${fontName}`)) return;
+
+    const style = document.createElement("style");
+    style.id = `font-${fontName}`;
+    style.innerHTML = `
+      @font-face {
+        font-family: "${fontName}";
+        src: url("${fontUrl}") format("truetype");
+        font-display: swap;
+      }
+    `;
+    document.head.appendChild(style);
+  });
+}, [fonts]);
+
+
 
 
   const handleDownload = async () => {
@@ -71,7 +95,8 @@ const getFontSize = (text: string) => {
       {/* Screenshot area */}
       <div
         ref={previewRef}
-        className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-2xl">
+        className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-2xl"
+      >
         {/* Background */}
         <div className="absolute inset-0 opacity-80">
           <img
@@ -86,14 +111,15 @@ const getFontSize = (text: string) => {
           width="100%"
           height="100%"
           viewBox="0 0 1000 300"
-          className="absolute top-0 left-0 z-10">
+          className="absolute top-0 left-0 z-10"
+        >
           <text
             x="50%"
             y="50%"
             dominantBaseline="middle"
             textAnchor="middle"
             fontSize={getFontSize(text)}
-            fontFamily={selectedFontObj?.fontFamily || "sans-serif"}
+            fontFamily={selectedFontObj?.name } // Use name as fontFamily
             fill="#ffffff"
             stroke={activeColor}
             strokeWidth="0"
@@ -102,21 +128,20 @@ const getFontSize = (text: string) => {
                        drop-shadow(0 0 5px ${activeColor})
                        drop-shadow(0 0 10px ${activeColor})`,
               whiteSpace: "pre-line",
-              fontFamily: selectedFont
             }}
           >
-          {(text || "Preview")
-            .split("\n")
-            .map((line, idx) => (
-              <tspan
-                key={idx}
-                x="50%"
-                dy={idx === 0 ? 0 : "1.2em"}
-                dominantBaseline="middle"
-              >
-                {line}
-              </tspan>
-            ))}
+            {(text || "Preview")
+              .split("\n")
+              .map((line, idx) => (
+                <tspan
+                  key={idx}
+                  x="50%"
+                  dy={idx === 0 ? 0 : "1.2em"}
+                  dominantBaseline="middle"
+                >
+                  {line}
+                </tspan>
+              ))}
           </text>
         </svg>
       </div>

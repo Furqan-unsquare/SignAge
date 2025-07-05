@@ -49,7 +49,7 @@ useEffect(() => {
                 fetch('http://localhost:5000/api/letter-charges'),
                 fetch('http://localhost:5000/api/colors'),
                 fetch('http://localhost:5000/api/sizes'),
-                fetch('http://localhost:5000/api/fonts')
+                fetch('http://localhost:5000/api/font-files/files')
             ])
 
             if (!letterRes.ok || !colorRes.ok || !sizeRes.ok || !fontRes.ok)
@@ -66,22 +66,10 @@ useEffect(() => {
             setColors(colorData)
             setSizes(sizeData)
 
-            // Load Google fonts
-            fontData.forEach((font) => {
-                const formatted = font.name.replace(/ /g, '+');
-                const fontUrl = `https://fonts.googleapis.com/css2?family=${formatted}&display=swap`;
-                if (!document.querySelector(`link[href="${fontUrl}"]`)) {
-                    const link = document.createElement('link');
-                    link.href = fontUrl;
-                    link.rel = 'stylesheet';
-                    document.head.appendChild(link);
-                }
-            })
-
             setFonts(
                 fontData.map((font) => ({
                     name: font.name,
-                    fontFamily: `'${font.name}', cursive`,
+                    fontFamily: `${font.filename}`,
                     rate: font.rate
                 }))
             )

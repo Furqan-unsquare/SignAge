@@ -105,11 +105,12 @@ export const ConfigurationPanel = ({
                     : "border-gray-600 bg-gray-800 hover:border-gray-500"
                 }`}
               >
-                <div className="text-xs" style={{ fontFamily: font.fontFamily }}>
+                <div className="text-xs" style={{ fontFamily: font.name  }}>
                   {font.name}
                 </div>
               </button>
             ))}
+            
           </div>
         </div>
 
