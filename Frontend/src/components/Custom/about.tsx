@@ -22,7 +22,7 @@ const AboutSection = () => {
   ]
 
   return (
-    <section className="py-16 px-6 md:px-4" id="about">
+    <section className="pt-16 px-6 md:px-4" id="about">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Content Column */}
@@ -55,16 +55,16 @@ const AboutSection = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 items-center">
               <button
               onClick={() => window.location.href = '/contact-us'} 
-              className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 rounded-lg transition-colors flex items-center gap-2">
+              className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 max-w-sm rounded-lg transition-colors flex items-center gap-2">
                 <Zap className="w-5 h-5" />
                 Get Free Quote
               </button>
               <button 
               onClick={() => window.location.href = '/work'} 
-              className="border-2 border-white/30 hover:border-white/50 text-white font-medium px-6 py-3 rounded-lg transition-colors flex items-center gap-2">
+              className="hidden md:flex border-2 border-white/30 hover:border-white/50 text-white font-medium px-6 py-3 rounded-lg transition-colors items-center gap-2">
                 View Portfolio
                 <ArrowRight className="w-5 h-5" />
               </button>
@@ -75,7 +75,7 @@ const AboutSection = () => {
           <div className="lg:w-1/2 relative">
             <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-black/10 border border-white/10">
               <img
-                src="/placeholder.svg" // Replace with your actual image
+                src="https://i.pinimg.com/736x/47/76/3a/47763a8f9f5e19fa083897c1ab744a25.jpg" // Replace with your actual image
                 alt="Custom neon sign examples"
                 className="absolute inset-0 w-full h-full object-cover"
               />

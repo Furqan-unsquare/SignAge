@@ -103,7 +103,7 @@ const HeroSection = () => {
           ].map((feature, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-medium hover:bg-[#fdca07] hover:text-black transition-all duration-300 cursor-pointer">
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-medium hover:bg-[#fdca07] hover:text-black transition-all duration-300 ">
               {feature}
             </div>
           ))}
@@ -112,8 +112,8 @@ const HeroSection = () => {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a href="/neonCustom">
-          <button className="group relative bg-[#fdca07] hover:bg-yellow-400 text-black font-black text-xl md:text-2xl uppercase tracking-wider px-10 py-5 rounded-2xl  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#fdca07]">
-            <div className="flex items-center gap-4">
+          <button className="group relative bg-[#fdca07] hover:bg-yellow-400 text-black font-bold text-xl md:text-2xl uppercase px-4 md:px-10 py-4 rounded-2xl  transform transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#fdca07]">
+            <div className="flex items-center gap-2">
               <Palette className="w-6 h-6" />
               <span>START DESIGNING</span>
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
@@ -121,7 +121,7 @@ const HeroSection = () => {
           </button>
           </a>
 
-          <a href="/work">
+          <a href="/work" className="hidden md:block">
           <button className="group bg-transparent  text-white hover:text-white/80 font-black text-xl uppercase tracking-wider px-10 py-5 rounded-2xl transition-all duration-300 hover:scale-105">
             <div className="flex items-center gap-3">
               <span>VIEW GALLERY</span>
@@ -133,7 +133,7 @@ const HeroSection = () => {
         
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {[
             { number: "10,000+", label: "Custom Signs Created" },
             { number: "500+", label: "Happy Businesses" },

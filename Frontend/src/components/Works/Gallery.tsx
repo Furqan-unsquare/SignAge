@@ -130,7 +130,7 @@ const filteredProjects = projects.filter((project) => {
   };
 
   return (
-    <section className="pb-0 md:pb-10 bg-[#E63025] pt-16 px-6 sm:px-8 lg:px-12 rounded-t-[3rem] -mt-40 relative " id="project">
+    <section className="pb-0 md:pb-10 bg-[#E63025] pt-16 md:px-6 sm:px-8 lg:px-12 rounded-t-[3rem] -mt-40 relative " id="project">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -148,60 +148,57 @@ const filteredProjects = projects.filter((project) => {
         </motion.div>
 
       {/* Filter Section */}
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.6, delay: 0.2 }}
-  className="mb-12 px-4 sm:px-0"
->
-  {/* Mobile Dropdown */}
-  <div className="sm:hidden mb-4">
-    <select
-      value={activeFilter}
-      onChange={(e) => {
-        setActiveFilter(e.target.value);
-        const isMobile = window.innerWidth < 768;
-        setVisibleCount(isMobile ? 3 : 9);
-      }}
-      className="w-full p-2 rounded-lg bg-gray-200 text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07]"
-    >
-      {productLinks.map((link) => (
-        <option key={link.id} value={link.id}>
-          {link.label}
-        </option>
-      ))}
-    </select>
-  </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="px-4 sm:px-0">
+        {/* Mobile Dropdown */}
+        <div className="sm:hidden mb-4">
+          <select
+            value={activeFilter}
+            onChange={(e) => {
+              setActiveFilter(e.target.value);
+              const isMobile = window.innerWidth < 768;
+              setVisibleCount(isMobile ? 3 : 9);
+            }}
+            className="w-full p-2 rounded-lg bg-gray-200 text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07]">
+            {productLinks.map((link) => (
+              <option key={link.id} value={link.id}>
+                {link.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-  {/* Desktop Button Grid */}
-  <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-    {productLinks.map((link) => (
-      <button
-        key={link.id}
-        onClick={() => {
-          setActiveFilter(link.id);
-          const isMobile = window.innerWidth < 768;
-          setVisibleCount(isMobile ? 3 : 9);
-        }}
-        className={`px-4 py-2 rounded-2xl text-sm text-center transition-colors ${
-          activeFilter === link.id
-            ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
-            : "bg-white/10 text-white hover:bg-white/20"
-        }`}
-      >
-        {link.label}
-      </button>
-    ))}
-  </div>
-</motion.div>
-
+        {/* Desktop Button Grid */}
+        <div className="hidden sm:grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          {productLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => {
+                setActiveFilter(link.id);
+                const isMobile = window.innerWidth < 768;
+                setVisibleCount(isMobile ? 3 : 9);
+              }}
+              className={`px-4 py-2 rounded-2xl text-sm text-center transition-colors ${
+                activeFilter === link.id
+                  ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
+                  : "bg-white/10 text-white hover:bg-white/20"
+              }`}
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+      </motion.div>
 
         {/* Masonry Gallery */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="columns-1 sm:columns-2 lg:columns-3 gap-6 mb-10">
+          className="columns-2 sm:columns-2 lg:columns-3 md:gap-6 md:mb-10 md:pt-4">
           <AnimatePresence>
             {filteredProjects.slice(0, visibleCount).map((project) => (
               <motion.div
@@ -211,18 +208,16 @@ const filteredProjects = projects.filter((project) => {
                   scale: 1.03,
                   boxShadow: "0 10px 25px -5px rgba(253, 202, 7, 0.3)",
                 }}
-                className={`rounded-xl overflow-hidden border break-inside-avoid mb-6 ${
+                className={`rounded-xl overflow-hidden border break-inside-avoid mb-4 ${
                   project.featured ? "border-2 border-[#FDCA07]" : "border-white/10"
                 }`}
-                layout
-              >
+                layout>
                 <div className="relative bg-gray-800 overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-auto object-cover"
-                    loading="lazy"
-                  />
+                    loading="lazy"/>
                   {project.featured && (
                     <div className="absolute top-4 left-4 bg-[#FDCA07] text-[#EA3C1F] px-3 py-1 rounded-full font-bold text-sm">
                       Featured

@@ -405,7 +405,7 @@ const AdminGallery = () => {
                         {showUrlInput ? "Hide URL Input" : "Want to enter URL?"}
                       </button>
                       {/* PREVIEW SECTION */}
-                      {imagePreview && (
+                      {/* {imagePreview && (
                         <div className="w-full lg:w-1/3 p-4 bg-gray-50 rounded-lg shadow-inner flex flex-col items-center justify-start">
                           <p className="text-sm text-gray-700 mb-2 font-semibold self-start">Preview:</p>
                           <img
@@ -415,7 +415,7 @@ const AdminGallery = () => {
                             loading="lazy"
                           />
                         </div>
-                      )}
+                      )} */}
                       <div className="pt-4">
                         <button
                           type="submit"

@@ -219,7 +219,7 @@ const DashboardPage = () => {
             <div className="flex items-center">
               <Activity className="w-6 h-6 text-emerald-600 mr-3" />
               <div>
-                <p className="text-gray-600 text-sm">Total Projects</p>
+                <p className="text-gray-600 text-sm">Uploaded Images</p>
                 <p className="text-2xl font-semibold text-gray-800">{counts.totalProjects}</p>
               </div>
             </div>

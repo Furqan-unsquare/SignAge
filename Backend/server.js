@@ -24,7 +24,22 @@ app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/orders', require('./routes/order'));
 app.use('/api/blogs', require('./routes/blogRoutes'));
 app.use('/api/auth', require('./routes/auth'));
-app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
+app.use('/fonts', express.static(path.join(__dirname, 'fonts'), {
+    setHeaders: (res, path) => {
+    if (path.endsWith('.ttf')) {
+      res.setHeader('Content-Type', 'font/ttf');
+    }
+    if (path.endsWith('.otf')) {
+      res.setHeader('Content-Type', 'font/otf');
+    }
+    if (path.endsWith('.woff')) {
+      res.setHeader('Content-Type', 'font/woff');
+    }
+    if (path.endsWith('.woff2')) {
+      res.setHeader('Content-Type', 'font/woff2');
+    }
+  }
+}));
 app.use("/api/font-files", require("./routes/fontRoutes")); // mount it
 
 app.use('/api', configRoutes);

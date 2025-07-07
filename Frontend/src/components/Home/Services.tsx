@@ -7,33 +7,40 @@ const services = [
     id: 1,
     title: "Acrylic Letter / Signboard",
     img: "/assets/1.jpg",
+    category: "acrylic",
   },
   {
     id: 2,
     title: "Aluminium Channel Letter",
     img: "/assets/2.jpg",
+    category: "aluminium",
   },
   {
     id: 3,
     title: "3D Steel Signage",
     img: "/assets/3.jpg",
+    category: "3d-steel",
   },
   {
     id: 4,
     title: "Printed Name Plate",
     img: "/assets/8.jpg",
+    category: "office-name",
   },
   {
     id: 5,
     title: "Glow Signs",
     img: "/assets/5.jpg",
+    category: "glow-sign",
   },
   {
     id: 6,
     title: "LED Scrolling Signs",
     img: "/assets/9.jpg",
-  }
+    category: "led-scrolling",
+  },
 ];
+
 
 
   return (
@@ -72,14 +79,14 @@ const services = [
               {/* Content Overlay */}
               <div className="absolute bottom-0 p-6 z-10 text-white w-full">
                 <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
-                {/* Optional: Short description */}
-                {/* <p className="text-sm mb-4">{service.description}</p> */}
-                {/* add a navigate onclick below button */}
-                <button onClick={() => window.location.href = `/work`} 
-                className="flex items-center text-white font-medium hover:text-yellow-300 transition-colors">
-                  View examples
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </button>
+               <button
+  onClick={() => window.location.href = `/work#project?category=${service.category}`}
+  className="flex items-center text-white font-medium hover:text-yellow-300 transition-colors"
+>
+  View examples
+  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+</button>
+
               </div>
             </div>
           ))}

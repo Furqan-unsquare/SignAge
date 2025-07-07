@@ -15,11 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useSignage } from '@/contexts/SignageContext';
 
-const SizeModal = ({ isOpen, onClose, size, onSuccess }) => {
-  const { addSize, updateSize } = useSignage();
-
+const SizeModal = ({ isOpen, onClose, size, onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     width: '',
@@ -27,56 +24,46 @@ const SizeModal = ({ isOpen, onClose, size, onSuccess }) => {
     rate: '',
   });
 
-useEffect(() => {
-  if (size) {
-    setFormData({
-      name: size.name || '',
-      width: size.width?.toString() || '',
-      height: size.height?.toString() || '',
-      rate: size.rate?.toString() || '',
-    });
-  } else {
-    setFormData({
-      name: '',
-      width: '',
-      height: '',
-      rate: '',
-    });
+  useEffect(() => {
+    if (size) {
+      setFormData({
+        name: size.name || '',
+        width: size.width?.toString() || '',
+        height: size.height?.toString() || '',
+        rate: size.rate?.toString() || '',
+      });
+    } else {
+      setFormData({
+        name: '',
+        width: '',
+        height: '',
+        rate: '',
+      });
+    }
+  }, [size, isOpen]);
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const width = parseFloat(formData.width);
+  const height = parseFloat(formData.height);
+  const rate = parseFloat(formData.rate); // ✅ Fix here
+
+  if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0 || isNaN(rate) || rate < 0) {
+    return;
   }
-}, [size, isOpen]);
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const width = parseFloat(formData.width);
-    const height = parseFloat(formData.height);
-    const price = parseFloat(formData.rate);
-
-    if (isNaN(width) || width <= 0 || isNaN(height) || height <= 0 || isNaN(price) || price < 0) {
-      return;
-    }
-
-    const sizeData = {
-      name: formData.name,
-      width,
-      height,
-      price,
-    };
-
-    try {
-      if (size && size.id) {
-        await updateSize(size.id, sizeData);
-      } else {
-        await addSize(sizeData);
-      }
-
-      onSuccess?.(); // fetch again and close modal
-      onClose();
-    } catch (error) {
-      console.error('Failed to save size:', error);
-    }
+  const sizeData = {
+    name: formData.name,
+    width,
+    height,
+    rate, // ✅ Fix here
   };
+
+  onSubmit(size?._id, sizeData); // ✅ Use _id
+  onClose();
+};
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -87,7 +74,7 @@ useEffect(() => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="label">Size Label</Label>
+            <Label htmlFor="name">Size Label</Label>
             <Input
               id="name"
               value={formData.name}
@@ -122,20 +109,18 @@ useEffect(() => {
               />
             </div>
           </div>
-
           <div>
-            <Label htmlFor="price">Price (₹)</Label>
-          <Input
-            id="rate"
-            type="number"
-            step="0.01"
-            min="0"
-            value={formData.rate}
-            onChange={(e) => setFormData((prev) => ({ ...prev, rate: e.target.value }))}
-            required
-          />
+            <Label htmlFor="rate">Price (₹)</Label>
+            <Input
+              id="rate"
+              type="number"
+              step="0.01"
+              min="0"
+              value={formData.rate}
+              onChange={(e) => setFormData((prev) => ({ ...prev, rate: e.target.value }))}
+              required
+            />
           </div>
-
           <div className="flex justify-end gap-2 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel

@@ -26,32 +26,6 @@ const customOptions: CustomOption[] = [
     "Preview Before Purchase"
   ],
 }
-
-  // {
-  //   id: 2,
-  //   title: "Logo & Branding",
-  //   description: "Transform your business logo into stunning LED neon signage",
-  //   icon: <Building className="w-6 h-6" />,
-  //   image: "/placeholder.svg?height=300&width=250",
-  //   features: ["Vector Conversion", "Brand Colors", "Multiple Sizes", "Indoor/Outdoor"],
-  //   popular: true,
-  // },
-  // {
-  //   id: 3,
-  //   title: "Custom Shapes",
-  //   description: "Unique shapes, symbols, and artistic designs tailored to your vision",
-  //   icon: <Palette className="w-6 h-6" />,
-  //   image: "/placeholder.svg?height=300&width=250",
-  //   features: ["Any Shape Possible", "3D Effects", "Multi-Color", "Animation Options"],
-  // },
-  // {
-  //   id: 4,
-  //   title: "Personal Messages",
-  //   description: "Wedding signs, home decor, gifts, and personal celebration signage",
-  //   icon: <Heart className="w-6 h-6" />,
-  //   image: "/placeholder.svg?height=300&width=250",
-  //   features: ["Wedding Specials", "Home Decor", "Gift Options", "Personal Touch"],
-  // },
 ]
 
 const ProductsSection = () => {
@@ -73,7 +47,7 @@ const ProductsSection = () => {
             <span className="text-[#fdca07]">Create Today?</span>
           </h2>
           
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed line-clamp-2">
             Choose from our popular customization categories or tell us about your unique vision. 
             Our design team will bring any concept to life with premium LED neon technology.
           </p>
@@ -115,26 +89,24 @@ const ProductsSection = () => {
       ))}
     </div>
 
-    {/* CTA Button */}
-    <a href="/neonCustom">
-      <button className="w-full mt-4 bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#EA3C1F] hover:to-red-400 text-white font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform">
-        Customize Now
-      </button>
-    </a>
-  </div>
+        {/* CTA Button */}
+        <a href="/neonCustom">
+          <button className="w-full mt-4 bg-gradient-to-r from-[#EA3C1F] to-[#EB3C20] hover:from-[#EA3C1F] hover:to-red-400 text-white font-bold text-sm uppercase tracking-wider px-6 py-3 rounded-lg transition-all duration-300 transform">
+            Customize Now
+          </button>
+        </a>
+      </div>
 
-  {/* Right Image */}
-  <div className="relative lg:w-1/2 h-64 lg:h-auto">
-    <img
-      src="https://i.pinimg.com/736x/2d/cd/1e/2dcd1eeb4f31bab402110771445d9d7a.jpg"
-      alt={option.title}
-      className="w-full h-full object-cover transition-transform duration-500"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-  </div>
-</div>
-
-
+      {/* Right Image */}
+      <div className="relative lg:w-1/2 h-64 lg:h-auto">
+        <img
+          src="https://i.pinimg.com/736x/2d/cd/1e/2dcd1eeb4f31bab402110771445d9d7a.jpg"
+          alt={option.title}
+          className="w-full h-full object-cover transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+      </div>
+    </div>
           ))}
         </div>
 
@@ -147,7 +119,7 @@ const ProductsSection = () => {
             <p className="text-gray-400 text-lg">Simple 4-step process to get your custom neon sign</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { step: "01", title: "Share Your Idea", desc: "Tell us your concept, upload images, or describe your vision" },
               { step: "02", title: "Free Design Tool", desc: "Our designers create a mockup within 24 hours at no cost" },
@@ -158,8 +130,7 @@ const ProductsSection = () => {
                 <div className="w-16 h-16 bg-[#fdca07] rounded-full flex items-center justify-center text-black font-black text-xl mx-auto">
                   {process.step}
                 </div>
-                <h4 className="text-white font-black uppercase tracking-wide">{process.title}</h4>
-                {/* <p className="text-gray-400 text-sm leading-relaxed">{process.desc}</p> */}
+                <h4 className="text-white text-sm md:text-lg uppercase tracking-wide">{process.title}</h4>
               </div>
             ))}
           </div>

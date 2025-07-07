@@ -75,7 +75,7 @@ const PremiumFloatingButton = () => {
     icon: <FaInstagram className="w-5 h-5" />,
     color: "bg-gradient-to-tr from-[#833AB4] via-[#C13584] to-[#E1306C]",
     tooltip: "Instagram DM",
-    href: "https://instagram.com/yourhandle",
+    href: "https://www.instagram.com/acrylic_signboard",
   },
   {
     icon: <FaPhoneAlt className="w-5 h-5" />,

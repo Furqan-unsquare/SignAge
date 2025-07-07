@@ -13,6 +13,20 @@ const FontModal = ({ isOpen, onClose, font, onSave, loading }) => {
     onSave({ name, rate, filename });
   };
 
+  useEffect(() => {
+  if (font) {
+    setName(font.name || '');
+    setRate(font.rate || 0);
+    setFilename(font.filename || '');
+  } else {
+    // Reset fields when adding new font
+    setName('');
+    setRate(0);
+    setFilename('');
+  }
+}, [font]);
+
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='bg-white text-gray-900'>

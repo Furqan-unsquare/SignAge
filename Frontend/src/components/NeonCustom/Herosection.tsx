@@ -43,50 +43,62 @@ export const NeonConfigurator = () => {
 
     // Fetch data from APIs
 useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const [letterRes, colorRes, sizeRes, fontRes] = await Promise.all([
-                fetch('http://localhost:5000/api/letter-charges'),
-                fetch('http://localhost:5000/api/colors'),
-                fetch('http://localhost:5000/api/sizes'),
-                fetch('http://localhost:5000/api/font-files/files')
-            ])
+  const fetchData = async () => {
+    try {
+      const [letterRes, colorRes, sizeRes, fontRes] = await Promise.all([
+        fetch('http://localhost:5000/api/letter-charges'),
+        fetch('http://localhost:5000/api/colors'),
+        fetch('http://localhost:5000/api/sizes'),
+        fetch('http://localhost:5000/api/font-files/files')
+      ]);
 
-            if (!letterRes.ok || !colorRes.ok || !sizeRes.ok || !fontRes.ok)
-                throw new Error('Failed to fetch data')
+      if (!letterRes.ok || !colorRes.ok || !sizeRes.ok || !fontRes.ok)
+        throw new Error('Failed to fetch data');
 
-            const [letterData, colorData, sizeData, fontData] = await Promise.all([
-                letterRes.json(),
-                colorRes.json(),
-                sizeRes.json(),
-                fontRes.json()
-            ])
+      const [letterData, colorData, sizeData, fontData] = await Promise.all([
+        letterRes.json(),
+        colorRes.json(),
+        sizeRes.json(),
+        fontRes.json()
+      ]);
 
-            setLetterCharge(letterData[0]?.charge || 0)
-            setColors(colorData)
-            setSizes(sizeData)
+      setLetterCharge(letterData[0]?.charge || 0);
+      setColors(colorData);
+      setSizes(sizeData);
 
-            setFonts(
-                fontData.map((font) => ({
-                    name: font.name,
-                    fontFamily: `${font.filename}`,
-                    rate: font.rate
-                }))
-            )
-        } catch (err) {
-            console.error('Error fetching configuration data:', err)
-        }
+      const mappedFonts = fontData.map((font) => ({
+        name: font.name,
+        fontFamily: `${font.filename}`,
+        rate: font.rate
+      }));
+
+      setFonts(mappedFonts);
+
+      // ✅ Set first font and color as default if not already selected
+      if (mappedFonts.length > 0) {
+        setSelectedFont(mappedFonts[0].name);
+      }
+      if (colorData.length > 0) {
+        setSelectedColor(colorData[0].value);
+      }
+
+    } catch (err) {
+      console.error('Error fetching configuration data:', err);
     }
+  };
 
-    fetchData()
-}, [])
+  fetchData();
+}, []);
+
 
 
     const calculatePrice = () => {
         const basePrice = 0
         const textPrice = text.length * letterCharge // e.g., 10 letters × 100 Rs = 1000 Rs
         const fontPrice = fonts.find((f) => f.name === selectedFont)?.rate || 0
-        const colorPrice = colors.find((c) => c.name === selectedColor)?.rate || 0
+        // const colorPrice = colors.find((c) => c.name === selectedColor)?.rate || 0
+        const colorPrice = colors.find((c) => c.value === selectedColor)?.rate || 0;
+
         const sizePrice = sizes.find((s) => s.name === selectedSize)?.rate || 0
 
         return basePrice + textPrice + fontPrice + colorPrice + sizePrice 
@@ -103,12 +115,14 @@ useEffect(() => {
                 <div className="max-w-7xl mx-auto px-4 pb-4 md:pt-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-screen">
 
+                        <div className="md:sticky top-24 self-start h-fit">
                         <PreviewPane
                             text={text}
                             selectedFont={selectedFont}
                             selectedColor={selectedColor}
                             fonts={fonts}
                         />
+                        </div>
 
                         <ConfigurationPanel
                             phoneNumber={phoneNumber}

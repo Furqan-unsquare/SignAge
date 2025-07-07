@@ -80,7 +80,7 @@ export const ConfigurationPanel = ({
       <div className="flex-1 overflow-y-auto px-4 space-y-4 pb-4">
         {/* Text Input */}
         <div>
-          <label className="block text-sm font-semibold mb-1">Type Your Text</label>
+          <label className="block text-sm font-semibold mb-2">Type Your Text</label>
           <textarea
             type="text"
             value={text}

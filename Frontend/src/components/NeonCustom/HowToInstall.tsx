@@ -2,7 +2,7 @@
 import React from "react";
 
 export const HowToInstall = () => (
-  <div className="py-12 bg-black text-white">
+  <div className="pb-10 md:py-12 bg-black text-white">
     <div className="max-w-7xl mx-auto px-4">
       <h2 className="text-3xl font-bold text-center mb-10">
         How to Install Your Neon Sign

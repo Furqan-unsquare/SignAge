@@ -6,28 +6,28 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      name: "Rajeev Yadav",
-      text: "Got a neon logo made for my café – now everyone stops and stares! The detailing is amazing.",
+      name: "Vikas Yadav",
+      text: "Thank you for the fantastic door nameplate! Your creativity and attention to detail made it a standout piece. We truly appreciate your hard work and professionalism.",
       rating: 5,
-      image: "https://i.pinimg.com/736x/19/0a/fc/190afc31e3dd8e7804652d509272edbc.jpg"
+      image: "https://i.pinimg.com/736x/02/bc/a2/02bca2e8bb0479b76924158afef8ccc3.jpg"
     },
     {
       name: "Priya Rathi",
       text: "Got my daughter's name customised in a unicorn design. It turned out super cute and premium looking.",
       rating: 5,
-      image: "https://i.pinimg.com/736x/3e/ad/0d/3ead0d3bde1ba10424c8b9a82eea8498.jpg"
+      image: "https://i.pinimg.com/736x/51/60/66/516066f4221f2b7f4bfd0a391fdfddc9.jpg"
     },
     {
-      name: "Shayli Agarwal",
+      name: "Samantha Agarwal",
       text: "Used it for my wedding décor – guests couldn't stop taking selfies with the neon sign",
       rating: 5,
-      image: "https://i.pinimg.com/736x/bc/bf/e0/bcbfe0633c354a1ad9afceb67461e36b.jpg"
+      image: "https://i.pinimg.com/736x/4f/ca/5b/4fca5b3b48362225165a55ace5f1737d.jpg"
     },
     {
       name: "Biswatin",
       text: "Unboxing the FloRo felt like opening a new gadget. Looks so cool on my bedroom wall!",
       rating: 5,
-      image: "https://i.pinimg.com/736x/00/a8/4a/00a84a5014daaeb67e991fd2525a306b.jpg"
+      image: "https://i.pinimg.com/736x/e6/ef/94/e6ef9442732a9cf6b30597e990137684.jpg"
     }
   ];
 

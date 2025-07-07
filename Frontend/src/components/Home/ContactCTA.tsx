@@ -29,36 +29,38 @@ const ContactCTA = () => {
         </p>
 
         {/* Signage-style buttons */}
-        <div className="flex flex-col sm:flex-row gap-6  justify-center items-center">
-          <div className="relative group">
-            <div className="absolute -top-4 left-1/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
-            <div className="absolute -top-4 left-3/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
+      <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+  {/* Call Button */}
+  <div className="relative group">
+    <div className="absolute -top-4 left-1/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
+    <div className="absolute -top-4 left-3/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
 
-            <Button size="lg"
-              className="relative z-10 bg-yellow-400 border-4 border-white text-gray-900 font-bold px-10 py-5 text-xl hover:bg-yellow-300 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/50 group">
-              Call on: +91 9594274068
-              <Phone className="w-5 h-5 ml-2 group-hover:animate-pulse" />
-            </Button>
+    <a
+      href="tel:+919594274068"
+      className="relative z-10 bg-yellow-400 border-4 border-white text-gray-900 font-bold px-10 py-2 text-xl hover:bg-yellow-300 hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/50 group rounded-lg flex items-center"
+    >
+      Call on: +91 9594274068
+      <Phone className="w-5 h-5 ml-2 group-hover:animate-pulse" />
+    </a>
+  </div>
+
+      {/* Brand Button */}
+      <div className="relative group">
+        <div className="absolute -top-4 left-1/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
+        <div className="absolute -top-4 left-3/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
+        <a
+        href="https://maps.app.goo.gl/UGTpFgRmeMELYazY7"  // Replace this with your exact location link
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative group">
+          <div className="relative z-10 bg-gray-100 border-4 border-yellow-400 text-gray-800 font-bold px-10 py-2 text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/30 group rounded-lg flex items-center">
+            Ansh Enterprises
+            <Zap className="w-5 h-5 ml-2 text-yellow-500 group-hover:animate-bounce" />
           </div>
-
-          <div className="relative group">
-            <div className="absolute -top-4 left-1/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
-            <div className="absolute -top-4 left-3/4 w-1 h-8 bg-yellow-300 transform -translate-x-1/2 z-10"></div>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="relative z-10 bg-gray-100 border-4 border-yellow-400 text-gray-800 font-bold px-10 py-5 text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/30 group">
-              Ansh Enterprises
-              <Zap className="w-5 h-5 ml-2 text-yellow-500 group-hover:animate-bounce" />
-            </Button>
-          </div>
-        </div>
+        </a>
       </div>
-
-    
-
-     
+    </div>
+      </div>     
     </section>
   );
 };

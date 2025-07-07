@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { XCircle } from "lucide-react";
 
 const PreviewModal = ({ show, onClose, order }) => {
   const modalRef = useRef(null);
+  const [fonts, setFonts] = useState([]);
 
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -20,21 +21,60 @@ const PreviewModal = ({ show, onClose, order }) => {
     };
   }, [show]);
 
-  const fonts = [
-     { name: "Pacifico", fontFamily: "'Pacifico', cursive", rate: 0 },
-     { name: "Boxy", fontFamily: "'Arial Black', sans-serif", rate: 200 },
-     { name: "Play", fontFamily: "'Play', sans-serif", rate: 150 }
-    
-  ];
+  // Fetch fonts when modal opens
+  useEffect(() => {
+    const fetchFonts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/font-files/files");
+        const fontData = await res.json();
 
-  const selectedFontObj = fonts.find((f) => f.name === order?.font) || fonts[0];
-  const color = order?.color || "#ffff00";
+        setFonts(
+          fontData.map((font) => ({
+            name: font.name,
+            fontFamily: font.filename,
+            rate: font.rate,
+          }))
+        );
+
+        // Inject fonts dynamically
+        fontData.forEach((font) => {
+          const fontId = `font-${font.name}`;
+          if (document.getElementById(fontId)) return;
+
+          const style = document.createElement("style");
+          style.id = fontId;
+
+          const format = font.filename.endsWith(".otf") ? "opentype" : "truetype";
+          const url = `http://localhost:5000/fonts/${font.filename}`;
+
+          style.innerHTML = `
+            @font-face {
+              font-family: "${font.name}";
+              src: url("${url}") format("${format}");
+              font-display: swap;
+            }
+          `;
+          document.head.appendChild(style);
+        });
+      } catch (err) {
+        console.error("Error loading fonts:", err);
+      }
+    };
+
+    if (show) fetchFonts();
+  }, [show]);
+
+  const selectedFontObj = useMemo(() => {
+    return fonts.find((f) => f.name === order?.font) || fonts[0];
+  }, [fonts, order?.font]);
+
+  const color = order?.color || "white";
   const text = order?.inputText || "Preview";
 
   const getFontSize = (text) => {
     const lines = text.split("\n");
     const maxLineLength = Math.max(...lines.map((line) => line.length));
-    const base = 90;
+    const base = 120;
     return Math.max(40, base - maxLineLength * 2.5);
   };
 
@@ -47,6 +87,7 @@ const PreviewModal = ({ show, onClose, order }) => {
       <div
         ref={modalRef}
         className="relative bg-gray-900 rounded-2xl p-4 md:p-8 flex items-center justify-center overflow-hidden w-full max-w-3xl min-h-[300px] md:min-h-[400px]">
+        
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -63,7 +104,7 @@ const PreviewModal = ({ show, onClose, order }) => {
           />
         </div>
 
-        {/* SVG Text with glow effect */}
+        {/* SVG Text */}
         <svg
           width="100%"
           height="100%"
@@ -76,7 +117,7 @@ const PreviewModal = ({ show, onClose, order }) => {
             dominantBaseline="middle"
             textAnchor="middle"
             fontSize={fontSize}
-            fontFamily={selectedFontObj?.fontFamily || "sans-serif"}
+            fontFamily={selectedFontObj?.name || "sans-serif"}
             fill="#fff"
             style={{
               filter: `drop-shadow(0 0 0px ${color})

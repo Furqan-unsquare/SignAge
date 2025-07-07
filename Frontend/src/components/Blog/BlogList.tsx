@@ -38,6 +38,7 @@ const BlogList: React.FC = () => {
 
     fetchBlogs();
   }, []);
+  
 
   // Animation variants
   const container = {
@@ -95,10 +96,11 @@ const BlogList: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-16 px-4 sm:px-6 lg:px-8" >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
+          id="blod-list"
           initial="hidden"
           animate="visible"
           variants={headerVariants}
@@ -169,7 +171,9 @@ const BlogList: React.FC = () => {
                   className="bg-[#F9F5EF] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                   style={{ willChange: "transform, opacity" }}
                 >
-                  <Link to={`/blog/${blog._id}`} className="block h-full">
+                  <Link to={`/blog/${blog._id}`}
+                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="block h-full">
                     <div className="relative h-48 overflow-hidden">
                       <motion.img
                         src={blog.image}

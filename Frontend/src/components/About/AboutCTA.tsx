@@ -71,12 +71,12 @@ const ContentHub = () => {
               >
                 Start Designing
               </button>
-              <button
-                onClick={() => navigate("/blog")}
+              <a
+                href="/blog#blog-list"
                 className="px-6 py-3 bg-white text-[#EA3C1F] font-bold rounded-lg hover:bg-gray-100 transition"
               >
                 View Case Studies
-              </button>
+              </a>
             </div>
           </div>
         </div>

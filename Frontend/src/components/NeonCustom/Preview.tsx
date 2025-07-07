@@ -28,8 +28,7 @@ export const PreviewPane = ({
     [fonts, selectedFont]
   );
 
-  const activeColor = selectedColor || "#ffff00";
-  const length = text.length;
+  const activeColor = selectedColor || "white";
 
   // Convert hex to RGB
   const hexToRgb = (hex: string): string => {
@@ -40,7 +39,7 @@ export const PreviewPane = ({
     return `${r}, ${g}, ${b}`;
   };
 
-  // Calculate font size for SVG (adjust this logic as needed)
+  // Calculate font size for SVG
   const getFontSize = (text: string) => {
     const base = 90;
     if (!text) return base;
@@ -49,110 +48,128 @@ export const PreviewPane = ({
     return Math.max(40, base - maxLineLength * 2.5);
   };
 
+  // Enhanced glow effect for better screenshot capture
+  const getTextShadow = () => {
+    const rgb = hexToRgb(activeColor);
+    return `0 0 10px rgba(${rgb}, 0.8), 
+            0 0 20px rgba(${rgb}, 0.8),
+            0 0 30px rgba(${rgb}, 0.6),
+            0 0 40px rgba(${rgb}, 0.4)`;
+  };
+
   // Load fonts dynamically
-useEffect(() => {
-  fonts.forEach((font) => {
-    const fontUrl = `http://localhost:5000/fonts/${font.fontFamily}`;
-    const fontName = font.name;
-console.log(font.name, font.fontFamily);
-      
-    if (document.getElementById(`font-${fontName}`)) return;
+  useEffect(() => {
+    fonts.forEach((font) => {
+      const fontUrl = `http://localhost:5000/fonts/${font.fontFamily}`;
+      const fontName = font.name;
 
-    const style = document.createElement("style");
-    style.id = `font-${fontName}`;
-    style.innerHTML = `
-      @font-face {
-        font-family: "${fontName}";
-        src: url("${fontUrl}") format("truetype");
-        font-display: swap;
-      }
-    `;
-    document.head.appendChild(style);
-  });
-}, [fonts]);
+      if (document.getElementById(`font-${fontName}`)) return;
 
-
-
+      const style = document.createElement("style");
+      style.id = `font-${fontName}`;
+      const fontFormat = font.fontFamily.endsWith(".otf") ? "opentype" : "truetype";
+      style.innerHTML = `
+        @font-face {
+          font-family: "${fontName}";
+          src: url("${fontUrl}") format("${fontFormat}");
+          font-display: swap;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  }, [fonts]);
 
   const handleDownload = async () => {
-    if (!previewRef.current) return;
-    const canvas = await html2canvas(previewRef.current, {
-      useCORS: true,
-      backgroundColor: null,
-      scale: 2,
-    });
-    const dataUrl = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.download = "preview.png";
-    link.href = dataUrl;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (!previewRef.current || !selectedFontObj?.name) return;
+
+    try {
+      // Create a clone for screenshot with enhanced styles
+      const clone = previewRef.current.cloneNode(true) as HTMLDivElement;
+      clone.style.position = 'fixed';
+      clone.style.top = '-9999px';
+      clone.style.width = previewRef.current.offsetWidth + 'px';
+      clone.style.height = previewRef.current.offsetHeight + 'px';
+      document.body.appendChild(clone);
+
+      // Enhance text visibility in the clone
+      const textElement = clone.querySelector('.text-container') as HTMLDivElement;
+      if (textElement) {
+        // Apply enhanced glow effect
+        textElement.style.textShadow = getTextShadow();
+        // Ensure text is on top
+        textElement.style.zIndex = '50';
+      }
+
+      // Make background darker for better text contrast
+      const bgImage = clone.querySelector('img') as HTMLImageElement;
+      if (bgImage) {
+        bgImage.style.opacity = '0.3';
+      }
+
+      await document.fonts.ready;
+      await document.fonts.load(`16px "${selectedFontObj.name}"`);
+
+      const canvas = await html2canvas(clone, {
+        useCORS: true,
+        scale: 4,
+        backgroundColor: "#111",
+      });
+
+      document.body.removeChild(clone);
+
+      const dataUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.download = "preview.png";
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error("Download failed:", err);
+    }
   };
 
   return (
-    <div className="relative bg-gray-900 rounded-2xl flex items-center justify-center overflow-hidden w-full min-h-[280px] h-full">
+    <div className="relative bg-gray-900 rounded-2xl flex items-center justify-center overflow-hidden mt-2 md:mt-0 w-full h-[280px] md:h-[550px]">
       {/* Screenshot area */}
       <div
         ref={previewRef}
         className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-2xl"
       >
-        {/* Background */}
-        <div className="absolute inset-0 opacity-80">
-          <img
-            src="/preview.jpg"
-            className="w-full h-full object-cover"
-            alt="Background"
-          />
-        </div>
+        <img
+          src="/preview.jpg"
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          style={{ opacity: 0.6 }}
+          alt="Background"
+        />
 
-        {/* Text Layer */}
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 1000 300"
-          className="absolute top-0 left-0 z-10"
+        <div
+          className="text-container z-20 px-2"
+          style={{
+            fontFamily: selectedFontObj?.name,
+            color: "#fff",
+            textShadow: `0 0 5px ${activeColor}, 0 0 10px ${activeColor}, 0 0 15px ${activeColor}`,
+            fontSize: `${getFontSize(text)}px`,
+            textAlign: "center",
+            whiteSpace: "pre-line",
+            position: "relative",
+          }}
         >
-          <text
-            x="50%"
-            y="50%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize={getFontSize(text)}
-            fontFamily={selectedFontObj?.name } // Use name as fontFamily
-            fill="#ffffff"
-            stroke={activeColor}
-            strokeWidth="0"
-            style={{
-              filter: `drop-shadow(0 0 0px ${activeColor})
-                       drop-shadow(0 0 5px ${activeColor})
-                       drop-shadow(0 0 10px ${activeColor})`,
-              whiteSpace: "pre-line",
-            }}
-          >
-            {(text || "Preview")
-              .split("\n")
-              .map((line, idx) => (
-                <tspan
-                  key={idx}
-                  x="50%"
-                  dy={idx === 0 ? 0 : "1.2em"}
-                  dominantBaseline="middle"
-                >
-                  {line}
-                </tspan>
-              ))}
-          </text>
-        </svg>
+          {(text || "Preview")
+            .split("\n")
+            .map((line, idx) => (
+              <div key={idx}>{line}</div>
+            ))}
+        </div>
       </div>
 
       {/* Download Button */}
       <button
         onClick={handleDownload}
-        className="absolute z-20 top-4 right-4 bg-[#FDCA07] text-gray-600 font-bold px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-yellow-500 transition-all"
+        className="absolute z-30 top-4 right-4 bg-gray-300 text-gray-900 font-bold px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-500 transition-all"
       >
         <Download className="w-5 h-5" />
-        Download
+        <span className="hidden md:block">Download</span>
       </button>
     </div>
   );

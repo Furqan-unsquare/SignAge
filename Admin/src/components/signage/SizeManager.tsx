@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
-import SizeModal from './modals/SizeModal'; // adjust the path as needed
+import SizeModal from './modals/SizeModal';
 import { Edit2, Trash2, Plus, Ruler } from 'lucide-react';
 
 const API_URL = 'http://localhost:5000/api/sizes';
@@ -12,13 +11,6 @@ const SizeManager = () => {
   const [sizes, setSizes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    width: '',
-    height: '',
-    rate: '',
-  });
 
   useEffect(() => {
     fetchSizes();
@@ -48,39 +40,18 @@ const SizeManager = () => {
 
   const handleEdit = (size) => {
     setEditingId(size._id);
-    setFormData({
-      name: size.name || '',
-      width: size.width?.toString() || '',
-      height: size.height?.toString() || '',
-      rate: size.rate?.toString() || '',
-    });
     setShowModal(true);
   };
 
   const handleAddNew = () => {
     setEditingId(null);
-    setFormData({ name: '', width: '', height: '', rate: '' });
     setShowModal(true);
   };
 
-  const handleCancel = () => {
-    setShowModal(false);
-    setFormData({ name: '', width: '', height: '', rate: '' });
-    setEditingId(null);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const payload = {
-      name: formData.name,
-      width: parseFloat(formData.width),
-      height: parseFloat(formData.height),
-      rate: parseFloat(formData.rate),
-    };
-
-    const url = editingId ? `${API_URL}/${editingId}` : API_URL;
-    const method = editingId ? 'PUT' : 'POST';
+  const handleSubmit = async (id, sizeData) => {
+    const url = id ? `${API_URL}/${id}` : API_URL;
+    const method = id ? 'PUT' : 'POST';
+    console.log('Submitting:', { url, method, sizeData }); // Debug log
 
     try {
       const res = await fetch(url, {
@@ -89,13 +60,15 @@ const SizeManager = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(sizeData), // No change needed, sizeData already uses rate
       });
 
-      if (!res.ok) throw new Error('Failed to save');
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Failed to save: ${res.status} - ${errorText}`);
+      }
 
       await fetchSizes();
-      handleCancel();
     } catch (err) {
       console.error('Save failed:', err);
     }
@@ -113,17 +86,12 @@ const SizeManager = () => {
         </Button>
       </div>
 
-   <SizeModal
-  isOpen={showModal}
-  onClose={handleCancel}
-  size={editingId ? { id: editingId, ...formData } : null}
-  onSuccess={() => {
-    fetchSizes();
-    handleCancel();
-  }}
-/>
-
-
+      <SizeModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        size={editingId ? sizes.find((s) => s._id === editingId) : null}
+        onSubmit={handleSubmit}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sizes.map((size) => (

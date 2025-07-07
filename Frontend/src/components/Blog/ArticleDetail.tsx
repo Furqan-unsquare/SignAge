@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 interface Blog {
   _id: string;
@@ -51,9 +51,6 @@ const ArticleDetail: React.FC = () => {
       case "whatsapp":
         shareUrl = `https://wa.me/?text=${text}%20${url}`;
         break;
-      case "instagram":
-        shareUrl = "https://www.instagram.com/yourProfileName"; // Update with your Instagram profile
-        break;
       default:
         break;
     }
@@ -61,7 +58,7 @@ const ArticleDetail: React.FC = () => {
     if (shareUrl) window.open(shareUrl, "_blank");
   };
 
-  const socialPlatforms = ["whatsapp", "instagram"];
+  const socialPlatforms = ["whatsapp"];
 
   // Animation variants
   const containerVariants = {
@@ -144,7 +141,7 @@ const ArticleDetail: React.FC = () => {
         <img
           src={blog?.image}
           alt={blog?.title}
-          className="w-full h-full object-cover aspect-[4/5] md:aspect-auto"
+          className="w-full h-auto object-contain md:h-full md:object-cover md:aspect-auto rounded-2xl"
         />
       </motion.div>
 
@@ -179,9 +176,7 @@ const ArticleDetail: React.FC = () => {
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="w-9 h-9 bg-[#FDCA07] rounded-full shadow-md flex items-center justify-center text-[#EA3C1F] hover:bg-[#FFD700] transition-colors"
-              onClick={() => shareArticle(social)}
-            >
-              {social === "instagram" && <FaInstagram className="w-4 h-4 text-gray-700" />}
+              onClick={() => shareArticle(social)}>
               {social === "whatsapp" && <FaWhatsapp className="w-4 h-4 text-gray-700" />}
             </motion.button>
           ))}

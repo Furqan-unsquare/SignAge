@@ -9,9 +9,9 @@ const CustomProducts = () => {
           
           {/* Left - Image */}
           <div className="w-full lg:w-1/2">
-            <div className="relative overflow-hidden rounded-3xl shadow-[0_4px_60px_rgba(253,202,7,0.2)] border border-yellow-400/10">
+            <div className="relative overflow-hidden rounded-3xl shadow-[0_4px_60px_rgba(253,202,7,0.2)] border border-yellow-200/10">
               <img 
-                src="/assets/7.jpg" 
+                src="https://i.pinimg.com/736x/d4/fd/20/d4fd20210e840cf6484ba246ad1288de.jpg" 
                 alt="Custom neon sign" 
                 className="w-full object-cover rounded-3xl max-h-[420px]"
               />
@@ -23,7 +23,7 @@ const CustomProducts = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
               Talk to us to <span className="text-yellow-400">place your order</span>
             </h2>
-
+ 
             <div className="space-y-6">
               {[
                 {
@@ -56,10 +56,15 @@ const CustomProducts = () => {
 
             {/* WhatsApp CTA */}
             <div>
+              <a 
+                href="https://wa.me/919594274068" // <-- Replace with your phone number
+                target="_blank"
+                rel="noopener noreferrer">
               <button className="mt-4 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
                <FaWhatsapp className='h-5'/>
                 WhatsApp Us
               </button>
+              </a>
             </div>
           </div>
         </div>

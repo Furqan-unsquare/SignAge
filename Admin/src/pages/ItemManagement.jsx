@@ -29,11 +29,11 @@ const ItemManagement = () => {
           <div className="container mx-auto px-4 py-8">
             {/* Header */}
             <div className="mb-6 md:mb-8 mt-6 md:mt-0">
-              <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-2">
-                Signage Configuration Panel
+              <h1 className="text-2xl md:text-4xl font-bold mb-2">
+                Neon Signage Configuration Panel
               </h1>
               <p className="text-slate-600 text-sm md:text-lg">
-                Manage and configure different types of signage options
+                Configure pricing, fonts, colors, sizes, and add-ons for neon signage
               </p>
             </div>
 
@@ -41,7 +41,7 @@ const ItemManagement = () => {
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
 
               {/* Tabs Neon */}
-             <div className="w-full overflow-x-auto">
+             {/* <div className="w-full overflow-x-auto">
                 <TabsList className="flex bg-white shadow-md border-0 p-1 h-auto mb-6 rounded-xl min-w-max sm:min-w-full justify-start">
                   {signageTypes.map((type) => (
                     <TabsTrigger
@@ -73,24 +73,15 @@ const ItemManagement = () => {
                     </TabsTrigger>
                   ))}
                 </TabsList>
-              </div>
+              </div> */}
 
               {/* Neon Signage Configuration */}
               <TabsContent value="neon" className="space-y-4 md:space-y-6">
                 <Card className="border-0 shadow-lg bg-white/70 backdrop-blur-sm ">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 md:gap-3">
-                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                      Neon Signage Configuration
-                    </CardTitle>
-                    <CardDescription className="text-sm md:text-base">
-                      Configure pricing, fonts, colors, sizes, and add-ons for neon signage
-                    </CardDescription>
-                  </CardHeader>
                   <CardContent className="space-y-4 md:space-y-8">
                     {/* Letter Charge */}
-                    <section>
-                      <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-slate-800">Letter Pricing</h3>
+                    <section className=''>
+                      <h3 className="text-base pt-4 md:text-lg font-semibold mb-3 md:mb-4 text-slate-800">Letter Pricing</h3>
                       <LetterChargeManager />
                     </section>
 

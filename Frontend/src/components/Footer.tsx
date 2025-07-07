@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import {  Mail, Phone, MapPin } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -14,19 +15,17 @@ const Footer = () => {
               Illuminating brands with custom neon signs and LED displays since 2015.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Facebook">
-                <Facebook className="w-5 h-5" />
+              <a href="https://www.facebook.com/AnshEnterprises1" target='_blank' className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Facebook">
+                <FaFacebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Instagram">
-                <Instagram className="w-5 h-5" />
+              <a href="https://www.instagram.com/acrylic_signboard" target="_blank" rel="noopener noreferrer"
+               className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Instagram">
+                <FaInstagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Twitter">
-                <Twitter className="w-5 h-5" />
+              <a href="https://youtube.com/@anshenterprisesacrylicsign7671" target='_blank' className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="Twitter">
+                <FaYoutube  className='w-5 h-5'/>
               </a>
-              <a href="#" className="text-white hover:text-[#FDCA07] transition-colors duration-200" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div> 
+            </div>  
           </div>
 
           {/* Quick Links */}
@@ -41,7 +40,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li><Link to="/work" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Gallery</Link></li>
               <li><Link to="/blog" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Blog</Link></li>
-              <li><Link to="/contact-us" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Contact</Link></li>
+              <li><Link to="/#contact" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Contact</Link></li>
             </ul>
           </div>
           </div>
@@ -49,20 +48,21 @@ const Footer = () => {
           {/* Our Products */}
           <div>
             <h4 className="text-lg font-semibold text-[#FDCA07] mb-4">Our Products</h4>
-            <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-6 gap-y-3">
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-4 gap-y-3">
               <ul className="space-y-3">
-  <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Acrylic Letter/Signboard</a></li>
-  <li><a href="/work#project?category=aluminium" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Ch. Letter</a></li>
-  <li><a href="/work#project?category=3d-steel" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">3D Steel Letters</a></li>
-  <li><a href="/work#project?category=laser-router" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Laser Router Cutting</a></li>
-</ul>
+                <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Acrylic Letter/Signboard</a></li>
+                <li><a href="/work#project?category=aluminium" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Ch. Letter</a></li>
+                <li><a href="/work#project?category=3d-steel" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">3D Steel Letters</a></li>
+                <li><a href="/work#project?category=laser-router" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Laser Router Cutting</a></li>
+              </ul>
 
-<ul className="space-y-3">
-  <li><a href="/work#project?category=glow-sign" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Glow Signboard Flex</a></li>
-  <li><a href="/work#project?category=acp" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">ACP Signboard</a></li>
-  <li><a href="/work#project?category=office-name" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Office Name Plate</a></li>
-  <li><a href="/work#project?category=led-scrolling" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">LED Scrolling Board</a></li>
-</ul>
+              <ul className="space-y-3">
+                <li><a href="/work#project?category=glow-sign" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Glow Signboard Flex</a></li>
+                <li><a href="/work#project?category=acp" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">ACP Signboard</a></li>
+                <li><a href="/work#project?category=photos" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Signboard</a></li>
+                <li><a href="/work#project?category=office-name" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Office Name Plate</a></li>
+                <li><a href="/work#project?category=led-scrolling" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">LED Scrolling Board</a></li>
+              </ul>
 
             </div>
           </div>

@@ -10,7 +10,7 @@ const CoverSection = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('https://i.pinimg.com/736x/51/57/f3/5157f3fa4b09aa3aafd43bfd40b0e638.jpg')"
+            backgroundImage: "url('https://i.pinimg.com/736x/c4/16/3f/c4163f377cb61cb6e53ca6d568900d72.jpg')"
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
