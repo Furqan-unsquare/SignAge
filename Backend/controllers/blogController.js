@@ -68,15 +68,28 @@ const getBlogs = async (req, res) => {
 const getBlogById = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);
+
     if (!blog) {
-      return res.status(404).json({ message: 'Blog not found' });
+      return res.status(404).json({ message: "Blog not found" });
     }
-    res.status(200).json(blog);
-  } catch (error) {
-    console.error('Error fetching blog:', error);
-    res.status(500).json({ message: 'Server error' });
+
+    const formattedBlog = {
+      _id: blog._id,
+      title: blog.title,
+      description: blog.description,
+      createdAt: blog.createdAt,
+      image: blog.image?.data
+        ? `data:${blog.image.contentType};base64,${blog.image.data.toString('base64')}`
+        : null,
+    };
+
+    res.json(formattedBlog);
+  } catch (err) {
+    console.error('Error fetching blog by ID:', err);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // UPDATE: Blog by ID
 const updateBlog = async (req, res) => {

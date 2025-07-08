@@ -124,7 +124,7 @@ const ArticleDetail: React.FC = () => {
       </div>
     );
   }
-
+ 
   return (
    <motion.div
   variants={containerVariants}
