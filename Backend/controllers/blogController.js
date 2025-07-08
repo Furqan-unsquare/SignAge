@@ -45,8 +45,8 @@ const createBlog = async (req, res) => {
 // READ: Get All Blogs
 const getBlogs = async (req, res) => {
    try {
-    const blogs = await Blog.find();
-
+    const blogs = await Blog.find().sort({ createdAt: -1 });
+    
     const formattedBlogs = blogs.map(blog => ({
       _id: blog._id,
       title: blog.title,

@@ -22,7 +22,7 @@ const BlogList: React.FC = () => {
       try {
         setLoading(true);
         const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-const response = await fetch(`${BASE_URL}/api/blogs`);
+        const response = await fetch(`${BASE_URL}/api/blogs`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
@@ -35,12 +35,11 @@ const response = await fetch(`${BASE_URL}/api/blogs`);
         setBlogs([]);
       } finally {
         setLoading(false);
-      } 
+      }
     };
 
     fetchBlogs();
   }, []);
-  
 
   // Animation variants
   const container = {
@@ -97,12 +96,29 @@ const response = await fetch(`${BASE_URL}/api/blogs`);
     setVisibleCount((prevCount) => Math.min(prevCount + 3, blogs.length));
   };
 
+  // Skeleton Loader Component
+  const SkeletonCard = () => (
+    <motion.div
+      variants={item}
+      className="bg-[#F9F5EF] rounded-xl overflow-hidden shadow-lg animate-pulse"
+    >
+      <div className="relative h-48 bg-gray-200" />
+      <div className="p-4 sm:p-6">
+        <div className="h-4 bg-gray-200 rounded w-1/3 mb-3" />
+        <div className="h-6 bg-gray-200 rounded w-3/4 mb-3" />
+        <div className="h-4 bg-gray-200 rounded w-full mb-2" />
+        <div className="h-4 bg-gray-200 rounded w-5/6 mb-4" />
+        <div className="h-4 bg-gray-200 rounded w-1/4" />
+      </div>
+    </motion.div>
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-16 px-4 sm:px-6 lg:px-8" >
+    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          id="blod-list"
+          id="blog-list"
           initial="hidden"
           animate="visible"
           variants={headerVariants}
@@ -136,14 +152,11 @@ const response = await fetch(`${BASE_URL}/api/blogs`);
           style={{ willChange: "transform, opacity" }}
         >
           {loading && (
-            <motion.p
-              className="text-white text-center col-span-full"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              Loading blogs...
-            </motion.p>
+            <>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={`skeleton-${index}`} />
+              ))}
+            </>
           )}
 
           {error && (
@@ -173,9 +186,11 @@ const response = await fetch(`${BASE_URL}/api/blogs`);
                   className="bg-[#F9F5EF] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                   style={{ willChange: "transform, opacity" }}
                 >
-                  <Link to={`/blog/${blog._id}`}
-                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                    className="block h-full">
+                  <Link
+                    to={`/blog/${blog._id}`}
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="block h-full"
+                  >
                     <div className="relative h-48 overflow-hidden">
                       <motion.img
                         src={blog.image}
@@ -188,6 +203,9 @@ const response = await fetch(`${BASE_URL}/api/blogs`);
                           ease: [0.16, 1, 0.3, 1],
                         }}
                         style={{ willChange: "transform, opacity" }}
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://via.placeholder.com/400x225?text=Image+Not+Found';
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     </div>

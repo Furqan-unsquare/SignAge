@@ -23,7 +23,11 @@ const Blogpanel = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/blogs`);
       const data = await response.json(); 
-      setBlogs(data);
+       // Sort newest first
+    const sorted = data.sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+      setBlogs(sorted);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching blogs:', error);
@@ -156,7 +160,15 @@ const handleSubmit = async (e) => {
   return (
     <div className="min-h-screen w-screen flex bg-gray-50">
       <Sidebar />
+      
       <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-x-hidden">
+         {loading ? (
+        // Loader only for main content
+        <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-10">
+          <div className="w-12 h-12 border-4 border-emerald-500 border-dashed rounded-full animate-spin" />
+        </div>
+      ) : (
+        <>
         <div className="flex justify-between items-center mb-4 mt-6 md:mt-0">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Blog Management</h1>
           <button
@@ -193,6 +205,7 @@ const handleSubmit = async (e) => {
         />
       ))}
     </div>
+    
 
     {/* Load More Button */}
     {visibleCount < blogs.length && (
@@ -207,6 +220,8 @@ const handleSubmit = async (e) => {
     )}
   </>
 )}
+        </>
+      )}
 
       </main>
 
