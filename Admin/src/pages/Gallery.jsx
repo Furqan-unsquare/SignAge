@@ -20,6 +20,9 @@ const AdminGallery = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(3);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 
   const productTypes = [
     { name: "Acrylic Letter/Signboard", id: "acrylic" },
@@ -43,7 +46,7 @@ const AdminGallery = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/projects");
+        const response = await fetch(`${API_BASE_URL}/api/projects`);
         if (!response.ok) throw new Error("Failed to fetch projects");
         const result = await response.json();
         // Handle different response structures
@@ -61,6 +64,7 @@ const AdminGallery = () => {
 
   // Filter projects when category changes
   useEffect(() => {
+    setVisibleCount(selectedCategory === "all" ? 4 : 12);
     if (selectedCategory === "all") {
       setFilteredProjects(projects);
     } else if (selectedCategory === "featured") {
@@ -108,7 +112,7 @@ const AdminGallery = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/projects", {
+      const response = await fetch(`${API_BASE_URL}/api/projects`, {
         method: "POST",
         body: form,
       });
@@ -127,7 +131,7 @@ const AdminGallery = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/projects/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/projects/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete project");
@@ -150,19 +154,29 @@ const AdminGallery = () => {
   };
 
   // Group projects by category when filtered by "all"
-  const groupedProjects = selectedCategory === "all" ? 
-    productTypes.reduce((acc, type) => {
-      const categoryProjects = projects.filter(project => project.category === type.id);
+const groupedProjects = selectedCategory === "all"
+  ? productTypes.reduce((acc, type) => {
+      const categoryProjects = projects.filter((p) => p.category === type.id);
       if (categoryProjects.length > 0) {
-        acc.push({ category: type.id, projects: categoryProjects });
+        acc.push({
+          category: type.id,
+          projects: categoryProjects.slice(0, visibleCount), // show only limited
+        });
       }
       return acc;
-    }, []).concat(
-      projects.filter(project => project.featured).length > 0 ? 
-      { category: "featured", projects: projects.filter(project => project.featured) } : 
-      []
-    ) : 
-    [{ category: selectedCategory, projects: filteredProjects }];
+    }, [])
+    .concat(
+      projects.filter((p) => p.featured).length > 0
+        ? { category: "featured", projects: projects.filter((p) => p.featured).slice(0, visibleCount) }
+        : []
+    )
+  : [
+      {
+        category: selectedCategory,
+        projects: filteredProjects.slice(0, visibleCount), // controlled
+      },
+    ];
+
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -278,6 +292,19 @@ const AdminGallery = () => {
                   </motion.div>
                 </div>
               ))}
+
+              {/* Load More Button */}
+{visibleCount < filteredProjects.length && (
+  <div className="flex justify-center mt-6">
+    <button
+      onClick={() => setVisibleCount((prev) => prev + 12)}
+      className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
+    >
+      Load More
+    </button>
+  </div>
+)}
+
             </div>
           )}
         </div>
@@ -404,18 +431,6 @@ const AdminGallery = () => {
                       >
                         {showUrlInput ? "Hide URL Input" : "Want to enter URL?"}
                       </button>
-                      {/* PREVIEW SECTION */}
-                      {/* {imagePreview && (
-                        <div className="w-full lg:w-1/3 p-4 bg-gray-50 rounded-lg shadow-inner flex flex-col items-center justify-start">
-                          <p className="text-sm text-gray-700 mb-2 font-semibold self-start">Preview:</p>
-                          <img
-                            src={imagePreview}
-                            alt="Preview"
-                            className="w-40 sm:w-56 lg:w-full max-h-60 sm:max-h-72 lg:max-h-80 object-contain rounded-lg border"
-                            loading="lazy"
-                          />
-                        </div>
-                      )} */}
                       <div className="pt-4">
                         <button
                           type="submit"

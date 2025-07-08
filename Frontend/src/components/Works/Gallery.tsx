@@ -95,22 +95,26 @@ productLinks.map((item) => (
 
 
   // Fetch projects from API
-  useEffect(() => {
-    const fetchProjects = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/api/projects');
-    if (!response.ok) throw new Error('Failed to fetch projects');
-    const data = await response.json(); // Don't destructure here
-    console.log("Fetched projects:", data);
-    setProjects(data); // should be an array
-  } catch (error) {
-    console.error("Error fetching projects:", error);
-  }
-};
+useEffect(() => {
+  const fetchProjects = async () => {
+    try {
+      const BASE_URL = import.meta.env.VITE_API_URL;
+      console.log("API URL:", import.meta.env.VITE_API_URL);
+      
 
+      const response = await fetch(`${BASE_URL}/api/projects`);
+      if (!response.ok) throw new Error('Failed to fetch projects');
+      const data = await response.json();
+      console.log("Fetched projects:", data);
+      setProjects(data);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
 
-    fetchProjects();
-  }, []);
+  fetchProjects();
+}, []);
+
 
   // Filter projects
 const filteredProjects = projects.filter((project) => {

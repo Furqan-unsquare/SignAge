@@ -40,16 +40,22 @@ export const NeonConfigurator = () => {
     const [colors, setColors] = useState<ColorOption[]>([])
     const [sizes, setSizes] = useState<SizeOption[]>([])
     const [letterCharge, setLetterCharge] = useState(0)
+    const [isConfigLoading, setIsConfigLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true); // replaces isConfigLoading
+
+
 
     // Fetch data from APIs
 useEffect(() => {
   const fetchData = async () => {
     try {
+    const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      console.log("API URL:", import.meta.env.VITE_API_URL);
       const [letterRes, colorRes, sizeRes, fontRes] = await Promise.all([
-        fetch('http://localhost:5000/api/letter-charges'),
-        fetch('http://localhost:5000/api/colors'),
-        fetch('http://localhost:5000/api/sizes'),
-        fetch('http://localhost:5000/api/font-files/files')
+        fetch(`${BASE_URL}/api/letter-charges`),
+        fetch(`${BASE_URL}/api/colors`),
+        fetch(`${BASE_URL}/api/sizes`),
+        fetch(`${BASE_URL}/api/font-files/files`)
       ]);
 
       if (!letterRes.ok || !colorRes.ok || !sizeRes.ok || !fontRes.ok)
@@ -74,13 +80,16 @@ useEffect(() => {
 
       setFonts(mappedFonts);
 
-      // ✅ Set first font and color as default if not already selected
       if (mappedFonts.length > 0) {
         setSelectedFont(mappedFonts[0].name);
       }
       if (colorData.length > 0) {
         setSelectedColor(colorData[0].value);
       }
+    
+        setIsConfigLoading(false);
+         setIsLoading(false); // Show both after 2 seconds
+
 
     } catch (err) {
       console.error('Error fetching configuration data:', err);
@@ -90,19 +99,26 @@ useEffect(() => {
   fetchData();
 }, []);
 
+const calculatePrice = () => {
+  const textPrice = text.length * letterCharge;
+
+  // Only include extra rates when text length is exactly 1
+  const fontPrice = text.length > 0
+    ? fonts.find((f) => f.name === selectedFont)?.rate || 0
+    : 0;
+
+  const colorPrice = text.length > 0
+    ? colors.find((c) => c.value === selectedColor)?.rate || 0
+    : 0;
+
+  const sizePrice = text.length > 0
+    ? sizes.find((s) => s.name === selectedSize)?.rate || 0
+    : 0;
+
+  return textPrice + fontPrice + colorPrice + sizePrice;
+};
 
 
-    const calculatePrice = () => {
-        const basePrice = 0
-        const textPrice = text.length * letterCharge // e.g., 10 letters × 100 Rs = 1000 Rs
-        const fontPrice = fonts.find((f) => f.name === selectedFont)?.rate || 0
-        // const colorPrice = colors.find((c) => c.name === selectedColor)?.rate || 0
-        const colorPrice = colors.find((c) => c.value === selectedColor)?.rate || 0;
-
-        const sizePrice = sizes.find((s) => s.name === selectedSize)?.rate || 0
-
-        return basePrice + textPrice + fontPrice + colorPrice + sizePrice 
-    }
 
     useEffect(() => {
         setTotalPrice(calculatePrice())
@@ -115,16 +131,28 @@ useEffect(() => {
                 <div className="max-w-7xl mx-auto px-4 pb-4 md:pt-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-screen">
 
-                        <div className="md:sticky top-24 self-start h-fit">
-                        <PreviewPane
-                            text={text}
-                            selectedFont={selectedFont}
-                            selectedColor={selectedColor}
-                            fonts={fonts}
-                        />
+                        <div className="md:sticky top-24 self-start h-full md:min-h-[400px]">
+                          {isLoading ? (
+                            <div className=" h-full md:min-h-[350px]">
+                              <img src="https://i.pinimg.com/736x/b4/af/50/b4af50b4f704232609d89952e5124187.jpg" alt="" className="h-full md:max-h-[550px] rounded-xl"/>
+                            </div>
+                          ) : (
+                            <PreviewPane
+                              text={text}
+                              selectedFont={selectedFont}
+                              selectedColor={selectedColor}
+                              fonts={fonts}
+                            />
+                          )}
                         </div>
 
-                        <ConfigurationPanel
+                        {isConfigLoading ? (
+                          <div className="flex flex-col justify-center items-center min-h-[400px]">
+                            <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mb-4" />
+                            <p className="text-white text-sm opacity-70">Loading configurator...</p>
+                          </div>
+                        ) : (
+                          <ConfigurationPanel
                             phoneNumber={phoneNumber}
                             setPhoneNumber={setPhoneNumber}
                             text={text}
@@ -139,7 +167,8 @@ useEffect(() => {
                             fonts={fonts}
                             colors={colors}
                             sizes={sizes}
-                        />
+                          />
+                        )}
                     </div>
                 </div>
             </div>

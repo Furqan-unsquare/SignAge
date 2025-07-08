@@ -5,13 +5,15 @@ import { XCircle } from "lucide-react";
 const PreviewModal = ({ show, onClose, order }) => {
   const modalRef = useRef(null);
   const [fonts, setFonts] = useState([]);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       onClose();
     }
   };
-
+ 
   useEffect(() => {
     if (show) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -22,47 +24,51 @@ const PreviewModal = ({ show, onClose, order }) => {
   }, [show]);
 
   // Fetch fonts when modal opens
-  useEffect(() => {
-    const fetchFonts = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/api/font-files/files");
-        const fontData = await res.json();
+useEffect(() => {
+  const fetchFonts = async () => {
+    setIsLoading(true); // Start loading
 
-        setFonts(
-          fontData.map((font) => ({
-            name: font.name,
-            fontFamily: font.filename,
-            rate: font.rate,
-          }))
-        );
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/font-files/files`);
+      const fontData = await res.json();
 
-        // Inject fonts dynamically
-        fontData.forEach((font) => {
-          const fontId = `font-${font.name}`;
-          if (document.getElementById(fontId)) return;
+      setFonts(
+        fontData.map((font) => ({
+          name: font.name,
+          fontFamily: font.filename,
+          rate: font.rate,
+        }))
+      );
 
-          const style = document.createElement("style");
-          style.id = fontId;
+      fontData.forEach((font) => {
+        const fontId = `font-${font.name}`;
+        if (document.getElementById(fontId)) return;
 
-          const format = font.filename.endsWith(".otf") ? "opentype" : "truetype";
-          const url = `http://localhost:5000/fonts/${font.filename}`;
+        const style = document.createElement("style");
+        style.id = fontId;
 
-          style.innerHTML = `
-            @font-face {
-              font-family: "${font.name}";
-              src: url("${url}") format("${format}");
-              font-display: swap;
-            }
-          `;
-          document.head.appendChild(style);
-        });
-      } catch (err) {
-        console.error("Error loading fonts:", err);
-      }
-    };
+        const format = font.filename.endsWith(".otf") ? "opentype" : "truetype";
+        const url = `${API_BASE_URL}/fonts/${font.filename}`;
 
-    if (show) fetchFonts();
-  }, [show]);
+        style.innerHTML = `
+          @font-face {
+            font-family: "${font.name}";
+            src: url("${url}") format("${format}");
+            font-display: swap;
+          }
+        `;
+        document.head.appendChild(style);
+      });
+    } catch (err) {
+      console.error("Error loading fonts:", err);
+    } finally {
+      setIsLoading(false); // Finish loading
+    }
+  };
+
+  if (show) fetchFonts();
+}, [show]);
+
 
   const selectedFontObj = useMemo(() => {
     return fonts.find((f) => f.name === order?.font) || fonts[0];
@@ -105,11 +111,16 @@ const PreviewModal = ({ show, onClose, order }) => {
         </div>
 
         {/* SVG Text */}
+        {isLoading ? (
+  <div className="flex justify-center items-center w-full h-full z-20">
+    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white" />
+  </div>
+) : (
         <svg
           width="100%"
           height="100%"
           viewBox="0 0 1000 300"
-          className="absolute top-0 left-0 z-10"
+          className="absolute bottom-4 left-0 z-10"
         >
           <text
             x="50%"
@@ -138,6 +149,7 @@ const PreviewModal = ({ show, onClose, order }) => {
             ))}
           </text>
         </svg>
+        )}
       </div>
     </div>
   );

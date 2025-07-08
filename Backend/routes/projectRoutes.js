@@ -12,4 +12,4 @@ router.post('/', upload.single('image'), createProject);
 // DELETE: Delete a project by ID
 router.delete('/:id', deleteProject);
 
-module.exports = router;
+module.exports = router; 

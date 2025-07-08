@@ -21,7 +21,9 @@ const BlogList: React.FC = () => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/blogs");
+        const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const response = await fetch(`${BASE_URL}/api/blogs`);
+
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
         }
@@ -33,7 +35,7 @@ const BlogList: React.FC = () => {
         setBlogs([]);
       } finally {
         setLoading(false);
-      }
+      } 
     };
 
     fetchBlogs();

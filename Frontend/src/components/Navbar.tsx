@@ -74,49 +74,57 @@ const productTypes = [
 
           {/* Desktop Navigation - Right Side */}
           <nav className="hidden md:flex items-center space-x-8 lg:space-x-10"> {/* Products Dropdown - Desktop Only */}
-            <motion.div
-              className="hidden md:block relative"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+          <motion.div
+            className="hidden md:block relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onMouseLeave={() => {
+              setIsProductsOpen(false);
+              clearTimeout(hoverTimeout);
+            }}
+          >
+            <button
+              className="flex items-center text-white font-anton text-lg hover:text-red-300 transition-colors duration-300"
+              onMouseEnter={() => {
+                hoverTimeout = setTimeout(() => {
+                  setIsProductsOpen(true);
+                }, 500); // delay in ms
+              }}
+              onClick={() => {
+                window.location.href = "/work";
+              }}
             >
-              <button
-                className="flex items-center text-white font-anton text-lg hover:text-red-400 transition-colors duration-300"
-                onMouseEnter={() => setIsProductsOpen(true)}
-                onClick={() => setIsProductsOpen(!isProductsOpen)}
+              Products
+              <ChevronDown
+                className={`ml-1 h-5 w-5 transition-transform ${
+                  isProductsOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {/* Dropdown Menu */}
+            {isProductsOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute left-0 mt-2 w-56 bg-white/10 backdrop-blur-lg border border-white/20 rounded-md shadow-xl z-50"
               >
-                Products
-                <ChevronDown
-                  className={`ml-1 h-5 w-5 transition-transform ${
-                    isProductsOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+                <div className="py-1">
+                  {productTypes.map((product) => (
+                    <a
+                      key={product.name}
+                      href={`/work#project?category=${product.id}`}
+                      className="block px-4 py-2 text-gray-100 hover:text-gray-300"
+                    >
+                      {product.name}
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
 
-              {/* Dropdown Menu */}
-              {isProductsOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute left-0 mt-2 w-56  bg-white/10 backdrop-blur-lg border border-white/20 rounded-md shadow-xl z-50"
-
-                  onMouseLeave={() => setIsProductsOpen(false)}
-                >
-                  <div className="py-1">
-                    {productTypes.map((product) => (
-                      <a
-                        key={product.name}
-                        href={`/work#project?category=${product.id}`}
-
-                        className="block px-4 py-2 text-gray-100 hover:text-gray-300"
-                      >
-                        {product.name}
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </motion.div>
             {navItems.map((item, idx) => (
               
               <motion.div
@@ -135,7 +143,7 @@ const productTypes = [
               >
                 <a
                   href={item.href}
-                  className="relative text-white font-anton text-lg hover:text-red-400 transition-colors duration-300"
+                  className="relative text-white font-anton text-lg hover:text-red-200 transition-colors duration-300"
                 >
                   {item.name}
                   <motion.span

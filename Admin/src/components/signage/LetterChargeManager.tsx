@@ -12,14 +12,16 @@ const LetterChargeManager = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     fetchLetterCharges();
-  }, []);
+  }, []); 
 
 const fetchLetterCharges = async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/letter-charges', {
+    const response = await fetch(`${API_BASE_URL}/api/letter-charges`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
@@ -56,7 +58,7 @@ const handleSave = async () => {
   if (isNaN(price) || price < 0 || !selectedId) return;
 
   try {
-    const response = await fetch(`http://localhost:5000/api/letter-charges/${selectedId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/letter-charges/${selectedId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

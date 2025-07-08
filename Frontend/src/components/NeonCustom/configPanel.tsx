@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Star, Info, Phone } from "lucide-react"
 import { WhatsAppButton } from "./WhatsAppButton"
 
@@ -41,12 +41,13 @@ export const ConfigurationPanel = ({
   selectedSize,
   setSelectedSize,
   totalPrice,
-  fonts,
+  fonts, 
   colors,
   sizes
 }: ConfigurationPanelProps) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const token = localStorage.getItem('token');
+const [defaultsApplied, setDefaultsApplied] = useState(false);
 
   const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
@@ -54,6 +55,14 @@ export const ConfigurationPanel = ({
       setMobileNumber(value);
     }
   };
+  useEffect(() => {
+  if (text.length === 1) {
+    if (fonts.length > 0) setSelectedFont(fonts[0].name);
+    if (colors.length > 0) setSelectedColor(colors[0].value);
+    if (sizes.length > 0) setSelectedSize(sizes[0].name);
+  }
+}, [text, fonts, colors, sizes]);
+
 
   return (
     <div className="w-full bg-black text-white flex flex-col">

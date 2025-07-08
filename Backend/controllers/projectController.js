@@ -1,6 +1,6 @@
 const Project = require('../model/Project');
 
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 'https://your-live-domain.com' : 'http://localhost:5000';
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 'https://signage-f2vt.onrender.com' : 'https://signage-f2vt.onrender.com';
 
 // GET: Fetch all projects
 const getProjects = async (req, res) => {

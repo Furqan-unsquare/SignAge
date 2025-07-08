@@ -5,7 +5,9 @@ import { Badge } from '../ui/badge';
 import SizeModal from './modals/SizeModal';
 import { Edit2, Trash2, Plus, Ruler } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000/api/sizes';
+// const API_URL = 'http://localhost:5000/api/sizes';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = `${API_BASE_URL}/api/sizes`;
 
 const SizeManager = () => {
   const [sizes, setSizes] = useState([]);

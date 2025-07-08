@@ -19,7 +19,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
+  LineElement, 
   BarElement,
   Title,
   Tooltip,
@@ -38,6 +38,8 @@ const DashboardPage = () => {
   const [recentOrders, setRecentOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,18 +54,19 @@ const DashboardPage = () => {
           return;
         }
 
-        console.log("Fetching data with token:", token.substring(0, 10) + "...");
-        const [ordersRes, enquiriesRes, projectsRes] = await Promise.all([
-          fetch("http://localhost:5000/api/orders", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          fetch("http://localhost:5000/api/enquiries", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          fetch("http://localhost:5000/api/projects", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
+         console.log("Fetching data with token:", token.substring(0, 10) + "...");
+
+    const [ordersRes, enquiriesRes, projectsRes] = await Promise.all([
+      fetch(`${API_BASE_URL}/api/orders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+      fetch(`${API_BASE_URL}/api/enquiries`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+      fetch(`${API_BASE_URL}/api/projects`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+    ]);
 
         // Check individual response status
         if (!ordersRes.ok) throw new Error(`Orders API failed: ${ordersRes.status}`);
@@ -114,13 +117,16 @@ const DashboardPage = () => {
 
     fetchData();
   }, [token]);
+  
+const transactionChartData = useMemo(() => {
+  const reversed = [...recentOrders].reverse(); // 👈 Reverse the order
 
-  const transactionChartData = useMemo(() => ({
-    labels: recentOrders.map((o) => new Date(o.date).toLocaleDateString()),
+  return {
+    labels: reversed.map((o) => new Date(o.date).toLocaleDateString()),
     datasets: [
       {
         label: "Recent Orders",
-        data: recentOrders.map((o) => o.amount), // Now works with amount
+        data: reversed.map((o) => o.amount),
         fill: false,
         borderColor: "#10B981",
         backgroundColor: "rgba(16, 185, 129, 0.1)",
@@ -130,26 +136,39 @@ const DashboardPage = () => {
         pointBorderColor: "#10B981",
       },
     ],
-  }), [recentOrders]);
+  };
+}, [recentOrders]);
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { position: "top", labels: { color: "#374151" } },
-      tooltip: {
-        backgroundColor: "#1F2937",
-        titleColor: "#F9FAFB",
-        bodyColor: "#F9FAFB",
-        borderColor: "#10B981",
-        borderWidth: 1,
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { position: "top", labels: { color: "#374151" } },
+    tooltip: {
+      backgroundColor: "#1F2937",
+      titleColor: "#F9FAFB",
+      bodyColor: "#F9FAFB",
+      borderColor: "#10B981",
+      borderWidth: 1,
+    },
+  },
+  scales: {
+    x: {
+      grid: { display: false },
+      ticks: { color: "#6B7280" },
+    },
+    y: {
+      beginAtZero: true,
+      grid: { color: "#E5E7EB" },
+      ticks: {
+        color: "#6B7280",
+        stepSize: 1000, // 👈 This sets the gap between y-axis ticks
       },
     },
-    scales: {
-      x: { grid: { display: false }, ticks: { color: "#6B7280" } },
-      y: { grid: { color: "#E5E7EB" }, ticks: { color: "#6B7280" }, beginAtZero: true },
-    },
-  };
+  },
+};
+
 
   if (isLoading) {
     return (

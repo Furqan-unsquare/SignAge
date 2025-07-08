@@ -2,22 +2,27 @@ import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, X, Save, Loader } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 
-const AdminPanel = () => {
+const Blogpanel = () => {
   const [blogs, setBlogs] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(6); // Initial visible count
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [currentBlog, setCurrentBlog] = useState(null);
-  const [formData, setFormData] = useState({
-    image: '',
-    title: '',
-    description: ''
-  });
+  
+ const [formData, setFormData] = useState({
+  title: '',
+  description: '',
+});
+// const [imageFile, setImageFile] = useState(null);
+
+  const API_BASE_URL = import.meta.env.VITE_API_URL; // Vite
+  
 
   // Fetch all blogs
   const fetchBlogs = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/blogs');
-      const data = await response.json();
+      const response = await fetch(`${API_BASE_URL}/api/blogs`);
+      const data = await response.json(); 
       setBlogs(data);
       setLoading(false);
     } catch (error) {
@@ -27,8 +32,35 @@ const AdminPanel = () => {
   };
 
   useEffect(() => {
-    fetchBlogs();
-  }, []);
+  fetchBlogs();
+}, []);
+
+const handleImageUpload = (e) => {
+  const file = e.target.files[0];
+  if (file && file.size <= 2 * 1024 * 1024) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData((prev) => ({
+        ...prev,
+        image: reader.result, // ✅ base64 string
+      }));
+    };
+    reader.readAsDataURL(file);
+  } else {
+    alert("Please select an image smaller than 2MB");
+  }
+};
+
+
+const handleImageChange = (e) => {
+  const file = e.target.files[0];
+  if (file && file.size <= 2 * 1024 * 1024) {
+    setImageFile(file);
+  } else {
+    alert("Please select an image smaller than 2MB");
+  }
+};
+
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -40,43 +72,48 @@ const AdminPanel = () => {
   };
 
   // Submit form (create or update)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const url = currentBlog 
-        ? `http://localhost:5000/api/blogs/${currentBlog._id}` 
-        : 'http://localhost:5000/api/blogs';
+  try {
+    const payload = {
+      title: formData.title,
+      description: formData.description,
+      image: formData.image, // ✅ base64 image string
+    };
 
-      const method = currentBlog ? 'PUT' : 'POST';
+    const url = currentBlog
+      ? `${API_BASE_URL}/api/blogs/${currentBlog._id}`
+      : `${API_BASE_URL}/api/blogs`;
 
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    const method = currentBlog ? 'PUT' : 'POST';
 
-      if (!response.ok) throw new Error('Operation failed');
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
 
-      // Refresh data without page reload
-      await fetchBlogs();
-      
-      setShowForm(false);
-      setCurrentBlog(null);
-      setFormData({
-        image: '',
-        title: '',
-        description: ''
-      });
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (!response.ok) throw new Error('Failed to save blog');
+
+    await fetchBlogs();
+
+    // Reset
+    setShowForm(false);
+    setCurrentBlog(null);
+    setFormData({ title: '', description: '', image: '' });
+    setImageFile(null);
+  } catch (error) {
+    console.error('Error saving blog:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   // Edit blog
   const handleEdit = (blog) => {
@@ -95,11 +132,17 @@ const AdminPanel = () => {
     
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/blogs/${id}`, {
-        method: 'DELETE'
+      const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token') || ''}`, // Add token if required
+        },
       });
 
-      if (!response.ok) throw new Error('Delete failed');
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Delete failed: ${response.status} - ${errorText}`);
+      }
 
       // Refresh data without page reload
       await fetchBlogs();
@@ -134,26 +177,37 @@ const AdminPanel = () => {
         </div>
         
         {/* Blog List */}
-        {loading && !blogs.length ? (
-          <div className="flex justify-center items-center h-64">
-            <Loader className="animate-spin h-12 w-12 text-emerald-600" />
-          </div>
-        ) : blogs.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No blog posts found. Create your first post!</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogs.map(blog => (
-              <BlogCard 
-                key={blog._id}
-                blog={blog}
-                onEdit={() => handleEdit(blog)}
-                onDelete={() => handleDelete(blog._id)}
-              />
-            ))}
-          </div>
-        )}
+       {blogs.length === 0 && !loading ? (
+  <div className="text-center py-12">
+    <p className="text-gray-500 text-lg">No blog posts found. Create your first post!</p>
+  </div>
+) : (
+  <>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {blogs.slice(0, visibleCount).map(blog => (
+        <BlogCard 
+          key={blog._id}
+          blog={blog}
+          onEdit={() => handleEdit(blog)}
+          onDelete={() => handleDelete(blog._id)}
+        />
+      ))}
+    </div>
+
+    {/* Load More Button */}
+    {visibleCount < blogs.length && (
+      <div className="flex justify-center mt-8">
+        <button
+          onClick={() => setVisibleCount((prev) => prev + 6)}
+          className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
+        >
+          Load More
+        </button>
+      </div>
+    )}
+  </>
+)}
+
       </main>
 
       {/* Blog Form Modal - Now outside main content */}
@@ -178,15 +232,19 @@ const AdminPanel = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Image URL <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="url"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                    required
-                    placeholder="https://example.com/image.jpg"
-                  />
+<input
+  type="file"
+  accept="image/*"
+  onChange={handleImageUpload}
+  className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+/>
+{formData.image && (
+  <img
+    src={formData.image}
+    alt="Preview"
+    className="mt-2 rounded-lg max-h-40 object-contain border"
+  />
+)}
                 </div>
 
                 <div>
@@ -246,21 +304,25 @@ const AdminPanel = () => {
         </div>
       )}
     </div>
-  );
+  ); 
 };
 
 // Blog Card Component
 const BlogCard = ({ blog, onEdit, onDelete }) => {
+  const imageUrl = blog.image;
+
+
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all h-full flex flex-col border border-gray-100">
-      <img 
-        src={blog.image} 
-        alt={blog.title}
-        className="w-full h-48 object-cover"
-        onError={(e) => {
-          e.target.src = 'https://via.placeholder.com/400x225?text=Image+Not+Found';
-        }}
-      />
+      <img
+  src={imageUrl || 'https://i.pinimg.com/736x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg'}
+  alt={blog.title}
+  className="w-full h-48 object-cover"
+  onError={(e) => {
+    e.target.src = 'https://i.pinimg.com/736x/d8/fe/c7/d8fec7801132a9a4f9c530b98396e295.jpg';
+  }}
+/>
+
       <div className="p-5 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
         <p className="text-gray-600 mb-4 flex-grow line-clamp-3">
@@ -296,4 +358,5 @@ const BlogCard = ({ blog, onEdit, onDelete }) => {
   );
 };
 
-export default AdminPanel;
+
+export default Blogpanel;

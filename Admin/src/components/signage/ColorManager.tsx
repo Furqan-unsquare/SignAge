@@ -13,7 +13,9 @@ import {
   DialogTrigger,
 } from '../ui/dialog';
 
-const API_URL = 'http://localhost:5000/api/colors';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = `${API_BASE_URL}/api/colors`;
+
 
 const ColorManager = () => {
   const [colors, setColors] = useState([]);

@@ -6,7 +6,8 @@ import { Edit2, Trash2, Ban  } from 'lucide-react';
 import FontModal from './modals/FontModal';
 import { toast } from '../ui/use-toast';
 
-const API_URL = 'http://localhost:5000/api/font-files/files';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = `${API_BASE_URL}/api/font-files/files`;
 
 const FontManager = () => {
   const [fonts, setFonts] = useState([]);

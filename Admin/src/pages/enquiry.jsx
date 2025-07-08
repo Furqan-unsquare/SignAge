@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import { User, Mail, Trash, ChevronUp, ChevronDown, Search, MessageSquare, MailIcon } from 'lucide-react';
 import authHeader from '../utils/authHeader';
 
-const backendUrl = 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const EnquiryListPage = () => {
   const [enquiries, setEnquiries] = useState([]);
@@ -19,7 +19,7 @@ const EnquiryListPage = () => {
   useEffect(() => {
     const fetchEnquiries = async () => {
       try {
-        const res = await axios.get(`${backendUrl}/api/enquiry`, authHeader());
+        const res = await axios.get(`${API_BASE_URL}/api/enquiry`, authHeader());
         setEnquiries(res.data);
         setFilteredEnquiries(res.data);
       } catch (err) {
@@ -70,7 +70,7 @@ const EnquiryListPage = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this enquiry?')) {
       try {
-        await axios.delete(`${backendUrl}/api/enquiry/${id}`, authHeader());
+        await axios.delete(`${API_BASE_URL}/api/enquiry/${id}`, authHeader());
         setEnquiries(enquiries.filter((entry) => entry._id !== id));
         setFilteredEnquiries(filteredEnquiries.filter((entry) => entry._id !== id));
       } catch (err) {

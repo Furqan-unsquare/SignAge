@@ -60,7 +60,9 @@ export const PreviewPane = ({
   // Load fonts dynamically
   useEffect(() => {
     fonts.forEach((font) => {
-      const fontUrl = `http://localhost:5000/fonts/${font.fontFamily}`;
+      const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const fontUrl = `${API_BASE_URL}/fonts/${font.fontFamily}`;
+
       const fontName = font.name;
 
       if (document.getElementById(`font-${fontName}`)) return;

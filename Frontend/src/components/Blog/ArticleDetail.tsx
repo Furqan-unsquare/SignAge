@@ -21,7 +21,9 @@ const ArticleDetail: React.FC = () => {
     const fetchBlog = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+        const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+        const response = await fetch(`${BASE_URL}/api/blogs/${id}`);
+
         if (!response.ok) {
           throw new Error("Failed to fetch blog");
         }
@@ -128,7 +130,7 @@ const ArticleDetail: React.FC = () => {
   variants={containerVariants}
   initial="hidden"
   animate="visible"
-  className="min-h-screen bg-gradient-to-r from-[#EA3C1F] via-[#F26742] to-[#EB3C20] py-12 px-4 sm:px-6 lg:px-8"
+  className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-12 px-4 sm:px-6 lg:px-8"
 >
   <div className="max-w-7xl mx-auto mt-10 md:mt-16">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">

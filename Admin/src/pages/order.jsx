@@ -1,13 +1,13 @@
 
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import { Eye, Trash, CheckCircle, XCircle, Edit, Calendar, ChevronUp, ChevronDown, RefreshCw, Search } from 'lucide-react';
 import authHeader from '../utils/authHeader';
 import PreviewModal from '../components/PreviewModal';
 
-const backendUrl = 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 // Helper function to format text, including buffers
 const formatText = (value) => {
@@ -20,7 +20,7 @@ const formatText = (value) => {
       return 'Invalid Buffer';
     }
   }
-  if (typeof value === 'object' && 'name' in value) return value.name;
+  if (typeof value === 'object' && 'name' in value) return value.name; 
   if (typeof value === 'object' && 'size' in value) return value.size;
   return String(value);
 };
@@ -49,11 +49,36 @@ const OrderListPage = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10); // Fixed at 10 items per page
+
+    const paginationData = useMemo(() => {
+    const totalItems = orders.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
+    
+    return {
+      currentItems,
+      totalPages,
+      totalItems
+    };
+  }, [orders, currentPage, itemsPerPage]);
+ useEffect(() => {
+    setCurrentPage(1);
+  }, [orders]);
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= paginationData.totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${backendUrl}/api/orders`, { headers: authHeader() });
+      const res = await axios.get(`${API_BASE_URL}/api/orders`, { headers: authHeader() });
       const formattedOrders = res.data.map((order) => ({
         ...order,
         orderId: order.orderId, // Use _id as orderId
@@ -87,7 +112,7 @@ const OrderListPage = () => {
       return;
     }
     try {
-      await axios.delete(`${backendUrl}/api/orders/${id}`, { headers: authHeader() });
+      await axios.delete(`${API_BASE_URL}/api/orders/${id}`, { headers: authHeader() });
       setOrders(orders.filter((o) => o.orderId !== id));
       setOriginalOrders(originalOrders.filter((o) => o.orderId !== id));
       setShowDeleteModal(false);
@@ -108,7 +133,7 @@ const OrderListPage = () => {
     }
     try {
       await axios.put(
-        `${backendUrl}/api/orders/${id}`,
+        `${API_BASE_URL}/api/orders/${id}`,
         { isPaid: true },
         { headers: authHeader() }
       );
@@ -145,7 +170,7 @@ const OrderListPage = () => {
     }
     try {
       await axios.put(
-        `${backendUrl}/api/orders/${selectedOrder.orderId}`,
+        `${API_BASE_URL}/api/orders/${selectedOrder.orderId}`,
         {
           inputText: selectedOrder.inputText,
           color: selectedOrder.color,
@@ -282,6 +307,7 @@ const OrderListPage = () => {
         ) : orders.length === 0 ? (
           <div className="text-center text-gray-600">No orders found.</div>
         ) : (
+          <>
           <div className="overflow-x-auto">
             <table className="w-full text-sm sm:text-base bg-white rounded-xl shadow">
               <thead className="bg-gray-100 sticky top-0">
@@ -362,11 +388,12 @@ const OrderListPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => {
-                  const idText = truncateText(order.orderId);
-                  const mobileText = truncateText(order.mobile);
-                  const dateText = truncateText(order.createdAt.toLocaleDateString(), 10);
-                  return (
+                {paginationData.currentItems.map((order) => {
+                    // FIX: Use paginated items here
+                    const idText = truncateText(order.orderId);
+                    const mobileText = truncateText(order.mobile);
+                    const dateText = truncateText(order.createdAt.toLocaleDateString(), 10);
+                    return (
                     <tr key={order.orderId} className="border-t hover:bg-gray-200 transition-colors">
                       <td className="p-3 truncate max-w-xs text-gray-800" title={idText.full}>
                         {idText.display}
@@ -433,7 +460,72 @@ const OrderListPage = () => {
               </tbody>
             </table>
           </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between items-center mt-4">
+              <div className="text-sm text-gray-600">
+                Showing {Math.min((currentPage - 1) * itemsPerPage + 1, paginationData.totalItems)} 
+                - {Math.min(currentPage * itemsPerPage, paginationData.totalItems)} 
+                of {paginationData.totalItems} orders
+              </div>
+              <div className="flex space-x-1">
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className={`px-3 py-1 rounded-md ${
+                    currentPage === 1 
+                      ? 'bg-gray-200 cursor-not-allowed' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                >
+                  &lsaquo;
+                </button>
+                
+                {/* Page numbers */}
+                {Array.from({ length: Math.min(5, paginationData.totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (paginationData.totalPages <= 5) {
+                    pageNum = i + 1;
+                  } else if (currentPage <= 3) {
+                    pageNum = i + 1;
+                  } else if (currentPage >= paginationData.totalPages - 2) {
+                    pageNum = paginationData.totalPages - 4 + i;
+                  } else {
+                    pageNum = currentPage - 2 + i;
+                  }
+                  
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => goToPage(pageNum)}
+                      className={`px-3 py-1 rounded-md ${
+                        currentPage === pageNum
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-300 hover:bg-gray-400'
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+                
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === paginationData.totalPages}
+                  className={`px-3 py-1 rounded-md ${
+                    currentPage === paginationData.totalPages 
+                      ? 'bg-gray-200 cursor-not-allowed' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                >
+                  &rsaquo;
+                </button>
+              </div>
+            </div>
+          </>
         )}
+
+        
 
         {/* Edit Modal */}
         {showEditModal && selectedOrder && (
@@ -452,7 +544,7 @@ const OrderListPage = () => {
                     className="w-full p-2 border border-gray-300 rounded-lg"
                     required
                   />
-                </div>
+                </div> 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Color</label>
                   <input
