@@ -245,7 +245,7 @@ const handleSubmit = async (e) => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Image URL <span className="text-red-500">*</span>
+                    Upload Image<span className="text-red-500">*</span>
                   </label>
 <input
   type="file"

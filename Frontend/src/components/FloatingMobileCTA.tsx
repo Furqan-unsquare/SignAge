@@ -63,7 +63,7 @@ const PremiumFloatingButton = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {/* Social Buttons */}
-      <div className="absolute bottom-full right-0 mb-3 pr-4 space-y-2">
+      <div className="absolute bottom-full right-0 mb-3 pr-2 space-y-2">
         {[
   {
     icon: <FaWhatsapp className="w-5 h-5" />,
@@ -96,7 +96,7 @@ const PremiumFloatingButton = () => {
             href={item.href}
             target="_blank"
             rel="noreferrer"
-            className={`social-option w-12 h-12 ${item.color} rounded-full flex items-center justify-center text-white shadow-lg transition-all will-change-transform ${
+            className={`social-option  w-12 h-12 ${item.color} rounded-full flex items-center justify-center text-white shadow-lg transition-all will-change-transform ${
               !isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
             aria-label={item.tooltip}
@@ -110,7 +110,7 @@ const PremiumFloatingButton = () => {
       <button
         ref={buttonRef}
         onClick={toggleMenu}
-        className="relative w-20 h-20 rounded-full transition-all duration-200 focus:outline-none backdrop-blur-md shadow-xl"
+        className="relative  w-16 h-16  rounded-full transition-all duration-200 focus:outline-none backdrop-blur-md shadow-xl"
         aria-expanded={isOpen}>
         {/* Rotating Text SVG */}
 
@@ -131,7 +131,7 @@ const PremiumFloatingButton = () => {
 
           </defs>
           <text
-            fontSize="12"
+            fontSize="10"
             fill="white"
             fontFamily="'Inter', sans-serif"
             fontWeight="500"
