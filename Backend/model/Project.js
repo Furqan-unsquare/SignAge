@@ -9,9 +9,9 @@ const projectSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    trim: true,
+    // trim: true,
   },
- category: {
+ category: { 
   type: String,
   required: true,
   enum: [

@@ -1,6 +1,6 @@
 const Project = require('../model/Project');
 
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 'https://signage-f2vt.onrender.com' : 'https://signage-f2vt.onrender.com';
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 'https://signage-f2vt.onrender.com' : 'http://localhost:5000';
 
 // GET: Fetch all projects
 const getProjects = async (req, res) => {
@@ -8,7 +8,7 @@ const getProjects = async (req, res) => {
     const projects = await Project.find().sort({ createdAt: -1 });
     res.status(200).json( projects );
   } catch (error) {
-    console.error('Error fetching projects:', error);
+    console.error('Error fetching projects:', error); 
     res.status(500).json({ message: 'Server error' });
   }
 };
@@ -16,14 +16,15 @@ const getProjects = async (req, res) => {
 // POST: Create a new project
 const createProject = async (req, res) => {
   try {
-    const { title, category, featured, imageUrl } = req.body;
-    let image = imageUrl || '';
+    const { title, category, featured, image } = req.body;
+
+    let imageUrl = image;
 
     if (req.file) {
-      image = `${baseUrl}/images/${req.file.filename}`;
+      imageUrl = `${baseUrl}/images/${req.file.filename}`;
     }
 
-    if (!title || !category || !image) {
+    if (!title || !category || !imageUrl) {
       return res.status(400).json({ message: 'Title, category, and image are required' });
     }
 
@@ -31,8 +32,9 @@ const createProject = async (req, res) => {
       title,
       category,
       featured: featured === 'true' || featured === true,
-      image,
+      image: imageUrl,
     });
+
     await project.save();
 
     res.status(201).json({ message: 'Project created successfully', data: project });
@@ -41,6 +43,7 @@ const createProject = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 // DELETE: Delete a project
 const deleteProject = async (req, res) => {
