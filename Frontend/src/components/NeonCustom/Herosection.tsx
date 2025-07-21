@@ -125,7 +125,7 @@ const calculatePrice = () => {
     }, [text, selectedFont, selectedColor, selectedSize, letterCharge, fonts, colors, sizes, phoneNumber])
 
     return (
-        <div className="bg-black text-white pt-20">
+        <div className="bg-black text-white">
             {/* <Sidebar /> */}
             <div className="min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 pb-4 md:pt-8">

@@ -1,40 +1,60 @@
 import React from "react";
-import {
-  Hand,
-  Wrench,
-  PackageCheck,
-  BadgeCheck,
-  Users,
-  Medal,
-} from "lucide-react";
-import { motion } from "framer-motion";
+import { Clock, Star, Layers, Zap, Wrench, Shield, Truck, PenTool, Activity, Award,} from "lucide-react";
 
 const features = [
-  { icon: <Hand className="w-6 h-6 text-purple-400 glow-icon" />, label: "Value for Money" },
-  { icon: <Wrench className="w-6 h-6 text-cyan-300 glow-icon" />, label: "2 Mins Installation" },
-  { icon: <PackageCheck className="w-6 h-6 text-blue-400 glow-icon" />, label: "100% Timely Delivery" },
-  { icon: <BadgeCheck className="w-6 h-6 text-green-400 glow-icon" />, label: "2 Year Warranty" },
-  { icon: <Users className="w-6 h-6 text-yellow-400 glow-icon" />, label: "4.8 ✦ by 20K+ Customers" },
-  { icon: <Medal className="w-6 h-6 text-sky-400 glow-icon" />, label: "Top-Notch Quality" },
+  { icon: <Zap className="w-5 h-5" />, label: "Premium Quality" },
+  { icon: <Clock className="w-5 h-5" />, label: "Quick Setup" },
+  { icon: <Shield className="w-5 h-5" />, label: "2-Year Warranty" },
+  { icon: <Star className="w-5 h-5" />, label: "4.8★ Rated" },
+  { icon: <Award className="w-5 h-5" />, label: "Best Value" },
+  { icon: <PenTool className="w-5 h-5" />, label: "Free Design Mockup" },
+  { icon: <Layers className="w-5 h-5" />, label: "Durable Acrylic Backing" },
+  { icon: <Wrench className="w-5 h-5" />, label: "Easy Installation Kit" },
+  { icon: <Truck className="w-5 h-5" />, label: "Secure & Fast Shipping" },
+  { icon: <Activity className="w-5 h-5" />, label: "Simple Animation Effects" },
 ];
+
 
 const MarqueeIcons = () => {
   return (
-    <div className="overflow-hidden w-full py-3 border-t border-white/10">
-      <div className="flex items-center space-x-10 animate-marquee min-w-full">
-        {[...features, ...features].map((feature, index) => (
-          <motion.div
+    <div 
+      className="overflow-hidden w-full pt-6 relative"
+      style={{ backgroundColor: '#E63025' }}
+    >
+      {/* Gradient overlays for smooth fade effect */}
+      <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-red-600 to-transparent z-10"></div>
+      <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-red-600 to-transparent z-10"></div>
+      
+      <div className="flex items-center animate-marquee">
+        {[...features, ...features, ...features].map((feature, index) => (
+          <div
             key={index}
-            className="flex items-center space-x-2 text-white  sm:text-base font-bold"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: index * 0.1 }}
+            className="flex items-center space-x-3 mx-4 bg-white/10 rounded-3xl px-4 py-2 text-white/80 hover:text-white transition-all duration-300 group"
           >
-            {feature.icon}
-            <span className="whitespace-nowrap">{feature.label}</span>
-          </motion.div>
+            <div className="text-white/80 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+              {feature.icon}
+            </div>
+            <span className="text-sm font-medium whitespace-nowrap tracking-wide">
+              {feature.label}
+            </span>
+          </div>
         ))}
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-33.333%); }
+          }
+          .animate-marquee {
+            animation: marquee 25s linear infinite;
+          }
+          .animate-marquee:hover {
+            animation-play-state: paused;
+          }
+        `
+      }} />
     </div>
   );
 };

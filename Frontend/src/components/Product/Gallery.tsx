@@ -138,7 +138,7 @@ const ProjectGallery = () => {
   );
 
   return (
-    <section className="pb-0 md:pb-10 bg-[#E63025] pt-16 px-4 sm:px-6 lg:px-12 rounded-t-[3rem] -mt-40 relative" id="project">
+    <section className="pb-0 md:pb-10 bg-[#E63025] pt-16 px-4 sm:px-6 lg:px-12 rounded-t-[3rem] -mt-60 relative" id="project">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

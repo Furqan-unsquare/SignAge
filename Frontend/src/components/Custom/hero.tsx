@@ -24,7 +24,7 @@ const HeroSection = () => {
   }, [])
 
   return (
-    <section className="relative pt-32 pb-24 px-4 overflow-hidden min-h-screen flex items-center">
+    <section className="pt-8 pb-24 px-4 overflow-hidden min-h-screen flex items-center">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-[#fdca07] rounded-full blur-3xl animate-pulse"></div>
@@ -148,12 +148,12 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Bottom Wave */}
+      {/* Bottom Wave
       <div className="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1200 120" className="w-full h-12 fill-black">
           <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z"></path>
         </svg>
-      </div>
+      </div> */}
     </section>
   )
 }

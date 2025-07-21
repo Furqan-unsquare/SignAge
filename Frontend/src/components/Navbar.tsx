@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(true);
+  const location = useLocation();
+
+  const isNeonPage = location.pathname.toLowerCase() === "/neoncustom";
 
   const navItems = [
     // { name: "Work", href: "/work" },
@@ -15,17 +19,17 @@ const Header = () => {
     { name: "Contact", href: "/#contact" },
   ];
 
-const productTypes = [
-  { name: "Acrylic Letter/Signboard", id: "acrylic" },
-  { name: "Aluminium Ch. Letter", id: "aluminium" },
-  { name: "3D Steel Letters", id: "3d-steel" },
-  { name: "Laser Router Cutting", id: "laser-router" },
-  { name: "Glow Signboard Flex", id: "glow-sign" },
-  { name: "ACP Signboard", id: "acp" },
-  { name: "Signboard Photos", id: "photos" },
-  { name: "Office Name Plate", id: "office-name" },
-  { name: "LED Scrolling Board", id: "led-scrolling" },
-];
+  const productTypes = [
+    { name: "Neon Title", id: "acrylic" },
+    { name: "Aluminium Ch. Letter", id: "aluminium" },
+    { name: "3D Steel Letters", id: "3d-steel" },
+    { name: "Laser Router Cutting", id: "laser-router" },
+    { name: "Glow Signboard Flex", id: "glow-sign" },
+    { name: "ACP Signboard", id: "acp" },
+    { name: "Signboard Photos", id: "photos" },
+    { name: "Office Name Plate", id: "office-name" },
+    { name: "LED Scrolling Board", id: "led-scrolling" },
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -46,7 +50,11 @@ const productTypes = [
   }, [isMenuOpen]);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+      <header
+      className={`sticky top-0 z-50 backdrop-blur-lg transition-all duration-300 ${
+        isNeonPage ? "bg-black" : ""
+      }`}
+    >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-24 relative">
             {/* Logo */}
@@ -64,11 +72,17 @@ const productTypes = [
               }}
             >
               <a href="/" className="flex items-center">
-                <img
+                {/* <img
                   src="/assets/logo4.png"
                   alt="Logo"
                   className="w-16 h-16 md:w-20 md:h-20"
-                />
+                /> */}
+                
+            <div className="leading-tight">
+  <h3 className="text-3xl md:text-4xl drop-shadow-lg font-bold text-[#FDCA07]">Ansh Enterprises</h3>
+  <p className="text-gray-300 text-sm md:text-sm font-medium mt-1">Acrylic Sign Boards & More</p>
+</div>
+
               </a>
             </motion.div>    
 

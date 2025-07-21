@@ -55,7 +55,7 @@ const AboutSection = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 items-center">
+            <div className="flex flex-col sm:flex-row gap-4 py-4 items-center">
               <button
               onClick={() => window.location.href = '/contact-us'} 
               className="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-6 py-3 max-w-sm rounded-lg transition-colors flex items-center gap-2">

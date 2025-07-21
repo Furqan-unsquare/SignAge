@@ -114,7 +114,7 @@ const BlogList: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -122,7 +122,7 @@ const BlogList: React.FC = () => {
           initial="hidden"
           animate="visible"
           variants={headerVariants}
-          className="my-12 text-left lg:w-1/2"
+          className="mb-12 text-left lg:w-1/2"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Latest <span className="text-[#FDCA07]">Blogs</span>

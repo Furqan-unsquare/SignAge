@@ -26,9 +26,9 @@ const App = () => (
       <Toaster />
 
       <BrowserRouter>
-        <Navbar />
 
-        <main className="min-h-screen">
+        <main className="min-h-screen bg-[#E63025] ">
+        <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<AboutUs />} />

@@ -5,7 +5,7 @@ const CoverSection = () => {
   return (
     <div>
       {/* Hero Section with Full Background */}
-      <div className="relative h-[600px] md:h-screen overflow-hidden">
+      <div className=" h-[600px] md:h-screen overflow-hidden">
         {/* Full Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -43,7 +43,7 @@ const CoverSection = () => {
       </div>
 
       {/* Journey Section */}
-      <div className="bg-[#E63025]  text-white pt-20 rounded-t-[4rem] -mt-40 relative z-10">
+      <div className="bg-[#E63025]  text-white pt-20 rounded-t-[4rem] -mt-60 relative z-10">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* First Section - Image Right */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-24">

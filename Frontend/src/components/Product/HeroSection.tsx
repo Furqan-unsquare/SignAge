@@ -4,7 +4,7 @@ const CoverSection = () => {
   return (
     <div>
       {/* Hero Section with Full Background */}
-      <div className="relative h-[600px] md:h-screen overflow-hidden">
+      <div className=" h-[600px] md:h-screen overflow-hidden">
         {/* Full Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"

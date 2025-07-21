@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
@@ -50,9 +49,9 @@ const OrderListPage = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10); // Fixed at 10 items per page
+  const [itemsPerPage] = useState(10);
 
-    const paginationData = useMemo(() => {
+  const paginationData = useMemo(() => {
     const totalItems = orders.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -65,7 +64,8 @@ const OrderListPage = () => {
       totalItems
     };
   }, [orders, currentPage, itemsPerPage]);
- useEffect(() => {
+
+  useEffect(() => {
     setCurrentPage(1);
   }, [orders]);
 
@@ -81,7 +81,7 @@ const OrderListPage = () => {
       const res = await axios.get(`${API_BASE_URL}/api/orders`, { headers: authHeader() });
       const formattedOrders = res.data.map((order) => ({
         ...order,
-        orderId: order.orderId, // Use _id as orderId
+        orderId: order.orderId,
         inputText: formatText(order.inputText),
         color: formatText(order.color),
         size: formatText(order.size),
@@ -89,7 +89,7 @@ const OrderListPage = () => {
         font: formatText(order.font),
         totalPrice: parseFloat(order.totalPrice) || 0,
         mobile: formatText(order.phoneNumber || order.mobile) || 'N/A',
-        isPaid: !!order.isPaid,
+        status: order.isPaid ? 'Completed' : (order.status === 'Manufacturing' ? 'Manufacturing' : 'Pending'),
         createdAt: order.createdAt ? new Date(order.createdAt) : new Date(),
       }));
       setOriginalOrders(formattedOrders);
@@ -124,24 +124,25 @@ const OrderListPage = () => {
     }
   };
 
-  const togglePaid = async (id, current) => {
-    if (current) return; // Prevent toggling if already paid
+  const toggleStatus = async (id, currentStatus) => {
+    if (currentStatus === 'Completed') return; // Prevent toggling if already Completed
     if (!id) {
       setErrorMessage('Invalid order ID.');
       setShowErrorModal(true);
       return;
     }
     try {
+      const newStatus = currentStatus === 'Pending' ? 'Manufacturing' : 'Completed';
       await axios.put(
         `${API_BASE_URL}/api/orders/${id}`,
-        { isPaid: true },
+        { status: newStatus, isPaid: newStatus === 'Completed' },
         { headers: authHeader() }
       );
       await fetchOrders();
       setShowSuccessModal(true);
     } catch (err) {
-      console.error('Toggle paid failed:', err.response?.data || err.message);
-      setErrorMessage(err.response?.data?.message || 'Failed to update payment status. Please try again.');
+      console.error('Toggle status failed:', err.response?.data || err.message);
+      setErrorMessage(err.response?.data?.message || 'Failed to update status. Please try again.');
       setShowErrorModal(true);
     }
   };
@@ -179,7 +180,8 @@ const OrderListPage = () => {
           font: selectedOrder.font,
           totalPrice: parseFloat(selectedOrder.totalPrice) || 0,
           mobile: selectedOrder.mobile,
-          isPaid: selectedOrder.isPaid,
+          status: selectedOrder.status,
+          isPaid: selectedOrder.status === 'Completed',
         },
         { headers: authHeader() }
       );
@@ -200,12 +202,13 @@ const OrderListPage = () => {
     setSortOrder(order);
 
     const sorted = [...orders].sort((a, b) => {
-      const aValue = field === 'isPaid' ? a[field] : a[field] || '';
-      const bValue = field === 'isPaid' ? b[field] : b[field] || '';
-      if (field === 'isPaid') {
+      const aValue = field === 'status' ? a[field] : a[field] || '';
+      const bValue = field === 'status' ? b[field] : b[field] || '';
+      if (field === 'status') {
+        const statusOrder = { 'Pending': 1, 'Manufacturing': 2, 'Completed': 3 };
         return order === 'asc'
-          ? Number(aValue) - Number(bValue)
-          : Number(bValue) - Number(aValue);
+          ? statusOrder[aValue] - statusOrder[bValue]
+          : statusOrder[bValue] - statusOrder[aValue];
       }
       return order === 'asc'
         ? String(aValue).localeCompare(String(bValue))
@@ -259,7 +262,7 @@ const OrderListPage = () => {
   return (
     <div className="min-h-screen w-screen flex">
       <Sidebar className="w-64" />
-      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 overflow-x-hidden ">
+      <main className="flex-1 p-4 sm:p-6 md:p-8 bg-gray-50 overflow-x-hidden">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 mt-6 md:mt-0">Customer Orders</h2>
         <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center w-full sm:w-auto">
@@ -274,7 +277,7 @@ const OrderListPage = () => {
               />
             </div>
           </div>
-          <div className="flex items-center space-x-2 ">
+          <div className="flex items-center space-x-2">
             <input
               type="date"
               value={startDate}
@@ -289,12 +292,14 @@ const OrderListPage = () => {
             />
             <button
               onClick={handleDateFilter}
-              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
+              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center"
+            >
               <Calendar className="w-5 h-5 mr-1" /> Filter
             </button>
             <button
               onClick={resetDateFilter}
-              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
+              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center"
+            >
               <RefreshCw className="w-5 h-5" />
             </button>
           </div>
@@ -308,158 +313,165 @@ const OrderListPage = () => {
           <div className="text-center text-gray-600">No orders found.</div>
         ) : (
           <>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm sm:text-base bg-white rounded-xl shadow">
-              <thead className="bg-gray-100 sticky top-0">
-                <tr>
-                  <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('orderId')}>
-                    <div className="flex items-center">
-                      Order ID
-                      {sortField === 'orderId' && (
-                        sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                      )}
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600">
-                    <div className="flex items-center">
-                      Name
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('color')}>
-                    <div className="flex items-center">
-                      Color
-                      {sortField === 'color' && (
-                        sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                      )}
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('size')}>
-                    <div className="flex items-center">
-                      Size
-                      {sortField === 'size' && (
-                        sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                      )}
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('type')}>
-                    <div className="flex items-center">
-                      Type
-                      {sortField === 'type' && (
-                        sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                      )}
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('font')}>
-                    <div className="flex items-center">
-                      Font
-                      {sortField === 'font' && (
-                        sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                      )}
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600">
-                    <div className="flex items-center">
-                      Mobile
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600">
-                    <div className="flex items-center">
-                      Total (₹)
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('isPaid')}>
-                    <div className="flex items-center">
-                      Status
-                      {sortField === 'isPaid' && (
-                        sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
-                      )}
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600">
-                    <div className="flex items-center">
-                      Date
-                    </div>
-                  </th>
-                  <th className="p-3 text-left text-gray-600">
-                    <div className="flex items-center">
-                      Actions
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginationData.currentItems.map((order) => {
-                    // FIX: Use paginated items here
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm sm:text-base bg-white rounded-xl shadow">
+                <thead className="bg-gray-100 sticky top-0">
+                  <tr>
+                    <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('orderId')}>
+                      <div className="flex items-center">
+                        Order ID
+                        {sortField === 'orderId' && (
+                          sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
+                        )}
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600">
+                      <div className="flex items-center">
+                        Name
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('color')}>
+                      <div className="flex items-center">
+                        Color
+                        {sortField === 'color' && (
+                          sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
+                        )}
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('size')}>
+                      <div className="flex items-center">
+                        Size
+                        {sortField === 'size' && (
+                          sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
+                        )}
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('type')}>
+                      <div className="flex items-center">
+                        Type
+                        {sortField === 'type' && (
+                          sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
+                        )}
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('font')}>
+                      <div className="flex items-center">
+                        Font
+                        {sortField === 'font' && (
+                          sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
+                        )}
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600">
+                      <div className="flex items-center">
+                        Mobile
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600">
+                      <div className="flex items-center">
+                        Total (₹)
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600 cursor-pointer" onClick={() => handleSort('status')}>
+                      <div className="flex items-center">
+                        Status
+                        {sortField === 'status' && (
+                          sortOrder === 'asc' ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />
+                        )}
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600">
+                      <div className="flex items-center">
+                        Date
+                      </div>
+                    </th>
+                    <th className="p-3 text-left text-gray-600">
+                      <div className="flex items-center">
+                        Actions
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paginationData.currentItems.map((order) => {
                     const idText = truncateText(order.orderId);
                     const mobileText = truncateText(order.mobile);
                     const dateText = truncateText(order.createdAt.toLocaleDateString(), 10);
                     return (
-                    <tr key={order.orderId} className="border-t hover:bg-gray-200 transition-colors">
-                      <td className="p-3 truncate max-w-xs text-gray-800" title={idText.full}>
-                        {idText.display}
-                      </td>
-                      <td className="p-3 truncate max-w-xs text-gray-800">{order.inputText}</td>
-                      <td className="p-3 text-gray-800">{order.color}</td>
-                      <td className="p-3 text-gray-800">{order.size}</td>
-                      <td className="p-3 text-gray-800">{order.type}</td>
-                      <td className="p-3 text-gray-800">{order.font}</td>
-                      <td className="p-3 truncate max-w-xs text-gray-800" title={mobileText.full}>
-                        {mobileText.display}
-                      </td>
-                      <td className="p-3 text-gray-800">₹{order.totalPrice.toFixed(2)}</td>
-                      <td className="p-3">
-                        <span
-                          className={`inline-flex items-center px-4 py-1 rounded-full text-xs font-medium cursor-pointer ${
-                            order.isPaid ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                          }`}
-                          onClick={() => togglePaid(order.orderId, order.isPaid)}
-                        >
-                          {order.isPaid ? (
-                            <>
-                              <CheckCircle className="w-4 h-4 mr-1" /> Completed
-                            </>
-                          ) : (
-                            <>
-                              <XCircle className="w-4 h-4 mr-1" /> Pending
-                            </>
-                          )}
-                        </span>
-                      </td>
-                      <td className="p-3 truncate max-w-xs text-gray-600" title={order.createdAt.toLocaleString()}>
-                        {dateText.display}
-                      </td>
-                      <td className="p-3 flex items-center space-x">
-                        <button
-                          onClick={() => handleEdit(order)}
-                          title="Edit Order"
-                          className="p-2 text-blue-600 hover:text-blue-200 transition-colors duration-200"
-                        >
-                          <Edit className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() => {
-                            setDeleteOrderId(order.orderId);
-                            setShowDeleteModal(true);
-                          }}
-                          title="Delete Order"
-                          className="p-2 text-red-600 text-hover-red-800 transition-colors duration-200"
-                        >
-                          <Trash className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() => handlePreview(order)}
-                          title="Preview Order"
-                          className="p-2 text-green-600 hover:text-green-800 transition-colors duration-200"
-                        >
-                          <Eye className="w-5 h-5" />
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                      <tr key={order.orderId} className="border-t hover:bg-gray-200 transition-colors">
+                        <td className="p-3 truncate max-w-xs text-gray-800" title={idText.full}>
+                          {idText.display}
+                        </td>
+                        <td className="p-3 truncate max-w-xs text-gray-800">{order.inputText}</td>
+                        <td className="p-3 text-gray-800">{order.color}</td>
+                        <td className="p-3 text-gray-800">{order.size}</td>
+                        <td className="p-3 text-gray-800">{order.type}</td>
+                        <td className="p-3 text-gray-800">{order.font}</td>
+                        <td className="p-3 truncate max-w-xs text-gray-800" title={mobileText.full}>
+                          {mobileText.display}
+                        </td>
+                        <td className="p-3 text-gray-800">₹{order.totalPrice.toFixed(2)}</td>
+                        <td className="p-3">
+                          <span
+                            className={`inline-flex items-center px-4 py-1 rounded-full text-xs font-medium cursor-pointer ${
+                              order.status === 'Completed'
+                                ? 'bg-green-100 text-green-800'
+                                : order.status === 'Manufacturing'
+                                ? 'bg-blue-100 text-blue-800'
+                                : 'bg-yellow-100 text-yellow-800'
+                            }`}
+                            onClick={() => toggleStatus(order.orderId, order.status)}
+                          >
+                            {order.status === 'Completed' ? (
+                              <>
+                                <CheckCircle className="w-4 h-4 mr-1" /> Completed
+                              </>
+                            ) : order.status === 'Manufacturing' ? (
+                              <>
+                                <CheckCircle className="w-4 h-4 mr-1" /> Manufacturing
+                              </>
+                            ) : (
+                              <>
+                                <XCircle className="w-4 h-4 mr-1" /> Pending
+                              </>
+                            )}
+                          </span>
+                        </td>
+                        <td className="p-3 truncate max-w-xs text-gray-600" title={order.createdAt.toLocaleString()}>
+                          {dateText.display}
+                        </td>
+                        <td className="p-3 flex items-center space-x">
+                          <button
+                            onClick={() => handleEdit(order)}
+                            title="Edit Order"
+                            className="p-2 text-blue-600 hover:text-blue-200 transition-colors duration-200"
+                          >
+                            <Edit className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setDeleteOrderId(order.orderId);
+                              setShowDeleteModal(true);
+                            }}
+                            title="Delete Order"
+                            className="p-2 text-red-600 text-hover-red-800 transition-colors duration-200"
+                          >
+                            <Trash className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => handlePreview(order)}
+                            title="Preview Order"
+                            className="p-2 text-green-600 hover:text-green-800 transition-colors duration-200"
+                          >
+                            <Eye className="w-5 h-5" />
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
 
             {/* Pagination Controls */}
             <div className="flex justify-between items-center mt-4">
@@ -478,10 +490,9 @@ const OrderListPage = () => {
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                 >
-                  &lsaquo;
+                  ‹
                 </button>
                 
-                {/* Page numbers */}
                 {Array.from({ length: Math.min(5, paginationData.totalPages) }, (_, i) => {
                   let pageNum;
                   if (paginationData.totalPages <= 5) {
@@ -518,21 +529,19 @@ const OrderListPage = () => {
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                 >
-                  &rsaquo;
+                  ›
                 </button>
               </div>
             </div>
           </>
         )}
 
-        
-
         {/* Edit Modal */}
         {showEditModal && selectedOrder && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-5 md:px-0">
             <div className="bg-white text-gray-800 p-6 rounded-lg w-full max-w-md mx-auto">
-              <h3 class="text-lg text-gray-800 font-bold mb-4">Edit Order</h3>
-              <form onSubmit={handleUpdateOrder} className="space-y-4 grid grid-cols-2 gap-4 ">
+              <h3 className="text-lg text-gray-800 font-bold mb-4">Edit Order</h3>
+              <form onSubmit={handleUpdateOrder} className="space-y-4 grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Input Text</label>
                   <input
@@ -611,19 +620,21 @@ const OrderListPage = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Status</label>
                   <select
-                    value={selectedOrder.isPaid ? "Paid" : "Pending"}
+                    value={selectedOrder.status}
                     onChange={(e) => {
                       const value = e.target.value;
-                      if (value === "Pending" && selectedOrder.isPaid) return;
-                      setSelectedOrder({ ...selectedOrder, isPaid: value === "Paid" });
+                      if (value === 'Pending' && selectedOrder.status === 'Completed') return;
+                      if (value === 'Manufacturing' && selectedOrder.status === 'Completed') return;
+                      setSelectedOrder({ ...selectedOrder, status: value });
                     }}
                     className="w-full p-2 border border-gray-300 rounded-lg bg-white"
                   >
                     <option value="Pending">Pending</option>
-                    <option value="Paid">Completed</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Completed">Completed</option>
                   </select>
-                  {selectedOrder.isPaid && (
-                    <p className="text-xs text-gray-500 mt-1">Paid status not reversible.</p>
+                  {selectedOrder.status === 'Completed' && (
+                    <p className="text-xs text-gray-500 mt-1">Completed status is not reversible.</p>
                   )}
                 </div>
                 <div className="flex justify-left space-x-2">
@@ -717,4 +728,4 @@ const OrderListPage = () => {
   );
 };
 
-export default OrderListPage; 
+export default OrderListPage;

@@ -50,7 +50,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-[#FDCA07] mb-4">Our Products</h4>
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-4 gap-y-3">
               <ul className="space-y-3">
-                <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Acrylic Letter/Signboard</a></li>
+                <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Neon Title</a></li>
                 <li><a href="/work#project?category=aluminium" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Ch. Letter</a></li>
                 <li><a href="/work#project?category=3d-steel" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">3D Steel Letters</a></li>
                 <li><a href="/work#project?category=laser-router" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Laser Router Cutting</a></li>
@@ -105,7 +105,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/80 text-xs md:text-sm">
-            &copy; {new Date().getFullYear()} <a href='https://www.unsquare.in/' target='_blank' className='underline'>Unsquare Lab</a>. All rights reserved.
+            &copy; {new Date().getFullYear()} <a href='https://www.unsquare.in/' target='_blank' className='underline'>Unsquare Labs</a>. All rights reserved.
           </p>
         </div>
       </div>

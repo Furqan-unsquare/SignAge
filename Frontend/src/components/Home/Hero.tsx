@@ -8,8 +8,8 @@ export default function HeroSection() {
       {/* HERO SECTION */}
       <div className="h-screen w-full flex flex-col">
         {/* Top section: 30% height */}
-        <div className="h-[35vh] w-full text-white text-center md:text-left pt-28 px-8 py-6 flex flex-col justify-center">
-          <p className="text-yellow-400 text-2xl md:text-4xl uppercase font-black">neon lights brand</p>
+         <div className="h-[25vh] w-full text-white text-center md:text-left px-4 md:px-20 py-6 flex flex-col justify-center">
+          <p className="text-yellow-400 text-2xl md:text-3xl uppercase font-black">neon lights brand</p>
           <p className=" md:text-lg text-gray-300 mt-2 max-w-3xl">
             Experience world-class craftsmanship with LED Neon Signs that brighten up your space and match your aesthetic.
           </p>
@@ -18,7 +18,7 @@ export default function HeroSection() {
         {/* Bottom section: 70% height */}
        {/* Desktop View Image */}
         <div
-          className="hidden sm:block h-[65vh] bg-cover bg-center"
+          className="hidden sm:block h-[85vh] bg-cover bg-center"
           style={{
             backgroundImage:
               "url('https://www.neonattack.com/cdn/shop/files/Adaptations-08_1.jpg?v=1749542649&width=2000')",
