@@ -7,12 +7,11 @@ export const WhatsInTheBox = () => (
       <h2 className="text-3xl font-bold text-center mb-10">
         What's in the Box
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {[
           { name: "LED Neon Sign", icon: "✨" },
           { name: "Mounting Kit", icon: "🔩" },
-          { name: "Power Adapter", icon: "🔌" },
-          { name: "Remote Control", icon: "📱" }
+          { name: "Power Adapter", icon: "🔌" }
         ].map((item, index) => (
           <div key={index} className="text-center">
             <div className="text-5xl mb-4">{item.icon}</div>

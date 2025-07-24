@@ -154,7 +154,7 @@ const LoginPage = () => {
                             <div className="flex items-center justify-between">
                                 <div className="text-sm">
                                     <a
-  href="https://wa.me/917045992776?text=Hello%2C%20I%20forgot%20my%20dashboard%20password.%20Could%20you%20please%20assist%20me%3F"
+  href="https://wa.me/919594274068?text=Hello%2C%20I%20forgot%20my%20dashboard%20password.%20Could%20you%20please%20assist%20me%3F"
   target="_blank"
   rel="noopener noreferrer"
   className="font-medium text-blue-600 hover:text-blue-500"

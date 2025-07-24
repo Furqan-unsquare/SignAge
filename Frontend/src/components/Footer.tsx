@@ -35,10 +35,10 @@ const Footer = () => {
             <ul className="space-y-3">
               <li><Link to="/" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Home</Link></li>
               <li><Link to="/about" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">About Us</Link></li>
-              <li><Link to="/NeonCustom" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Our Products</Link></li>
+              <li><Link to="/work" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Our Products</Link></li>
               </ul>
             <ul className="space-y-3">
-              <li><Link to="/work" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Gallery</Link></li>
+              <li><Link to="/NeonCustom" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Customizer</Link></li>
               <li><Link to="/blog" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Blog</Link></li>
               <li><Link to="/#contact" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Contact</Link></li>
             </ul>

@@ -42,7 +42,7 @@ const NeonCraftSection = () => {
               onClick={() => window.location.href = '/custom'}
               className="mt-8 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-all"
             >
-              Customize Yours
+              Customize Your Neon
               <Zap className="w-4 h-4" />
             </button>
           </div>

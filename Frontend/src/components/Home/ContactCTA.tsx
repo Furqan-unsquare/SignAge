@@ -1,4 +1,4 @@
-import { Phone, Zap } from 'lucide-react';
+import { Map, MapIcon, MapPinCheck, Phone, Zap } from 'lucide-react';
 import { Button } from '@/components/UI/button';
 
 const ContactCTA = () => {
@@ -55,7 +55,7 @@ const ContactCTA = () => {
         className="relative group">
           <div className="relative z-10 bg-gray-100 border-4 border-yellow-400 text-gray-800 font-bold px-10 py-2 text-xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/30 group rounded-lg flex items-center">
             Ansh Enterprises
-            <Zap className="w-5 h-5 ml-2 text-yellow-500 group-hover:animate-bounce" />
+            <MapPinCheck className="w-5 h-5 ml-2 text-gray-800 group-hover:animate-bounce" />
           </div>
         </a>
       </div>

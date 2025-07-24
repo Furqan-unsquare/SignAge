@@ -29,7 +29,7 @@ const CoverSection = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}>
-              Our Collection
+              Our Products
             </motion.h1>
             <motion.p
               className="text-white/90 text-lg sm:text-xl leading-relaxed"

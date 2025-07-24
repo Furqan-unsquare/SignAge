@@ -9,9 +9,9 @@ export default function HeroSection() {
       <div className="h-screen w-full flex flex-col">
         {/* Top section: 30% height */}
          <div className="h-[25vh] w-full text-white text-center md:text-left px-4 md:px-20 py-6 flex flex-col justify-center">
-          <p className="text-yellow-400 text-2xl md:text-3xl uppercase font-black">neon lights brand</p>
+          <p className="text-yellow-400 text-2xl md:text-3xl uppercase font-black">Acrylic Sign Boards & More</p>
           <p className=" md:text-lg text-gray-300 mt-2 max-w-3xl">
-            Experience world-class craftsmanship with LED Neon Signs that brighten up your space and match your aesthetic.
+            Where design meets durability—discover Acrylic Sign Boards and other Signs that shine with personality
           </p>
         </div>
 

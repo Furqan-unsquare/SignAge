@@ -79,9 +79,8 @@ const Header = () => {
                 /> */}
                 
             <div className="leading-tight">
-  <h3 className="text-3xl md:text-4xl drop-shadow-lg font-bold text-[#FDCA07]">Ansh Enterprises</h3>
-  <p className="text-gray-300 text-sm md:text-sm font-medium mt-1">Acrylic Sign Boards & More</p>
-</div>
+              <h3 className="text-3xl md:text-4xl drop-shadow-lg font-bold text-[#FDCA07]">Ansh Enterprises</h3>
+            </div>
 
               </a>
             </motion.div>    

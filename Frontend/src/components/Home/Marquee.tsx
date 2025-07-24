@@ -9,7 +9,7 @@ const features = [
   { icon: <Award className="w-5 h-5" />, label: "Best Value" },
   { icon: <PenTool className="w-5 h-5" />, label: "Free Design Mockup" },
   { icon: <Layers className="w-5 h-5" />, label: "Durable Acrylic Backing" },
-  { icon: <Wrench className="w-5 h-5" />, label: "Easy Installation Kit" },
+  { icon: <Wrench className="w-5 h-5" />, label: "Easy Installation" },
   { icon: <Truck className="w-5 h-5" />, label: "Secure & Fast Shipping" },
   { icon: <Activity className="w-5 h-5" />, label: "Simple Animation Effects" },
 ];

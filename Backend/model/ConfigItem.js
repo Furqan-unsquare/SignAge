@@ -24,7 +24,8 @@ const sizeSchema = new mongoose.Schema({
 
 // Letter Charge Schema
 const letterChargeSchema = new mongoose.Schema({
-  charge: { type: Number, required: true, min: 0 }
+  initialCharge: { type: Number, required: true, min: 0, default: 1000 },
+  subsequentCharge: { type: Number, required: true, min: 0 }
 }, { timestamps: true });
 
 // Export Models
