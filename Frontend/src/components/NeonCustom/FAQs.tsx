@@ -6,23 +6,23 @@ export const FAQs = () => {
 
   const faqs = [
     {
-      question: "How long does shipping take?",
+      question: "What types of custom signs do you offer?",
       answer: "Orders typically ship within 3-5 business days. Delivery takes 7-10 days domestically."
     },
     {
       question: "What is the power consumption?",
-      answer: "Our neon signs consume only 15-20W depending on size, making them energy efficient."
+      answer: "We create custom neon signs, acrylic boards, LED signs, nameplates, 3D letters, and more. You can personalize colors, sizes, fonts, and styles."
     },
     {
-      question: "Can I customize the sign after ordering?",
-      answer: "Changes can be made within 24 hours of ordering. Contact us immediately for modifications."
+      question: "Do you offer installation services?",
+      answer: "Yes, we provide installation for local orders and offer easy-to-follow instructions for remote deliveries."
     },
     {
-      question: "Do you offer international shipping?",
-      answer: "Yes, we ship worldwide. International delivery takes 10-15 business days."
+      question: "What is the return or refund policy for custom designs?",
+      answer: "Since custom products are made to order, they are non-refundable. However, we will replace or fix any defects or damage caused during shipping."
     }
   ];
-
+ 
   return (
     <div className="py-12 bg-black text-white">
       <div className="max-w-3xl mx-auto px-4">

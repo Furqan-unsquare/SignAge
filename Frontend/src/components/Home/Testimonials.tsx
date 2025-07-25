@@ -4,7 +4,7 @@ import { Star } from 'lucide-react';
 const Testimonials = () => {
   const [showAll, setShowAll] = useState(false);
 
-  const testimonials = [
+  const testimonials = [ 
     {
       name: "Vikas Yadav",
       text: "Thank you for the fantastic door nameplate! Your creativity and attention to detail made it a standout piece. We truly appreciate your hard work and professionalism.",

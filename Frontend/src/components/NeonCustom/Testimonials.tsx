@@ -2,24 +2,26 @@
 import React from "react";
 
 export const Testimonials = () => {
-  const testimonials = [
+
+  
+  const testimonials = [ 
     {
-      name: "Sarah K.",
-      role: "Cafe Owner",
-      content: "The custom neon sign completely transformed my coffee shop's ambiance. Customers love taking photos with it!",
-      image: "https://i.pinimg.com/736x/e8/b1/f5/e8b1f506358e0a4c56e27eb50b2196c6.jpg"
+      name: "Vikas Yadav",
+      content: "Thank you for the fantastic door nameplate! Your creativity made it a standout piece. We truly appreciate your hard work.",
+      rating: 5,
+      image: "https://i.pinimg.com/736x/02/bc/a2/02bca2e8bb0479b76924158afef8ccc3.jpg"
     },
     {
-      name: "Michael T.",
-      role: "Home Decor Enthusiast",
-      content: "The quality exceeded my expectations. Installation was a breeze and it looks stunning in our living room.",
-      image: "https://i.pinimg.com/736x/47/91/f0/4791f027dcad85f85883359daf191c5d.jpg"
+      name: "Priya Rathi",
+      content: "Got my daughter's name customised in a unicorn design. It turned out super cute and premium looking.",
+      rating: 5,
+      image: "https://i.pinimg.com/736x/51/60/66/516066f4221f2b7f4bfd0a391fdfddc9.jpg"
     },
     {
-      name: "Priya R.",
-      role: "Event Planner",
-      content: "Used these for a wedding reception. They were the highlight of the decor and so many guests asked about them.",
-      image: "https://i.pinimg.com/736x/d3/62/fb/d362fb782bfc64b7b3e36e4b90e1e9f0.jpg"
+      name: "Samantha Agarwal",
+      content: "Used it for my wedding décor – guests couldn't stop taking selfies with the neon sign",
+      rating: 5,
+      image: "https://i.pinimg.com/736x/4f/ca/5b/4fca5b3b48362225165a55ace5f1737d.jpg"
     }
   ];
 
@@ -44,7 +46,6 @@ export const Testimonials = () => {
                 </div>
                 <div>
                   <h3 className="font-bold">{testimonial.name}</h3>
-                  <p className="text-gray-400 text-sm">{testimonial.role}</p>
                 </div>
               </div>
               <p className="text-gray-300 italic">"{testimonial.content}"</p>

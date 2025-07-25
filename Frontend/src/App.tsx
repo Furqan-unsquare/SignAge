@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Blog from "./components/Blog/BlogList";
 import ArticleDetail from "./components/Blog/ArticleDetail";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -29,6 +30,8 @@ const App = () => (
 
         <main className="min-h-screen bg-[#E63025] ">
         <Navbar />
+        
+      <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<AboutUs />} />
