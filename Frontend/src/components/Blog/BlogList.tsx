@@ -100,8 +100,7 @@ const BlogList: React.FC = () => {
   const SkeletonCard = () => (
     <motion.div
       variants={item}
-      className="bg-[#F9F5EF] rounded-xl overflow-hidden shadow-lg animate-pulse"
-    >
+      className="bg-[#F9F5EF] rounded-xl overflow-hidden shadow-lg animate-pulse">
       <div className="relative h-48 bg-gray-200" />
       <div className="p-4 sm:p-6">
         <div className="h-4 bg-gray-200 rounded w-1/3 mb-3" />

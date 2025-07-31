@@ -87,7 +87,7 @@ const ArticleDetail: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="min-h-screen bg-[#E63025] py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
@@ -99,7 +99,7 @@ const ArticleDetail: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="min-h-screen bg-[#E63025] pb-20 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="inline-block mb-6">
           <svg className="w-16 h-16 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -130,7 +130,7 @@ const ArticleDetail: React.FC = () => {
   variants={containerVariants}
   initial="hidden"
   animate="visible"
-  className="min-h-screen bg-gradient-to-r from-red-600 via-red-500 to-red-600 py-12 px-4 sm:px-6 lg:px-8"
+  className="min-h-screen bg-[#E63025] pb-12 px-4 sm:px-6 lg:px-8"
 >
   <div className="max-w-7xl mx-auto mt-10 md:mt-16">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
