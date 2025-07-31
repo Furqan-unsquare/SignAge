@@ -9,8 +9,6 @@ import EnquiryListPage from './pages/Enquiry';
 import Gallery from './pages/Gallery';
 import NotFoundPage from './components/NotFoundPage';
 
-
-
 function App() {
   return (
     <Router>
