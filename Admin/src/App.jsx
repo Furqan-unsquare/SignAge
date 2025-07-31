@@ -3,9 +3,9 @@ import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import RequireAuth from './components/auth';
 import ItemManagement from './pages/ItemManagement';
-import OrderListPage from './pages/Order';
+import OrderListPage from './pages/order';
 import Blog from './pages/Blog';
-import EnquiryListPage from './pages/Enquiry';
+import EnquiryListPage from './pages/enquiry';
 import Gallery from './pages/Gallery';
 import NotFoundPage from './components/NotFoundPage';
 
