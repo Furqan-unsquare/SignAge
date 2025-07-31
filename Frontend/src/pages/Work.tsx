@@ -7,7 +7,7 @@ const Work = () => {
   return (
     <>
      <Helmet>
-        <title>Explore Custom Products | T-Shirts, Trousers, Diaries, Pens</title>
+        <title>Explore Custom Products | Neon Sign</title>
         <meta name="description" content="Welcome to YourBrand. Discover custom t-shirts, bags, caps, and more." />
         <link rel="canonical" href="https://yourdomain.com/" />
       </Helmet>

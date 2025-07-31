@@ -1,4 +1,3 @@
-import React from "react";
 import { Clock, Star, Layers, Zap, Wrench, Shield, Truck, PenTool, Activity, Award,} from "lucide-react";
 
 const features = [
@@ -18,9 +17,8 @@ const features = [
 const MarqueeIcons = () => {
   return (
     <div 
-      className="overflow-hidden w-full pt-6 relative"
-      style={{ backgroundColor: '#E63025' }}
-    >
+      className="overflow-hidden w-full md:pt-6 relative"
+      style={{ backgroundColor: '#E63025' }}>
       {/* Gradient overlays for smooth fade effect */}
       <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-red-600 to-transparent z-10"></div>
       <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-red-600 to-transparent z-10"></div>
@@ -29,8 +27,7 @@ const MarqueeIcons = () => {
         {[...features, ...features, ...features].map((feature, index) => (
           <div
             key={index}
-            className="flex items-center space-x-3 mx-4 bg-white/10 rounded-3xl px-4 py-2 text-white/80 hover:text-white transition-all duration-300 group"
-          >
+            className="flex items-center md:space-x-3 mx-2 md:mx-4 bg-white/10 rounded-3xl px-4 py-2 text-white/80 hover:text-white transition-all duration-300 group">
             <div className="text-white/80 group-hover:text-white group-hover:scale-110 transition-all duration-300">
               {feature.icon}
             </div>
@@ -42,19 +39,27 @@ const MarqueeIcons = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-33.333%); }
-          }
-          .animate-marquee {
-            animation: marquee 25s linear infinite;
-          }
-          .animate-marquee:hover {
-            animation-play-state: paused;
-          }
-        `
-      }} />
+  __html: `
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-33.333%); }
+    }
+    .animate-marquee {
+      animation: marquee 25s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Faster marquee on mobile */
+    @media (max-width: 768px) {
+      .animate-marquee {
+        animation: marquee 10s linear infinite;
+      }
+    }
+  `
+}} />
+
     </div>
   );
 };

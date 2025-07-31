@@ -51,7 +51,7 @@ const Footer = () => {
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-4 gap-y-3">
               <ul className="space-y-3">
                 <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Neon Title</a></li>
-                <li><a href="/work#project?category=aluminium" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Ch. Letter</a></li>
+                <li><a href="/work#project?category=aluminium" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Channel Letter</a></li>
                 <li><a href="/work#project?category=3d-steel" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">3D Steel Letters</a></li>
                 <li><a href="/work#project?category=laser-router" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Laser Router Cutting</a></li>
               </ul>

@@ -5,8 +5,6 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
 const CTA = () => {
   const ctaImages = [
     "https://i.pinimg.com/736x/13/e8/cf/13e8cf80d8bd6c39ea13fb86f3e08b1b.jpg",
@@ -24,16 +22,13 @@ const CTA = () => {
   { x: 160,  y: 0, rotate: 15 }
 ];
 
-
 const ref = useRef(null);
 const isInView = useInView(ref, { once: true, margin: "-100px" }); // triggers only once
 const navigate = useNavigate();
 
   return (
-    <section 
-      id="cta" 
-      ref={ref}
-      className="py-10 md:py-0 relative overflow-hidden">
+    <section id="cta" ref={ref}
+      className="py-10 bg-[#E63025]  md:py-0 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
         {/* Stacked Images with Animation */}
         <motion.div 

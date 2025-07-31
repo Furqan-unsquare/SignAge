@@ -12,7 +12,7 @@ const collectionsData = [
   },
   {
     id: 2,
-    title: "Aluminium CH.",
+    title: "Aluminium Channel",
     image: "/assets/2.jpg",
     category: "aluminium",
     description: "Durable, professional signage ideal for corporate and commercial spaces.",

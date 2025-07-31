@@ -24,7 +24,7 @@ const HeroSection = () => {
   }, [])
 
   return (
-    <section className="pt-8 pb-24 px-4 overflow-hidden min-h-screen flex items-center">
+    <section className="pb-24 px-4 overflow-hidden min-h-screen flex items-center">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-[#fdca07] rounded-full blur-3xl animate-pulse"></div>
@@ -67,7 +67,7 @@ const HeroSection = () => {
             SIGNAGE
           </h1>
 
-          <p className="text-sm line-clamp-2 md:text-lg text-white/90 font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm line-clamp-2 md:text-lg text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
             Bring your vision to life with our premium LED neon signs. From concept to creation, design the perfect
             signage that represents your unique style and brand.
           </p>
@@ -76,37 +76,6 @@ const HeroSection = () => {
         {/* Mobile Good Vibes (only visible on mobile) */}
         <div className="md:hidden rotate-4 mx-auto w-64">
           <GoodVibesNeon />
-        </div>
-
-        {/* Dynamic Text Display */}
-        <div className="bg-black/30 backdrop-blur-sm border-2 border-white/20 rounded-2xl p-8 max-w-4xl mx-auto">
-          <p className="text-white/80 text-lg mb-4">Design anything you want:</p>
-          <div className="h-16 flex items-center justify-center">
-            <span
-              className={`text-3xl md:text-4xl font-black text-[#fdca07] uppercase tracking-wider transition-all duration-500 ${
-                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-            >
-              "{customTexts[currentText]}"
-            </span>
-          </div>
-        </div>
-
-        {/* Feature Pills */}
-        <div className="hidden md:flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
-          {[
-            "Free Design Consultation",
-            "Unlimited Revisions",
-            "Premium LED Technology",
-            "Weather Resistant",
-            "2 Year Warranty",
-          ].map((feature, index) => (
-            <div
-              key={index}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white font-medium hover:bg-[#fdca07] hover:text-black transition-all duration-300 ">
-              {feature}
-            </div>
-          ))}
         </div>
 
         {/* CTA Buttons */}

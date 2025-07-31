@@ -40,8 +40,7 @@ const NeonCraftSection = () => {
             {/* CTA */}
             <button
               onClick={() => window.location.href = '/custom'}
-              className="mt-8 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-all"
-            >
+              className="mt-8 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-semibold px-6 py-3 rounded-lg flex items-center gap-2 transition-all">
               Customize Your Neon
               <Zap className="w-4 h-4" />
             </button>
@@ -49,16 +48,32 @@ const NeonCraftSection = () => {
 
           {/* Right: Image */}
           <div className="lg:w-1/2 w-full">
-            <div className="rounded-xl overflow-hidden border-2 border-yellow-300 shadow-xl">
-              <div className="aspect-video bg-gray-900">
-                <img
-                  src="/assets/9.jpg"
-                  alt="Neon sign craftsmanship"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+          <div className="rounded-xl overflow-hidden border-2 border-yellow-300 shadow-xl">
+            <div className="aspect-video bg-gray-900 relative">
+              {/* The image */}
+              <img
+                src="/assets/9.jpg"
+                alt="Neon sign craftsmanship"
+                className="w-full h-full object-cover"
+              />
+              {/* Watermark overlay */}
+              <span
+                style={{
+                  position: 'absolute',
+                  top: 10,
+                  left: 20,
+                  color: 'rgba(255,255,255,0.7)',
+                  fontWeight: 'bold',
+                  fontSize: 24,
+                  textShadow: '1px 1px 4px rgba(0,0,0,0.7)',
+                  pointerEvents: 'none', // Make text not interactable
+                }}
+              >
+                Sample
+              </span>
             </div>
           </div>
+          </div>  
         </div>
       </div>
     </section>

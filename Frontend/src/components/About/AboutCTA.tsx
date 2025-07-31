@@ -67,14 +67,17 @@ const ContentHub = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
                 onClick={() => navigate("/custom#customize")}
-                className="px-6 py-3 bg-[#EA3C1F] text-white font-bold rounded-lg hover:bg-[#c4321a] transition"
-              >
-                Start Designing
+                className="px-6 py-3 bg-[#EA3C1F] text-white font-bold rounded-lg hover:bg-[#c4321a] transition">
+                Start Designing Your Neon Sign 
+              </button>
+               <button
+                onClick={() => window.open('https://www.canva.com/create/signs/', '_blank', 'noopener,noreferrer')}
+                className="px-6 py-3 bg-[#EA3C1F] text-white font-bold rounded-lg hover:bg-[#c4321a] transition">
+                Start Designing with Canva
               </button>
               <a
                 href="/blog#blog-list"
-                className="px-6 py-3 bg-white text-[#EA3C1F] font-bold rounded-lg hover:bg-gray-100 transition"
-              >
+                className="px-6 py-3 bg-white text-[#EA3C1F] font-bold rounded-lg hover:bg-gray-100 transition">
                 View Case Studies
               </a>
             </div>

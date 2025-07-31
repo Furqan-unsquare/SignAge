@@ -23,7 +23,7 @@ const AdminGallery = () => {
 
   const productTypes = [
     { name: "Acrylic Letter/Signboard", id: "acrylic" },
-    { name: "Aluminium Ch. Letter", id: "aluminium" },
+    { name: "Aluminium Channel Letter", id: "aluminium" },
     { name: "3D Steel Letters", id: "3d-steel" },
     { name: "Laser Router Cutting", id: "laser-router" },
     { name: "Glow Signboard Flex", id: "glow-sign" },
@@ -235,7 +235,7 @@ const handleSubmit = async (e) => {
             className="fixed bottom-6 right-6 z-10 bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all"
             aria-label="Add project"
           >
-            <Plus className="h-6 w-6" />
+            <Plus className="h-6 w-6" /> 
           </motion.button>
 
           {loading ? (

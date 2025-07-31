@@ -29,15 +29,15 @@ const PremiumFloatingButton = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-40">
       {/* Social Buttons (Always Visible) */}
       <div className="absolute bottom-full right-0 space-y-2">
         {[
           {
-            icon: <img src="https://imagepng.org/wp-content/uploads/2017/08/WhatsApp-icone.png" alt="WhatsApp" className="w-6 h-6" />,
+            icon: <img src="http://www.pngall.com/wp-content/uploads/2016/04/WhatsApp-PNG-Picture.png" alt="WhatsApp" className="w-6 h-6" />,
             color: "bg-[#25D366] hover:bg-[#128C7E]",
             tooltip: "WhatsApp Chat",
-            href: "https://wa.me/+917738205322",
+            href: "https://wa.me/+919594274068", 
           },
           {
             icon: <img src="https://static.vecteezy.com/system/resources/previews/024/170/870/original/instagram-icon-logo-symbol-free-png.png" alt="Instagram" className="w-6 h-6" />,
@@ -70,44 +70,6 @@ const PremiumFloatingButton = () => {
           </a>
         ))}
       </div>
-
-      {/* Main FAB */}
-      {/* <button
-        className="relative w-16 h-16 rounded-full backdrop-blur-md shadow-xl focus:outline-none"
-        aria-expanded="true"
-      >
-        <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent opacity-20" />
-        </div>
-
-        <svg
-          ref={svgRef}
-          viewBox="0 0 100 100"
-          className="absolute inset-0 w-full h-full pointer-events-none"
-        >
-          <defs>
-            <path
-              id="circlePath"
-              d="M50,50 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"
-            />
-          </defs>
-          <text
-            fontSize="10"
-            fill="white"
-            fontFamily="'Inter', sans-serif"
-            fontWeight="500"
-            letterSpacing="0.5"
-          >
-            <textPath href="#circlePath" startOffset="0%">
-              • Contact • Support • Contact • Support • Contact
-            </textPath>
-          </text>
-        </svg>
-
-        <div ref={arrowRef} className="absolute inset-0 flex items-center justify-center">
-          <ChevronUp className="w-6 h-6 text-white" />
-        </div>
-      </button> */}
     </div>
   );
 };

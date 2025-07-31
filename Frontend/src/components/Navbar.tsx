@@ -21,7 +21,7 @@ const Header = () => {
 
   const productTypes = [
     { name: "Neon Title", id: "acrylic" },
-    { name: "Aluminium Ch. Letter", id: "aluminium" },
+    { name: "Aluminium Channel Letter", id: "aluminium" },
     { name: "3D Steel Letters", id: "3d-steel" },
     { name: "Laser Router Cutting", id: "laser-router" },
     { name: "Glow Signboard Flex", id: "glow-sign" },
@@ -53,8 +53,7 @@ const Header = () => {
       <header
       className={`sticky top-0 z-50 backdrop-blur-lg transition-all duration-300 ${
         isNeonPage ? "bg-black" : ""
-      }`}
-    >
+      }`} >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-24 relative">
             {/* Logo */}
@@ -69,77 +68,56 @@ const Header = () => {
                   stiffness: 300,
                   damping: 15,
                 },
-              }}
-            >
-              <a href="/" className="flex items-center">
-                {/* <img
-                  src="/assets/logo4.png"
-                  alt="Logo"
-                  className="w-16 h-16 md:w-20 md:h-20"
-                /> */}
-                
-            <div className="leading-tight">
-              <h3 className="text-3xl md:text-4xl drop-shadow-lg font-bold text-[#FDCA07]">Ansh Enterprises</h3>
-            </div>
-
+              }}>
+              <a href="/" className="flex items-center"> 
+              <div className="leading-tight">
+                <h3 className="text-3xl md:text-4xl drop-shadow-lg font-bold text-[#FDCA07]">Ansh Enterprises</h3>
+              </div>
               </a>
             </motion.div>    
 
           {/* Desktop Navigation - Right Side */}
           <nav className="hidden md:flex items-center space-x-8 lg:space-x-10"> {/* Products Dropdown - Desktop Only */}
           <motion.div
-            className="hidden md:block relative"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            onMouseLeave={() => {
-              setIsProductsOpen(false);
-              clearTimeout(hoverTimeout);
-            }}
-          >
-            <button
-              className="flex items-center text-white font-anton text-lg hover:text-red-300 transition-colors duration-300"
-              onMouseEnter={() => {
-                hoverTimeout = setTimeout(() => {
-                  setIsProductsOpen(true);
-                }, 500); // delay in ms
-              }}
-              onClick={() => {
-                window.location.href = "/work";
-              }}
-            >
-              Products
-              <ChevronDown
-                className={`ml-1 h-5 w-5 transition-transform ${
-                  isProductsOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
+  className="hidden md:block relative"
+>
+  <button
+    className="flex items-center text-white font-anton text-lg hover:text-red-300 transition-colors duration-300"
+    onClick={() => setIsProductsOpen(!isProductsOpen)} // toggle dropdown on click
+  >
+    Products
+    <ChevronDown
+      className={`ml-1 h-5 w-5 transition-transform ${isProductsOpen ? "rotate-180" : ""}`}
+    />
+  </button>
 
-            {/* Dropdown Menu */}
-            {isProductsOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute left-0 mt-2 w-56 bg-white/10 backdrop-blur-lg border border-white/20 rounded-md shadow-xl z-50"
-              >
-                <div className="py-1">
-                  {productTypes.map((product) => (
-                    <a
-                      key={product.name}
-                      href={`/work#project?category=${product.id}`}
-                      className="block px-4 py-2 text-gray-100 hover:text-gray-300"
-                    >
-                      {product.name}
-                    </a>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
+  {/* Dropdown Menu */}
+  <AnimatePresence>
+    {isProductsOpen && (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10 }}
+        className="absolute left-0 mt-2 w-56 bg-white/10 backdrop-blur-lg border border-white/20 rounded-md shadow-xl z-50"
+      >
+        <div className="py-1">
+          {productTypes.map((product) => (
+            <a
+              key={product.name}
+              href={`/work#project?category=${product.id}`}
+              className="block px-4 py-2 text-gray-100 hover:text-gray-300"
+              onClick={() => setIsProductsOpen(false)} // close dropdown on click
+            >
+              {product.name}
+            </a>
+          ))}
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</motion.div>
 
             {navItems.map((item, idx) => (
-              
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: -40 }}
@@ -152,18 +130,15 @@ const Header = () => {
                     stiffness: 300,
                     damping: 15,
                   },
-                }}
-              >
+                }}>
                 <a
                   href={item.href}
-                  className="relative text-white font-anton text-lg hover:text-red-200 transition-colors duration-300"
-                >
+                  className="relative text-white font-anton text-lg hover:text-red-200 transition-colors duration-300">
                   {item.name}
                   <motion.span
                     className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FDCA07]"
                     whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
+                    transition={{ duration: 0.3 }}/>
                 </a>
               </motion.div>
             ))}
@@ -173,8 +148,7 @@ const Header = () => {
           <motion.button
             className="md:hidden text-white p-2 z-50"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            whileTap={{ scale: 0.9 }}
-          >
+            whileTap={{ scale: 0.9 }}>
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </motion.button>
         </div>
@@ -182,15 +156,7 @@ const Header = () => {
         {/* Mobile Menu - Swipeable */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="md:hidden fixed inset-0 top-0 h-screen bg-red-600 border border-white/20 shadow-lg pt-24 z-40 overflow-y-auto"
-
-
-            >
+            <div className="md:hidden fixed inset-0 top-0 h-screen bg-red-600 border border-white/20 shadow-lg pt-24 z-40 overflow-y-auto">
               <div className="h-full overflow-y-auto flex flex-col justify-between pb-6">
                 {/* Nav Links */}
                 <nav className="flex flex-col px-6 space-y-4">
@@ -198,8 +164,7 @@ const Header = () => {
                   <div className="border-b border-gray-700 pb-4">
                     <button
                       onClick={() => setIsProductsOpen(!isProductsOpen)}
-                      className="flex justify-between w-full text-white text-lg font-semibold"
-                    >
+                      className="flex justify-between w-full text-white text-lg font-semibold">
                       Products
                       <ChevronDown
                         className={`transition-transform ${isProductsOpen ? "rotate-180" : ""}`}
@@ -211,19 +176,16 @@ const Header = () => {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="pl-4 mt-2 space-y-2"
-                        >
+                          className="pl-4 mt-2 space-y-2">
                           {productTypes.map((item) => (
                         <a
                           key={item.name}
                           href={`/work#project?category=${item.id}`}
                           onClick={() => setIsMenuOpen(false)}
-                          className="block w-full text-left text-white text-sm px-4 py-2 rounded-md hover:bg-yellow-500/20 transition"
-                        >
+                          className="block w-full text-left text-white text-sm px-4 py-2 rounded-md hover:bg-yellow-500/20 transition">
                           {item.name}
                         </a>
                       ))}
-
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -233,8 +195,7 @@ const Header = () => {
                   {navItems.map((item) => (
                     <div
                       key={item.name}
-                      className="py-4 border-b border-gray-700 text-white text-lg font-semibold"
-                    >
+                      className="py-4 border-b border-gray-700 text-white text-lg font-semibold">
                       <a href={item.href} onClick={() => setIsMenuOpen(false)}>
                         {item.name}
                       </a>
@@ -243,31 +204,36 @@ const Header = () => {
                 </nav>
 
                 {/* Need Help Box */}
-                <div className="bg-red-700 backdrop-blur-md text-white mx-4 p-4 rounded-xl">
+                <div className="bg-red-700 mb-16 backdrop-blur-md text-white mx-4 p-4 rounded-xl">
                   <h3 className="text-center text-lg font-bold mb-4">Need Help?</h3>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <p className="font-semibold mb-1">Text us on WhatsApp</p>
                       <p className="flex items-center gap-2">
-                        <span>📱</span> +91 93810 01808
+                        <a
+                          href="https://wa.me/919381001808"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 hover:underline">
+                          📱 +91 93810 01808
+                        </a>
                       </p>
                     </div>
                     <div>
-                      <p className="font-semibold mb-1">Email Id</p>
-                      <p className="flex items-center gap-2">
-                        <span>✉️</span>{" "}
-                        <a
-                          href="mailto:info@neonattack.com"
-                          className="underline"
-                        >
-                          info@neonattack.com
-                        </a>
-                      </p>
+                     <p className="font-semibold mb-1">Email Id</p>
+                     <p className="flex items-center gap-2 break-words max-w-full sm:max-w-none">
+                      <span>✉️</span>
+                      <a
+                        href="mailto:info@neonattack.com"
+                        className="underline break-all max-w-[15ch] sm:max-w-none">
+                        info@neonattack.com
+                      </a>
+                    </p>
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>

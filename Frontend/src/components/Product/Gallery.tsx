@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from 'react-router-dom';
-import { duration } from "html2canvas/dist/types/css/property-descriptors/duration";
 
 const ProjectGallery = () => {
   // State management
@@ -78,7 +77,7 @@ const ProjectGallery = () => {
   const productLinks = [
     { id: "all", label: "All Projects" },
     { id: "acrylic", label: "Acrylic Letter/Signboard" },
-    { id: "aluminium", label: "Aluminium Ch. Letter" },
+    { id: "aluminium", label: "Aluminium Channel Letter" },
     { id: "3d-steel", label: "3D Steel Letters" },
     { id: "laser-router", label: "Laser Router Cutting" },
     { id: "glow-sign", label: "Glow Signboard Flex" },
@@ -160,8 +159,7 @@ const ProjectGallery = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="px-4 sm:px-0 mb-8"
-        >
+          className="px-4 sm:px-0 mb-8">
           {/* Mobile Dropdown */}
           <div className="sm:hidden mb-4">
             <select
@@ -170,8 +168,7 @@ const ProjectGallery = () => {
                 setActiveFilter(e.target.value);
                 setVisibleCount(window.innerWidth < 768 ? 3 : 9);
               }}
-              className="w-full p-3 rounded-lg bg-gray-200 text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07] border-none"
-            >
+              className="w-full p-3 rounded-lg bg-gray-200 text-[#EA3C1F] font-semibold focus:ring-2 focus:ring-[#FDCA07] border-none">
               {productLinks.map((link) => (
                 <option key={link.id} value={link.id}>
                   {link.label}
@@ -195,8 +192,7 @@ const ProjectGallery = () => {
                   activeFilter === link.id
                     ? "bg-[#FDCA07] text-[#EA3C1F] font-bold"
                     : "bg-white/10 text-white hover:bg-white/20"
-                }`}
-              >
+                }`}>
                 {link.label}
               </a>
             ))}
@@ -264,10 +260,10 @@ const ProjectGallery = () => {
               ))}
             </AnimatePresence>
           )}
-
+ 
           {!isLoading && !error && filteredProjects.length === 0 && (
             <motion.p
-              className="text-white text-center col-span-full break-inside-avoid"
+              className="text-white  text-center col-span-full break-inside-avoid"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}

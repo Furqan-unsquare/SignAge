@@ -29,11 +29,11 @@ const AboutSection = () => {
           <div className="lg:w-1/2 space-y-8">
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-                India's Premier <span className="text-yellow-400">Custom Neon</span> Design Studio
+                Thane's Premier <span className="text-yellow-400">Custom Neon</span> Design Studio
               </h2>
               
               <p className="text-white/90 md:text-lg">
-                With 10,000+ custom signs created, we're the trusted choice for premium LED neon signage across India.
+                With 10,000+ custom signs created, we're the trusted choice for premium LED neon signage across Thane.
               </p>
 
               {/* Features Grid */}
@@ -87,7 +87,7 @@ const AboutSection = () => {
               
               {/* Made in India Badge */}
               <div className="absolute top-4 right-4 bg-white/90 text-black text-xs font-medium px-3 py-1 rounded-full">
-                Made in India
+                Made in Thane
               </div>
             </div>
           </div>
