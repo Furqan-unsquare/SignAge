@@ -154,8 +154,8 @@ const LoginPage = () => {
                             <div className="flex items-center justify-between">
                                 <div className="text-sm">
                                     <a
-  href="https://wa.me/919594274068?text=Hello%2C%20I%20forgot%20my%20dashboard%20password.%20Could%20you%20please%20assist%20me%3F"
-  target="_blank"
+   href="mailto:info@unsquare.in?subject=Support%20Request&body=Hello%2C%20I%20am%20facing%20an%20issue%20related%20to%20my%20dashboard.%20Please%20assist%20me%20with%20this%20as%20soon%20as%20possible."
+target="_blank"
   rel="noopener noreferrer"
   className="font-medium text-blue-600 hover:text-blue-500"
 >
@@ -190,17 +190,17 @@ const LoginPage = () => {
                                     <div className="w-full border-t border-gray-200"></div>
                                 </div>
                                 <div className="relative flex justify-center text-sm">
-                                    <span className="px-2 bg-white text-gray-500">
-                                        Need help?
+                                <span className="px-2 bg-white text-gray-500">
+                                        Don't have an Account?
                                     </span>
+                                
                                 </div>
                             </div>
 
                             <div className="mt-6 text-center">
-                               <a
-                                href="mailto:support@example.com?subject=Support%20Request&body=Hello%2C%20I%20am%20facing%20an%20issue%20related%20to%20my%20dashboard.%20Please%20assist%20me%20with%20this%20as%20soon%20as%20possible."
+                               <a href="/register"
                                 className="text-sm font-medium text-blue-600 hover:text-blue-500">
-                                Contact our support team
+                                Create New Account
                                 </a>
 
                             </div>

@@ -8,6 +8,7 @@ import Blog from './pages/Blog';
 import EnquiryListPage from './pages/enquiry';
 import Gallery from './pages/Gallery';
 import NotFoundPage from './components/NotFoundPage';
+import RegistrationForm from './pages/RegistrationForm';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegistrationForm />} />
         <Route path="/dashboard" element={<RequireAuth><DashboardPage /></RequireAuth>} />
         <Route path="/management" element={<RequireAuth><ItemManagement /></RequireAuth>} />
         <Route path="/orders" element={<RequireAuth><OrderListPage /></RequireAuth>} />
