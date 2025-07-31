@@ -1,8 +1,7 @@
 const Blog = require('../model/blog');
 const baseUrl =
   process.env.NODE_ENV === 'production'
-    ? process.env.BASE_URL || 'https://signage-f2vt.onrender.com'
-    : 'http://localhost:5000';
+    ? process.env.BASE_URL || 'http://localhost:5000' : 'https://api.acrylicsignboards.in';
 
 // CREATE: New Blog
 const createBlog = async (req, res) => {

@@ -1,6 +1,6 @@
 const Project = require('../model/Project');
 
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 'https://signage-f2vt.onrender.com' : 'http://localhost:5000';
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.BASE_URL || 'http://localhost:5000' : 'https://api.acrylicsignboards.in';
 
 // GET: Fetch all projects
 const getProjects = async (req, res) => {
