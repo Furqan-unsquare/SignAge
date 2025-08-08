@@ -15,6 +15,7 @@ const projectSchema = new mongoose.Schema({
   type: String,
   required: true,
   enum: [
+    "Neon",
     "acrylic",
     "aluminium",
     "3d-steel",

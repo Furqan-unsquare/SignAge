@@ -20,15 +20,16 @@ const Header = () => {
   ];
 
   const productTypes = [
-    { name: "Neon Title", id: "acrylic" },
+    { name: "Neon Photos", id: "Neon", },
+    { name: "Acrylic Sign Boards", id: "acrylic" },
     { name: "Aluminium Channel Letter", id: "aluminium" },
     { name: "3D Steel Letters", id: "3d-steel" },
-    { name: "Laser Router Cutting", id: "laser-router" },
-    { name: "Glow Signboard Flex", id: "glow-sign" },
+    { name: "CNC Laser & Router Cutting (2D/3D)", id: "laser-router" },
+    { name: "Glow Signboard Fabrix & Flex", id: "glow-sign" },
     { name: "ACP Signboard", id: "acp" },
-    { name: "Signboard Photos", id: "photos" },
+    { name: "Mandir Design / Jali Cutting", id: "photos" },
     { name: "Office Name Plate", id: "office-name" },
-    { name: "LED Scrolling Board", id: "led-scrolling" },
+    { name: "Custom LED Screen / Scrolling Board", id: "led-scrolling" },
   ];
 
   useEffect(() => {
@@ -98,14 +99,14 @@ const Header = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
-        className="absolute left-0 mt-2 w-56 bg-white/10 backdrop-blur-lg border border-white/20 rounded-md shadow-xl z-50"
+        className="absolute left-0 mt-2 w-56 bg-white/20 backdrop-blur-xl border border-white/20 rounded-md shadow-xl z-50"
       >
         <div className="py-1">
           {productTypes.map((product) => (
             <a
               key={product.name}
               href={`/work#project?category=${product.id}`}
-              className="block px-4 py-2 text-gray-100 hover:text-gray-300"
+              className="block px-4 py-2 text-gray-100  hover:text-gray-300"
               onClick={() => setIsProductsOpen(false)} // close dropdown on click
             >
               {product.name}

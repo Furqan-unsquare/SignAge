@@ -22,15 +22,16 @@ const AdminGallery = () => {
   const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const productTypes = [
+    { name: "Neon Photos", id: "Neon", },
     { name: "Acrylic Letter/Signboard", id: "acrylic" },
     { name: "Aluminium Channel Letter", id: "aluminium" },
     { name: "3D Steel Letters", id: "3d-steel" },
-    { name: "Laser Router Cutting", id: "laser-router" },
-    { name: "Glow Signboard Flex", id: "glow-sign" },
+    { name: "CNC Laser & Router Cutting (2D/3D)", id: "laser-router" },
+    { name: "Glow Signboard Fabrix & Flex", id: "glow-sign" },
     { name: "ACP Signboard", id: "acp" },
-    { name: "Signboard Photos", id: "photos" },
+    { name: "Mandir Design / Jali Cutting", id: "photos" },
     { name: "Office Name Plate", id: "office-name" },
-    { name: "LED Scrolling Board", id: "led-scrolling" },
+    { name: "Custom LED Screen / Scrolling Board", id: "led-scrolling" },
   ];
 
   const filterCategories = [

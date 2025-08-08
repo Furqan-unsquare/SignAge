@@ -76,15 +76,16 @@ const ProjectGallery = () => {
   // Filter options
   const productLinks = [
     { id: "all", label: "All Projects" },
+    { id: "Neon", label: "Neon Photos" },
     { id: "acrylic", label: "Acrylic Letter/Signboard" },
     { id: "aluminium", label: "Aluminium Channel Letter" },
     { id: "3d-steel", label: "3D Steel Letters" },
-    { id: "laser-router", label: "Laser Router Cutting" },
-    { id: "glow-sign", label: "Glow Signboard Flex" },
+    { id: "laser-router", label: "CNC Laser & Router Cutting (2D/3D)" },
+    { id: "glow-sign", label: "Glow Signboard Fabrix & Flex" },
     { id: "acp", label: "ACP Signboard" },
-    { id: "photos", label: "Signboard Photos" },
+    { id: "photos", label: "Mandir Design / Jali Cutting" },
     { id: "office-name", label: "Office Name Plate" },
-    { id: "led-scrolling", label: "LED Scrolling Board" },
+    { id: "led-scrolling", label: "Custom LED Screen / Scrolling Board" },
     { id: "featured", label: "Featured Projects" },
   ];
 

@@ -50,18 +50,19 @@ const Footer = () => {
             <h4 className="text-lg font-semibold text-[#FDCA07] mb-4">Our Products</h4>
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-4 gap-y-3">
               <ul className="space-y-3">
-                <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Neon Title</a></li>
+                <li><a href="/work#project?category=neon" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Neon Signage</a></li>
+                <li><a href="/work#project?category=acrylic" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Acrylic Sign Boards</a></li>
                 <li><a href="/work#project?category=aluminium" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Aluminium Channel Letter</a></li>
                 <li><a href="/work#project?category=3d-steel" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">3D Steel Letters</a></li>
-                <li><a href="/work#project?category=laser-router" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Laser Router Cutting</a></li>
+                <li><a href="/work#project?category=laser-router" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">CNC Laser & Router Cutting (2D/3D)</a></li>
               </ul>
 
               <ul className="space-y-3">
-                <li><a href="/work#project?category=glow-sign" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Glow Signboard Flex</a></li>
+                <li><a href="/work#project?category=glow-sign" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Glow Signboard Fabrix & Flex</a></li>
                 <li><a href="/work#project?category=acp" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">ACP Signboard</a></li>
                 <li><a href="/work#project?category=photos" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Signboard</a></li>
                 <li><a href="/work#project?category=office-name" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Office Name Plate</a></li>
-                <li><a href="/work#project?category=led-scrolling" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">LED Scrolling Board</a></li>
+                <li><a href="/work#project?category=led-scrolling" className="text-white/90 hover:text-white text-sm md:text-base transition-colors duration-200 block">Custom LED Screen / Scrolling Board</a></li>
               </ul>
 
             </div>
